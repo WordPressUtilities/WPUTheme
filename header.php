@@ -1,11 +1,8 @@
 <?php
 include dirname( __FILE__ ) . '/z-protect.php';
 if ( !isset( $_GET['is_ajax'] ) ) {
-?><!DOCTYPE HTML>
-<!--[if IE 8 ]><html <?php language_attributes(); ?> class="is_ie8 lt_ie9 lt_ie10"><![endif]-->
-<!--[if IE 9 ]><html <?php language_attributes(); ?> class="is_ie9 lt_ie10"><![endif]-->
-<!--[if gt IE 9]><html <?php language_attributes(); ?> class="is_ie10"><![endif]-->
-<!--[if !IE]><!--> <html <?php language_attributes(); ?>><!--<![endif]-->
+echo wputh_get_doctype_html();
+?>
 <head><?php echo wp_head(); ?></head>
 <body <?php body_class( 'no-js cssc-is-responsive' ); ?>>
 <div class="main-header centered-container">
