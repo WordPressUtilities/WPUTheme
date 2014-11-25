@@ -2,12 +2,11 @@
 include dirname( __FILE__ ) . '/z-protect.php';
 if ( !isset( $_GET['is_ajax'] ) ) {
 ?><!DOCTYPE HTML>
-<!--[if lt IE 8 ]><html <?php language_attributes(); ?> class="is_ie7 lt_ie8 lt_ie9 lt_ie10"><![endif]-->
 <!--[if IE 8 ]><html <?php language_attributes(); ?> class="is_ie8 lt_ie9 lt_ie10"><![endif]-->
 <!--[if IE 9 ]><html <?php language_attributes(); ?> class="is_ie9 lt_ie10"><![endif]-->
 <!--[if gt IE 9]><html <?php language_attributes(); ?> class="is_ie10"><![endif]-->
 <!--[if !IE]><!--> <html <?php language_attributes(); ?>><!--<![endif]-->
-<head><?php include get_template_directory() . '/tpl/header/head.php'; ?></head>
+<head><?php echo wp_head(); ?></head>
 <body <?php body_class( 'no-js cssc-is-responsive' ); ?>>
 <div class="main-header centered-container">
     <header class="banner" role="banner" id="banner">

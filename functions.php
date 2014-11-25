@@ -35,8 +35,8 @@ foreach ($pages_ids as $id => $option) {
 
 /* Social links
 -------------------------- */
-if (!isset($wpu_social_links) || !is_array($wpu_social_links)) {
 
+if (!isset($wpu_social_links) || !is_array($wpu_social_links)) {
     $wpu_social_links = array(
         'twitter' => 'Twitter',
         'facebook' => 'Facebook',
@@ -119,6 +119,7 @@ include get_template_directory() . '/inc/theme/utilities.php';
 include get_template_directory() . '/inc/theme/shortcodes.php';
 include get_template_directory() . '/inc/theme/activation.php';
 include get_template_directory() . '/inc/theme/customize.php';
+include get_template_directory() . '/inc/theme/head.php';
 
 if ( ! isset( $content_width ) ) $content_width = 680;
 
