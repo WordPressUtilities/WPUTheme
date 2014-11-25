@@ -11,16 +11,18 @@ define( 'PAGINATION_KIND', 'numbers' ); // load-more || numbers || default
 /* Pages IDs
 -------------------------- */
 
-$pages_ids = array(
-    'about__page_id' => array(
-        'constant' => 'ABOUT__PAGE_ID',
-        'name' => 'About'
-    ) ,
-    'mentions__page_id' => array(
-        'constant' => 'MENTIONS__PAGE_ID',
-        'name' => 'Mentions légales'
-    ) ,
-);
+if (!isset($pages_ids) || !is_array($pages_ids)) {
+    $pages_ids = array(
+        'about__page_id' => array(
+            'constant' => 'ABOUT__PAGE_ID',
+            'name' => 'About'
+        ) ,
+        'mentions__page_id' => array(
+            'constant' => 'MENTIONS__PAGE_ID',
+            'name' => 'Mentions légales'
+        ) ,
+    );
+}
 
 define('PAGES_IDS', serialize($pages_ids));
 
@@ -33,12 +35,14 @@ foreach ($pages_ids as $id => $option) {
 
 /* Social links
 -------------------------- */
+if (!isset($wpu_social_links) || !is_array($wpu_social_links)) {
 
-$wpu_social_links = array(
-    'twitter' => 'Twitter',
-    'facebook' => 'Facebook',
-    'instagram' => 'Instagram',
-);
+    $wpu_social_links = array(
+        'twitter' => 'Twitter',
+        'facebook' => 'Facebook',
+        'instagram' => 'Instagram',
+    );
+}
 
 define('WPU_SOCIAL_LINKS', serialize($wpu_social_links));
 
