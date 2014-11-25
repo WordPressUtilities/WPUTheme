@@ -1,8 +1,11 @@
 <?php
 include dirname( __FILE__ ) . '/../../z-protect.php';
 
-if ( !is_admin() ) {
-    add_action( 'wp_enqueue_scripts', 'wputh_add_stylesheets' );
+if (!is_admin()) {
+    add_action('wp_enqueue_scripts', 'wputh_add_stylesheets');
+    if (function_exists('wputh_control_stylesheets')) {
+        add_action('wp_enqueue_scripts', 'wputh_control_stylesheets');
+    }
 }
 
 // Base values
