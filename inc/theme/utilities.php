@@ -248,3 +248,15 @@ function wputh_sendmail( $address, $subject, $content, $more = array() ) {
 function wputh_sendmail_set_html_content_type() {
     return 'text/html';
 }
+
+/* ----------------------------------------------------------
+  Pagination
+---------------------------------------------------------- */
+
+if (!function_exists('wputh_paginate')) {
+    function wputh_paginate() {
+        ob_start();
+        include get_template_directory() . '/tpl/paginate.php';
+        return ob_get_clean();
+    }
+}
