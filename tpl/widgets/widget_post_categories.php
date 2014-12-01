@@ -1,7 +1,9 @@
 <?php
-add_action( 'widgets_init', 'widget_post_categories_register_widgets' );
-function widget_post_categories_register_widgets() {
-    register_widget( 'widget_post_categories' );
+add_action('widgets_init', 'widget_post_categories_register_widgets');
+if (!function_exists('widget_post_categories_register_widgets')) {
+    function widget_post_categories_register_widgets() {
+        register_widget('widget_post_categories');
+    }
 }
 
 // Widget Post Categories

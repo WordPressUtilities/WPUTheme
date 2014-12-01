@@ -57,30 +57,34 @@ register_nav_menus( array(
 -------------------------- */
 
 add_filter( 'wputh_get_posttypes', 'wputh_set_theme_posttypes' );
-function wputh_set_theme_posttypes( $post_types ) {
-    $post_types = array(
-        'work' => array(
-            'menu_icon' => 'dashicons-portfolio',
-            'name' => __( 'Work', 'wputh' ),
-            'plural' => __( 'Works', 'wputh' ),
-            'female' => 0
-        )
-    );
-    return $post_types;
+if(!function_exists('wputh_set_theme_posttypes')){
+    function wputh_set_theme_posttypes( $post_types ) {
+        $post_types = array(
+            //'work' => array(
+            //    'menu_icon' => 'dashicons-portfolio',
+            //    'name' => __( 'Work', 'wputh' ),
+            //    'plural' => __( 'Works', 'wputh' ),
+            //    'female' => 0
+            //)
+        );
+        return $post_types;
+    }
 }
 
 /* Taxonomies
 -------------------------- */
 
 add_filter( 'wputh_get_taxonomies', 'wputh_set_theme_taxonomies' );
-function wputh_set_theme_taxonomies( $taxonomies ) {
-    $taxonomies = array(
-        'work-type' => array(
-            'name' => __( 'Work type', 'wputh' ),
-            'post_type' => 'work'
-        )
-    );
-    return $taxonomies;
+if(!function_exists('wputh_set_theme_taxonomies')){
+    function wputh_set_theme_taxonomies( $taxonomies ) {
+        $taxonomies = array(
+            'work-type' => array(
+                'name' => __( 'Work type', 'wputh' ),
+                'post_type' => 'work'
+            )
+        );
+        return $taxonomies;
+    }
 }
 
 /* Sidebars
