@@ -78,10 +78,10 @@ add_filter( 'wputh_get_taxonomies', 'wputh_set_theme_taxonomies' );
 if(!function_exists('wputh_set_theme_taxonomies')){
     function wputh_set_theme_taxonomies( $taxonomies ) {
         $taxonomies = array(
-            'work-type' => array(
-                'name' => __( 'Work type', 'wputh' ),
-                'post_type' => 'work'
-            )
+            // 'work-type' => array(
+            //     'name' => __( 'Work type', 'wputh' ),
+            //     'post_type' => 'work'
+            // )
         );
         return $taxonomies;
     }
