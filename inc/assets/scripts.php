@@ -36,6 +36,11 @@ function wputh_add_javascripts() {
 
     foreach ($WPUJavaScripts as $id => $details) {
         $url = '';
+        if (!isset($details['uri']) && !isset($details['url'])) {
+            wp_enqueue_script($id);
+            continue;
+        }
+
         if (isset($details['url'])) {
             $url = $details['url'];
         }
