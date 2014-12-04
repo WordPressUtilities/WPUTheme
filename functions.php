@@ -155,8 +155,3 @@ function wputh_setup() {
     load_theme_textdomain( 'wputh', get_template_directory() . '/inc/lang' );
 }
 
-/* Parameters
--------------------------- */
-
-// Disabling admin bar
-add_filter( 'show_admin_bar', '__return_false' );
