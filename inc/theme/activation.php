@@ -6,7 +6,7 @@
  * @package default
  */
 
-add_action('switch_theme', 'wputh_setup_theme');
+add_action('after_switch_theme', 'wputh_setup_theme');
 function wputh_setup_theme() {
 
     // Options

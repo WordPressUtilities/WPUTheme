@@ -9,9 +9,6 @@ define( "THEME_URL", get_template_directory_uri() );
 define( 'PAGINATION_KIND', 'numbers' ); // load-more || numbers || default
 
 /* Pages IDs
--------------------------- */
-
-/* Pages IDs
  -------------------------- */
 
 if (!function_exists('wputh_set_pages_site')) {
