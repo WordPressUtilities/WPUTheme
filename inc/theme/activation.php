@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Configuration after Theme activation
  *
@@ -24,25 +25,14 @@ function wputh_setup_theme() {
         'wpu_home_meta_description' => '',
     );
 
-    $wputh_setup_pages = array(
-        'about__page_id' => array(
-            'post_title' => 'A Propos',
-            'post_content' => '<p>A Propos de ce site.</p>',
-        ) ,
-        'mentions__page_id' => array(
-            'post_title' => 'Mentions Legales',
-            'post_content' => '<p>Mentions l&eacute;gales du site.</p>',
-        ) ,
-    );
-
-
     // Setting options
     foreach ($wputh_setup_options as $name => $value) {
         update_option($name, $value);
     }
 
     // Creating pages
-    foreach ($wputh_setup_pages as $id => $page) {
+    $pages_site = apply_filters('wputh_pages_site', array());
+    foreach ($pages_site as $id => $page) {
         $option = get_option($id);
 
         // If page doesn't exists

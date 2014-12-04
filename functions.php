@@ -11,22 +11,32 @@ define( 'PAGINATION_KIND', 'numbers' ); // load-more || numbers || default
 /* Pages IDs
 -------------------------- */
 
-if (!isset($pages_ids) || !is_array($pages_ids)) {
-    $pages_ids = array(
-        'about__page_id' => array(
-            'constant' => 'ABOUT__PAGE_ID',
-            'name' => 'About'
-        ) ,
-        'mentions__page_id' => array(
-            'constant' => 'MENTIONS__PAGE_ID',
-            'name' => 'Mentions légales'
-        ) ,
-    );
+/* Pages IDs
+ -------------------------- */
+
+if (!function_exists('wputh_set_pages_site')) {
+    function wputh_set_pages_site($pages_site) {
+        $pages_site = array(
+            'about__page_id' => array(
+                'constant' => 'ABOUT__PAGE_ID',
+                'post_title' => 'A Propos',
+                'post_content' => '<p>A Propos de ce site.</p>',
+            ) ,
+            'mentions__page_id' => array(
+                'constant' => 'MENTIONS__PAGE_ID',
+                'post_title' => 'Mentions légales',
+                'post_content' => '<p>Contenu des mentions légales</p>',
+            ) ,
+        );
+        return $pages_site;
+    }
 }
 
-define('PAGES_IDS', serialize($pages_ids));
+add_filter('wputh_pages_site', 'wputh_set_pages_site');
 
-foreach ($pages_ids as $id => $option) {
+$pages_site = apply_filters('wputh_pages_site', array());
+
+foreach ($pages_site as $id => $option) {
     if (!isset($option['constant'])) {
         $option['constant'] = strtoupper($id);
     }

@@ -1,6 +1,5 @@
 <?php
-
-include dirname( __FILE__ ) . '/../../z-protect.php';
+include dirname(__FILE__) . '/../../z-protect.php';
 
 /* ----------------------------------------------------------
    Options for the plugin "WPU Options"
@@ -46,17 +45,13 @@ if (!function_exists('set_wputh_options_fields')) {
         }
 
         // Create pages IDs from list defined in functions.php
-        if (defined('PAGES_IDS')) {
-            $pages_ids = unserialize(PAGES_IDS);
-            if (is_array($pages_ids)) {
-                foreach ($pages_ids as $id => $page) {
-                    $options[$id] = array(
-                        'label' => __($page['name'], 'wputh') ,
-                        'box' => 'pages_id',
-                        'type' => 'page'
-                    );
-                }
-            }
+        $pages_site = apply_filters('wputh_pages_site', array());
+        foreach ($pages_site as $id => $page) {
+            $options[$id] = array(
+                'label' => __($page['post_title'], 'wputh') ,
+                'box' => 'pages_id',
+                'type' => 'page'
+            );
         }
 
         return $options;
