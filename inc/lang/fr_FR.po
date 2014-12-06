@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2014-05-11 23:20+0100\n"
+"POT-Creation-Date: 2014-12-06 19:07+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kevin <kevin@rocher.me>\n"
 "Language-Team: \n"
@@ -16,105 +16,121 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../../.\n"
 "X-Poedit-SearchPath-1: ../../../../mu-plugins\n"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:72
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:134
 msgid "Add New"
 msgstr "Ajouter"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:73
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:135
 #, php-format
 msgctxt "male"
 msgid "Add New %s"
 msgstr "Ajouter un %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:74
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:136
 #, php-format
 msgctxt "male"
 msgid "Edit %s"
-msgstr "Modifier ce %s"
+msgstr "Modifier cet %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:75
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:137
 #, php-format
 msgctxt "male"
 msgid "New %s"
 msgstr "Nouveau %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:76
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:138
 #, php-format
 msgctxt "male"
 msgid "All %s"
 msgstr "Tous les %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:77
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:139
 #, php-format
 msgctxt "male"
 msgid "View %s"
 msgstr "Voir cet %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:78
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:140
 #, php-format
 msgctxt "male"
 msgid "Search %s"
 msgstr "Rechercher un %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:79
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:141
 #, php-format
 msgctxt "male"
 msgid "No %s found"
 msgstr "Aucun %s trouvé"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:80
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:142
 #, php-format
 msgctxt "male"
 msgid "No %s found in Trash"
 msgstr "Aucun %s trouvé dans la corbeille"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:88
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:157
+#, php-format
+msgctxt "male_consonant"
+msgid "Edit %s"
+msgstr "Modifier ce %s"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:158
+#, php-format
+msgctxt "male_consonant"
+msgid "View %s"
+msgstr "Voir ce %s"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:163
 #, php-format
 msgctxt "female"
 msgid "Add New %s"
 msgstr "Ajouter une %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:89
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:164
 #, php-format
 msgctxt "female"
 msgid "Edit %s"
 msgstr "Modifier cette %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:90
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:165
 #, php-format
 msgctxt "female"
 msgid "New %s"
 msgstr "Nouvelle %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:91
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:166
 #, php-format
 msgctxt "female"
 msgid "All %s"
 msgstr "Toutes les %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:92
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:167
 #, php-format
 msgctxt "female"
 msgid "View %s"
 msgstr "Voir cette %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:93
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:168
 #, php-format
 msgctxt "female"
 msgid "Search %s"
 msgstr "Rechercher une %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:94
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:169
 #, php-format
 msgctxt "female"
 msgid "No %s found"
 msgstr "Aucune %s trouvée"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:95
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:170
 #, php-format
 msgctxt "female"
 msgid "No %s found in Trash"
 msgstr "Aucune %s trouvée dans la corbeille"
+
+#: ../../../../mu-plugins/wpu_ux_tweaks.php:212
+msgid "Thumbnail"
+msgstr "Miniature"
 
 #: ../.././404.php:7 ../.././tpl/header/breadcrumbs.php:72
 msgid "404 Error"
@@ -129,60 +145,76 @@ msgstr "Désolé, mais cette page n'existe pas."
 msgid "A %s site using %s"
 msgstr "Un site %s utilisant %s"
 
-#: ../.././functions.php:27
+#: ../.././functions.php:60
 msgid "Main menu"
 msgstr "Menu principal"
 
-#: ../.././functions.php:38
+#: ../.././functions.php:72
 msgid "Work"
 msgstr "Projet"
 
-#: ../.././functions.php:39
+#: ../.././functions.php:73
 msgid "Works"
 msgstr "Projets"
 
-#: ../.././functions.php:53
+#: ../.././functions.php:89
 msgid "Work type"
 msgstr "Type de Work"
 
-#: ../.././functions.php:64
+#: ../.././functions.php:101
 msgid "Default Sidebar"
 msgstr "Sidebar par défaut"
 
-#: ../.././functions.php:66
+#: ../.././functions.php:103
 msgid "Default theme sidebar"
 msgstr "Sidebar du thème par défaut"
 
-#: ../.././inc/plugins/wpu-options.php:25
+#: ../.././inc/plugins/wpu-options.php:32
 msgid "Email address"
 msgstr "Adresse email"
 
-#: ../.././inc/plugins/wpu-options.php:37
-msgid "About"
-msgstr "A Propos"
+#: ../.././inc/theme/customize.php:23
+msgid "Link Color"
+msgstr "Couleur des liens"
 
-#: ../.././inc/plugins/wpu-options.php:38
-msgid "Mentions"
-msgstr "Mentions"
+#: ../.././inc/theme/customize.php:30
+msgid "Link Color :hover"
+msgstr "Couleur des liens au survol"
+
+#: ../.././inc/theme/customize.php:37
+msgid "Background Color"
+msgstr "Couleur de fond"
+
+#: ../.././inc/theme/customize.php:44
+msgid "Background image site"
+msgstr "Image de fond du site"
+
+#: ../.././inc/theme/customize.php:51
+msgid "Title align"
+msgstr "Alignement du titre"
+
+#: ../.././inc/theme/customize.php:58
+msgid "Title size"
+msgstr "Taille du titre"
 
 #: ../.././inc/theme/utilities.php:41
 msgid "Sorry, no search results for this query."
 msgstr "Désolé, il n'y a aucun résultat pour cette requête."
 
-#: ../.././inc/theme/utilities.php:68
+#: ../.././inc/theme/utilities.php:71
 msgid "<strong>no</strong> comments"
 msgstr "<strong>aucun</strong> commentaire"
 
-#: ../.././inc/theme/utilities.php:71
+#: ../.././inc/theme/utilities.php:74
 msgid "<strong>1</strong> comment"
 msgstr "<strong>1</strong> commentaire"
 
-#: ../.././inc/theme/utilities.php:74
+#: ../.././inc/theme/utilities.php:77
 #, php-format
 msgid "<strong>%s</strong> comments"
 msgstr "<strong>%s</strong> commentaires"
 
-#: ../.././inc/theme/utilities.php:77
+#: ../.././inc/theme/utilities.php:80
 msgid "Comments are closed"
 msgstr "Les commentaires sont fermés"
 
@@ -301,7 +333,7 @@ msgstr "Rechercher sur %s"
 msgid "Search"
 msgstr "Rechercher"
 
-#: ../.././tpl/header/social.php:11
+#: ../.././tpl/header/social.php:7
 #, php-format
 msgid "%s: Follow %s (open in new window)"
 msgstr "%s : Suivre %s (s'ouvre dans une nouvelle fenêtre)"
@@ -310,13 +342,19 @@ msgstr "%s : Suivre %s (s'ouvre dans une nouvelle fenêtre)"
 msgid "Next page"
 msgstr "Page suivante"
 
-#: ../.././tpl/widgets/widget_post_categories.php:22
+#: ../.././tpl/widgets/widget_post_categories.php:24
 msgid "Number of posts:"
 msgstr "Nombre de posts :"
 
-#: ../.././tpl/widgets/widget_post_categories.php:25
+#: ../.././tpl/widgets/widget_post_categories.php:27
 msgid "Category:"
 msgstr "Catégorie :"
+
+#~ msgid "About"
+#~ msgstr "A Propos"
+
+#~ msgid "Mentions"
+#~ msgstr "Mentions"
 
 #~ msgid "task"
 #~ msgstr "tâche"
