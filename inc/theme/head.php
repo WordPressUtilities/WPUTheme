@@ -1,5 +1,5 @@
 <?php
-include dirname( __FILE__ ) . '/../../z-protect.php';
+include dirname(__FILE__) . '/../../z-protect.php';
 
 /* ----------------------------------------------------------
   Charset
@@ -16,12 +16,14 @@ if (!function_exists('wputh_head_add_charset')) {
   Page title
 ---------------------------------------------------------- */
 
-add_action('wp_head', 'wputh_head_add_title', 1);
-if (!function_exists('wputh_head_add_title')) {
-    function wputh_head_add_title() {
-        echo '<title>';
-        wp_title();
-        echo '</title>';
+if (!function_exists('_wp_render_title_tag')) {
+    add_action('wp_head', 'wputh_head_add_title', 1);
+    if (!function_exists('wputh_head_add_title')) {
+        function wputh_head_add_title() {
+            echo '<title>';
+            wp_title();
+            echo '</title>';
+        }
     }
 }
 
