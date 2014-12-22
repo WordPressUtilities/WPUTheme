@@ -1,132 +1,187 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2014-12-06 19:07+0100\n"
+"POT-Creation-Date: 2014-12-22 18:05+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Kevin <kevin@rocher.me>\n"
+"Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: __;_e;_x:1,2c;_n:1,2;esc_attr__\n"
 "X-Poedit-SearchPath-0: ../../.\n"
 "X-Poedit-SearchPath-1: ../../../../mu-plugins\n"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:134
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:146
 msgid "Add New"
 msgstr "Ajouter"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:135
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:147
 #, php-format
 msgctxt "male"
 msgid "Add New %s"
 msgstr "Ajouter un %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:136
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:148
 #, php-format
 msgctxt "male"
 msgid "Edit %s"
 msgstr "Modifier cet %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:137
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:149
 #, php-format
 msgctxt "male"
 msgid "New %s"
 msgstr "Nouveau %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:138
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:150
 #, php-format
 msgctxt "male"
 msgid "All %s"
 msgstr "Tous les %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:139
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:151
 #, php-format
 msgctxt "male"
 msgid "View %s"
 msgstr "Voir cet %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:140
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:152
 #, php-format
 msgctxt "male"
 msgid "Search %s"
 msgstr "Rechercher un %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:141
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:153
 #, php-format
 msgctxt "male"
 msgid "No %s found"
 msgstr "Aucun %s trouvé"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:142
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:154
 #, php-format
 msgctxt "male"
 msgid "No %s found in Trash"
 msgstr "Aucun %s trouvé dans la corbeille"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:157
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:162
 #, php-format
 msgctxt "male_consonant"
 msgid "Edit %s"
 msgstr "Modifier ce %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:158
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:163
 #, php-format
 msgctxt "male_consonant"
 msgid "View %s"
 msgstr "Voir ce %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:163
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:168
 #, php-format
 msgctxt "female"
 msgid "Add New %s"
 msgstr "Ajouter une %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:164
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:169
 #, php-format
 msgctxt "female"
 msgid "Edit %s"
 msgstr "Modifier cette %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:165
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:170
 #, php-format
 msgctxt "female"
 msgid "New %s"
 msgstr "Nouvelle %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:166
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:171
 #, php-format
 msgctxt "female"
 msgid "All %s"
 msgstr "Toutes les %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:167
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:172
 #, php-format
 msgctxt "female"
 msgid "View %s"
 msgstr "Voir cette %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:168
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:173
 #, php-format
 msgctxt "female"
 msgid "Search %s"
 msgstr "Rechercher une %s"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:169
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:174
 #, php-format
 msgctxt "female"
 msgid "No %s found"
 msgstr "Aucune %s trouvée"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:170
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:175
 #, php-format
 msgctxt "female"
 msgid "No %s found in Trash"
 msgstr "Aucune %s trouvée dans la corbeille"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:205
+#, php-format
+msgid "Search %s"
+msgstr "Rechercher des %s"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:206
+#, php-format
+msgid "Popular %s"
+msgstr "%s populaires"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:207
+#, php-format
+msgid "All %s"
+msgstr "Tous les %s"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:208
+#, php-format
+msgid "Edit %s"
+msgstr "Modifier ce %s"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:209
+#, php-format
+msgid "Update %s"
+msgstr "Mettre à jour ce %s"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:210
+#, php-format
+msgid "Add New %s"
+msgstr "Ajouter un nouveau %s"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:211
+#, php-format
+msgid "New %s Name"
+msgstr "Nouveau nom de %s"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:212
+#, php-format
+msgid "Separate %s with commas"
+msgstr "Séparer les %s avec des virgules"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:213
+#, php-format
+msgid "Add or remove %s"
+msgstr "Ajouter ou supprimer %s"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:214
+#, php-format
+msgid "Choose from the most used %s"
+msgstr "Choisir parmi les %s les plus utilisés"
+
+#: ../../../../mu-plugins/wpu_posttypestaxos.php:215
+#, php-format
+msgid "No %s found."
+msgstr "Aucun %s trouvé."
 
 #: ../../../../mu-plugins/wpu_ux_tweaks.php:212
 msgid "Thumbnail"
@@ -408,15 +463,13 @@ msgstr "Catégorie :"
 #~ msgstr "Tâche"
 
 #~ msgid "This post requires a password to read the comments"
-#~ msgstr ""
-#~ "Cet article demande un mot de passe afin de pouvoir lire les commentaires"
+#~ msgstr "Cet article demande un mot de passe afin de pouvoir lire les commentaires"
 
 #~ msgid "Trackbacks"
 #~ msgstr "Trackbacks"
 
 #~ msgid "You must be <a href=\"%s\">logged in</a> to post a comment"
-#~ msgstr ""
-#~ "Vous devez être <a href=\"%s\">connecté(e)</a> pour ajouter un commentaire"
+#~ msgstr "Vous devez être <a href=\"%s\">connecté(e)</a> pour ajouter un commentaire"
 
 #~ msgid "Leave a reply"
 #~ msgstr "Ajouter un commentaire"
