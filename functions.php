@@ -2,6 +2,8 @@
 session_start();
 include dirname( __FILE__ ) . '/z-protect.php';
 
+do_action('wputh_functionsphp_start');
+
 /* Globals
 -------------------------- */
 
@@ -162,3 +164,5 @@ function wputh_setup() {
     load_theme_textdomain( 'wputh', get_template_directory() . '/inc/lang' );
 }
 
+
+do_action('wputh_functionsphp_end');
