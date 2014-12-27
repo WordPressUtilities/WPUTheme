@@ -13,6 +13,19 @@ if (!function_exists('wputh_head_add_charset')) {
 }
 
 /* ----------------------------------------------------------
+  Google Fonts
+---------------------------------------------------------- */
+
+add_action('wp_enqueue_scripts', 'wputh_head_enqueue_google_fonts');
+function wputh_head_enqueue_google_fonts() {
+    $query_args = apply_filters('wputh_google_fonts', array());
+    if (!empty($query_args)) {
+        wp_register_style('google-fonts', add_query_arg($query_args, "//fonts.googleapis.com/css") , array() , null);
+        wp_enqueue_style('google-fonts');
+    }
+}
+
+/* ----------------------------------------------------------
   Page title
 ---------------------------------------------------------- */
 
