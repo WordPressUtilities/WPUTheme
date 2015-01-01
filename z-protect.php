@@ -16,6 +16,8 @@ while (!is_file($bootfile)) {
 require_once ($bootfile);
 
 // Load 404
-header( $_SERVER["SERVER_PROTOCOL"]." 404 Not Found" );
+header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
+global $wp_query;
+$wp_query->is_404 = true;
 include get_404_template();
 die;
