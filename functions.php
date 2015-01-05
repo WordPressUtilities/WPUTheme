@@ -143,6 +143,7 @@ if ( ! isset( $content_width ) ) $content_width = 680;
 include get_template_directory() . '/inc/plugins/wpu-options.php';
 include get_template_directory() . '/inc/plugins/wpu-postmetas.php';
 include get_template_directory() . '/inc/plugins/wpu-usermetas.php';
+include get_template_directory() . '/inc/plugins/wpu-tinymce.php';
 
 /* Assets
 -------------------------- */

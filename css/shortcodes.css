@@ -33,3 +33,16 @@
     column-gap: 20px;
     margin-bottom: 20px;
 }
+
+/* ----------------------------------------------------------
+  Table
+---------------------------------------------------------- */
+
+.wputinymce-table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.wputinymce-table th {
+    text-align: left;
+}
