@@ -87,3 +87,39 @@ function wputh_youtube_shortcode($atts, $content = "") {
 
     return '<div class="wputh-video-container"><iframe src="http://www.youtube.com/embed/' . $arr['v'] . '" height="315" width="560" allowfullscreen="" frameborder="0"></iframe></div>';
 }
+
+/* ----------------------------------------------------------
+  [responsive_vimeo]https://www.vimeo.com/watch?v=wl2Rc4R0yLQ[/responsive_vimeo]
+---------------------------------------------------------- */
+
+add_shortcode('responsive_vimeo', 'wputh_vimeo_shortcode');
+function wputh_vimeo_shortcode($atts, $content = "") {
+    $url = trim($content);
+
+    # Regex from http://blog.luutaa.com/php/extract-youtube-and-vimeo-video-id-from-link/
+    $regexstr = '~
+                # Match Vimeo link and embed code
+                (?:<iframe [^>]*src=")?       # If iframe match up to first quote of src
+                (?:                         # Group vimeo url
+                    https?:\/\/             # Either http or https
+                    (?:[\w]+\.)*            # Optional subdomains
+                    vimeo\.com              # Match vimeo.com
+                    (?:[\/\w]*\/videos?)?   # Optional video sub directory this handles groups links also
+                    \/                      # Slash before Id
+                    ([0-9]+)                # $1: VIDEO_ID is numeric
+                    [^\s]*                  # Not a space
+                )                           # End group
+                "?                          # Match end quote if part of src
+                (?:[^>]*></iframe>)?        # Match the end of the iframe
+                (?:<p>.*</p>)?              # Match any title information stuff
+                ~ix';
+
+    preg_match($regexstr, $url, $url_details);
+
+    // Check query
+    if (!isset($url_details[1])) {
+        return;
+    }
+
+    return '<div class="wputh-video-container"><iframe src="//player.vimeo.com/video/' . $url_details[1] . '?title=0&amp;byline=0&amp;portrait=0" width="1200" height="674" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>';
+}
