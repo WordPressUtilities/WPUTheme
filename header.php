@@ -1,11 +1,12 @@
 <?php
 include dirname( __FILE__ ) . '/z-protect.php';
 $main_tag = is_home() ? 'h1' : 'div';
-if ( !isset( $_GET['is_ajax'] ) ) {
+if ( !IS_AJAX ) {
 echo wputh_get_doctype_html();
 ?>
 <head><?php echo wp_head(); ?></head>
 <body <?php body_class( 'no-js cssc-is-responsive' ); ?>>
+<?php if (apply_filters('wputheme_display_header', true)): ?>
 <div class="main-header centered-container">
     <header class="banner" role="banner" id="banner">
     <?php
@@ -24,7 +25,10 @@ echo wputh_get_doctype_html();
     ?>
     </header>
 </div>
+<?php endif; ?>
+<?php if (apply_filters('wputheme_display_mainwrapper', true)): ?>
 <div class="main-container centered-container"><div class="main-container--inner" id="content">
+<?php endif; ?>
 <?php }
 include get_template_directory() . '/tpl/header/languages.php';
 include get_template_directory() . '/tpl/header/breadcrumbs.php';

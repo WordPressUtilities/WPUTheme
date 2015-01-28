@@ -8,6 +8,7 @@ do_action('wputh_functionsphp_start');
 -------------------------- */
 
 define( "THEME_URL", get_template_directory_uri() );
+define( "IS_AJAX", isset($_GET['ajax']) );
 define( 'PAGINATION_KIND', 'numbers' ); // load-more || numbers || default
 
 /* Pages IDs
