@@ -70,7 +70,7 @@ function wputh_add_javascripts() {
             $url = $details['url'];
         }
         if (isset($details['uri'])) {
-            $url = get_template_directory_uri() . $details['uri'];
+            $url = get_stylesheet_directory_uri() . $details['uri'];
         }
         $deps = isset($details['deps']) ? $details['deps'] : false;
         $ver = isset($details['ver']) ? $details['ver'] : false;
