@@ -26,6 +26,7 @@ echo wputh_get_doctype_html();
     </header>
 </div>
 <?php endif; ?>
+<?php do_action('wputheme_header_elements'); ?>
 <?php if (apply_filters('wputheme_display_mainwrapper', true)): ?>
 <div class="main-container centered-container"><div class="main-container--inner" id="content">
 <?php endif; ?>
