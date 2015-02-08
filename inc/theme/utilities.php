@@ -64,7 +64,7 @@ function wputh_get_comments_title( $count_comments, $zero = false, $one = false,
     if ( is_array( $count_comments ) ) {
         $count_comments = count( $count_comments );
     }
-    if( !is_number($count_comments) ){
+    if( !is_numeric($count_comments) ){
         $count_comments = $post->comment_count;
     }
     if ( $zero === false ) {

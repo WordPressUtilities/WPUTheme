@@ -6,6 +6,7 @@ echo wputh_get_doctype_html();
 ?>
 <head><?php echo wp_head(); ?></head>
 <body <?php body_class( 'no-js cssc-is-responsive' ); ?>>
+<?php do_action('wputheme_header_items'); ?>
 <?php if (apply_filters('wputheme_display_header', true)): ?>
 <div class="main-header centered-container">
     <header class="banner" role="banner" id="banner">
