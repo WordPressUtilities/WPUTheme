@@ -22,6 +22,7 @@ if (!function_exists('set_wpu_options_boxes')) {
     }
 }
 
+add_filter('wpu_options_fields', 'set_wputh_options_fields_default', 10, 3);
 add_filter('wpu_options_fields', 'set_wputh_options_fields', 10, 3);
 
 if (!function_exists('set_wputh_options_fields')) {
@@ -35,25 +36,31 @@ if (!function_exists('set_wputh_options_fields')) {
             'test' => 'email'
         );
 
-        // Social networks
-        $wpu_social_links = unserialize(WPU_SOCIAL_LINKS);
-        foreach ($wpu_social_links as $id => $name) {
-            $options['social_' . $id . '_url'] = array(
-                'label' => $name . ' URL',
-                'box' => 'social_networks'
-            );
-        }
-
-        // Create pages IDs from list defined in functions.php
-        $pages_site = apply_filters('wputh_pages_site', array());
-        foreach ($pages_site as $id => $page) {
-            $options[$id] = array(
-                'label' => __($page['post_title'], 'wputh') ,
-                'box' => 'pages_id',
-                'type' => 'page'
-            );
-        }
-
         return $options;
     }
 }
+
+function set_wputh_options_fields_default($options) {
+
+    // Social networks
+    $wpu_social_links = unserialize(WPU_SOCIAL_LINKS);
+    foreach ($wpu_social_links as $id => $name) {
+        $options['social_' . $id . '_url'] = array(
+            'label' => $name . ' URL',
+            'box' => 'social_networks'
+        );
+    }
+
+    // Create pages IDs from list defined in functions.php
+    $pages_site = apply_filters('wputh_pages_site', array());
+    foreach ($pages_site as $id => $page) {
+        $options[$id] = array(
+            'label' => __($page['post_title'], 'wputh') ,
+            'box' => 'pages_id',
+            'type' => 'page'
+        );
+    }
+
+    return $options;
+}
+
