@@ -15,7 +15,7 @@ if ( !isset( $elements_ariane ) ) {
     $elements_ariane = array();
     $elements_ariane['home'] = array(
         'name' => __( 'Home', 'wputh' ),
-        'link' => site_url()
+        'link' => home_url()
     );
 
     if ( is_singular() ) {

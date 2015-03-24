@@ -10,7 +10,7 @@ function get_pages_sitemap_child_of( $sitemap_pages = array(), $parent = 0 ) {
     $content = '';
 
     if ( $parent == 0 ) {
-        $content .= '<li><a href="'.site_url().'">'.__( 'Home page', 'wputh' ).'</a></li>';
+        $content .= '<li><a href="'.home_url().'">'.__( 'Home page', 'wputh' ).'</a></li>';
     }
 
     foreach ( $sitemap_pages as $id => $sitemap_page ) {

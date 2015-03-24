@@ -12,7 +12,7 @@ echo wputh_get_doctype_html();
     <header class="banner" role="banner" id="banner">
     <?php
     /* Title */
-    echo '<'.$main_tag.' class="h1 main-title"><a href="' . site_url() . '">'.get_bloginfo( 'name' ).'</a></'.$main_tag.'>';
+    echo '<'.$main_tag.' class="h1 main-title"><a href="' . home_url() . '">'.get_bloginfo( 'name' ).'</a></'.$main_tag.'>';
     /* Search form */
     include get_template_directory() . '/tpl/header/searchform.php';
     /* Social links */
