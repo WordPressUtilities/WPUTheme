@@ -249,12 +249,13 @@ function wputh_sendmail_set_html_content_type() {
     return 'text/html';
 }
 
+
 /* ----------------------------------------------------------
   Pagination
 ---------------------------------------------------------- */
 
 if (!function_exists('wputh_paginate')) {
-    function wputh_paginate() {
+    function wputh_paginate($prev_text='', $next_text='') {
         ob_start();
         include get_template_directory() . '/tpl/paginate.php';
         return ob_get_clean();

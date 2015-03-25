@@ -33,5 +33,7 @@ echo wputh_get_doctype_html();
 <?php endif; ?>
 <?php }
 include get_template_directory() . '/tpl/header/languages.php';
+if (apply_filters('wputheme_display_breadcrumbs', true)):
 include get_template_directory() . '/tpl/header/breadcrumbs.php';
+endif;
 include get_template_directory() . '/tpl/header/jsvalues.php';
