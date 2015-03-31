@@ -66,17 +66,15 @@ register_nav_menus( array(
 /* Post Types
 -------------------------- */
 
-add_filter( 'wputh_get_posttypes', 'wputh_set_theme_posttypes' );
-if(!function_exists('wputh_set_theme_posttypes')){
-    function wputh_set_theme_posttypes( $post_types ) {
-        $post_types = array(
-            //'work' => array(
-            //    'menu_icon' => 'dashicons-portfolio',
-            //    'name' => __( 'Work', 'wputh' ),
-            //    'plural' => __( 'Works', 'wputh' ),
-            //    'female' => 0
-            //)
-        );
+add_filter('wputh_get_posttypes', 'wputh_set_theme_posttypes');
+if (!function_exists('wputh_set_theme_posttypes')) {
+    function wputh_set_theme_posttypes($post_types) {
+        // $post_types['work'] = array(
+        //     'menu_icon' => 'dashicons-portfolio',
+        //     'name' => __('Work', 'wputh') ,
+        //     'plural' => __('Works', 'wputh') ,
+        //     'female' => 0
+        // );
         return $post_types;
     }
 }
