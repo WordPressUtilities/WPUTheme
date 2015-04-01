@@ -70,6 +70,6 @@ add_action('wp_head', 'wputh_head_add_iecompatibility', 10);
 if (!function_exists('wputh_head_add_iecompatibility')) {
     function wputh_head_add_iecompatibility() {
         $script_src = get_template_directory_uri() . '/js/ie/';
-        echo '<!--[if lt IE 9]><script type="text/javascript" src="' . $script_src . 'html5.js"></script><script type="text/javascript" src="' . $script_src . 'selectivizr-min.js"></script><![endif]-->';
+        echo '<!--[if lt IE 9]><script type="text/javascript" src="' . $script_src . 'ie.js"></script><![endif]-->';
     }
 }
