@@ -9,7 +9,9 @@ do_action('wputh_functionsphp_start');
 
 define("THEME_URL", get_template_directory_uri());
 define("IS_AJAX", isset($_GET['ajax']));
-define( 'PAGINATION_KIND', 'numbers' ); // load-more || numbers || default
+
+// load-more || numbers || default
+define('PAGINATION_KIND', 'numbers');
 
 /* Pages IDs
  -------------------------- */
@@ -39,6 +41,7 @@ foreach ($pages_site as $id => $option) {
         $option['constant'] = strtoupper($id);
     }
     define($option['constant'], get_option($id));
+    define($option['constant'] . '__LINK', get_page_link(get_option($id)));
 }
 
 /* Social links
@@ -128,10 +131,10 @@ include get_template_directory() . '/inc/theme/customize.php';
 include get_template_directory() . '/inc/theme/head.php';
 include get_template_directory() . '/inc/theme/display.php';
 
-if ( ! isset( $content_width ) ) $content_width = 680;
+if (!isset($content_width)) $content_width = 680;
 
 /* Plugins Configuration
--------------------------- */
+ -------------------------- */
 
 include get_template_directory() . '/inc/plugins/wpu-options.php';
 include get_template_directory() . '/inc/plugins/wpu-postmetas.php';
@@ -139,13 +142,13 @@ include get_template_directory() . '/inc/plugins/wpu-usermetas.php';
 include get_template_directory() . '/inc/plugins/wpu-tinymce.php';
 
 /* Assets
--------------------------- */
+ -------------------------- */
 
 include get_template_directory() . '/inc/assets/styles.php';
 include get_template_directory() . '/inc/assets/scripts.php';
 
 /* Widgets
--------------------------- */
+ -------------------------- */
 
 include get_template_directory() . '/tpl/widgets/widget_post_categories.php';
 
