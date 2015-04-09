@@ -40,8 +40,13 @@ foreach ($pages_site as $id => $option) {
     if (!isset($option['constant'])) {
         $option['constant'] = strtoupper($id);
     }
-    define($option['constant'], get_option($id));
-    define($option['constant'] . '__LINK', get_page_link(get_option($id)));
+    $opt_id = get_option($id);
+    define($option['constant'], $opt_id);
+    $link = '#';
+    if (is_numeric($opt_id)) {
+        $link = get_page_link($opt_id);
+    }
+    define($option['constant'] . '__LINK', $link);
 }
 
 /* Social links
