@@ -261,3 +261,13 @@ if (!function_exists('wputh_paginate')) {
         return ob_get_clean();
     }
 }
+
+/* ----------------------------------------------------------
+  Get HTML page link
+---------------------------------------------------------- */
+
+if (!function_exists('wputh_link')) {
+    function wputh_link($page_id) {
+        return '<a class="' . (is_page($page_id) ? 'current' : '') . '" href="' . get_permalink($page_id) . '">' . get_the_title($page_id) . '</a>';
+    }
+}
