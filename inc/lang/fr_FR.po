@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2014-12-22 18:05+0100\n"
+"POT-Creation-Date: 2015-04-13 15:51+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -16,178 +16,20 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../../.\n"
 "X-Poedit-SearchPath-1: ../../../../mu-plugins\n"
 
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:146
-msgid "Add New"
-msgstr "Ajouter"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:147
-#, php-format
-msgctxt "male"
-msgid "Add New %s"
-msgstr "Ajouter un %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:148
-#, php-format
-msgctxt "male"
-msgid "Edit %s"
-msgstr "Modifier cet %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:149
-#, php-format
-msgctxt "male"
-msgid "New %s"
-msgstr "Nouveau %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:150
-#, php-format
-msgctxt "male"
-msgid "All %s"
-msgstr "Tous les %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:151
-#, php-format
-msgctxt "male"
-msgid "View %s"
-msgstr "Voir cet %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:152
-#, php-format
-msgctxt "male"
-msgid "Search %s"
-msgstr "Rechercher un %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:153
-#, php-format
-msgctxt "male"
-msgid "No %s found"
-msgstr "Aucun %s trouvé"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:154
-#, php-format
-msgctxt "male"
-msgid "No %s found in Trash"
-msgstr "Aucun %s trouvé dans la corbeille"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:162
-#, php-format
-msgctxt "male_consonant"
-msgid "Edit %s"
-msgstr "Modifier ce %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:163
-#, php-format
-msgctxt "male_consonant"
-msgid "View %s"
-msgstr "Voir ce %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:168
-#, php-format
-msgctxt "female"
-msgid "Add New %s"
-msgstr "Ajouter une %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:169
-#, php-format
-msgctxt "female"
-msgid "Edit %s"
-msgstr "Modifier cette %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:170
-#, php-format
-msgctxt "female"
-msgid "New %s"
-msgstr "Nouvelle %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:171
-#, php-format
-msgctxt "female"
-msgid "All %s"
-msgstr "Toutes les %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:172
-#, php-format
-msgctxt "female"
-msgid "View %s"
-msgstr "Voir cette %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:173
-#, php-format
-msgctxt "female"
-msgid "Search %s"
-msgstr "Rechercher une %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:174
-#, php-format
-msgctxt "female"
-msgid "No %s found"
-msgstr "Aucune %s trouvée"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:175
-#, php-format
-msgctxt "female"
-msgid "No %s found in Trash"
-msgstr "Aucune %s trouvée dans la corbeille"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:205
-#, php-format
-msgid "Search %s"
-msgstr "Rechercher des %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:206
-#, php-format
-msgid "Popular %s"
-msgstr "%s populaires"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:207
-#, php-format
-msgid "All %s"
-msgstr "Tous les %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:208
-#, php-format
-msgid "Edit %s"
-msgstr "Modifier ce %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:209
-#, php-format
-msgid "Update %s"
-msgstr "Mettre à jour ce %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:210
-#, php-format
-msgid "Add New %s"
-msgstr "Ajouter un nouveau %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:211
-#, php-format
-msgid "New %s Name"
-msgstr "Nouveau nom de %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:212
-#, php-format
-msgid "Separate %s with commas"
-msgstr "Séparer les %s avec des virgules"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:213
-#, php-format
-msgid "Add or remove %s"
-msgstr "Ajouter ou supprimer %s"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:214
-#, php-format
-msgid "Choose from the most used %s"
-msgstr "Choisir parmi les %s les plus utilisés"
-
-#: ../../../../mu-plugins/wpu_posttypestaxos.php:215
-#, php-format
-msgid "No %s found."
-msgstr "Aucun %s trouvé."
-
-#: ../../../../mu-plugins/wpu_ux_tweaks.php:212
+#: ../../../../mu-plugins/wpu_ux_tweaks.php:259
 msgid "Thumbnail"
 msgstr "Miniature"
 
-#: ../.././404.php:7 ../.././tpl/header/breadcrumbs.php:72
+#: ../../../../mu-plugins/wpudisableposts.php:59
+#, php-format
+msgid "Our RSS feed is disabled. Please <a href=\"%s\">visit our homepage</a>."
+msgstr "﻿Notre flux RSS est désactivé. Vous pouvez <a href=\"\"%s\"\">accéder à notre page d'accueil</a>."
+
+#: ../../../../mu-plugins/wputh_admin_protect.php:34
+msgid "You are not allowed to access this part of the site"
+msgstr "Vous n'êtes pas autorisé à accéder à cette section du site"
+
+#: ../.././404.php:7 ../.././tpl/header/breadcrumbs.php:92
 msgid "404 Error"
 msgstr "Erreur 404"
 
@@ -195,36 +37,19 @@ msgstr "Erreur 404"
 msgid "Sorry, but this page doesn&rsquo;t exists."
 msgstr "Désolé, mais cette page n'existe pas."
 
-#: ../.././footer.php:10
-#, php-format
-msgid "A %s site using %s"
-msgstr "Un site %s utilisant %s"
-
-#: ../.././functions.php:60
+#: ../.././functions.php:69
 msgid "Main menu"
 msgstr "Menu principal"
 
-#: ../.././functions.php:72
-msgid "Work"
-msgstr "Projet"
-
-#: ../.././functions.php:73
-msgid "Works"
-msgstr "Projets"
-
-#: ../.././functions.php:89
-msgid "Work type"
-msgstr "Type de Work"
-
-#: ../.././functions.php:101
+#: ../.././functions.php:109
 msgid "Default Sidebar"
 msgstr "Sidebar par défaut"
 
-#: ../.././functions.php:103
+#: ../.././functions.php:111
 msgid "Default theme sidebar"
 msgstr "Sidebar du thème par défaut"
 
-#: ../.././inc/plugins/wpu-options.php:32
+#: ../.././inc/plugins/wpu-options.php:33
 msgid "Email address"
 msgstr "Adresse email"
 
@@ -358,11 +183,16 @@ msgstr "Erreur :"
 msgid "Submit"
 msgstr "Envoyer"
 
-#: ../.././tpl/header/breadcrumbs.php:17
+#: ../.././tpl/footer/copyright.php:5
+#, php-format
+msgid "A %s site using %s"
+msgstr "Un site %s utilisant %s"
+
+#: ../.././tpl/header/breadcrumbs.php:18
 msgid "Home"
 msgstr "Accueil"
 
-#: ../.././tpl/header/breadcrumbs.php:79
+#: ../.././tpl/header/breadcrumbs.php:99
 #, php-format
 msgid "Search results for \"%s\""
 msgstr "Résultats de recherche pour \"%s\""
@@ -393,7 +223,15 @@ msgstr "Rechercher"
 msgid "%s: Follow %s (open in new window)"
 msgstr "%s : Suivre %s (s'ouvre dans une nouvelle fenêtre)"
 
-#: ../.././tpl/paginate.php:28
+#: ../.././tpl/paginate.php:22
+msgid "« Previous"
+msgstr "« Précédent"
+
+#: ../.././tpl/paginate.php:25
+msgid "Next »"
+msgstr "Suivant »"
+
+#: ../.././tpl/paginate.php:39
 msgid "Next page"
 msgstr "Page suivante"
 
@@ -404,6 +242,123 @@ msgstr "Nombre de posts :"
 #: ../.././tpl/widgets/widget_post_categories.php:27
 msgid "Category:"
 msgstr "Catégorie :"
+
+#~ msgid "Add New"
+#~ msgstr "Ajouter"
+
+#~ msgctxt "male"
+#~ msgid "Add New %s"
+#~ msgstr "Ajouter un %s"
+
+#~ msgctxt "male"
+#~ msgid "Edit %s"
+#~ msgstr "Modifier cet %s"
+
+#~ msgctxt "male"
+#~ msgid "New %s"
+#~ msgstr "Nouveau %s"
+
+#~ msgctxt "male"
+#~ msgid "All %s"
+#~ msgstr "Tous les %s"
+
+#~ msgctxt "male"
+#~ msgid "View %s"
+#~ msgstr "Voir cet %s"
+
+#~ msgctxt "male"
+#~ msgid "Search %s"
+#~ msgstr "Rechercher un %s"
+
+#~ msgctxt "male"
+#~ msgid "No %s found"
+#~ msgstr "Aucun %s trouvé"
+
+#~ msgctxt "male"
+#~ msgid "No %s found in Trash"
+#~ msgstr "Aucun %s trouvé dans la corbeille"
+
+#~ msgctxt "male_consonant"
+#~ msgid "Edit %s"
+#~ msgstr "Modifier ce %s"
+
+#~ msgctxt "male_consonant"
+#~ msgid "View %s"
+#~ msgstr "Voir ce %s"
+
+#~ msgctxt "female"
+#~ msgid "Add New %s"
+#~ msgstr "Ajouter une %s"
+
+#~ msgctxt "female"
+#~ msgid "Edit %s"
+#~ msgstr "Modifier cette %s"
+
+#~ msgctxt "female"
+#~ msgid "New %s"
+#~ msgstr "Nouvelle %s"
+
+#~ msgctxt "female"
+#~ msgid "All %s"
+#~ msgstr "Toutes les %s"
+
+#~ msgctxt "female"
+#~ msgid "View %s"
+#~ msgstr "Voir cette %s"
+
+#~ msgctxt "female"
+#~ msgid "Search %s"
+#~ msgstr "Rechercher une %s"
+
+#~ msgctxt "female"
+#~ msgid "No %s found"
+#~ msgstr "Aucune %s trouvée"
+
+#~ msgctxt "female"
+#~ msgid "No %s found in Trash"
+#~ msgstr "Aucune %s trouvée dans la corbeille"
+
+#~ msgid "Search %s"
+#~ msgstr "Rechercher des %s"
+
+#~ msgid "Popular %s"
+#~ msgstr "%s populaires"
+
+#~ msgid "All %s"
+#~ msgstr "Tous les %s"
+
+#~ msgid "Edit %s"
+#~ msgstr "Modifier ce %s"
+
+#~ msgid "Update %s"
+#~ msgstr "Mettre à jour ce %s"
+
+#~ msgid "Add New %s"
+#~ msgstr "Ajouter un nouveau %s"
+
+#~ msgid "New %s Name"
+#~ msgstr "Nouveau nom de %s"
+
+#~ msgid "Separate %s with commas"
+#~ msgstr "Séparer les %s avec des virgules"
+
+#~ msgid "Add or remove %s"
+#~ msgstr "Ajouter ou supprimer %s"
+
+#~ msgid "Choose from the most used %s"
+#~ msgstr "Choisir parmi les %s les plus utilisés"
+
+#~ msgid "No %s found."
+#~ msgstr "Aucun %s trouvé."
+
+#~ msgid "Work"
+#~ msgstr "Projet"
+
+#~ msgid "Works"
+#~ msgstr "Projets"
+
+#~ msgid "Work type"
+#~ msgstr "Type de Work"
 
 #~ msgid "About"
 #~ msgstr "A Propos"
