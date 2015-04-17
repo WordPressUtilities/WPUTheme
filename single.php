@@ -9,6 +9,8 @@ the_post();
 /* Content */
 get_template_part( 'loop' );
 
+include get_template_directory() . '/tpl/loops/share.php';
+
 /* Comments */
 comments_template();
 
