@@ -13,42 +13,6 @@ define("IS_AJAX", isset($_GET['ajax']));
 // load-more || numbers || default
 define('PAGINATION_KIND', 'numbers');
 
-/* Pages IDs
- -------------------------- */
-
-if (!function_exists('wputh_set_pages_site')) {
-    function wputh_set_pages_site($pages_site) {
-        $pages_site['about__page_id'] = array(
-            'constant' => 'ABOUT__PAGE_ID',
-            'post_title' => 'A Propos',
-            'post_content' => '<p>A Propos de ce site.</p>',
-        );
-        $pages_site['mentions__page_id'] = array(
-            'constant' => 'MENTIONS__PAGE_ID',
-            'post_title' => 'Mentions légales',
-            'post_content' => '<p>Contenu des mentions légales</p>',
-        );
-        return $pages_site;
-    }
-}
-
-add_filter('wputh_pages_site', 'wputh_set_pages_site');
-
-$pages_site = apply_filters('wputh_pages_site', array());
-
-foreach ($pages_site as $id => $option) {
-    if (!isset($option['constant'])) {
-        $option['constant'] = strtoupper($id);
-    }
-    $opt_id = get_option($id);
-    define($option['constant'], $opt_id);
-    $link = '#';
-    if (is_numeric($opt_id)) {
-        $link = get_page_link($opt_id);
-    }
-    define($option['constant'] . '__LINK', $link);
-}
-
 /* Social links
  -------------------------- */
 
@@ -61,13 +25,6 @@ if (!isset($wpu_social_links) || !is_array($wpu_social_links)) {
 }
 
 define('WPU_SOCIAL_LINKS', serialize($wpu_social_links));
-
-/* Menus
- -------------------------- */
-
-register_nav_menus(array(
-    'main' => __('Main menu', 'wputh') ,
-));
 
 /* Post Types
  -------------------------- */
@@ -102,21 +59,39 @@ if (!function_exists('wputh_set_theme_taxonomies')) {
     }
 }
 
+/* Menus
+ -------------------------- */
+
+$default_menus = array(
+    'main' => __('Main menu', 'wputh') ,
+);
+$wputh_menus = apply_filters('wputh_default_menus', $default_menus);
+register_nav_menus($wputh_menus);
+
 /* Sidebars
  -------------------------- */
 
-register_sidebar(array(
-    'name' => __('Default Sidebar', 'wputh') ,
-    'id' => 'wputh-sidebar',
-    'description' => __('Default theme sidebar', 'wputh') ,
-    'before_title' => '<h3>',
-    'after_title' => '</h3>'
-));
+$default_sidebars = array(
+    array(
+        'name' => __('Default Sidebar', 'wputh') ,
+        'id' => 'wputh-sidebar',
+        'description' => __('Default theme sidebar', 'wputh') ,
+        'before_title' => '<h3>',
+        'after_title' => '</h3>'
+    )
+);
+
+$wputh_sidebars = apply_filters('wputh_default_sidebars', $default_sidebars);
+if (!empty($wputh_sidebars)) {
+    foreach ($wputh_sidebars as $wputh_sidebar) {
+        register_sidebar($wputh_sidebar);
+    }
+}
 
 /* Thumbnails
  -------------------------- */
 
-// Default thumbnail size
+// Default featured image size size
 if (function_exists('set_post_thumbnail_size')) {
     set_post_thumbnail_size(1200, 1200);
 }
@@ -128,6 +103,7 @@ if (function_exists('set_post_thumbnail_size')) {
 /* Theme
  -------------------------- */
 
+include get_template_directory() . '/inc/theme/pages.php';
 include get_template_directory() . '/inc/theme/params.php';
 include get_template_directory() . '/inc/theme/utilities.php';
 include get_template_directory() . '/inc/theme/shortcodes.php';
