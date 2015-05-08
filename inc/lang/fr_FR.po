@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2015-04-17 19:45-0000\n"
+"POT-Creation-Date: 2015-05-08 23:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -28,19 +28,31 @@ msgstr "Erreur 404"
 msgid "Sorry, but this page doesn&rsquo;t exists."
 msgstr "Désolé, mais cette page n'existe pas."
 
-#: ../.././functions.php:69
+#: ../.././functions.php:66
 msgid "Main menu"
 msgstr "Menu principal"
 
-#: ../.././functions.php:109
+#: ../.././functions.php:76
 msgid "Default Sidebar"
 msgstr "Sidebar par défaut"
 
-#: ../.././functions.php:111
+#: ../.././functions.php:78
 msgid "Default theme sidebar"
 msgstr "Sidebar du thème par défaut"
 
-#: ../.././inc/plugins/wpu-options.php:33
+#: ../.././inc/plugins/wpu-options.php:13
+msgid "Contacts"
+msgstr "Contacts"
+
+#: ../.././inc/plugins/wpu-options.php:16
+msgid "Social networks"
+msgstr "Réseaux sociaux"
+
+#: ../.././inc/plugins/wpu-options.php:19
+msgid "Pages IDs"
+msgstr "IDs des pages"
+
+#: ../.././inc/plugins/wpu-options.php:32
 msgid "Email address"
 msgstr "Adresse email"
 
@@ -237,6 +249,9 @@ msgstr "Nombre de posts :"
 #: ../.././tpl/widgets/widget_post_categories.php:27
 msgid "Category:"
 msgstr "Catégorie :"
+
+#~ msgid "Virtual contacts"
+#~ msgstr "Contacts"
 
 #~ msgid "Our RSS feed is disabled. Please <a href=\"%s\">visit our homepage</a>."
 #~ msgstr "﻿Notre flux RSS est désactivé. Vous pouvez <a href=\"\"%s\"\">accéder à notre page d'accueil</a>."

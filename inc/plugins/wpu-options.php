@@ -10,13 +10,13 @@ add_filter('wpu_options_boxes', 'set_wpu_options_boxes', 10, 3);
 if (!function_exists('set_wpu_options_boxes')) {
     function set_wpu_options_boxes($boxes) {
         $boxes['virtual_contacts'] = array(
-            'name' => 'Virtual contacts'
+            'name' => __('Contacts', 'wputh')
         );
         $boxes['social_networks'] = array(
-            'name' => 'Réseaux sociaux'
+            'name' => __('Social networks', 'wputh')
         );
         $boxes['pages_id'] = array(
-            'name' => 'Pages IDs'
+            'name' => __('Pages IDs', 'wputh')
         );
         return $boxes;
     }
@@ -27,7 +27,6 @@ add_filter('wpu_options_fields', 'set_wputh_options_fields', 10, 3);
 
 if (!function_exists('set_wputh_options_fields')) {
     function set_wputh_options_fields($options) {
-
         // Virtual contacts
         $options['wpu_opt_email'] = array(
             'label' => __('Email address', 'wputh') ,
