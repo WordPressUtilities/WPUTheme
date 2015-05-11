@@ -32,7 +32,9 @@ echo wputh_get_doctype_html();
 <div class="main-container centered-container"><div class="main-container--inner" id="content">
 <?php endif; ?>
 <?php }
+if (apply_filters('wputheme_display_languages', true)):
 include get_template_directory() . '/tpl/header/languages.php';
+endif;
 if (apply_filters('wputheme_display_breadcrumbs', true)):
 include get_template_directory() . '/tpl/header/breadcrumbs.php';
 endif;

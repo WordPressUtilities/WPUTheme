@@ -13,7 +13,19 @@ if (function_exists('qtrans_getSortedLanguages')) {
     foreach ($languages as $lang) {
         $display_languages[$lang] = array(
             'name' => $lang,
-            'url' => qtrans_convertURL($current_url, $lang)
+            'url' => qtrans_convertURL($current_url, $lang, 0, 1)
+        );
+    }
+}
+
+// Obtaining from Qtranslate W
+if (function_exists('qtranxf_getSortedLanguages')) {
+    $current_lang = qtranxf_getLanguage();
+    $languages = qtranxf_getSortedLanguages();
+    foreach ($languages as $lang) {
+        $display_languages[$lang] = array(
+            'name' => $lang,
+            'url' => qtranxf_convertURL($current_url, $lang, 0, 1)
         );
     }
 }
