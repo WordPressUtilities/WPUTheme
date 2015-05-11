@@ -36,4 +36,6 @@ include get_template_directory() . '/tpl/header/languages.php';
 if (apply_filters('wputheme_display_breadcrumbs', true)):
 include get_template_directory() . '/tpl/header/breadcrumbs.php';
 endif;
+if (apply_filters('wputheme_display_jsvalues', true)):
 include get_template_directory() . '/tpl/header/jsvalues.php';
+endif;
