@@ -150,20 +150,34 @@ function wputh_get_thumbnail_url( $format ) {
  * @param string  $format (optional)
  * @return array
  */
-function wputh_get_attachments_images( $postID, $format='medium' ) {
+function wputh_get_attachments_images($postID = false, $format = 'medium', $settings = array()) {
+    global $post;
+    if ($postID === false) {
+        if (isset($post->ID)) {
+            $postID = $post->ID;
+        }
+        else {
+            return array();
+        }
+    }
+
+    $default_settings = array(
+        'post_type' => 'attachment',
+        'post_mime_type' => 'image',
+        'posts_per_page' => - 1,
+        'post_status' => 'any',
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+        'post_parent' => $postID
+    );
+
+    $args = array_merge($default_settings,$settings);
+
     $images = array();
-    $attachments = get_posts( array(
-            'post_type' => 'attachment',
-            'post_mime_type' => 'image',
-            'posts_per_page' => -1,
-            'post_status' =>'any',
-            'orderby' => 'menu_order',
-            'order' => 'ASC',
-            'post_parent' => $postID
-        ) );
-    foreach ( $attachments as $attachment ) {
-        $image = wp_get_attachment_image_src( $attachment->ID , $format );
-        if ( isset( $image[0] ) ) {
+    $attachments = get_posts($args);
+    foreach ($attachments as $attachment) {
+        $image = wp_get_attachment_image_src($attachment->ID, $format);
+        if (isset($image[0])) {
             $images[$attachment->ID] = $image;
         }
     }
