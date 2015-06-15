@@ -22,6 +22,7 @@ if (!isset($wpu_social_links) || !is_array($wpu_social_links)) {
         'facebook' => 'Facebook',
         'instagram' => 'Instagram',
     );
+    $wpu_social_links = apply_filters('wpu_social_links', $wpu_social_links);
 }
 
 define('WPU_SOCIAL_LINKS', serialize($wpu_social_links));
@@ -93,7 +94,7 @@ if (!empty($wputh_sidebars)) {
 
 // Default featured image size size
 if (function_exists('set_post_thumbnail_size')) {
-    set_post_thumbnail_size(1200, 1200);
+    set_post_thumbnail_size(1024, 1024);
 }
 
 /* ----------------------------------------------------------

@@ -50,7 +50,7 @@ if (function_exists('pll_current_language')) {
 if (!empty($display_languages)) {
     echo '<div class="languages">';
     foreach ($display_languages as $lang) {
-        echo '<a hreflang="' . $lang['name'] . '" ' . ($lang['name'] == $current_lang ? 'class="current"' : '') . ' href="' . $lang['url'] . '">' . $lang['name'] . '</a>';
+        echo '<a hreflang="' . $lang['name'] . '" ' . ($lang['name'] == $current_lang ? 'class="current"' : '') . ' href="' . $lang['url'] . '"><span>' . $lang['name'] . '</span></a>';
     }
     echo '</div>';
 }
