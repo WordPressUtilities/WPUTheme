@@ -23,28 +23,7 @@ function wputh_disable_jqmigrate(&$scripts) {
 
 add_filter('wputh_javascript_files', 'wputh_default_wputh_javascript_files', 1, 1);
 function wputh_default_wputh_javascript_files($scripts = array()) {
-    $scripts['mootools'] = array(
-        'uri' => '/js/lib/mootools-core-1.4.5-full-nocompat-yc.js'
-    );
-    $scripts['mootools-more'] = array(
-        'uri' => '/js/lib/mootools-more-1.4.0.1.js'
-    );
-    $scripts['dk-smooth-scroll'] = array(
-        'uri' => '/js/classes/dk-smooth-scroll.js',
-        'footer' => 1
-    );
-    $scripts['functions'] = array(
-        'uri' => '/js/functions.js',
-        'footer' => 1
-    );
-    $scripts['wpu-home'] = array(
-        'uri' => '/js/modules/home.js',
-        'footer' => 1
-    );
-    $scripts['wpu-faq'] = array(
-        'uri' => '/js/modules/faq.js',
-        'footer' => 1
-    );
+    $scripts['jquery'] = array();
     $scripts['events'] = array(
         'uri' => '/js/events.js',
         'footer' => 1
