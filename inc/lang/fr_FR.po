@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2015-05-08 23:14+0100\n"
+"POT-Creation-Date: 2015-07-01 23:20+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -28,15 +28,15 @@ msgstr "Erreur 404"
 msgid "Sorry, but this page doesn&rsquo;t exists."
 msgstr "Désolé, mais cette page n'existe pas."
 
-#: ../.././functions.php:66
+#: ../.././functions.php:67
 msgid "Main menu"
 msgstr "Menu principal"
 
-#: ../.././functions.php:76
+#: ../.././functions.php:77
 msgid "Default Sidebar"
 msgstr "Sidebar par défaut"
 
-#: ../.././functions.php:78
+#: ../.././functions.php:79
 msgid "Default theme sidebar"
 msgstr "Sidebar du thème par défaut"
 
@@ -65,18 +65,14 @@ msgid "Link Color :hover"
 msgstr "Couleur des liens au survol"
 
 #: ../.././inc/theme/customize.php:37
-msgid "Background Color"
-msgstr "Couleur de fond"
-
-#: ../.././inc/theme/customize.php:44
 msgid "Background image site"
 msgstr "Image de fond du site"
 
-#: ../.././inc/theme/customize.php:51
+#: ../.././inc/theme/customize.php:44
 msgid "Title align"
 msgstr "Alignement du titre"
 
-#: ../.././inc/theme/customize.php:58
+#: ../.././inc/theme/customize.php:51
 msgid "Title size"
 msgstr "Taille du titre"
 
@@ -249,6 +245,9 @@ msgstr "Nombre de posts :"
 #: ../.././tpl/widgets/widget_post_categories.php:27
 msgid "Category:"
 msgstr "Catégorie :"
+
+#~ msgid "Background Color"
+#~ msgstr "Couleur de fond"
 
 #~ msgid "Virtual contacts"
 #~ msgstr "Contacts"

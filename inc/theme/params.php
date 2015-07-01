@@ -11,13 +11,29 @@ if (function_exists('add_theme_support')) {
 
     function wputh_custom_theme_setup() {
 
+        // Theme style
+        add_theme_support('custom-background');
+        add_theme_support('custom-header', array(
+            'height' => 100,
+            'width' => 200
+        ));
+
+        // Supporting HTML5
+        add_theme_support('html5', array(
+            'comment-list',
+            'comment-form',
+            'search-form',
+            'gallery',
+            'caption'
+        ));
+
         // Supporting thumbnails
         add_theme_support('post-thumbnails');
 
         // Supporting RSS Links
         add_theme_support('automatic-feed-links');
 
-        // Title
+        // Supporting Title
         add_theme_support('title-tag');
     }
 }

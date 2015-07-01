@@ -20,42 +20,35 @@ if (!function_exists('wpu_theme_customize__settings__wputheme')) {
     function wpu_theme_customize__settings__wputheme($settings) {
         return array(
             'wpu_link_color' => array(
-                'label' => __('Link Color') ,
+                'label' => __('Link Color', 'wputh') ,
                 'default' => '#6699CC',
                 'section' => 'global',
                 'css_selector' => 'a',
                 'css_property' => 'color'
             ) ,
             'wpu_link_color_hover' => array(
-                'label' => __('Link Color :hover') ,
+                'label' => __('Link Color :hover', 'wputh') ,
                 'default' => '#336699',
                 'section' => 'global',
                 'css_selector' => 'a:hover',
                 'css_property' => 'color'
             ) ,
-            'wpu_background_color' => array(
-                'label' => __('Background Color') ,
-                'default' => '#FFFFFF',
-                'section' => 'global',
-                'css_selector' => 'body',
-                'css_property' => 'background-color'
-            ) ,
             'wpu_background_image' => array(
-                'label' => __('Background image site') ,
+                'label' => __('Background image site', 'wputh') ,
                 'default' => '',
                 'section' => 'global',
                 'css_selector' => 'body',
                 'css_property' => 'background-image'
             ) ,
             'wpu_text_title_align' => array(
-                'label' => __('Title align') ,
+                'label' => __('Title align', 'wputh') ,
                 'default' => 'left',
                 'section' => 'header',
                 'css_selector' => '.main-title',
                 'css_property' => 'text-align'
             ) ,
             'wpu_text_title_size' => array(
-                'label' => __('Title size') ,
+                'label' => __('Title size', 'wputh') ,
                 'default' => '25px',
                 'section' => 'header',
                 'css_selector' => '.main-title',

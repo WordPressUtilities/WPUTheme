@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2015-05-08 23:15+0100\n"
+"POT-Creation-Date: 2015-07-01 23:20+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -23,17 +23,17 @@ msgstr "Errore 404"
 msgid "Sorry, but this page doesn&rsquo;t exists."
 msgstr "Spiacenti, ma questa pagina non esiste."
 
-#: ../.././functions.php:66
+#: ../.././functions.php:67
 msgid "Main menu"
 msgstr "menu principale"
 
-#: ../.././functions.php:76
+#: ../.././functions.php:77
 msgid "Default Sidebar"
-msgstr ""
+msgstr "Sidebar Predefinita"
 
-#: ../.././functions.php:78
+#: ../.././functions.php:79
 msgid "Default theme sidebar"
-msgstr ""
+msgstr "Sidebar tema predefinito"
 
 #: ../.././inc/plugins/wpu-options.php:13
 msgid "Contacts"
@@ -53,25 +53,21 @@ msgstr "Indirizzo e-mail"
 
 #: ../.././inc/theme/customize.php:23
 msgid "Link Color"
-msgstr ""
+msgstr "Colore del link"
 
 #: ../.././inc/theme/customize.php:30
 msgid "Link Color :hover"
-msgstr ""
+msgstr "Colore del link :hover"
 
 #: ../.././inc/theme/customize.php:37
-msgid "Background Color"
-msgstr ""
+msgid "Background image site"
+msgstr "Immagine di Sfondo"
 
 #: ../.././inc/theme/customize.php:44
-msgid "Background image site"
-msgstr ""
-
-#: ../.././inc/theme/customize.php:51
 msgid "Title align"
 msgstr "Allineamento del titolo"
 
-#: ../.././inc/theme/customize.php:58
+#: ../.././inc/theme/customize.php:51
 msgid "Title size"
 msgstr "Dimensione del titolo"
 

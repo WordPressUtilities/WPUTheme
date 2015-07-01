@@ -1,6 +1,5 @@
 <?php
 include dirname( __FILE__ ) . '/z-protect.php';
-$main_tag = is_home() ? 'h1' : 'div';
 if ( !IS_AJAX ) {
 echo wputh_get_doctype_html();
 ?>
@@ -12,7 +11,7 @@ echo wputh_get_doctype_html();
     <header class="banner" role="banner" id="banner">
     <?php
     /* Title */
-    echo '<'.$main_tag.' class="h1 main-title"><a href="' . home_url() . '">'.get_bloginfo( 'name' ).'</a></'.$main_tag.'>';
+    do_action('wputheme_header_banner');
     /* Search form */
     include get_template_directory() . '/tpl/header/searchform.php';
     /* Social links */
