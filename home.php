@@ -1,9 +1,6 @@
 <?php
 include dirname( __FILE__ ) . '/z-protect.php';
 get_header();
-
-echo '<div class="main-content">';
-echo get_the_loop();
-echo '</div>';
+do_action('wputheme_home_content');
 get_sidebar();
 get_footer();

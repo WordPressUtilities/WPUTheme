@@ -110,7 +110,7 @@ include get_template_directory() . '/inc/theme/utilities.php';
 include get_template_directory() . '/inc/theme/shortcodes.php';
 include get_template_directory() . '/inc/theme/activation.php';
 include get_template_directory() . '/inc/theme/customize.php';
-include get_template_directory() . '/inc/theme/head.php';
+include get_template_directory() . '/inc/theme/default-items.php';
 include get_template_directory() . '/inc/theme/display.php';
 
 if (!isset($content_width)) $content_width = 680;

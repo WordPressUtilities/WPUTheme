@@ -55,5 +55,5 @@ function wpu_add_css_file( $file, $dir, $url ) {
 
 add_action( 'init', 'wputh_add_editor_styles' );
 function wputh_add_editor_styles() {
-    add_editor_style( WPU_CSS_URL . 'c-editor.css' );
+    add_editor_style( WPU_CSS_URL . 'editor.css' );
 }

@@ -10,13 +10,7 @@ echo wputh_get_doctype_html();
 <div class="main-header centered-container">
     <header class="banner" role="banner" id="banner">
     <?php
-    /* Title */
     do_action('wputheme_header_banner');
-    /* Search form */
-    include get_template_directory() . '/tpl/header/searchform.php';
-    /* Social links */
-    include get_template_directory() . '/tpl/header/social.php';
-    /* Main menu */
     wp_nav_menu( array(
         'depth' => 1,
         'theme_location' => 'main',
