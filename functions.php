@@ -130,6 +130,7 @@ include get_template_directory() . '/inc/assets/scripts.php';
 /* Widgets
  -------------------------- */
 
+include get_template_directory() . '/tpl/widgets/widget_push.php';
 include get_template_directory() . '/tpl/widgets/widget_post_categories.php';
 
 /* Langs
