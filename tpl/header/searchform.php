@@ -11,9 +11,7 @@ include dirname(__FILE__) . '/../../z-protect.php';
   </form>
 </div>
 <?php
-$all_terms = array(
-    $terms
-);
+$all_terms = array();
 $terms_type = array(
     'post_tag',
     'category'
