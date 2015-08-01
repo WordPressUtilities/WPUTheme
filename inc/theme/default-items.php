@@ -2,6 +2,25 @@
 include dirname(__FILE__) . '/../../z-protect.php';
 
 /* ----------------------------------------------------------
+  Main
+---------------------------------------------------------- */
+
+if (!IS_AJAX) {
+    add_action('get_header', 'wputh_get_doctype_html', 1, 1);
+}
+if (!function_exists('wputh_get_doctype_html')) {
+    function wputh_get_doctype_html() {
+?>
+<!DOCTYPE HTML>
+<!--[if IE 8 ]><html <?php language_attributes(); ?> class="is_ie8 lt_ie9 lt_ie10"><![endif]-->
+<!--[if IE 9 ]><html <?php language_attributes(); ?> class="is_ie9 lt_ie10"><![endif]-->
+<!--[if gt IE 9]><html <?php language_attributes(); ?> class="is_ie10"><![endif]-->
+<!--[if !IE]><!--> <html <?php language_attributes(); ?>><!--<![endif]-->
+<?php
+    }
+}
+
+/* ----------------------------------------------------------
   HEAD
 ---------------------------------------------------------- */
 
@@ -57,7 +76,7 @@ if (!function_exists('wputh_head_add_viewport')) {
 add_action('wp_head', 'wputh_head_add_favicon', 10);
 if (!function_exists('wputh_head_add_favicon')) {
     function wputh_head_add_favicon() {
-        echo '<link rel="shortcut icon" href="' . get_stylesheet_directory_uri() . '/images/favicon.ico" />';
+        echo '<link rel="shortcut icon" href="' . get_template_directory_uri() . '/images/favicon.ico" />';
     }
 }
 
@@ -114,7 +133,7 @@ if (!function_exists('wputh_display_social')) {
 }
 
 /* Main menu
--------------------------- */
+ -------------------------- */
 
 add_action('wputheme_header_banner', 'wputh_display_social');
 if (!function_exists('wputh_display_social')) {
@@ -133,3 +152,4 @@ if (!function_exists('wputheme_home_content__default')) {
         include get_template_directory() . '/tpl/home/default.php';
     }
 }
+

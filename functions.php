@@ -67,7 +67,9 @@ $default_menus = array(
     'main' => __('Main menu', 'wputh') ,
 );
 $wputh_menus = apply_filters('wputh_default_menus', $default_menus);
-register_nav_menus($wputh_menus);
+if (!empty($wputh_menus)) {
+    register_nav_menus($wputh_menus);
+}
 
 /* Sidebars
  -------------------------- */

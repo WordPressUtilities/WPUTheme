@@ -24,8 +24,16 @@ function wputh_disable_jqmigrate(&$scripts) {
 add_filter('wputh_javascript_files', 'wputh_default_wputh_javascript_files', 1, 1);
 function wputh_default_wputh_javascript_files($scripts = array()) {
     $scripts['jquery'] = array();
+    $scripts['functions-faq-accordion'] = array(
+        'url' => get_template_directory_uri().'/js/functions/faq-accordion.js',
+        'footer' => 1
+    );
+    $scripts['functions-search-form-check'] = array(
+        'url' => get_template_directory_uri().'/js/functions/search-form-check.js',
+        'footer' => 1
+    );
     $scripts['events'] = array(
-        'uri' => '/js/events.js',
+        'url' => get_template_directory_uri().'/js/events.js',
         'footer' => 1
     );
     return $scripts;

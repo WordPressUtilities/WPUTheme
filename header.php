@@ -1,7 +1,6 @@
 <?php
 include dirname( __FILE__ ) . '/z-protect.php';
 if ( !IS_AJAX ) {
-echo wputh_get_doctype_html();
 ?>
 <head><?php echo wp_head(); ?></head>
 <body <?php body_class( 'no-js cssc-is-responsive' ); ?>>
@@ -11,11 +10,11 @@ echo wputh_get_doctype_html();
     <header class="banner" role="banner" id="banner">
     <?php
     do_action('wputheme_header_banner');
-    wp_nav_menu( array(
+    wp_nav_menu(array(
         'depth' => 1,
-        'theme_location' => 'main',
+        'theme_location' => 'main-navigation',
         'menu_class' => 'main-menu'
-    ) );
+    ));
     ?>
     </header>
 </div>
