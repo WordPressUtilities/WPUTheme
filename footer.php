@@ -1,8 +1,10 @@
 <?php
 include dirname(__FILE__) . '/z-protect.php';
+do_action('wputheme_main_undercontent_inajax');
 if (IS_AJAX) {
     return;
 }
+do_action('wputheme_main_undercontent');
 if (apply_filters('wputheme_display_mainwrapper', true)) {
     echo '</div></div>';
 }
