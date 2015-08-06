@@ -1,6 +1,6 @@
 <?php
-session_start();
-include dirname(__FILE__) . '/z-protect.php';
+require_once dirname(__FILE__) . '/z-protect.php';
+@session_start();
 
 do_action('wputh_functionsphp_start');
 
@@ -106,41 +106,42 @@ if (function_exists('set_post_thumbnail_size')) {
 /* Theme
  -------------------------- */
 
-include get_template_directory() . '/inc/theme/pages.php';
-include get_template_directory() . '/inc/theme/params.php';
-include get_template_directory() . '/inc/theme/utilities.php';
-include get_template_directory() . '/inc/theme/shortcodes.php';
-include get_template_directory() . '/inc/theme/activation.php';
-include get_template_directory() . '/inc/theme/customize.php';
-include get_template_directory() . '/inc/theme/default-items.php';
+require_once get_template_directory() . '/inc/theme/pages.php';
+require_once get_template_directory() . '/inc/theme/params.php';
+require_once get_template_directory() . '/inc/theme/utilities.php';
+require_once get_template_directory() . '/inc/theme/shortcodes.php';
+require_once get_template_directory() . '/inc/theme/activation.php';
+require_once get_template_directory() . '/inc/theme/customize.php';
+require_once get_template_directory() . '/inc/theme/default-items.php';
 
 if (!isset($content_width)) $content_width = 680;
 
 /* Plugins Configuration
  -------------------------- */
 
-include get_template_directory() . '/inc/plugins/wpu-options.php';
-include get_template_directory() . '/inc/plugins/wpu-tinymce.php';
+require_once get_template_directory() . '/inc/plugins/wpu-options.php';
+require_once get_template_directory() . '/inc/plugins/wpu-tinymce.php';
 
 /* Assets
  -------------------------- */
 
-include get_template_directory() . '/inc/assets/styles.php';
-include get_template_directory() . '/inc/assets/scripts.php';
+require_once get_template_directory() . '/inc/assets/styles.php';
+require_once get_template_directory() . '/inc/assets/scripts.php';
 
 /* Widgets
  -------------------------- */
 
-include get_template_directory() . '/tpl/widgets/widget_push.php';
-include get_template_directory() . '/tpl/widgets/widget_post_categories.php';
+require_once get_template_directory() . '/tpl/widgets/widget_push.php';
+require_once get_template_directory() . '/tpl/widgets/widget_post_categories.php';
 
 /* Langs
  -------------------------- */
 
 add_action('after_setup_theme', 'wputh_setup');
-
-function wputh_setup() {
-    load_theme_textdomain('wputh', get_template_directory() . '/inc/lang');
+if (!function_exists('wputh_setup')) {
+    function wputh_setup() {
+        load_theme_textdomain('wputh', get_template_directory() . '/inc/lang');
+    }
 }
 
 do_action('wputh_functionsphp_end');

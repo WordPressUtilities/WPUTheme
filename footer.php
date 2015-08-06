@@ -1,7 +1,7 @@
 <?php
 include dirname(__FILE__) . '/z-protect.php';
 do_action('wputheme_main_undercontent_inajax');
-if (IS_AJAX) {
+if (defined('IS_AJAX') && IS_AJAX) {
     return;
 }
 do_action('wputheme_main_undercontent');

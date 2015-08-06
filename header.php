@@ -1,6 +1,6 @@
 <?php
-include dirname( __FILE__ ) . '/z-protect.php';
-if ( !IS_AJAX ) {
+require_once dirname( __FILE__ ) . '/z-protect.php';
+if (!defined('IS_AJAX') || !IS_AJAX ) {
 ?>
 <head><?php echo wp_head(); ?></head>
 <body <?php body_class( 'no-js cssc-is-responsive' ); ?>>
