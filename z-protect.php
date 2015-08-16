@@ -21,15 +21,19 @@ include ($bootfile);
 
 // Redirect to home page for some files
 if (isset($_SERVER['REQUEST_URI'])) {
-    $current_filename = basename($_SERVER['REQUEST_URI']);
-    $invalid_files = array(
-        'functions.php',
-        'header.php',
-        'footer.php'
-    );
-    if (in_array($current_filename, $invalid_files)) {
-        wp_redirect(home_url());
-        die;
+    $url = parse_url($_SERVER['REQUEST_URI']);
+    if (isset($url['path'])) {
+        $current_filename = basename($url['path']);
+        $invalid_files = array(
+            'functions.php',
+            'header.php',
+            'footer.php'
+        );
+
+        if (in_array($current_filename, $invalid_files)) {
+            wp_redirect(home_url());
+            die;
+        }
     }
 }
 

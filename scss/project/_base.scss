@@ -83,7 +83,18 @@ body {
 
 .breadcrumbs {
     padding-bottom: 10px;
-    font-size: 10px;
+    font-size: 0;
+}
+
+.breadcrumbs li {
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: 0;
+}
+
+.breadcrumbs li + li:before {
+    content: '›';
+    margin: 0 5px;
 }
 
 /* ----------------------------------------------------------

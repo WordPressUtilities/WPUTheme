@@ -60,6 +60,11 @@ add_filter('wputheme_display_searchform','__return_false');
 * **wputheme_display_breadcrumbs** : (bool:true) Display or hide breadcrumbs ( header.php )
 * **wputheme_display_jsvalues** : (bool:true) Display or hide JS Values ( header.php )
 
+#### Single
+
+* **wputheme_display_single_share** : (bool:true) Display or hide share links ( single.php )
+* **wputheme_display_single_prevnext** : (bool:true) Display or hide prev/next post ( single.php )
+
 ### Action hooks
 
 #### Functions
