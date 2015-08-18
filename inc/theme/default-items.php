@@ -76,7 +76,9 @@ if (!function_exists('wputh_head_add_viewport')) {
 add_action('wp_head', 'wputh_head_add_favicon', 10);
 if (!function_exists('wputh_head_add_favicon')) {
     function wputh_head_add_favicon() {
-        echo '<link rel="shortcut icon" href="' . get_template_directory_uri() . '/images/favicon.ico" />';
+        if (!function_exists('has_site_icon') || !has_site_icon()) {
+            echo '<link rel="shortcut icon" href="' . get_template_directory_uri() . '/images/favicon.ico" />';
+        }
     }
 }
 
@@ -146,11 +148,12 @@ if (apply_filters('wputheme_display_mainmenu', true)):
 endif;
 if (!function_exists('wputh_display_mainmenu')) {
     function wputh_display_mainmenu() {
-        wp_nav_menu(array(
+        $main_menu_settings = apply_filters('wputheme_mainmenu_settings', array(
             'depth' => 1,
-            'theme_location' => 'main-navigation',
+            'theme_location' => 'main',
             'menu_class' => 'main-menu'
         ));
+        wp_nav_menu($main_menu_settings);
     }
 }
 
