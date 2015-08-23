@@ -9,6 +9,8 @@ do_action('wputh_functionsphp_start');
 
 define("THEME_URL", get_template_directory_uri());
 define("IS_AJAX", isset($_GET['ajax']));
+define("WPUTH_HAS_COMMENTS", apply_filters('wputh_has_comments', false));
+define("WPUTH_HAS_SIDEBAR", apply_filters('wputh_has_sidebar', false));
 
 // load-more || numbers || default
 define('PAGINATION_KIND', 'numbers');

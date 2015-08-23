@@ -18,27 +18,27 @@ class wputh_push extends WP_Widget {
         '_blank',
     );
 
-    function wputh_push() {
-        parent::WP_Widget(false, '[WPU] Push', array(
+    function __construct() {
+        parent::__construct(false, '[WPU] Push', array(
             'description' => 'Push'
         ));
     }
     function form($instance) {
-        $title = !empty($instance['title']) ? $instance['title'] : __('Title');
+        $title = !empty($instance['title']) ? $instance['title'] : __('Title', 'wputh');
         $link = !empty($instance['link']) ? $instance['link'] : home_url();
         $target = !empty($instance['target']) ? $instance['target'] : $this->wputh_push__targets[0];
         $attachment_id = !empty($instance['attachment_id']) ? $instance['attachment_id'] : 0;
 ?>
         <p>
-        <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+        <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:','wputh'); ?></label>
         <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>">
         </p>
         <p>
-        <label for="<?php echo $this->get_field_id('link'); ?>"><?php _e('Link:'); ?></label>
+        <label for="<?php echo $this->get_field_id('link'); ?>"><?php _e('Link:','wputh'); ?></label>
         <input class="widefat" id="<?php echo $this->get_field_id('link'); ?>" name="<?php echo $this->get_field_name('link'); ?>" type="text" value="<?php echo esc_attr($link); ?>">
         </p>
         <p>
-        <label for="<?php echo $this->get_field_id('target'); ?>"><?php _e('Target:'); ?></label>
+        <label for="<?php echo $this->get_field_id('target'); ?>"><?php _e('Target:','wputh'); ?></label>
         <select class="widefat" id="<?php echo $this->get_field_id('target'); ?>" name="<?php echo $this->get_field_name('target'); ?>">
         <?php foreach ($this->wputh_push__targets as $this_target) {
             echo '<option ' . ($this_target == $target ? 'selected="selected"' : '') . ' value="' . $this_target . '">' . $this_target . '</option>';

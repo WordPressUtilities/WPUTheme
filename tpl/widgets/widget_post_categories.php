@@ -8,7 +8,7 @@ if (!function_exists('widget_post_categories_register_widgets')) {
 
 // Widget Post Categories
 class widget_post_categories extends WP_Widget {
-    function widget_post_categories() {parent::WP_Widget( false,
+    function __construct() {parent::__construct( false,
             '[WPU] Post Categories',
             array( 'description' => 'Post Categories' )
         );}

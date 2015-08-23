@@ -24,6 +24,18 @@ if (!function_exists('wputh_get_doctype_html')) {
   HEAD
 ---------------------------------------------------------- */
 
+/* Comments
+ -------------------------- */
+
+add_action('wp_head', 'wputh_head_set_comment_reply');
+if (!function_exists('wputh_head_set_comment_reply')) {
+    function wputh_head_set_comment_reply() {
+        if (WPUTH_HAS_COMMENTS && is_singular() && comments_open() && get_option('thread_comments')) {
+            wp_enqueue_script('comment-reply');
+        }
+    }
+}
+
 /* Charset
  -------------------------- */
 
