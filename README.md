@@ -64,6 +64,7 @@ add_filter('wputheme_display_searchform','__return_false');
 #### Single
 
 * **wputheme_display_single_share** : (bool:true) Display or hide share links ( single.php )
+* **wputheme_share_methods** : (array) Add, edit or delete share methods ( single.php )
 * **wputheme_display_single_prevnext** : (bool:true) Display or hide prev/next post ( single.php )
 
 ### Action hooks

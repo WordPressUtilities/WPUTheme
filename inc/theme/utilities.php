@@ -285,3 +285,54 @@ if (!function_exists('wputh_link')) {
         return '<a class="' . (is_page($page_id) ? 'current' : '') . '" href="' . get_permalink($page_id) . '">' . get_the_title($page_id) . '</a>';
     }
 }
+
+/* ----------------------------------------------------------
+  Share methods
+---------------------------------------------------------- */
+
+function wputh_get_share_methods($post) {
+    $_title = apply_filters('the_title', $post->post_title);
+    $_permalink = get_permalink($post);
+    $_image = '';
+    if (has_post_thumbnail($post->ID)) {
+        if (function_exists('wputhumb_get_thumbnail_url')) {
+            $_image = urlencode(wputhumb_get_thumbnail_url('thumbnail', $post->ID));
+        }
+        else {
+            $_image = wp_get_attachment_url(get_post_thumbnail_id($post_id));
+        }
+    }
+
+    $_methods = array(
+        'email' => array(
+            'name' => 'Email',
+            'url' => str_replace('+', '%20', 'mailto:mail@mail.com?subject=' . urlencode($_title) . '&body=' . urlencode($_title) . '+' . urlencode($_permalink))
+        ) ,
+        'facebook' => array(
+            'name' => 'Facebook',
+            'url' => 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($_permalink)
+        ) ,
+        'googleplus' => array(
+            'name' => 'Google Plus',
+            'url' => 'https://plus.google.com/share?url=' . urlencode($_permalink)
+        ) ,
+        'linkedin' => array(
+            'name' => 'LinkedIn',
+            'url' => 'https://www.linkedin.com/shareArticle?mini=true&url=' . urlencode($_permalink) . '&title=' . urlencode($_title) . '&summary=&source='
+        ) ,
+        'pinterest' => array(
+            'name' => 'Pinterest',
+            'url' => 'https://pinterest.com/pin/create/button/?url=' . urlencode($_permalink) . (!empty($_image) ? '&media=' . $_image : '') . '&description=' . urlencode($_title)
+        ) ,
+        'twitter' => array(
+            'name' => 'Twitter',
+            'url' => 'https://twitter.com/home?status=' . urlencode($_title) . '+' . urlencode($_permalink)
+        ) ,
+        'viadeo' => array(
+            'name' => 'Viadeo',
+            'url' => 'https://www.viadeo.com/shareit/share/?url' . urlencode($_permalink) . '&title=' . urlencode($_title) . ''
+        ) ,
+    );
+
+    return apply_filters('wputheme_share_methods', $_methods, $_title, $_permalink, $_image);
+}
