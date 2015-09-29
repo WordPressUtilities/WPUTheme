@@ -15,20 +15,6 @@ define("WPUTH_HAS_SIDEBAR", apply_filters('wputh_has_sidebar', false));
 // load-more || numbers || default
 define('PAGINATION_KIND', 'numbers');
 
-/* Social links
- -------------------------- */
-
-if (!isset($wpu_social_links) || !is_array($wpu_social_links)) {
-    $wpu_social_links = array(
-        'twitter' => 'Twitter',
-        'facebook' => 'Facebook',
-        'instagram' => 'Instagram',
-    );
-    $wpu_social_links = apply_filters('wpu_social_links', $wpu_social_links);
-}
-
-define('WPU_SOCIAL_LINKS', serialize($wpu_social_links));
-
 /* Post Types
  -------------------------- */
 

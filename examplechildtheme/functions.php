@@ -9,6 +9,19 @@ add_filter('wputheme_display_searchform', '__return_false');
 add_filter('wputheme_display_social', '__return_false');
 
 /* ----------------------------------------------------------
+  Social links
+---------------------------------------------------------- */
+
+add_filter('wpu_social_links', 'wpuchildtheme_social_links');
+function wpuchildtheme_social_links($links) {
+    $links = array(
+        'twitter' => 'Twitter',
+        'instagram' => 'Instagram',
+    );
+    return $links;
+}
+
+/* ----------------------------------------------------------
   Load new blocks
 ---------------------------------------------------------- */
 

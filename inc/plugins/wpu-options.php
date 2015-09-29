@@ -42,7 +42,7 @@ if (!function_exists('set_wputh_options_fields')) {
 function set_wputh_options_fields_default($options) {
 
     // Social networks
-    $wpu_social_links = unserialize(WPU_SOCIAL_LINKS);
+    $wpu_social_links = wputh_get_social_links_ids();
     foreach ($wpu_social_links as $id => $name) {
         $options['social_' . $id . '_url'] = array(
             'label' => $name . ' URL',

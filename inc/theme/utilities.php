@@ -336,3 +336,29 @@ function wputh_get_share_methods($post) {
 
     return apply_filters('wputheme_share_methods', $_methods, $_title, $_permalink, $_image);
 }
+
+/* ----------------------------------------------------------
+  Social Links
+---------------------------------------------------------- */
+
+function wputh_get_social_links_ids() {
+    return apply_filters('wpu_social_links', array(
+        'twitter' => 'Twitter',
+        'facebook' => 'Facebook',
+        'instagram' => 'Instagram',
+    ));
+}
+function wputh_get_social_links() {
+    $wpu_social_links = wputh_get_social_links_ids();
+    $links = array();
+    foreach ($wpu_social_links as $id => $name) {
+        $social_link = trim(get_option('social_' . $id . '_url'));
+        if (!empty($social_link)) {
+            $links[$id] = array(
+                'name' => $name,
+                'url' => $social_link
+            );
+        }
+    }
+    return $links;
+}
