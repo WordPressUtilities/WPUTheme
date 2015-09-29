@@ -342,7 +342,7 @@ function wputh_get_share_methods($post) {
 ---------------------------------------------------------- */
 
 function wputh_get_social_links_ids() {
-    return apply_filters('wpu_social_links', array(
+    return apply_filters('wputheme_social_links', array(
         'twitter' => 'Twitter',
         'facebook' => 'Facebook',
         'instagram' => 'Instagram',

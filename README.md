@@ -52,6 +52,7 @@ add_filter('wputheme_display_searchform','__return_false');
 * **wputheme_display_title** : (bool:true) Display or hide search form ( header.php )
 * **wputheme_display_searchform** : (bool:true) Display or hide search form ( header.php )
 * **wputheme_display_social** : (bool:true) Display or hide social links ( header.php )
+* **wputheme_social_links** : (array) Add, edit or delete social links ( header.php )
 * **wputheme_display_mainmenu** : (bool:true) Display or hide main menu ( header.php )
 * **wputheme_mainmenu_settings** : (array) Add options for main menu ( header.php )
 

@@ -12,7 +12,7 @@ add_filter('wputheme_display_social', '__return_false');
   Social links
 ---------------------------------------------------------- */
 
-add_filter('wpu_social_links', 'wpuchildtheme_social_links');
+add_filter('wputheme_social_links', 'wpuchildtheme_social_links');
 function wpuchildtheme_social_links($links) {
     $links = array(
         'twitter' => 'Twitter',
