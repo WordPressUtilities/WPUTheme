@@ -11,6 +11,9 @@ if (function_exists('add_theme_support')) {
 
     function wputh_custom_theme_setup() {
 
+        // Woocommerce
+        add_theme_support( 'woocommerce' );
+
         // Theme style
         add_theme_support('custom-background');
         add_theme_support('custom-header', array(
