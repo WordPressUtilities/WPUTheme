@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+/* ----------------------------------------------------------
+  Skip to main content
+---------------------------------------------------------- */
+
+.skiptomain {
+    z-index: 999;
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 3;
+    color: #000;
+    background-color: #F0F0F0;
+}
+
+a.skiptomain:active,
+a.skiptomain:focus,
+a.skiptomain:hover {
+    top: 5px;
+    left: 5px;
+    width: auto;
+    height: auto;
+    padding: 0 1em;
+    overflow: visible;
+    outline: 1px solid #999;
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.6);
+}

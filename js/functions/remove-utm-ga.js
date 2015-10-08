@@ -1,9 +1,10 @@
 /* ----------------------------------------------------------
   Remove UTM arguments from URL
 ---------------------------------------------------------- */
+/* globals jQuery */
+'use strict';
 
 var wpu_remove_utm_ga = function() {
-    'use strict';
     // Only if pushstate available & utm_ arguments
     if (!('pushState' in history) || !(/utm_/.test(location.search))) {
         return;

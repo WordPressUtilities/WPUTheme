@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2015-07-01 23:20+0100\n"
+"POT-Creation-Date: 2015-10-08 14:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: __;_e;_x:1,2c;_n:1,2;esc_attr__\n"
@@ -23,17 +23,21 @@ msgstr "Errore 404"
 msgid "Sorry, but this page doesn&rsquo;t exists."
 msgstr "Spiacenti, ma questa pagina non esiste."
 
-#: ../.././functions.php:67
+#: ../.././functions.php:55
 msgid "Main menu"
 msgstr "menu principale"
 
-#: ../.././functions.php:77
+#: ../.././functions.php:67
 msgid "Default Sidebar"
 msgstr "Sidebar Predefinita"
 
-#: ../.././functions.php:79
+#: ../.././functions.php:69
 msgid "Default theme sidebar"
 msgstr "Sidebar tema predefinito"
+
+#: ../.././header.php:7
+msgid "Skip to main content"
+msgstr "Vai al contenuto principale"
 
 #: ../.././inc/plugins/wpu-options.php:13
 msgid "Contacts"
@@ -212,12 +216,12 @@ msgstr "Ricerca in %s"
 msgid "Search"
 msgstr "Ricerca"
 
-#: ../.././tpl/header/social.php:7
+#: ../.././tpl/header/social.php:5
 #, php-format
 msgid "%s: Follow %s (open in new window)"
 msgstr "%s : Seguire %s (apre in una nuova finestra)"
 
-#: ../.././tpl/loops/share.php:33
+#: ../.././tpl/loops/share.php:5
 msgid "Share this post"
 msgstr "Condividi questo post"
 
@@ -240,6 +244,26 @@ msgstr "Numero di articolo"
 #: ../.././tpl/widgets/widget_post_categories.php:27
 msgid "Category:"
 msgstr "Categoria :"
+
+#: ../.././tpl/widgets/widget_push.php:27
+msgid "Title"
+msgstr "Titolo"
+
+#: ../.././tpl/widgets/widget_push.php:33
+msgid "Title:"
+msgstr "Titolo:"
+
+#: ../.././tpl/widgets/widget_push.php:37
+msgid "Link:"
+msgstr "Link:"
+
+#: ../.././tpl/widgets/widget_push.php:41
+msgid "Target:"
+msgstr "Target:"
+
+#: ../.././tpl/widgets/widget_push.php:49
+msgid "Select an Image"
+msgstr "Seleziona un'Immagine"
 
 #~ msgid "Work"
 #~ msgstr "Lavoro"
