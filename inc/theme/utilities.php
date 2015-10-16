@@ -287,11 +287,54 @@ if (!function_exists('wputh_link')) {
 }
 
 /* ----------------------------------------------------------
+  Truncate
+---------------------------------------------------------- */
+
+function wputh_truncate($string, $length, $more = '...') {
+    $_new_string = '';
+    $_maxlen = $length - strlen($more);
+    $_words = explode(' ', $string);
+
+    /* Add word to word */
+    foreach ($_words as $_word) {
+        if (strlen($_word) + strlen($_new_string) >= $_maxlen) {
+            break;
+        }
+
+        /* Separate by spaces */
+        if (!empty($_new_string)) {
+            $_new_string.= ' ';
+        }
+        $_new_string.= $_word;
+    }
+
+    /* If new string is shorter than original */
+    if (strlen($_new_string) < strlen($string)) {
+
+        /* Add the after text */
+        $_new_string.= $more;
+    }
+
+    return $_new_string;
+}
+
+/* ----------------------------------------------------------
   Share methods
 ---------------------------------------------------------- */
 
-function wputh_get_share_methods($post) {
+function wputh_get_share_methods($post, $title = false) {
+
+    if (!is_object($post)) {
+        if (!is_numeric($post)) {
+            return array();
+        }
+        $post = get_post($post);
+    }
+
     $_title = apply_filters('the_title', $post->post_title);
+    if ($title !== false) {
+        $_title = $title;
+    }
     $_permalink = get_permalink($post);
     $_image = '';
     if (has_post_thumbnail($post->ID)) {
@@ -326,7 +369,7 @@ function wputh_get_share_methods($post) {
         ) ,
         'twitter' => array(
             'name' => 'Twitter',
-            'url' => 'https://twitter.com/home?status=' . urlencode($_title) . '+' . urlencode($_permalink)
+            'url' => 'https://twitter.com/home?status=' . urlencode(wputh_truncate($_title, 100)) . '+' . urlencode($_permalink)
         ) ,
         'viadeo' => array(
             'name' => 'Viadeo',
