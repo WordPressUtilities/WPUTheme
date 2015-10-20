@@ -88,3 +88,9 @@ add_filter('wputheme_display_searchform','__return_false');
 * **wputheme_footer_elements** : Load blocks under main wrapper.
 * **wputheme_home_content** : Blocks on home page
 
+### Filters
+
+#### Paginate
+
+* **wputheme_loadmore_button** : Theme for loadmore button in paginate.php
+* **wputh_pagination_kind** : Kind of pagination used when loading paginate.php

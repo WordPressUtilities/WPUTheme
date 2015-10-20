@@ -36,7 +36,7 @@ $paginate_args = array(
 
 // load next page
 if ($pagedd < $pagi_query->max_num_pages) {
-    $next_page = '<a class="load-more" href="' . get_pagenum_link($pagedd + 1) . '">' . __('Next page', 'wputh') . '</a>';
+    $next_page = apply_filters('wputheme_loadmore_button', get_pagenum_link($pagedd + 1));
 }
 
 // Hiding pagination if not enough pages

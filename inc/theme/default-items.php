@@ -211,3 +211,13 @@ if (!function_exists('wputheme_home_content__default')) {
     }
 }
 
+/* ----------------------------------------------------------
+  Load more button
+---------------------------------------------------------- */
+
+add_filter('wputheme_loadmore_button', 'wputheme_loadmore_button__default', 10, 1);
+if (!function_exists('wputheme_loadmore_button__default')) {
+    function wputheme_loadmore_button__default($next_page_url) {
+        return sprintf('<a class="load-more" href="%s">' . __('Next page', 'wputh') . '</a>', $next_page_url);
+    }
+}

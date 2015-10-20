@@ -13,7 +13,7 @@ define("WPUTH_HAS_COMMENTS", apply_filters('wputh_has_comments', false));
 define("WPUTH_HAS_SIDEBAR", apply_filters('wputh_has_sidebar', false));
 
 // load-more || numbers || default
-define('PAGINATION_KIND', 'numbers');
+define('PAGINATION_KIND', apply_filters('wputh_pagination_kind', 'numbers'));
 
 /* Post Types
  -------------------------- */
