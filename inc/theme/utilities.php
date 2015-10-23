@@ -342,7 +342,7 @@ function wputh_get_share_methods($post, $title = false) {
             $_image = urlencode(wputhumb_get_thumbnail_url('thumbnail', $post->ID));
         }
         else {
-            $_image = wp_get_attachment_url(get_post_thumbnail_id($post_id));
+            $_image = wp_get_attachment_url(get_post_thumbnail_id($post->ID));
         }
     }
 
