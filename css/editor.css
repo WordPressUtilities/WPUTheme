@@ -16,6 +16,12 @@ body#tinymce.wp-editor img {
     max-width: 100%;
 }
 
+body#tinymce.wp-editor img.wp-more-tag {
+    width: auto;
+    height: 16px;
+    min-width: 300px;
+}
+
 .wputh-content li,
 .wputh-content p,
 body#tinymce.wp-editor li,

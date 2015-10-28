@@ -342,9 +342,13 @@ function wputh_get_share_methods($post, $title = false) {
             $_image = urlencode(wputhumb_get_thumbnail_url('thumbnail', $post->ID));
         }
         else {
-            $_image = wp_get_attachment_url(get_post_thumbnail_id($post->ID));
+            $_image = wp_get_attachment_url(get_post_thumbnail_id($post_id));
         }
     }
+
+    $_via_user = get_option('social_twitter_username');
+    $_via = !empty($_via_user) ? ' via @' . $_via_user : '';
+    $_twitter_text = wputh_truncate($_title, 100 - strlen($_via));
 
     $_methods = array(
         'email' => array(
@@ -369,7 +373,7 @@ function wputh_get_share_methods($post, $title = false) {
         ) ,
         'twitter' => array(
             'name' => 'Twitter',
-            'url' => 'https://twitter.com/home?status=' . urlencode(wputh_truncate($_title, 100)) . '+' . urlencode($_permalink)
+            'url' => 'https://twitter.com/intent/tweet?text=' . urlencode($_twitter_text) . '+' . urlencode($_permalink) . urlencode($_via)
         ) ,
         'viadeo' => array(
             'name' => 'Viadeo',

@@ -48,6 +48,12 @@ function set_wputh_options_fields_default($options) {
             'label' => $name . ' URL',
             'box' => 'social_networks'
         );
+        if($id == 'twitter'){
+            $options['social_' . $id . '_username'] = array(
+                'label' => $name . ' username',
+                'box' => 'social_networks'
+            );
+        }
     }
 
     // Create pages IDs from list defined in functions.php
