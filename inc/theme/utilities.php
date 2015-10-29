@@ -322,7 +322,7 @@ function wputh_truncate($string, $length, $more = '...') {
   Share methods
 ---------------------------------------------------------- */
 
-function wputh_get_share_methods($post, $title = false) {
+function wputh_get_share_methods($post, $title = false, $permalink = false, $image = false) {
 
     if (!is_object($post)) {
         if (!is_numeric($post)) {
@@ -336,6 +336,9 @@ function wputh_get_share_methods($post, $title = false) {
         $_title = $title;
     }
     $_permalink = get_permalink($post);
+    if ($permalink !== false) {
+        $_permalink = $permalink;
+    }
     $_image = '';
     if (has_post_thumbnail($post->ID)) {
         if (function_exists('wputhumb_get_thumbnail_url')) {
@@ -344,6 +347,9 @@ function wputh_get_share_methods($post, $title = false) {
         else {
             $_image = wp_get_attachment_url(get_post_thumbnail_id($post_id));
         }
+    }
+    if ($image !== false) {
+        $_image = $image;
     }
 
     $_via_user = get_option('social_twitter_username');
