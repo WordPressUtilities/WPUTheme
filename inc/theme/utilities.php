@@ -335,6 +335,7 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
     if ($title !== false) {
         $_title = $title;
     }
+    $_title = trim(strip_tags(html_entity_decode($_title)));
     $_permalink = get_permalink($post);
     if ($permalink !== false) {
         $_permalink = $permalink;
