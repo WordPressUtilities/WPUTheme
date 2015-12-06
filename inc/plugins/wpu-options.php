@@ -27,6 +27,7 @@ add_filter('wpu_options_fields', 'set_wputh_options_fields', 10, 3);
 
 if (!function_exists('set_wputh_options_fields')) {
     function set_wputh_options_fields($options) {
+
         // Virtual contacts
         $options['wpu_opt_email'] = array(
             'label' => __('Email address', 'wputh') ,
@@ -48,7 +49,7 @@ function set_wputh_options_fields_default($options) {
             'label' => $name . ' URL',
             'box' => 'social_networks'
         );
-        if($id == 'twitter'){
+        if ($id == 'twitter') {
             $options['social_' . $id . '_username'] = array(
                 'label' => $name . ' username',
                 'box' => 'social_networks'
@@ -60,7 +61,7 @@ function set_wputh_options_fields_default($options) {
     $pages_site = apply_filters('wputh_pages_site', array());
     foreach ($pages_site as $id => $page) {
         $options[$id] = array(
-            'label' => __($page['post_title'], 'wputh') ,
+            'label' => $page['post_title'],
             'box' => 'pages_id',
             'type' => 'page'
         );

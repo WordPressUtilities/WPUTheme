@@ -269,9 +269,15 @@ function wputh_sendmail_set_html_content_type() {
 ---------------------------------------------------------- */
 
 if (!function_exists('wputh_paginate')) {
-    function wputh_paginate($prev_text='', $next_text='') {
+    function wputh_paginate($prev_text = '', $next_text = '') {
+        $paginate_file = '/tpl/paginate.php';
+        $paginate_path = get_template_directory() . $paginate_file;
+        if (file_exists(get_stylesheet_directory() . $paginate_file)) {
+            $paginate_path = get_stylesheet_directory() . $paginate_file;
+        }
+
         ob_start();
-        include get_template_directory() . '/tpl/paginate.php';
+        include $paginate_path;
         return ob_get_clean();
     }
 }
@@ -282,7 +288,8 @@ if (!function_exists('wputh_paginate')) {
 
 if (!function_exists('wputh_link')) {
     function wputh_link($page_id) {
-        return '<a class="' . (is_page($page_id) ? 'current' : '') . '" href="' . get_permalink($page_id) . '">' . get_the_title($page_id) . '</a>';
+        $wputh_link_classname = apply_filters('wputh_link_classname', (is_page($page_id) ? 'current' : ''));
+        return '<a class="' . $wputh_link_classname . '" href="' . get_permalink($page_id) . '">' . get_the_title($page_id) . '</a>';
     }
 }
 
@@ -388,7 +395,7 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
         ) ,
     );
 
-    return apply_filters('wputheme_share_methods', $_methods, $_title, $_permalink, $_image);
+    return apply_filters('wputheme_share_methods', $_methods, $_title, $_permalink, $_image, $_via_user);
 }
 
 /* ----------------------------------------------------------

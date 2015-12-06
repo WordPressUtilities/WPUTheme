@@ -25,6 +25,8 @@ function wputh_setup_theme() {
         'wpu_home_meta_description' => '',
     );
 
+    $wputh_setup_options = apply_filters('wputh_setup_options', $wputh_setup_options);
+
     // Setting options
     foreach ($wputh_setup_options as $name => $value) {
         update_option($name, $value);
