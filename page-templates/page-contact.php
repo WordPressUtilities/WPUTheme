@@ -1,7 +1,6 @@
 <?php
 /* Template Name: Contact */
 include dirname( __FILE__ ) . '/../z-protect.php';
-include get_template_directory() . '/tpl/contact/header-action.php';
 get_header();
 the_post();
 ?>
@@ -9,7 +8,7 @@ the_post();
 <article>
     <h1><?php the_title(); ?></h1>
     <?php the_content(); ?>
-    <?php echo $content_contact; ?>
+    <?php do_action('wputh_contact_content'); ?>
 </article>
 </div>
 <?php

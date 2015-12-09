@@ -104,6 +104,11 @@ require_once get_template_directory() . '/inc/theme/default-items.php';
 
 if (!isset($content_width)) $content_width = 680;
 
+/* Modules
+ -------------------------- */
+
+require_once get_template_directory() . '/inc/modules/contact.php';
+
 /* Plugins Configuration
  -------------------------- */
 
