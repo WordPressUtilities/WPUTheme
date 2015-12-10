@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2015-10-08 14:29+0200\n"
+"POT-Creation-Date: 2015-12-10 23:04+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -39,6 +39,61 @@ msgstr "Sidebar tema predefinito"
 msgid "Skip to main content"
 msgstr "Vai al contenuto principale"
 
+#: ../.././inc/modules/contact.php:17
+msgid "Thank you for your message!"
+msgstr "Grazie per il tuo messaggio!"
+
+#: ../.././inc/modules/contact.php:26
+msgid "No"
+msgstr "No"
+
+#: ../.././inc/modules/contact.php:27
+msgid "Yes"
+msgstr "Sì"
+
+#: ../.././inc/modules/contact.php:34
+msgid "Submit"
+msgstr "Inviare"
+
+#: ../.././inc/modules/contact.php:40
+msgid "Name"
+msgstr "Nome"
+
+#: ../.././inc/modules/contact.php:44
+msgid "Email"
+msgstr "E-mail"
+
+#: ../.././inc/modules/contact.php:49
+msgid "Message"
+msgstr "Messaggio"
+
+#: ../.././inc/modules/contact.php:91
+msgid "Select a value"
+msgstr "Seleziona un valore"
+
+#: ../.././inc/modules/contact.php:171
+#, php-format
+msgid "The field \"%s\" is not correct"
+msgstr "Il campo \"%s\" non è corretto"
+
+#: ../.././inc/modules/contact.php:179
+#, php-format
+msgid "The field \"%s\" is required"
+msgstr "Il campo \"%s\" è necessaria"
+
+#: ../.././inc/modules/contact.php:202 ../.././inc/modules/contact.php:211
+msgid "Message from your contact form"
+msgstr "Messaggio dal modulo di contatto"
+
+#: ../.././inc/modules/contact.php:214
+msgid "Error:"
+msgstr "Errore :"
+
+#: ../.././inc/modules/contact.php:243
+#, php-format
+msgid "No more than %s links, please"
+msgstr "Non più di %s link, per favore"
+
 #: ../.././inc/plugins/wpu-options.php:13
 msgid "Contacts"
 msgstr "Contatti"
@@ -51,7 +106,7 @@ msgstr "Reti sociali"
 msgid "Pages IDs"
 msgstr "Pagine IDs"
 
-#: ../.././inc/plugins/wpu-options.php:32
+#: ../.././inc/plugins/wpu-options.php:33
 msgid "Email address"
 msgstr "Indirizzo e-mail"
 
@@ -75,6 +130,10 @@ msgstr "Allineamento del titolo"
 msgid "Title size"
 msgstr "Dimensione del titolo"
 
+#: ../.././inc/theme/default-items.php:221
+msgid "Next page"
+msgstr "Pagina successiva"
+
 #: ../.././inc/theme/utilities.php:41
 msgid "Sorry, no search results for this query."
 msgstr "Spiacenti, nessun risultato trovato."
@@ -96,15 +155,15 @@ msgstr "<strong>%s</strong> commenti"
 msgid "Comments are closed"
 msgstr "I commenti sono chiusi"
 
-#: ../.././loop.php:8 ../.././tpl/loops/header-loop-small.php:8
+#: ../.././loop.php:7 ../.././tpl/loops/header-loop-small.php:8
 msgid "F j, Y"
 msgstr "j F Y"
 
-#: ../.././loop.php:10 ../.././tpl/loops/header-loop-small.php:4
+#: ../.././loop.php:9 ../.././tpl/loops/header-loop-small.php:4
 msgid "By"
 msgstr "Di"
 
-#: ../.././loop.php:14
+#: ../.././loop.php:13
 msgid "Tags:"
 msgstr "Tags :"
 
@@ -141,45 +200,6 @@ msgstr "<strong>%s</strong> risultati di ricerca"
 #, php-format
 msgid "%s for &ldquo;%s&rdquo;"
 msgstr "%s per &ldquo;%s&rdquo;"
-
-#: ../.././tpl/contact/header-action.php:6
-msgid "Name"
-msgstr "Nome"
-
-#: ../.././tpl/contact/header-action.php:10
-msgid "Email"
-msgstr "E-mail"
-
-#: ../.././tpl/contact/header-action.php:15
-msgid "Message"
-msgstr "Messaggio"
-
-#: ../.././tpl/contact/header-action.php:60
-#, php-format
-msgid "The field \"%s\" is not correct"
-msgstr "Il campo \"%s\" non è corretto"
-
-#: ../.././tpl/contact/header-action.php:67
-#, php-format
-msgid "The field \"%s\" is required"
-msgstr "Il campo \"%s\" è necessaria"
-
-#: ../.././tpl/contact/header-action.php:74
-msgid "Thank you for your message!"
-msgstr "Grazie per il tuo messaggio!"
-
-#: ../.././tpl/contact/header-action.php:77
-#: ../.././tpl/contact/header-action.php:85
-msgid "Message from your contact form"
-msgstr "Messaggio dal modulo di contatto"
-
-#: ../.././tpl/contact/header-action.php:89
-msgid "Error:"
-msgstr "Errore :"
-
-#: ../.././tpl/contact/header-action.php:117
-msgid "Submit"
-msgstr "Inviare"
 
 #: ../.././tpl/footer/copyright.php:5
 #, php-format
@@ -233,10 +253,6 @@ msgstr "« Precedente"
 msgid "Next »"
 msgstr "Prossimo »"
 
-#: ../.././tpl/paginate.php:39
-msgid "Next page"
-msgstr "Pagina successiva"
-
 #: ../.././tpl/widgets/widget_post_categories.php:24
 msgid "Number of posts:"
 msgstr "Numero di articolo"
@@ -264,6 +280,9 @@ msgstr "Target:"
 #: ../.././tpl/widgets/widget_push.php:49
 msgid "Select an Image"
 msgstr "Seleziona un'Immagine"
+
+#~ msgid "Spam detected"
+#~ msgstr "Spam rilevato"
 
 #~ msgid "Work"
 #~ msgstr "Lavoro"

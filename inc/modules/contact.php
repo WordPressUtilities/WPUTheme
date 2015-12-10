@@ -20,7 +20,12 @@ class wputh__contact {
             'type' => 'text',
             'html_before' => '',
             'html_after' => '',
+            'box_class' => '',
             'required' => 0,
+            'datas' => array(
+                __('No', 'wputh') ,
+                __('Yes', 'wputh')
+            ) ,
         );
         $this->contact__settings = apply_filters('wputh_contact_settings', array(
             'ul_class' => 'cssc-form cssc-form--default float-form',
@@ -57,6 +62,10 @@ class wputh__contact {
             if (!isset($field['label'])) {
                 $this->contact_fields[$id]['label'] = ucfirst(str_replace('contact_', '', $id));
             }
+
+            if (!is_array($field['datas'])) {
+                $this->contact_fields[$id]['datas'] = $this->default_field['datas'];
+            }
         }
 
         $this->content_contact = '';
@@ -72,11 +81,19 @@ class wputh__contact {
                 $field_id_name.= ' required="required"';
             }
             $field_val = 'value="' . $field['value'] . '"';
-            $this->content_contact.= $field['html_before'] . '<li class="' . $this->contact__settings['box_class'] . '">';
+            $this->content_contact.= $field['html_before'] . '<li class="' . $this->contact__settings['box_class'] . ' ' . $field['box_class'] . '">';
             if (isset($field['label'])) {
                 $this->content_contact.= '<label for="' . $id . '">' . $field['label'] . '</label>';
             }
             switch ($field['type']) {
+                case 'select':
+                    $this->content_contact.= '<select  ' . $field_id_name . '>';
+                    $this->content_contact.= '<option value="" disabled selected style="display:none;">' . __('Select a value') . '</option>';
+                    foreach ($field['datas'] as $key => $val) {
+                        $this->content_contact.= '<option ' . ($field['value'] == $key ? 'selected="selected"' : '') . ' value="' . esc_attr($key) . '">' . $val . '</option>';
+                    }
+                    $this->content_contact.= '</select>';
+                break;
                 case 'text':
                 case 'url':
                 case 'email':
@@ -88,6 +105,13 @@ class wputh__contact {
             }
             $this->content_contact.= '</li>' . $field['html_after'];
         }
+
+        /* Quick honeypot */
+        $this->content_contact.= '<li class="screen-reader-text">';
+        $this->content_contact.= '<label>If you are a human, leave this empty</label>';
+        $this->content_contact.= '<input tabindex="-1" name="hu-man-te-st" type="text"/>';
+        $this->content_contact.= '</li>';
+
         $this->content_contact.= '<li class="' . $this->contact__settings['li_submit_class'] . '">
         <input type="hidden" name="control_stripslashes" value="&quot;" />
         <input type="hidden" name="wputh_contact_send" value="1" />
@@ -115,15 +139,26 @@ class wputh__contact {
             }
         }
 
+        // Checking bots
+        if (!isset($_POST['hu-man-te-st']) || !empty($_POST['hu-man-te-st'])) {
+            return;
+        }
+
         foreach ($this->contact_fields as $id => $field) {
 
-            if (isset($_POST[$id]) && !empty($_POST[$id])) {
-                $tmp_value = htmlentities(strip_tags($_POST[$id]));
+            $tmp_value = '';
+            if (isset($_POST[$id])) {
+                $tmp_value = trim(htmlentities(strip_tags($_POST[$id])));
+            }
 
+            if ($tmp_value != '') {
                 $field_ok = true;
 
                 // Testing fields
                 switch ($field['type']):
+                case 'select':
+                    $field_ok = array_key_exists($tmp_value, $field['datas']);
+                break;
                 case 'email':
                     $field_ok = filter_var($tmp_value, FILTER_VALIDATE_EMAIL) !== false;
                 break;
@@ -143,6 +178,18 @@ class wputh__contact {
                 if ($field['required']) {
                     $msg_errors[] = sprintf(__('The field "%s" is required', 'wputh') , $field['label']);
                 }
+            }
+        }
+
+        if (isset($this->contact_fields['contact_message'])) {
+            $contact_message = apply_filters('wputh_contact_message', $this->contact_fields['contact_message']['value']);
+            if (is_array($contact_message)) {
+                foreach ($contact_message as $msg) {
+                    $msg_errors[] = $msg;
+                }
+            }
+            else {
+                $this->contact_fields['contact_message']['value'] = $contact_message;
             }
         }
 
@@ -169,7 +216,10 @@ class wputh__contact {
     }
 }
 
-$wputh__contact = new wputh__contact();
+add_action('init', 'launch_wputh__contact');
+function launch_wputh__contact() {
+    new wputh__contact();
+}
 
 /* ----------------------------------------------------------
   Shortcode for form
@@ -178,4 +228,24 @@ $wputh__contact = new wputh__contact();
 add_shortcode('wputh_contact_form', 'wputh__contact__content');
 function wputh__contact__content() {
     do_action('wputh_contact_content');
+}
+
+/* ----------------------------------------------------------
+  Antispam
+---------------------------------------------------------- */
+
+/* Count number of links
+ -------------------------- */
+
+add_filter('wputh_contact_message', 'wputh_contact_message___maxlinks', 10, 1);
+function wputh_contact_message___maxlinks($message) {
+    $maxlinks_nb = apply_filters('wputh_contact_message___maxlinks__nb', 5);
+    $http_count = substr_count($message, 'http');
+    if ($http_count > $maxlinks_nb) {
+        return array(
+            sprintf(__('No more than %s links, please', 'wputh') , $maxlinks_nb)
+        );
+    }
+
+    return $message;
 }
