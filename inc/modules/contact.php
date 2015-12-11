@@ -63,7 +63,7 @@ class wputh__contact {
                 $this->contact_fields[$id]['label'] = ucfirst(str_replace('contact_', '', $id));
             }
 
-            if (!is_array($field['datas'])) {
+            if (!isset($field['datas']) || !is_array($field['datas'])) {
                 $this->contact_fields[$id]['datas'] = $this->default_field['datas'];
             }
         }
@@ -90,7 +90,7 @@ class wputh__contact {
                     $this->content_contact.= '<select  ' . $field_id_name . '>';
                     $this->content_contact.= '<option value="" disabled selected style="display:none;">' . __('Select a value') . '</option>';
                     foreach ($field['datas'] as $key => $val) {
-                        $this->content_contact.= '<option ' . ($field['value'] == $key ? 'selected="selected"' : '') . ' value="' . esc_attr($key) . '">' . $val . '</option>';
+                        $this->content_contact.= '<option ' . (!empty($field['value']) && $field['value'] == $key ? 'selected="selected"' : '') . ' value="' . esc_attr($key) . '">' . $val . '</option>';
                     }
                     $this->content_contact.= '</select>';
                 break;
@@ -171,6 +171,11 @@ class wputh__contact {
                     $msg_errors[] = sprintf(__('The field "%s" is not correct', 'wputh') , $field['label']);
                 }
                 else {
+
+                    if ($field['type'] == 'select') {
+                        $tmp_value = $field['datas'][$tmp_value];
+                    }
+
                     $this->contact_fields[$id]['value'] = $tmp_value;
                 }
             }
