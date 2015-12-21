@@ -11,8 +11,28 @@ class wputh__contact {
         add_action('wputh_contact_content', array(&$this,
             'page_content'
         ));
+
+        if ($this->contact__settings['ajax_enabled']) {
+            add_action('wp_ajax_wputh__contact', array(&$this,
+                'ajax_action'
+            ));
+            add_action('wp_ajax_nopriv_wputh__contact', array(&$this,
+                'ajax_action'
+            ));
+            add_action('wp_enqueue_scripts', array(&$this,
+                'form_scripts'
+            ));
+        }
     }
 
+    function form_scripts() {
+        wp_enqueue_script('wputh-contact-form', get_template_directory_uri() . '/js/functions/contact-form.js', array(
+            'jquery'
+        ) , '1.0', true);
+
+        // pass Ajax Url to script.js
+        wp_localize_script('wputh-contact-form', 'ajaxurl', admin_url('admin-ajax.php'));
+    }
     function set_options() {
         $this->contact__success = apply_filters('wputh_contact_success', '<p class="contact-success">' . __('Thank you for your message!', 'wputh') . '</p>');
         $this->default_field = array(
@@ -27,12 +47,14 @@ class wputh__contact {
                 __('Yes', 'wputh')
             ) ,
         );
+
         $this->contact__settings = apply_filters('wputh_contact_settings', array(
             'ul_class' => 'cssc-form cssc-form--default float-form',
             'box_class' => 'box',
             'submit_class' => 'cssc-button cssc-button--default',
             'submit_label' => __('Submit', 'wputh') ,
-            'li_submit_class' => ''
+            'li_submit_class' => '',
+            'ajax_enabled' => true
         ));
 
         $this->contact_fields = apply_filters('wputh_contact_fields', array(
@@ -74,7 +96,7 @@ class wputh__contact {
     function page_content() {
 
         // Display contact form
-        $this->content_contact.= '<form action="" method="post"><ul class="' . $this->contact__settings['ul_class'] . '">';
+        $this->content_contact.= '<form class="wputh__contact__form" action="" method="post"><ul class="' . $this->contact__settings['ul_class'] . '">';
         foreach ($this->contact_fields as $id => $field) {
             $field_id_name = 'id="' . $id . '" name="' . $id . '"';
             if ($field['required']) {
@@ -115,10 +137,11 @@ class wputh__contact {
         $this->content_contact.= '<li class="' . $this->contact__settings['li_submit_class'] . '">
         <input type="hidden" name="control_stripslashes" value="&quot;" />
         <input type="hidden" name="wputh_contact_send" value="1" />
+        <input type="hidden" name="action" value="wputh__contact" />
         <button class="' . $this->contact__settings['submit_class'] . '" type="submit">' . $this->contact__settings['submit_label'] . '</button>
         </li>';
         $this->content_contact.= '</ul></form>';
-        echo $this->content_contact;
+        echo '<div class="wputh-contact-form-wrapper">' . $this->content_contact . '</div>';
     }
 
     function post_contact() {
@@ -218,6 +241,12 @@ class wputh__contact {
         else {
             $this->content_contact.= '<p class="contact-error"><strong>' . __('Error:', 'wputh') . '</strong><br />' . implode('<br />', $msg_errors) . '</p>';
         }
+    }
+
+    function ajax_action() {
+        $this->post_contact();
+        $this->page_content();
+        die;
     }
 }
 
