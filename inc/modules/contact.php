@@ -34,6 +34,7 @@ class wputh__contact {
         wp_localize_script('wputh-contact-form', 'ajaxurl', admin_url('admin-ajax.php'));
     }
     function set_options() {
+        $this->has_upload = false;
         $this->contact__success = apply_filters('wputh_contact_success', '<p class="contact-success">' . __('Thank you for your message!', 'wputh') . '</p>');
         $this->default_field = array(
             'value' => '',
@@ -54,7 +55,13 @@ class wputh__contact {
             'submit_class' => 'cssc-button cssc-button--default',
             'submit_label' => __('Submit', 'wputh') ,
             'li_submit_class' => '',
-            'ajax_enabled' => true
+            'ajax_enabled' => true,
+            'file_types' => array(
+                'image/png',
+                'image/jpeg',
+            ) ,
+            'max_file_size' => 2 * 1024 * 1024,
+            'attach_to_post' => get_the_ID() ,
         ));
 
         $this->contact_fields = apply_filters('wputh_contact_fields', array(
@@ -77,8 +84,15 @@ class wputh__contact {
         // Testing missing settings
         foreach ($this->contact_fields as $id => $field) {
 
+            if ($field['type'] == 'file') {
+                $this->has_upload = true;
+                $this->contact__settings['ajax_enabled'] = false;
+            }
+
             // Merge with default field.
             $this->contact_fields[$id] = array_merge(array() , $this->default_field, $field);
+
+            $this->contact_fields[$id]['id'] = $id;
 
             // Default label
             if (!isset($field['label'])) {
@@ -96,7 +110,7 @@ class wputh__contact {
     function page_content() {
 
         // Display contact form
-        $this->content_contact.= '<form class="wputh__contact__form" action="" method="post"><ul class="' . $this->contact__settings['ul_class'] . '">';
+        $this->content_contact.= '<form class="wputh__contact__form" action="" method="post" ' . ($this->has_upload ? 'enctype="multipart/form-data' : '') . '"><ul class="' . $this->contact__settings['ul_class'] . '">';
         foreach ($this->contact_fields as $id => $field) {
             $field_id_name = 'id="' . $id . '" name="' . $id . '"';
             if ($field['required']) {
@@ -118,6 +132,7 @@ class wputh__contact {
                 break;
                 case 'text':
                 case 'url':
+                case 'file':
                 case 'email':
                     $this->content_contact.= '<input type="' . $field['type'] . '" ' . $field_id_name . ' ' . $field_val . ' />';
                 break;
@@ -152,7 +167,7 @@ class wputh__contact {
         }
 
         // Initial settings
-        $msg_errors = array();
+        $this->msg_errors = array();
         $msg_success = '';
 
         // Checking for PHP Conf
@@ -167,53 +182,13 @@ class wputh__contact {
             return;
         }
 
-        foreach ($this->contact_fields as $id => $field) {
-
-            $tmp_value = '';
-            if (isset($_POST[$id])) {
-                $tmp_value = trim(htmlentities(strip_tags($_POST[$id])));
-            }
-
-            if ($tmp_value != '') {
-                $field_ok = true;
-
-                // Testing fields
-                switch ($field['type']):
-                case 'select':
-                    $field_ok = array_key_exists($tmp_value, $field['datas']);
-                break;
-                case 'email':
-                    $field_ok = filter_var($tmp_value, FILTER_VALIDATE_EMAIL) !== false;
-                break;
-                case 'url':
-                    $field_ok = filter_var($tmp_value, FILTER_VALIDATE_URL) !== false;
-                break;
-                endswitch;
-
-                if (!$field_ok) {
-                    $msg_errors[] = sprintf(__('The field "%s" is not correct', 'wputh') , $field['label']);
-                }
-                else {
-
-                    if ($field['type'] == 'select') {
-                        $tmp_value = $field['datas'][$tmp_value];
-                    }
-
-                    $this->contact_fields[$id]['value'] = $tmp_value;
-                }
-            }
-            else {
-                if ($field['required']) {
-                    $msg_errors[] = sprintf(__('The field "%s" is required', 'wputh') , $field['label']);
-                }
-            }
-        }
+        $this->contact_fields = $this->extract_value_from_post($_POST, $this->contact_fields);
 
         if (isset($this->contact_fields['contact_message'])) {
             $contact_message = apply_filters('wputh_contact_message', $this->contact_fields['contact_message']['value']);
             if (is_array($contact_message)) {
                 foreach ($contact_message as $msg) {
-                    $msg_errors[] = $msg;
+                    $this->msg_errors[] = $msg;
                 }
             }
             else {
@@ -221,26 +196,143 @@ class wputh__contact {
             }
         }
 
-        if (empty($msg_errors)) {
+        if (empty($this->msg_errors)) {
 
             // Setting success message
             $this->content_contact.= $this->contact__success;
+            $attachments_to_destroy = array();
+            $this->more = array(
+                'attachments' => array()
+            );
 
             // Send mail
             $mail_content = '<p>' . __('Message from your contact form', 'wputh') . '</p>';
 
             foreach ($this->contact_fields as $id => $field) {
 
+                if ($field['type'] == 'file') {
+
+                    // Store attachment id
+                    $attachments_to_destroy[] = $this->contact_fields[$id]['value'];
+
+                    // Add to mail attachments
+                    $this->more['attachments'][] = get_attached_file($this->contact_fields[$id]['value']);
+                    $this->contact_fields[$id]['value'] = '';
+                    continue;
+                }
+
                 // Emptying values
                 $mail_content.= '<hr /><p><strong>' . $field['label'] . '</strong>:<br />' . $field['value'] . '</p>';
                 $this->contact_fields[$id]['value'] = '';
             }
 
-            wputh_sendmail(get_option('admin_email') , __('Message from your contact form', 'wputh') , $mail_content);
+            wputh_sendmail(get_option('admin_email') , __('Message from your contact form', 'wputh') , $mail_content, $this->more);
+
+            // Delete temporary attachments
+            foreach ($attachments_to_destroy as $att_id) {
+                wp_delete_attachment($att_id);
+            }
         }
         else {
-            $this->content_contact.= '<p class="contact-error"><strong>' . __('Error:', 'wputh') . '</strong><br />' . implode('<br />', $msg_errors) . '</p>';
+            $this->content_contact.= '<p class="contact-error"><strong>' . __('Error:', 'wputh') . '</strong><br />' . implode('<br />', $this->msg_errors) . '</p>';
         }
+    }
+
+    function extract_value_from_post($post, $contact_fields) {
+        foreach ($contact_fields as $id => $field) {
+
+            $tmp_value = '';
+            if (isset($post[$id])) {
+                $tmp_value = trim(htmlentities(strip_tags($post[$id])));
+            }
+
+            if ($field['type'] == 'file') {
+                if (isset($_FILES[$id]) && $_FILES[$id]['error'] == 0) {
+                    $tmp_value = $_FILES[$id]['tmp_name'];
+                }
+            }
+
+            if ($tmp_value != '') {
+                if ($field['type'] == 'file') {
+                    $field_ok = $this->validate_field_file($_FILES[$id], $field);
+                }
+                else {
+                    $field_ok = $this->validate_field($tmp_value, $field);
+                }
+
+                if (!$field_ok) {
+                    $this->msg_errors[] = sprintf(__('The field "%s" is not correct', 'wputh') , $field['label']);
+                }
+                else {
+
+                    if ($field['type'] == 'select') {
+                        $tmp_value = $field['datas'][$tmp_value];
+                    }
+
+                    if ($field['type'] == 'file') {
+                        $tmp_value = $this->upload_file_return_att_id($_FILES[$id], $field);
+                    }
+
+                    $contact_fields[$id]['value'] = $tmp_value;
+                }
+            }
+            else {
+                if ($field['required']) {
+                    $this->msg_errors[] = sprintf(__('The field "%s" is required', 'wputh') , $field['label']);
+                }
+            }
+        }
+        return $contact_fields;
+    }
+
+    function upload_file_return_att_id($file, $field) {
+
+        require_once (ABSPATH . 'wp-admin/includes/image.php');
+        require_once (ABSPATH . 'wp-admin/includes/file.php');
+        require_once (ABSPATH . 'wp-admin/includes/media.php');
+
+        $attachment_id = media_handle_upload($field['id'], $this->contact__settings['attach_to_post']);
+
+        if (is_wp_error($attachment_id)) {
+            return false;
+        }
+        else {
+            return $attachment_id;
+        }
+    }
+
+    function validate_field_file($file, $field) {
+        $field_ok = true;
+
+        // Max size
+        if ($file['size'] >= $this->contact__settings['max_file_size']) {
+            $field_ok = false;
+        }
+
+        // Type
+        if (!in_array($file['type'], $this->contact__settings['file_types'])) {
+            $field_ok = false;
+        }
+
+        return $field_ok;
+    }
+
+    function validate_field($tmp_value, $field) {
+        $field_ok = true;
+
+        switch ($field['type']) {
+            case 'select':
+                $field_ok = array_key_exists($tmp_value, $field['datas']);
+            break;
+            case 'email':
+                $field_ok = filter_var($tmp_value, FILTER_VALIDATE_EMAIL) !== false;
+            break;
+            case 'url':
+                $field_ok = filter_var($tmp_value, FILTER_VALIDATE_URL) !== false;
+            break;
+        }
+
+        return $field_ok;
     }
 
     function ajax_action() {
