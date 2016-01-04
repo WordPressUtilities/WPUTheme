@@ -3,12 +3,12 @@ jQuery(document).ready(function() {
     $wrapper.on('submit', '.wputh__contact__form', function(e) {
         $wrapper.addClass('contact-form-is-loading');
         e.preventDefault();
-        jQuery.post(
-            ajaxurl, jQuery(this).serialize(),
-            function(response) {
-                $wrapper.html(jQuery(response).html());
+        jQuery(this).ajaxSubmit({
+            target: $wrapper,
+            url: ajaxurl,
+            success: function() {
                 $wrapper.removeClass('contact-form-is-loading');
             }
-        );
+        });
     });
 });

@@ -26,6 +26,7 @@ class wputh__contact {
     }
 
     function form_scripts() {
+        wp_enqueue_script('jquery-form');
         wp_enqueue_script('wputh-contact-form', get_template_directory_uri() . '/js/functions/contact-form.js', array(
             'jquery'
         ) , '1.0', true);
@@ -86,7 +87,6 @@ class wputh__contact {
 
             if ($field['type'] == 'file') {
                 $this->has_upload = true;
-                $this->contact__settings['ajax_enabled'] = false;
             }
 
             // Merge with default field.
@@ -107,7 +107,7 @@ class wputh__contact {
         $this->content_contact = '';
     }
 
-    function page_content() {
+    function page_content($hide_wrapper = false) {
 
         // Display contact form
         $this->content_contact.= '<form class="wputh__contact__form" action="" method="post" ' . ($this->has_upload ? 'enctype="multipart/form-data' : '') . '"><ul class="' . $this->contact__settings['ul_class'] . '">';
@@ -156,7 +156,13 @@ class wputh__contact {
         <button class="' . $this->contact__settings['submit_class'] . '" type="submit">' . $this->contact__settings['submit_label'] . '</button>
         </li>';
         $this->content_contact.= '</ul></form>';
-        echo '<div class="wputh-contact-form-wrapper">' . $this->content_contact . '</div>';
+        if ($hide_wrapper !== true) {
+            echo '<div class="wputh-contact-form-wrapper">';
+        }
+        echo $this->content_contact;
+        if ($hide_wrapper !== true) {
+            echo '</div>';
+        }
     }
 
     function post_contact() {
@@ -337,7 +343,7 @@ class wputh__contact {
 
     function ajax_action() {
         $this->post_contact();
-        $this->page_content();
+        $this->page_content(true);
         die;
     }
 }
