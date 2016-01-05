@@ -59,7 +59,9 @@ class wputh__contact {
             'ajax_enabled' => true,
             'file_types' => array(
                 'image/png',
+                'image/jpg',
                 'image/jpeg',
+                'image/gif',
             ) ,
             'max_file_size' => 2 * 1024 * 1024,
             'attach_to_post' => get_the_ID() ,
@@ -85,14 +87,14 @@ class wputh__contact {
         // Testing missing settings
         foreach ($this->contact_fields as $id => $field) {
 
-            if ($field['type'] == 'file') {
-                $this->has_upload = true;
-            }
-
             // Merge with default field.
             $this->contact_fields[$id] = array_merge(array() , $this->default_field, $field);
 
             $this->contact_fields[$id]['id'] = $id;
+
+            if ($this->contact_fields[$id]['type'] == 'file') {
+                $this->has_upload = true;
+            }
 
             // Default label
             if (!isset($field['label'])) {
@@ -111,36 +113,8 @@ class wputh__contact {
 
         // Display contact form
         $this->content_contact.= '<form class="wputh__contact__form" action="" method="post" ' . ($this->has_upload ? 'enctype="multipart/form-data' : '') . '"><ul class="' . $this->contact__settings['ul_class'] . '">';
-        foreach ($this->contact_fields as $id => $field) {
-            $field_id_name = 'id="' . $id . '" name="' . $id . '"';
-            if ($field['required']) {
-                $field_id_name.= ' required="required"';
-            }
-            $field_val = 'value="' . $field['value'] . '"';
-            $this->content_contact.= $field['html_before'] . '<li class="' . $this->contact__settings['box_class'] . ' ' . $field['box_class'] . '">';
-            if (isset($field['label'])) {
-                $this->content_contact.= '<label for="' . $id . '">' . $field['label'] . '</label>';
-            }
-            switch ($field['type']) {
-                case 'select':
-                    $this->content_contact.= '<select  ' . $field_id_name . '>';
-                    $this->content_contact.= '<option value="" disabled selected style="display:none;">' . __('Select a value') . '</option>';
-                    foreach ($field['datas'] as $key => $val) {
-                        $this->content_contact.= '<option ' . (!empty($field['value']) && $field['value'] == $key ? 'selected="selected"' : '') . ' value="' . esc_attr($key) . '">' . $val . '</option>';
-                    }
-                    $this->content_contact.= '</select>';
-                break;
-                case 'text':
-                case 'url':
-                case 'file':
-                case 'email':
-                    $this->content_contact.= '<input type="' . $field['type'] . '" ' . $field_id_name . ' ' . $field_val . ' />';
-                break;
-                case 'textarea':
-                    $this->content_contact.= '<textarea cols="30" rows="5" ' . $field_id_name . '>' . $field['value'] . '</textarea>';
-                break;
-            }
-            $this->content_contact.= '</li>' . $field['html_after'];
+        foreach ($this->contact_fields as $field) {
+            $this->content_contact.= $this->field_content($field);
         }
 
         /* Quick honeypot */
@@ -163,6 +137,42 @@ class wputh__contact {
         if ($hide_wrapper !== true) {
             echo '</div>';
         }
+    }
+
+    function field_content($field) {
+        $content = '';
+        $id = $field['id'];
+        $field_id_name = 'id="' . $field['id'] . '" name="' . $field['id'] . '"';
+        if ($field['required']) {
+            $field_id_name.= ' required="required"';
+        }
+        $field_val = 'value="' . $field['value'] . '"';
+        if (isset($field['label'])) {
+            $content.= '<label for="' . $field['id'] . '">' . $field['label'] . '</label>';
+        }
+        switch ($field['type']) {
+            case 'select':
+                $content.= '<select  ' . $field_id_name . '>';
+                $content.= '<option value="" disabled selected style="display:none;">' . __('Select a value') . '</option>';
+                foreach ($field['datas'] as $key => $val) {
+                    $content.= '<option ' . (!empty($field['value']) && $field['value'] == $key ? 'selected="selected"' : '') . ' value="' . esc_attr($key) . '">' . $val . '</option>';
+                }
+                $content.= '</select>';
+            break;
+            case 'file':
+                $content.= '<input type="file" accept="' . implode(',', $this->contact__settings['file_types']) . '" ' . $field_id_name . ' ' . $field_val . ' />';
+            break;
+            case 'text':
+            case 'url':
+            case 'email':
+                $content.= '<input type="' . $field['type'] . '" ' . $field_id_name . ' ' . $field_val . ' />';
+            break;
+            case 'textarea':
+                $content.= '<textarea cols="30" rows="5" ' . $field_id_name . '>' . $field['value'] . '</textarea>';
+            break;
+        }
+
+        return $field['html_before'] . '<li class="' . $this->contact__settings['box_class'] . ' ' . $field['box_class'] . '">' . $content . '</li>' . $field['html_after'];
     }
 
     function post_contact() {
@@ -308,37 +318,33 @@ class wputh__contact {
     }
 
     function validate_field_file($file, $field) {
-        $field_ok = true;
 
         // Max size
         if ($file['size'] >= $this->contact__settings['max_file_size']) {
-            $field_ok = false;
+            return false;
         }
 
         // Type
         if (!in_array($file['type'], $this->contact__settings['file_types'])) {
-            $field_ok = false;
+            return false;
         }
 
-        return $field_ok;
+        return true;
     }
 
     function validate_field($tmp_value, $field) {
-        $field_ok = true;
-
         switch ($field['type']) {
             case 'select':
-                $field_ok = array_key_exists($tmp_value, $field['datas']);
+                return array_key_exists($tmp_value, $field['datas']);
             break;
             case 'email':
-                $field_ok = filter_var($tmp_value, FILTER_VALIDATE_EMAIL) !== false;
+                return filter_var($tmp_value, FILTER_VALIDATE_EMAIL) !== false;
             break;
             case 'url':
-                $field_ok = filter_var($tmp_value, FILTER_VALIDATE_URL) !== false;
+                return filter_var($tmp_value, FILTER_VALIDATE_URL) !== false;
             break;
         }
-
-        return $field_ok;
+        return true;
     }
 
     function ajax_action() {
