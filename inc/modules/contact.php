@@ -34,6 +34,7 @@ class wputh__contact {
         // pass Ajax Url to script.js
         wp_localize_script('wputh-contact-form', 'ajaxurl', admin_url('admin-ajax.php'));
     }
+
     function set_options() {
         $this->has_upload = false;
         $this->contact__success = apply_filters('wputh_contact_success', '<p class="contact-success">' . __('Thank you for your message!', 'wputh') . '</p>');
@@ -112,7 +113,7 @@ class wputh__contact {
     function page_content($hide_wrapper = false) {
 
         // Display contact form
-        $this->content_contact.= '<form class="wputh__contact__form" action="" method="post" ' . ($this->has_upload ? 'enctype="multipart/form-data' : '') . '"><ul class="' . $this->contact__settings['ul_class'] . '">';
+        $this->content_contact.= '<form class="wputh__contact__form" action="" aria-live="assertive" method="post" ' . ($this->has_upload ? 'enctype="multipart/form-data' : '') . '"><ul class="' . $this->contact__settings['ul_class'] . '">';
         foreach ($this->contact_fields as $field) {
             $this->content_contact.= $this->field_content($field);
         }
@@ -142,13 +143,13 @@ class wputh__contact {
     function field_content($field) {
         $content = '';
         $id = $field['id'];
-        $field_id_name = 'id="' . $field['id'] . '" name="' . $field['id'] . '"';
+        $field_id_name = ' id="' . $id. '" name="' . $id. '" aria-labelledby="label-' . $id. '" aria-required="' . ($field['required'] ? 'true' : 'false') . '" ';
         if ($field['required']) {
             $field_id_name.= ' required="required"';
         }
         $field_val = 'value="' . $field['value'] . '"';
         if (isset($field['label'])) {
-            $content.= '<label for="' . $field['id'] . '">' . $field['label'] . '</label>';
+            $content.= '<label id="label-' . $id. '" for="' . $id. '">' . $field['label'] . '</label>';
         }
         switch ($field['type']) {
             case 'select':
