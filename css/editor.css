@@ -73,6 +73,42 @@ body#tinymce.wp-editor p:last-child {
     margin-bottom: 20px;
 }
 
+/* Grid
+-------------------------- */
+
+.post-content-grid {
+    display: table;
+    width: 100%;
+    margin-bottom: 1em;
+    table-layout: fixed;
+}
+
+.post-content-grid > .col {
+    display: table-cell;
+    padding: 0 1em;
+    vertical-align: top;
+}
+
+.post-content-grid > .col:first-child {
+    padding-left: 0;
+}
+
+.post-content-grid > .col:last-child {
+    padding-right: 0;
+}
+
+@media(max-width:767px) {
+    .post-content-grid {
+        display: block;
+        margin: 0;
+    }
+
+    .post-content-grid > .col {
+        display: block;
+        padding: 0 0 1em;
+    }
+}
+
 /* Table
 -------------------------- */
 

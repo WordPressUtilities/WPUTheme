@@ -1,6 +1,21 @@
 <?php
 
 /* ----------------------------------------------------------
+  [grid]test 1 -column-separator- test 2[/grid]
+---------------------------------------------------------- */
+
+function wputh_grid_shortcode($atts, $content = null) {
+    $content = strip_tags($content, '<br><img><b><i><strong><em><small>');
+    $content_cols = explode('-column-separator-', $content);
+    $content = '';
+    foreach($content_cols as $col){
+        $content .= '<div class="col">'.trim($col).'</div>';
+    }
+    return '<div class="post-content-grid">' . $content . '</div>';
+}
+add_shortcode('grid', 'wputh_grid_shortcode');
+
+/* ----------------------------------------------------------
   [columns]Text on multiple columns[/columns]
 ---------------------------------------------------------- */
 
