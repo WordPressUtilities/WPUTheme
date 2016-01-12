@@ -52,12 +52,13 @@ class wputh__contact {
         );
 
         $this->contact__settings = apply_filters('wputh_contact_settings', array(
-            'ul_class' => 'cssc-form cssc-form--default float-form',
+            'ajax_enabled' => true,
             'box_class' => 'box',
+            'label_text_required' => '<em>*</em>',
+            'li_submit_class' => '',
             'submit_class' => 'cssc-button cssc-button--default',
             'submit_label' => __('Submit', 'wputh') ,
-            'li_submit_class' => '',
-            'ajax_enabled' => true,
+            'ul_class' => 'cssc-form cssc-form--default float-form',
             'file_types' => array(
                 'image/png',
                 'image/jpg',
@@ -120,7 +121,7 @@ class wputh__contact {
 
         /* Quick honeypot */
         $this->content_contact.= '<li class="screen-reader-text">';
-        $this->content_contact.= '<label>If you are a human, leave this empty</label>';
+        $this->content_contact.= '<label>If you are human, leave this empty</label>';
         $this->content_contact.= '<input tabindex="-1" name="hu-man-te-st" type="text"/>';
         $this->content_contact.= '</li>';
 
@@ -143,13 +144,13 @@ class wputh__contact {
     function field_content($field) {
         $content = '';
         $id = $field['id'];
-        $field_id_name = ' id="' . $id. '" name="' . $id. '" aria-labelledby="label-' . $id. '" aria-required="' . ($field['required'] ? 'true' : 'false') . '" ';
+        $field_id_name = ' id="' . $id . '" name="' . $id . '" aria-labelledby="label-' . $id . '" aria-required="' . ($field['required'] ? 'true' : 'false') . '" ';
         if ($field['required']) {
             $field_id_name.= ' required="required"';
         }
         $field_val = 'value="' . $field['value'] . '"';
         if (isset($field['label'])) {
-            $content.= '<label id="label-' . $id. '" for="' . $id. '">' . $field['label'] . '</label>';
+            $content.= '<label id="label-' . $id . '" for="' . $id . '">' . $field['label'] . ' ' . ($field['required'] ? $this->contact__settings['label_text_required'] : '') . '</label>';
         }
         switch ($field['type']) {
             case 'select':
