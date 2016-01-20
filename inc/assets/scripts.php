@@ -28,6 +28,10 @@ function wputh_default_wputh_javascript_files($scripts = array()) {
         'url' => get_template_directory_uri().'/js/functions/faq-accordion.js',
         'footer' => 1
     );
+    $scripts['functions-menu-scroll'] = array(
+        'url' => get_template_directory_uri().'/js/functions/menu-scroll.js',
+        'footer' => 1
+    );
     $scripts['functions-remove-utm-ga'] = array(
         'url' => get_template_directory_uri().'/js/functions/remove-utm-ga.js',
         'footer' => 1
