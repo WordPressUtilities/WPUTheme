@@ -25,12 +25,13 @@ function set_wputh_menu_scroll() {
 
 var wputh_scroll_event = function() {
     var scrollTop = wputhmenu.itemWindow.scrollTop(),
+        scrollAmount = Math.abs(wputhmenu.prevScroll - scrollTop),
         scrollToTop = wputhmenu.prevScroll > scrollTop;
     if (scrollToTop && scrollTop > wputhmenu.scrollLimit && !wputhmenu.has_floating_menu) {
         wputhmenu.has_floating_menu = true;
         wputhmenu.itemBody.addClass(wputhmenu.CSSClassName);
     }
-    if ((!scrollToTop || scrollTop < wputhmenu.scrollLimit) && wputhmenu.has_floating_menu) {
+    if ((!scrollToTop || scrollTop < wputhmenu.scrollLimit) && wputhmenu.has_floating_menu && scrollAmount > 0) {
         wputhmenu.has_floating_menu = false;
         wputhmenu.itemBody.removeClass(wputhmenu.CSSClassName);
     }
