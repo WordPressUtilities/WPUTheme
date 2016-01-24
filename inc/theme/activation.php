@@ -22,7 +22,7 @@ function wputh_setup_theme() {
         'widget_pages' => '',
         'widget_post_categories' => '',
         'widget_tag_cloud' => '',
-        'wpu_home_meta_description' => '',
+        'wpu_home_meta_description' => ''
     );
 
     $wputh_setup_options = apply_filters('wputh_setup_options', $wputh_setup_options);
@@ -33,20 +33,12 @@ function wputh_setup_theme() {
     }
 
     // Creating pages
-    $pages_site = apply_filters('wputh_pages_site', array());
+    $pages_site = wputh_setup_pages_site(apply_filters('wputh_pages_site', array()));
     foreach ($pages_site as $id => $page) {
         $option = get_option($id);
 
         // If page doesn't exists
         if (!is_numeric($option)) {
-
-            if (!isset($page['post_status'])) {
-                $page['post_status'] = 'publish';
-            }
-            if (!isset($page['post_type'])) {
-                $page['post_type'] = 'page';
-            }
-
             // Create page
             $option_page = wp_insert_post($page);
             if (is_numeric($option_page)) {

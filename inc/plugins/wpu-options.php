@@ -58,7 +58,7 @@ function set_wputh_options_fields_default($options) {
     }
 
     // Create pages IDs from list defined in functions.php
-    $pages_site = apply_filters('wputh_pages_site', array());
+    $pages_site = wputh_setup_pages_site(apply_filters('wputh_pages_site', array()));
     foreach ($pages_site as $id => $page) {
         $options[$id] = array(
             'label' => $page['post_title'],
