@@ -43,8 +43,7 @@ if (!function_exists('wputh_set_pages_site')) {
         );
         $pages_site['mentions__page_id'] = array(
             'constant' => 'MENTIONS__PAGE_ID',
-            'post_title' => 'Mentions légales',
-            'post_content' => '<p>Contenu des mentions légales</p>'
+            'post_title' => 'Mentions légales'
         );
         return $pages_site;
     }

@@ -32,6 +32,8 @@ function wputh_setup_theme() {
         update_option($name, $value);
     }
 
+    $default_folder = dirname(__FILE__) . '/activation/';
+
     // Creating pages
     $pages_site = wputh_setup_pages_site(apply_filters('wputh_pages_site', array()));
     foreach ($pages_site as $id => $page) {
@@ -39,6 +41,21 @@ function wputh_setup_theme() {
 
         // If page doesn't exists
         if (!is_numeric($option)) {
+            if (!isset($page['post_status'])) {
+                $page['post_status'] = 'publish';
+            }
+            if (!isset($page['post_type'])) {
+                $page['post_type'] = 'page';
+            }
+
+            if (!isset($page['post_content']) || empty($page['post_content'])) {
+                $file_content = $default_folder . str_replace('__page_id', '', $id) . '.php';
+                if (file_exists($file_content)) {
+                    ob_start();
+                    include $file_content;
+                    $page['post_content'] = ob_get_clean();
+                }
+            }
             // Create page
             $option_page = wp_insert_post($page);
             if (is_numeric($option_page)) {

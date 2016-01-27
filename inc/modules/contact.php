@@ -187,6 +187,12 @@ class wputh__contact {
         // Initial settings
         $this->msg_errors = array();
         $msg_success = '';
+        $this->target_email = get_option('admin_email');
+        $wpu_opt_email = get_option('wpu_opt_email');
+        if (is_email($wpu_opt_email)) {
+            $this->target_email = $wpu_opt_email;
+        }
+        $this->target_email = apply_filters('wputh_contact_email', $this->target_email);
 
         // Checking for PHP Conf
         if (isset($_POST['control_stripslashes']) && $_POST['control_stripslashes'] == '\"') {
@@ -244,7 +250,7 @@ class wputh__contact {
                 $this->contact_fields[$id]['value'] = '';
             }
 
-            wputh_sendmail(get_option('admin_email') , __('Message from your contact form', 'wputh') , $mail_content, $this->more);
+            wputh_sendmail($this->target_email, __('Message from your contact form', 'wputh'), $mail_content, $this->more);
 
             // Delete temporary attachments
             foreach ($attachments_to_destroy as $att_id) {
