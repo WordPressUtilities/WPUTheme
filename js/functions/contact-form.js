@@ -3,15 +3,16 @@
 'use strict';
 
 jQuery(document).ready(function() {
-    set_wputh_contact_form();
+    jQuery('.wputh-contact-form-wrapper').each(function() {
+        set_wputh_contact_form(jQuery(this));
+    });
 });
 
 /* ----------------------------------------------------------
   Set Contact form
 ---------------------------------------------------------- */
 
-function set_wputh_contact_form() {
-    var $wrapper = jQuery('.wputh-contact-form-wrapper');
+function set_wputh_contact_form($wrapper) {
 
     function submit_form(e) {
         e.preventDefault();
