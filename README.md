@@ -32,7 +32,6 @@ add_filter('wputheme_display_searchform','__return_false');
 ### Page templates
 
 * **Big Pictures** : A gallery of big views of attached pictures.
-* **Contact** : A contact form sending an email.
 * **Download** : A list of attached files.
 * **FAQ** : A list of all the pages.
 * **Gallery** : A gallery of thumbnails of attached pictures, with a link to the full picture.
@@ -88,41 +87,9 @@ add_filter('wputheme_display_searchform','__return_false');
 * **wputheme_footer_elements** : Load blocks under main wrapper.
 * **wputheme_home_content** : Blocks on home page
 
-#### Contact
-
-* **wputh_contact_content** : Load contact form.
-
 ### Filters
 
 #### Paginate
 
 * **wputheme_loadmore_button** : Theme for loadmore button in paginate.php
 * **wputh_pagination_kind** : Kind of pagination used when loading paginate.php
-
-#### Contact
-
-* **disable_wputh_contact** : (bool:false) Disable contact form.
-* **wputh_contact_fields** : (string)
-* **wputh_contact_message** : (string)
-* **wputh_contact_message___maxlinks__nb** : (string)
-* **wputh_contact_success** : (string:html)
-* **wputh_contact_settings** : (array)
-
-##### Settings
-
-* **ul_class** : 'cssc-form cssc-form--default float-form'
-* **box_class** : 'box'
-* **submit_class** : 'cssc-button cssc-button--default'
-* **submit_label** : 'Submit'
-* **li_submit_class** : ''
-
-##### Fields
-
-* **value** : (string) Default value.
-* **label** : (string) Field name.
-* **type** : (string) Field type : text, url, email, textarea, select.
-* **datas** : (array) 1dim array setting datas for select.
-* **required** : (bool) Field is required.
-* **html_before** : (string) HTML before LI box.
-* **html_after** : (string) HTML after LI box.
-* **box_class** : (string) LI Box CSS Class
