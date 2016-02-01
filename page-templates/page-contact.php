@@ -8,7 +8,7 @@ the_post();
 <article>
     <h1><?php the_title(); ?></h1>
     <?php the_content(); ?>
-    <?php do_action('wputh_contact_content'); ?>
+    <?php do_action('wpucontactforms_content'); ?>
 </article>
 </div>
 <?php
