@@ -117,7 +117,7 @@ endif;
 add_action('wputheme_header_banner', 'wputh_display_title');
 if (!function_exists('wputh_display_title')) {
     function wputh_display_title() {
-        $main_tag = is_home() ? 'h1' : 'div';
+        $main_tag = (is_home() || is_front_page()) ? 'h1' : 'div';
         $main_tag_classname = 'h1 main-title';
         $title_content = get_bloginfo('name');
         if (has_header_image()) {

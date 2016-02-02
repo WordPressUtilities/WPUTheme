@@ -9,7 +9,7 @@
 if (!isset($elements_ariane)) {
 
     // Hide breadcrumbs if called on homepage
-    if (is_home()) {
+    if (is_home() || is_front_page()) {
         return;
     }
 

@@ -16,10 +16,7 @@ if (function_exists('add_theme_support')) {
 
         // Theme style
         add_theme_support('custom-background');
-        add_theme_support('custom-header', array(
-            'height' => 100,
-            'width' => 200
-        ));
+        add_theme_support('custom-header');
 
         // Supporting HTML5
         add_theme_support('html5', array(
