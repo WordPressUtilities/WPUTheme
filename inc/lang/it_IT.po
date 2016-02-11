@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2016-01-29 11:07+0100\n"
+"POT-Creation-Date: 2016-02-11 23:31+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../../.\n"
 "X-Poedit-SearchPath-1: ../../../../mu-plugins\n"
 
-#: ../../../../mu-plugins/wpu-test.php:113
+#: ../../../../mu-plugins/wpu-test.php:101
 msgid "Work"
 msgstr "Lavori"
 
-#: ../../../../mu-plugins/wpu-test.php:114
+#: ../../../../mu-plugins/wpu-test.php:102
 msgid "Works"
 msgstr "Lavoro"
 
@@ -92,26 +92,31 @@ msgstr "Dimensione del titolo"
 msgid "Next page"
 msgstr "Pagina successiva"
 
-#: ../.././inc/theme/utilities.php:41
+#: ../.././inc/theme/utilities.php:40
 msgid "Sorry, no search results for this query."
 msgstr "Spiacenti, nessun risultato trovato."
 
-#: ../.././inc/theme/utilities.php:71
+#: ../.././inc/theme/utilities.php:69
 msgid "<strong>no</strong> comments"
 msgstr "<strong>nessun</strong> comment"
 
-#: ../.././inc/theme/utilities.php:74
+#: ../.././inc/theme/utilities.php:72
 msgid "<strong>1</strong> comment"
 msgstr "<strong>1</strong> commento"
 
-#: ../.././inc/theme/utilities.php:77
+#: ../.././inc/theme/utilities.php:75
 #, php-format
 msgid "<strong>%s</strong> comments"
 msgstr "<strong>%s</strong> commenti"
 
-#: ../.././inc/theme/utilities.php:80
+#: ../.././inc/theme/utilities.php:78
 msgid "Comments are closed"
 msgstr "I commenti sono chiusi"
+
+#: ../.././inc/theme/utilities.php:421
+#, php-format
+msgid "%s: Follow %s (open in new window)"
+msgstr "%s : Seguire %s (apre in una nuova finestra)"
 
 #: ../.././loop.php:7 ../.././tpl/loops/header-loop-small.php:8
 msgid "F j, Y"
@@ -193,11 +198,6 @@ msgstr "Ricerca in %s"
 #: ../.././tpl/header/searchform.php:9
 msgid "Search"
 msgstr "Ricerca"
-
-#: ../.././tpl/header/social.php:5
-#, php-format
-msgid "%s: Follow %s (open in new window)"
-msgstr "%s : Seguire %s (apre in una nuova finestra)"
 
 #: ../.././tpl/loops/share.php:5
 msgid "Share this post"

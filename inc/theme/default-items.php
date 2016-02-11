@@ -148,7 +148,7 @@ if (apply_filters('wputheme_display_social', true)):
 endif;
 if (!function_exists('wputh_display_social')) {
     function wputh_display_social() {
-        include get_template_directory() . '/tpl/header/social.php';
+        echo wputh_get_social_links_html();
     }
 }
 
