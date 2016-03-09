@@ -15,39 +15,6 @@ define("WPUTH_HAS_SIDEBAR", apply_filters('wputh_has_sidebar', false));
 // load-more || numbers || default
 define('PAGINATION_KIND', apply_filters('wputh_pagination_kind', 'numbers'));
 
-/* Post Types
- -------------------------- */
-
-add_filter('wputh_get_posttypes', 'wputh_set_theme_posttypes');
-if (!function_exists('wputh_set_theme_posttypes')) {
-    function wputh_set_theme_posttypes($post_types) {
-
-        // $post_types['work'] = array(
-        //     'menu_icon' => 'dashicons-portfolio',
-        //     'name' => __('Work', 'wputh') ,
-        //     'plural' => __('Works', 'wputh') ,
-        //     'female' => 0
-        // );
-        return $post_types;
-    }
-}
-
-/* Taxonomies
- -------------------------- */
-
-add_filter('wputh_get_taxonomies', 'wputh_set_theme_taxonomies');
-if (!function_exists('wputh_set_theme_taxonomies')) {
-    function wputh_set_theme_taxonomies($taxonomies) {
-
-        // $taxonomies['work-type'] = array(
-        //     'name' => __( 'Work type', 'wputh' ),
-        //     'post_type' => 'work'
-        // );
-
-        return $taxonomies;
-    }
-}
-
 /* Menus
  -------------------------- */
 
