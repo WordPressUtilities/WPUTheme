@@ -1,6 +1,6 @@
 <?php
 $js_values_html_attributes = apply_filters('wputh_jsvalues', array(
-    'page_title' => addslashes(trim(wp_title(null, false))),
+    'page_title' => addslashes(trim(wp_title('|', false))),
     'body_class' => implode(' ', get_body_class('cssc-is-responsive'))
 ));
 $html_jsvalues = '';
