@@ -414,12 +414,16 @@ function wputh_get_social_links() {
     return $links;
 }
 
-function wputh_get_social_links_html($wrapper_classname = 'header__social', $display_type = false) {
+function wputh_get_social_links_html($wrapper_classname = 'header__social', $display_type = false, $template = '') {
     $wpu_social_links = wputh_get_social_links();
     $html = '<ul class="' . $wrapper_classname . '">';
     foreach ($wpu_social_links as $id => $link) {
         $html .= '<li><a rel="me" href="' . $link['url'] . '" class="' . $id . '" title="' . sprintf(__('%s: Follow %s (open in new window)', 'wputh'), $link['name'], get_bloginfo('name')) . '" target="_blank">';
         switch ($display_type) {
+        case 'custom':
+            $html .= str_replace('%s', $id, $template);
+            break;
+            break;
         case 'icon':
             $html .= '<i class="icon icon_' . $id . '"></i>';
             break;
