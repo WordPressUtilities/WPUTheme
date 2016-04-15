@@ -10,13 +10,19 @@ if (!IS_AJAX) {
 }
 if (!function_exists('wputh_get_doctype_html')) {
     function wputh_get_doctype_html() {
-?>
-<!DOCTYPE HTML>
-<!--[if IE 8 ]><html <?php language_attributes(); ?> class="is_ie8 lt_ie9 lt_ie10"><![endif]-->
-<!--[if IE 9 ]><html <?php language_attributes(); ?> class="is_ie9 lt_ie10"><![endif]-->
-<!--[if gt IE 9]><html <?php language_attributes(); ?> class="is_ie10"><![endif]-->
-<!--[if !IE]><!--> <html <?php language_attributes(); ?>><!--<![endif]-->
-<?php
+        ob_start();
+        language_attributes();
+        $lang = ob_get_clean();
+
+        echo '<!DOCTYPE HTML>';
+        if (WPUTH_IECOMPATIBILITY) {
+            echo '<!--[if IE 8 ]><html ' . $lang . ' class="is_ie8 lt_ie9 lt_ie10"><![endif]-->';
+            echo '<!--[if IE 9 ]><html ' . $lang . ' class="is_ie9 lt_ie10"><![endif]-->';
+            echo '<!--[if gt IE 9]><html ' . $lang . ' class="is_ie10"><![endif]-->';
+            echo '<!--[if !IE]><!--> <html ' . $lang . '><!--<![endif]-->';
+        } else {
+            echo '<html ' . $lang . '>';
+        }
     }
 }
 
@@ -53,7 +59,7 @@ add_action('wp_enqueue_scripts', 'wputh_head_enqueue_google_fonts');
 function wputh_head_enqueue_google_fonts() {
     $query_args = apply_filters('wputh_google_fonts', array());
     if (!empty($query_args)) {
-        wp_register_style('google-fonts', add_query_arg($query_args, "//fonts.googleapis.com/css") , array() , null);
+        wp_register_style('google-fonts', add_query_arg($query_args, "//fonts.googleapis.com/css"), array(), null);
         wp_enqueue_style('google-fonts');
     }
 }
@@ -97,7 +103,9 @@ if (!function_exists('wputh_head_add_favicon')) {
 /* IE Compatibility
  -------------------------- */
 
-add_action('wp_head', 'wputh_head_add_iecompatibility', 10);
+if (WPUTH_IECOMPATIBILITY):
+    add_action('wp_head', 'wputh_head_add_iecompatibility', 10);
+endif;
 if (!function_exists('wputh_head_add_iecompatibility')) {
     function wputh_head_add_iecompatibility() {
         $script_src = get_template_directory_uri() . '/js/ie/';
@@ -122,7 +130,7 @@ if (!function_exists('wputh_display_title')) {
         $title_content = get_bloginfo('name');
         if (has_header_image()) {
             $title_content = '<img src="' . get_header_image() . '" alt="' . esc_attr($title_content) . '" />';
-            $main_tag_classname.= ' main-logo';
+            $main_tag_classname .= ' main-logo';
         }
         echo '<' . $main_tag . ' class="' . $main_tag_classname . '"><a href="' . home_url() . '">' . $title_content . '</a></' . $main_tag . '>';
     }
