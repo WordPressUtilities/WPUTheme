@@ -8,7 +8,7 @@ if (!defined('IS_AJAX') || !IS_AJAX ) {
 <?php do_action('wputheme_header_items'); ?>
 <?php if (apply_filters('wputheme_display_header', true)): ?>
 <div class="main-header centered-container">
-    <header class="banner" role="banner" id="banner">
+    <header class="banner" id="banner">
     <?php
     do_action('wputheme_header_banner');
     ?>

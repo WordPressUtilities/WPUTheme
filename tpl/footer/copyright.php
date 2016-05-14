@@ -1,5 +1,5 @@
 <div class="main-footer centered-container">
-    <footer class="contentinfo" role="contentinfo" id="contentinfo">
+    <footer class="contentinfo" id="contentinfo">
         <small class="main-footer--copyright">&copy; <?php echo date( 'Y' ); ?> - <?php bloginfo( 'name' ); ?></small>
         <small class="main-footer--credits"><?php
         echo sprintf( __( 'A %s site using %s', 'wputh' ),
