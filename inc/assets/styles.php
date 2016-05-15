@@ -33,7 +33,7 @@ function parse_path( $dir ) {
         if ( is_dir( $file ) ) {
             $css_files = array_merge( parse_path( $file ), $css_files );
         }
-        elseif ( substr( $file, -3, 3 ) == 'css' ) {
+        elseif ( substr( $file, -4, 4 ) == '.css' ) {
             $css_files[] = $file;
         }
     }

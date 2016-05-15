@@ -21,8 +21,8 @@ function wputh_disable_jqmigrate(&$scripts) {
   Add JS
 ---------------------------------------------------------- */
 
-add_filter('wputh_javascript_files', 'wputh_default_wputh_javascript_files', 1, 1);
-function wputh_default_wputh_javascript_files($scripts = array()) {
+add_filter('wputh_javascript_files', 'wputh_javascript_files__default', 1, 1);
+function wputh_javascript_files__default($scripts = array()) {
     $scripts['jquery'] = array();
     $scripts['functions-faq-accordion'] = array(
         'url' => get_template_directory_uri().'/js/functions/faq-accordion.js',

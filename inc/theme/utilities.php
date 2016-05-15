@@ -435,3 +435,47 @@ function wputh_get_social_links_html($wrapper_classname = 'header__social', $dis
     $html .= '</ul>';
     return $html;
 }
+
+/* ----------------------------------------------------------
+  Content helpers
+---------------------------------------------------------- */
+
+/**
+ * Convert an array to an HTML table
+ * @param  array  $array    Two dimensional array to be displayed
+ * @param  array  $columns  Column names.
+ * @return string           HTML Table
+ */
+function array_to_html_table($array = array(), $columns = array()) {
+    $thead = '';
+    $tbody = '';
+    if (is_array($columns) && !empty($columns)) {
+        $tr = '<tr><th>' . implode('</th><th>', $columns) . '</th></tr>';
+        $thead = '<thead>' . $tr . '</thead>';
+        $tbody = '<tbody>' . $tr . '</tbody>';
+    }
+
+    $html = '<table>' . $thead;
+    foreach ($array as $line) {
+        if (!is_array($line) || empty($line)) {
+            continue;
+        }
+        $html .= '<tr>';
+        foreach ($line as $id => $cell) {
+            $html .= '<td class="col-' . $id . '">' . $cell . '</td>';
+        }
+        $html .= '</tr>';
+
+    }
+    $html .= $tbody . '</table>';
+    return $html;
+}
+
+/**
+ * Convert an array to an HTML List
+ * @param  array  $array  Array to be displayed
+ * @return string         HTML List
+ */
+function array_to_html_list($array = array()) {
+    return '<ul>' . implode('</li><li>', $array) . '</ul>';
+}
