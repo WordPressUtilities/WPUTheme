@@ -6,6 +6,10 @@
  * @package default
  */
 
+if (apply_filters('wputheme_hide_breadcrumbs_page', false)) {
+    return;
+}
+
 if (!isset($elements_ariane)) {
 
     // Hide breadcrumbs if called on homepage
@@ -15,7 +19,7 @@ if (!isset($elements_ariane)) {
 
     $elements_ariane = array();
     $elements_ariane['home'] = array(
-        'name' => __('Home', 'wputh') ,
+        'name' => __('Home', 'wputh'),
         'link' => home_url()
     );
 
@@ -48,8 +52,7 @@ if (!isset($elements_ariane)) {
                         'link' => get_category_link($category_parent[0]->term_id)
                     );
                     $cat_tmp = $category_parent[0]->parent;
-                }
-                else {
+                } else {
                     $cat_tmp = 0;
                 }
             }
@@ -66,8 +69,7 @@ if (!isset($elements_ariane)) {
                 'last' => 1
             );
         }
-    }
-    else {
+    } else {
         if (is_archive() && class_exists('WPUSEO')) {
             $wpu_seo = new WPUSEO();
             $shown_title = $wpu_seo->get_displayed_title(false);
@@ -82,21 +84,21 @@ if (!isset($elements_ariane)) {
 
     if (is_singular() || is_page()) {
         $elements_ariane['single-page'] = array(
-            'name' => get_the_title() ,
+            'name' => get_the_title(),
             'last' => 1
         );
     }
 
     if (is_404()) {
         $elements_ariane['404-error'] = array(
-            'name' => __('404 Error', 'wputh') ,
+            'name' => __('404 Error', 'wputh'),
             'last' => 1
         );
     }
 
     if (is_search()) {
         $elements_ariane['search-results'] = array(
-            'name' => sprintf(__('Search results for "%s"', 'wputh') , get_search_query()) ,
+            'name' => sprintf(__('Search results for "%s"', 'wputh'), get_search_query()),
             'last' => 1
         );
     }
@@ -106,12 +108,11 @@ if (!empty($elements_ariane)) {
     echo '<ul class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">';
     foreach ($elements_ariane as $id => $element) {
         $last = (isset($element['last']) && $element['last'] == 1);
-        $itemAttributes = 'itemprop="item" class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '').'"';
+        $itemAttributes = 'itemprop="item" class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '') . '"';
         echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
         if (isset($element['link'])) {
-            echo '<a href="' . $element['link'] . '" '.$itemAttributes.'>' . $element['name'] . '</a>';
-        }
-        else {
+            echo '<a href="' . $element['link'] . '" ' . $itemAttributes . '>' . $element['name'] . '</a>';
+        } else {
             echo '<strong ' . $itemAttributes . '>' . $element['name'] . '</strong>';
         }
         echo '</li>';

@@ -448,26 +448,45 @@ function wputh_get_social_links_html($wrapper_classname = 'header__social', $dis
  */
 function array_to_html_table($array = array(), $columns = array()) {
     $thead = '';
+    $tfoot = '';
     $tbody = '';
+
     if (is_array($columns) && !empty($columns)) {
-        $tr = '<tr><th>' . implode('</th><th>', $columns) . '</th></tr>';
-        $thead = '<thead>' . $tr . '</thead>';
-        $tbody = '<tbody>' . $tr . '</tbody>';
+        if (isset($columns['thead'], $columns['tfoot'])) {
+            if (!empty($columns['thead'])) {
+                $thead = '<thead><tr><th>' . implode('</th><th>', $columns['thead']) . '</th></tr></thead>';
+            }
+            if (!empty($columns['tfoot'])) {
+                $tfoot = '<tfoot><tr><th>' . implode('</th><th>', $columns['tfoot']) . '</th></tr></tfoot>';
+            }
+        } else {
+            $tr = '<tr><th>' . implode('</th><th>', $columns) . '</th></tr>';
+            $thead = '<thead>' . $tr . '</thead>';
+            $tfoot = '<tfoot>' . $tr . '</tfoot>';
+        }
     }
 
-    $html = '<table>' . $thead;
+    $html = '<table data-sortable>' . $thead . '<tbody>';
     foreach ($array as $line) {
         if (!is_array($line) || empty($line)) {
             continue;
         }
         $html .= '<tr>';
         foreach ($line as $id => $cell) {
-            $html .= '<td class="col-' . $id . '">' . $cell . '</td>';
+
+            $content = $cell;
+            $data = '';
+            if (is_array($cell)) {
+                $content = isset($cell['content']) ? $cell['content'] : implode('', $cell);
+                $data = isset($cell['value']) ? 'data-value="' . $cell['value'] . '"' : '';
+            }
+
+            $html .= '<td class="col-' . $id . '" ' . $data . '>' . $content . '</td>';
         }
         $html .= '</tr>';
 
     }
-    $html .= $tbody . '</table>';
+    $html .= '</tbody>' . $tfoot . '</table>';
     return $html;
 }
 
