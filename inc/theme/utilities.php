@@ -451,6 +451,10 @@ function array_to_html_table($array = array(), $columns = array()) {
     $tfoot = '';
     $tbody = '';
 
+    if (!is_array($array)) {
+        return '';
+    }
+
     if (is_array($columns) && !empty($columns)) {
         if (isset($columns['thead'], $columns['tfoot'])) {
             if (!empty($columns['thead'])) {
