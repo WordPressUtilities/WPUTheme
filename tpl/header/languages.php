@@ -10,7 +10,7 @@ if(is_singular() || is_single() || is_page()){
 }
 
 // Obtaining from Qtranslate
-if (function_exists('qtrans_getSortedLanguages')) {
+if (function_exists('qtrans_getSortedLanguages') && function_exists('qtrans_getLanguage') && function_exists('qtrans_convertURL')) {
     $current_lang = qtrans_getLanguage();
     $languages = qtrans_getSortedLanguages();
     foreach ($languages as $lang) {
@@ -21,7 +21,7 @@ if (function_exists('qtrans_getSortedLanguages')) {
     }
 }
 
-// Obtaining from Qtranslate W
+// Obtaining from Qtranslate X
 if (function_exists('qtranxf_getSortedLanguages')) {
     $current_lang = qtranxf_getLanguage();
     $languages = qtranxf_getSortedLanguages();
