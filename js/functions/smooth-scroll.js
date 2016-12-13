@@ -4,7 +4,7 @@
 
 var wpu_set_smooth_scroll = function() {
     /* Scrollto */
-    jQuery('[href^="#"]').on('click', function(e) {
+    jQuery('[href^="#"]:not(.no-smooth)').on('click', function(e) {
         e.preventDefault();
         var href = jQuery(this).attr('href'),
             $href = jQuery(href);
