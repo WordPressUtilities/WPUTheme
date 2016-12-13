@@ -28,6 +28,10 @@ function wputh_javascript_files__default($scripts = array()) {
         'url' => get_template_directory_uri().'/js/functions/faq-accordion.js',
         'footer' => 1
     );
+    $scripts['functions-smooth-scroll'] = array(
+        'url' => get_template_directory_uri().'/js/functions/smooth-scroll.js',
+        'footer' => 1
+    );
     $scripts['functions-menu-scroll'] = array(
         'url' => get_template_directory_uri().'/js/functions/menu-scroll.js',
         'footer' => 1
