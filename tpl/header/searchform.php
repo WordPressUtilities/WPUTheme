@@ -27,7 +27,7 @@ asort($all_terms);
 if (!empty($all_terms)):
     echo '<datalist id="header-search-list">';
     foreach ($all_terms as $term):
-        echo '<option value="' . $term . '">';
+        echo '<option value="' . $term . '"></option>';
     endforeach;
     echo '</datalist>';
 endif;

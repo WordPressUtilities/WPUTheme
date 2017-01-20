@@ -34,13 +34,11 @@ if (!isset($elements_ariane)) {
     }
 
     if (is_category()) {
-        $category = get_categories(array(
-            'include' => $cat
-        ));
-        if (isset($category[0])) {
+        $term = get_queried_object();
+        if (is_object($term)) {
 
             // Checking for parent categories
-            $cat_tmp = $category[0]->parent;
+            $cat_tmp = $term->parent;
             $parents_categories = array();
             while ($cat_tmp != 0) {
                 $category_parent = get_categories(array(
@@ -65,7 +63,7 @@ if (!isset($elements_ariane)) {
 
             // Adding category
             $elements_ariane['category'] = array(
-                'name' => $category[0]->name,
+                'name' => $term->name,
                 'last' => 1
             );
         }
