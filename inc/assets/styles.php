@@ -12,10 +12,12 @@ if (!is_admin()) {
 define( 'WPU_CSS_DIR', get_template_directory() . '/css/' );
 define( 'WPU_CSS_URL', get_template_directory_uri() . '/css/' );
 
-function wputh_add_stylesheets() {
-    $css_files = parse_path( WPU_CSS_DIR );
-    foreach ( $css_files as $file ) {
-        wpu_add_css_file( $file, WPU_CSS_DIR, WPU_CSS_URL );
+if(!function_exists('wputh_add_stylesheets')){
+    function wputh_add_stylesheets() {
+        $css_files = parse_path( WPU_CSS_DIR );
+        foreach ( $css_files as $file ) {
+            wpu_add_css_file( $file, WPU_CSS_DIR, WPU_CSS_URL );
+        }
     }
 }
 

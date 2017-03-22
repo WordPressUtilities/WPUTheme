@@ -40,7 +40,7 @@ function wputh_setup_theme() {
         $option = get_option($id);
 
         // If page doesn't exists
-        if (!is_numeric($option)) {
+        if (!is_numeric($option) && !isset($page['prevent_creation'])) {
             if (!isset($page['post_status'])) {
                 $page['post_status'] = 'publish';
             }
