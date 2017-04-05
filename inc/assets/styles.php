@@ -55,7 +55,9 @@ function wpu_add_css_file( $file, $dir, $url ) {
 /* Editor Stylesheet
 -------------------------- */
 
-add_action( 'init', 'wputh_add_editor_styles' );
-function wputh_add_editor_styles() {
-    add_editor_style( WPU_CSS_URL . 'editor.css' );
+add_action('init', 'wputh_add_editor_styles');
+if (!function_exists('wputh_add_editor_styles')) {
+    function wputh_add_editor_styles() {
+        add_editor_style(WPU_CSS_URL . 'editor.css');
+    }
 }
