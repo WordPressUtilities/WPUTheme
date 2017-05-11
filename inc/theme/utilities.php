@@ -356,7 +356,7 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
     $_methods = array(
         'email' => array(
             'name' => 'Email',
-            'url' => str_replace('+', '%20', 'mailto:mail@mail.com?subject=' . urlencode($_title) . '&body=' . urlencode($_title) . '+' . urlencode($_permalink))
+            'url' => str_replace('+', '%20', 'mailto:?subject=' . urlencode($_title) . '&body=' . urlencode($_title) . '+' . urlencode($_permalink))
         ),
         'facebook' => array(
             'name' => 'Facebook',
