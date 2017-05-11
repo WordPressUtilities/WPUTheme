@@ -376,13 +376,25 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
         ),
         'twitter' => array(
             'name' => 'Twitter',
-            'url' => 'https://twitter.com/intent/tweet?text=' . urlencode($_twitter_text) . '+' . urlencode($_permalink) . urlencode($_via)
+            'url' => 'https://twitter.com/intent/tweet?text=' . urlencode($_twitter_text) . '+' . urlencode($_permalink) . urlencode($_via),
+            'datas' => array(
+                'via' => $_via
+            )
         ),
         'viadeo' => array(
             'name' => 'Viadeo',
             'url' => 'https://www.viadeo.com/shareit/share/?url' . urlencode($_permalink) . '&title=' . urlencode($_title) . ''
         )
     );
+
+    foreach ($_methods as $_id => $_method) {
+        if (!isset($_method[$_id]['datas'])) {
+            $_methods[$_id]['datas'] = array();
+        }
+        $_methods[$_id]['datas']['permalink'] = $_permalink;
+        $_methods[$_id]['datas']['title'] = $_title;
+        $_methods[$_id]['datas']['image'] = $_image;
+    }
 
     return apply_filters('wputheme_share_methods', $_methods, $_title, $_permalink, $_image, $_via_user);
 }
