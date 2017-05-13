@@ -378,7 +378,7 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
             'name' => 'Twitter',
             'url' => 'https://twitter.com/intent/tweet?text=' . urlencode($_twitter_text) . '+' . urlencode($_permalink) . urlencode($_via),
             'datas' => array(
-                'via' => $_via
+                'via' => $_via_user
             )
         ),
         'viadeo' => array(
@@ -388,7 +388,7 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
     );
 
     foreach ($_methods as $_id => $_method) {
-        if (!isset($_method[$_id]['datas'])) {
+        if (!isset($_methods[$_id]['datas'])) {
             $_methods[$_id]['datas'] = array();
         }
         $_methods[$_id]['datas']['permalink'] = $_permalink;
