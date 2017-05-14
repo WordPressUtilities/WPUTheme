@@ -22,7 +22,6 @@ function get_the_loop($params = array()) {
     if (!is_array($params)) {
         $params = array($params);
     }
-    ;
 
     $parameters = array_merge($default_params, $params);
 
@@ -513,4 +512,37 @@ function array_to_html_table($array = array(), $columns = array()) {
  */
 function array_to_html_list($array = array()) {
     return '<ul>' . implode('</li><li>', $array) . '</ul>';
+}
+
+/**
+ * Convert an URL to a HTML link
+ * @param  string $url
+ * @param  array  $options
+ * @return string
+ */
+function wputh_url_to_link($url, $options = array()) {
+    $link_text = $url;
+    if (!is_array($options)) {
+        $options = array();
+    }
+
+    /* Empty or invalid URL */
+    if (empty($url) || filter_var($url, FILTER_VALIDATE_URL) === false) {
+        return '';
+    }
+
+    /* Link text is by default the original link */
+    $url_parts = parse_url($url);
+    if (isset($url_parts['host'], $options['display_only_domain']) && $options['display_only_domain']) {
+        $link_text = $url_parts['host'];
+    }
+
+    /* Target blank */
+    $target = '';
+    if (isset($options['target_blank']) && $options['target_blank']) {
+        $target = ' target="_blank"';
+    }
+
+    return '<a' . $target . ' href="' . $url . '">' . esc_html($link_text) . '</a>';
+
 }
