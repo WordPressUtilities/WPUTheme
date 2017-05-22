@@ -1,6 +1,9 @@
 <?php
 require_once dirname(__FILE__) . '/z-protect.php';
-@session_start();
+
+if (apply_filters('wputheme_usesessions', true)) {
+    @session_start();
+}
 
 do_action('wputh_functionsphp_start');
 
@@ -13,7 +16,6 @@ define("WPUTH_HAS_COMMENTS", apply_filters('wputh_has_comments', false));
 define("WPUTH_HAS_SIDEBAR", apply_filters('wputh_has_sidebar', false));
 define('WPUTH_IECOMPATIBILITY', apply_filters('wputheme_header_iecompatibility', false));
 
-
 // load-more || numbers || default
 define('PAGINATION_KIND', apply_filters('wputh_pagination_kind', 'numbers'));
 
@@ -21,7 +23,7 @@ define('PAGINATION_KIND', apply_filters('wputh_pagination_kind', 'numbers'));
  -------------------------- */
 
 $default_menus = array(
-    'main' => __('Main menu', 'wputh') ,
+    'main' => __('Main menu', 'wputh')
 );
 $wputh_menus = apply_filters('wputh_default_menus', $default_menus);
 if (!empty($wputh_menus)) {
@@ -33,9 +35,9 @@ if (!empty($wputh_menus)) {
 
 $default_sidebars = array(
     array(
-        'name' => __('Default Sidebar', 'wputh') ,
+        'name' => __('Default Sidebar', 'wputh'),
         'id' => 'wputh-sidebar',
-        'description' => __('Default theme sidebar', 'wputh') ,
+        'description' => __('Default theme sidebar', 'wputh'),
         'before_title' => '<h3>',
         'after_title' => '</h3>'
     )
@@ -71,7 +73,9 @@ require_once get_template_directory() . '/inc/theme/activation.php';
 require_once get_template_directory() . '/inc/theme/customize.php';
 require_once get_template_directory() . '/inc/theme/default-items.php';
 
-if (!isset($content_width)) $content_width = 680;
+if (!isset($content_width)) {
+    $content_width = 680;
+}
 
 /* Plugins Configuration
  -------------------------- */
