@@ -31,6 +31,45 @@ function wputh_setup_pages_site($pages) {
 }
 
 /* ----------------------------------------------------------
+  Page creation
+---------------------------------------------------------- */
+
+function wputh_pages_site_setup() {
+
+    $default_folder = dirname(__FILE__) . '/activation/';
+
+    // Creating pages
+    $pages_site = wputh_setup_pages_site(apply_filters('wputh_pages_site', array()));
+    foreach ($pages_site as $id => $page) {
+        $option = get_option($id);
+
+        // If page doesn't exists
+        if (is_numeric($option) || isset($page['prevent_creation'])) {
+            continue;
+        }
+
+        if (!isset($page['post_content']) || empty($page['post_content'])) {
+            $file_content = $default_folder . str_replace('__page_id', '', $id) . '.php';
+            if (file_exists($file_content)) {
+                ob_start();
+                include $file_content;
+                $page['post_content'] = ob_get_clean();
+            }
+        }
+        // Create page
+        $option_page = wp_insert_post($page);
+        if (is_numeric($option_page)) {
+            update_option($id, $option_page);
+        }
+    }
+}
+
+add_action('init', 'wputh_setup_pages_init');
+function wputh_setup_pages_init() {
+    wputh_pages_site_setup();
+}
+
+/* ----------------------------------------------------------
   Pages IDs
 ---------------------------------------------------------- */
 
