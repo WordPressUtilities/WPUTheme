@@ -546,3 +546,19 @@ function wputh_url_to_link($url, $options = array()) {
     return '<a' . $target . ' href="' . $url . '">' . esc_html($link_text) . '</a>';
 
 }
+
+/* ----------------------------------------------------------
+  Fix locale
+---------------------------------------------------------- */
+/* Thx https://openclassrooms.com/forum/sujet/avoir-la-date-en-francais-grace-a-un-datetime-29453#message-5364823 */
+if (class_exists('DateTime')) {
+    class DateTimeFrench extends DateTime {
+        public function format($format) {
+            $english_days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+            $french_days = array('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
+            $english_months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Décember');
+            $french_months = array('Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
+            return str_replace($english_months, $french_months, str_replace($english_days, $french_days, parent::format($format)));
+        }
+    }
+}
