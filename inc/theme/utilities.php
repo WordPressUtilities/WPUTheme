@@ -562,3 +562,61 @@ if (class_exists('DateTime')) {
         }
     }
 }
+
+/* ----------------------------------------------------------
+  Get current URL
+---------------------------------------------------------- */
+
+/* Thanks to http://kovshenin.com/2012/current-url-in-wordpress/ */
+function wputh_get_current_url() {
+    global $wp;
+    $current_url = add_query_arg($wp->query_string, '', home_url($wp->request));
+    if (is_singular() || is_single() || is_page()) {
+        $current_url = get_permalink();
+    }
+    return $current_url;
+}
+
+/* ----------------------------------------------------------
+  Cached nav menu
+---------------------------------------------------------- */
+
+function wputh_cached_nav_menu($args = array()) {
+    $cache_duration = 7 * 24 * 60 * 60;
+    $cache_id = 'wputh_cached_menu_' . md5(wputh_get_current_url()) . md5(serialize($args));
+
+    /* Keep URL keys */
+    $cached_urls = wp_cache_get('wputh_cached_menu_urls');
+    if (!is_array($cached_urls)) {
+        $cached_urls = array();
+    }
+    if (!in_array($cache_id, $cached_urls)) {
+        $cached_urls[] = $cache_id;
+        wp_cache_set('wputh_cached_menu_urls', $cached_urls, '', $cache_duration);
+    }
+
+    /* Force return */
+    $args['echo'] = false;
+
+    /* Cache menu if not cached */
+    $menu = wp_cache_get($cache_id);
+    if ($menu === false) {
+        $menu = wp_nav_menu($args);
+        wp_cache_set($cache_id, $menu, '', $cache_duration);
+    }
+
+    return $menu;
+}
+
+add_action('wp_update_nav_menu_item', 'wputh_cached_nav_menu__clear_cache');
+add_action('wp_update_nav_menu', 'wputh_cached_nav_menu__clear_cache');
+function caca_wp_update_nav_menu() {
+    $cached_urls = wp_cache_get('wputh_cached_menu_urls');
+    if (!is_array($cached_urls)) {
+        return;
+    }
+    foreach ($cached_urls as $cached_url) {
+        wp_cache_delete($cached_url);
+    }
+    wp_cache_delete('wputh_cached_menu_urls');
+}

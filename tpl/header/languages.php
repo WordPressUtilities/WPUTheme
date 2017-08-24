@@ -1,13 +1,8 @@
 <?php
-global $wp;
 $display_languages = array();
 $current_lang = '';
 
-/* Thanks to http://kovshenin.com/2012/current-url-in-wordpress/ */
-$current_url = add_query_arg($wp->query_string, '', home_url($wp->request));
-if (is_singular() || is_single() || is_page()) {
-    $current_url = get_permalink();
-}
+$current_url = wputh_get_current_url();
 
 // Obtaining from Qtranslate
 if (function_exists('qtrans_getSortedLanguages') && function_exists('qtrans_getLanguage') && function_exists('qtrans_convertURL')) {
