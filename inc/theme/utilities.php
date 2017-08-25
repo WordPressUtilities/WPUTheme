@@ -610,7 +610,7 @@ function wputh_cached_nav_menu($args = array()) {
 
 add_action('wp_update_nav_menu_item', 'wputh_cached_nav_menu__clear_cache');
 add_action('wp_update_nav_menu', 'wputh_cached_nav_menu__clear_cache');
-function caca_wp_update_nav_menu() {
+function wputh_cached_nav_menu__clear_cache() {
     $cached_urls = wp_cache_get('wputh_cached_menu_urls');
     if (!is_array($cached_urls)) {
         return;
