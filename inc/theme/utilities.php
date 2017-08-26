@@ -584,6 +584,10 @@ function wputh_get_current_url() {
 function wputh_cached_nav_menu($args = array()) {
     $cache_duration = 7 * 24 * 60 * 60;
     $cache_id = 'wputh_cached_menu_' . md5(wputh_get_current_url()) . md5(serialize($args));
+    if(isset($args['cache_id'])){
+        $cache_id = $args['cache_id'];
+        unset($args['cache_id']);
+    }
 
     /* Keep URL keys */
     $cached_urls = wp_cache_get('wputh_cached_menu_urls');

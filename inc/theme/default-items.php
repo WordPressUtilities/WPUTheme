@@ -200,7 +200,7 @@ if (!function_exists('wputh_maincontent_breadcrumbs')) {
 }
 
 if (apply_filters('wputheme_display_jsvalues', true)):
-    add_action('wputheme_main_overcontent', 'wputh_maincontent_jsvalues');
+    add_action('wputheme_main_overcontent_inajax', 'wputh_maincontent_jsvalues');
 endif;
 if (!function_exists('wputh_maincontent_jsvalues')) {
     function wputh_maincontent_jsvalues() {

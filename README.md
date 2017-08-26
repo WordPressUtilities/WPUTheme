@@ -45,7 +45,7 @@ add_filter('wputheme_display_searchform','__return_false');
 * **wputheme_display_header** : (bool:true) Display or hide header ( header.php )
 * **wputheme_display_footer** : (bool:true) Display or hide footer ( footer.php )
 * **wputheme_display_mainwrapper** : (bool:true) Display or hide main wrapper ( header.php & footer.php )
-* **wputheme_header_iecompatibility** : (bool:false) Display or hide main wrapper
+* **wputheme_header_iecompatibility** : (bool:false) Add IE Compatibility.
 
 #### Header
 

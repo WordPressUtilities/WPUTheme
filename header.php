@@ -19,6 +19,8 @@ if (!defined('IS_AJAX') || !IS_AJAX ) {
 <?php do_action('wputheme_header_elements'); ?>
 <?php if (apply_filters('wputheme_display_mainwrapper', true)): ?>
 <div class="main-container centered-container"><div class="main-container--inner" id="content">
+<?php else: ?>
+<div id="content">
 <?php endif;
 do_action('wputheme_main_overcontent');
 if (apply_filters('wputheme_display_skiplinks', true)) { echo '<a id="maincontent"></a>'; }
