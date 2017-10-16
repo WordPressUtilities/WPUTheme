@@ -37,6 +37,8 @@ $paginate_args = array(
     'format' => '?paged=%#%',
     'current' => $pagedd,
     'total' => $max_num_pages,
+    'before_page_number' => '<span class="pagenum-content">',
+    'after_page_number' => '</span>',
     'prev_text' => $prev_text,
     'next_text' => $next_text
 );
@@ -52,7 +54,7 @@ if ($max_num_pages > 1) {?>
 <p><?php
 switch (PAGINATION_KIND) {
 case 'numbers':
-    echo paginate_links($paginate_args);
+    echo paginate_links(apply_filters('wputheme_paginate_args', $paginate_args));
     break;
 case 'load-more':
     echo $next_page;
