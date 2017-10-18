@@ -9,7 +9,9 @@ if (apply_filters('wputheme_display_mainwrapper', true)) {
     echo '</div></div>';
 }
 else {
-    echo '</div>';
+    if (apply_filters('wputheme_display_mainwrapper__content', true)):
+    echo '<div id="content">';
+    endif;
 }
 do_action('wputheme_footer_elements');
 if (apply_filters('wputheme_display_footer', true)) {
