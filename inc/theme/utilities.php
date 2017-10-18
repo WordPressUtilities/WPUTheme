@@ -624,3 +624,21 @@ function wputh_cached_nav_menu__clear_cache() {
     }
     wp_cache_delete('wputh_cached_menu_urls');
 }
+
+
+/* ----------------------------------------------------------
+  Update without revisions
+---------------------------------------------------------- */
+
+/**
+ * Update without creating post revisions
+ * @param  array $args  post arguments
+ * @return void
+ */
+function wputh_update_without_revision($args) {
+    remove_action('post_updated', 'wp_save_post_revision');
+    remove_action('pre_post_update', 'wp_save_post_revision');
+    wp_update_post($args);
+    add_action('post_updated', 'wp_save_post_revision');
+    add_action('pre_post_update', 'wp_save_post_revision');
+}
