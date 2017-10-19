@@ -11,7 +11,7 @@ if (function_exists('add_theme_support')) {
 
     function wputh_custom_theme_setup() {
 
-        // Woocommerce
+        // WooCommerce
         add_theme_support( 'woocommerce' );
 
         // Theme style

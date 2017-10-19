@@ -584,7 +584,7 @@ function wputh_get_current_url() {
 function wputh_cached_nav_menu($args = array()) {
     $cache_duration = 7 * 24 * 60 * 60;
     $cache_id = 'wputh_cached_menu_' . md5(wputh_get_current_url()) . md5(serialize($args));
-    if(isset($args['cache_id'])){
+    if (isset($args['cache_id'])) {
         $cache_id = $args['cache_id'];
         unset($args['cache_id']);
     }
@@ -625,7 +625,6 @@ function wputh_cached_nav_menu__clear_cache() {
     wp_cache_delete('wputh_cached_menu_urls');
 }
 
-
 /* ----------------------------------------------------------
   Update without revisions
 ---------------------------------------------------------- */
@@ -635,10 +634,11 @@ function wputh_cached_nav_menu__clear_cache() {
  * @param  array $args  post arguments
  * @return void
  */
-function wputh_update_without_revision($args) {
+function wputh_update_without_revision($args = array()) {
     remove_action('post_updated', 'wp_save_post_revision');
     remove_action('pre_post_update', 'wp_save_post_revision');
-    wp_update_post($args);
+    $update_action = wp_update_post($args, true);
     add_action('post_updated', 'wp_save_post_revision');
     add_action('pre_post_update', 'wp_save_post_revision');
+    return $update_action;
 }

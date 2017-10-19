@@ -16,7 +16,6 @@ if (!function_exists('wputh_get_doctype_html')) {
 
         echo '<!DOCTYPE HTML>';
         if (WPUTH_IECOMPATIBILITY) {
-            echo '<!--[if IE 8 ]><html ' . $lang . ' class="is_ie8 lt_ie9 lt_ie10"><![endif]-->';
             echo '<!--[if IE 9 ]><html ' . $lang . ' class="is_ie9 lt_ie10"><![endif]-->';
             echo '<!--[if gt IE 9]><html ' . $lang . ' class="is_ie10"><![endif]-->';
             echo '<!--[if !IE]><!--> <html ' . $lang . '><!--<![endif]-->';
