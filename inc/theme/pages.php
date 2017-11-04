@@ -91,15 +91,8 @@ if (!function_exists('wputh_set_pages_site')) {
 add_filter('wputh_pages_site', 'wputh_set_pages_site');
 
 $pages_site = wputh_setup_pages_site(apply_filters('wputh_pages_site', array()));
-
 foreach ($pages_site as $id => $p) {
-    $opt_id = get_option($id);
-    define($p['constant'], $opt_id);
-    $link = '#';
-    if (is_numeric($opt_id)) {
-        $link = get_page_link($opt_id);
-    }
-    define($p['constant'] . '__LINK', $link);
+    define($p['constant'], get_option($id));
 }
 
 /* ----------------------------------------------------------

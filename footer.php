@@ -10,7 +10,7 @@ if (apply_filters('wputheme_display_mainwrapper', true)) {
 }
 else {
     if (apply_filters('wputheme_display_mainwrapper__content', true)):
-    echo '<div id="content">';
+    echo '</div>';
     endif;
 }
 do_action('wputheme_footer_elements');

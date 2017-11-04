@@ -8,7 +8,7 @@ var wpu_set_smooth_scroll = function() {
         e.preventDefault();
         var href = jQuery(this).attr('href'),
             $href = jQuery(href);
-        if ($href) {
+        if ($href.length > 0) {
             jQuery('html,body').animate({
                 scrollTop: $href.offset().top
             }, 500);
