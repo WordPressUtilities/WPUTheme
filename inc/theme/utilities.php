@@ -625,6 +625,14 @@ function wputh_cached_nav_menu__clear_cache() {
     wp_cache_delete('wputh_cached_menu_urls');
 }
 
+add_action('save_post', 'wputh_cached_nav_menu__clear_cache_post');
+function wputh_cached_nav_menu__clear_cache_post($post_id) {
+    if (wp_is_post_revision($post_id)) {
+        return;
+    }
+    wputh_cached_nav_menu__clear_cache();
+}
+
 /* ----------------------------------------------------------
   Update without revisions
 ---------------------------------------------------------- */
