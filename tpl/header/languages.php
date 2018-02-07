@@ -1,54 +1,11 @@
 <?php
-$display_languages = array();
-$current_lang = '';
 
-$current_url = wputh_get_current_url();
-
-// Obtaining from Qtranslate
-if (function_exists('qtrans_getSortedLanguages') && function_exists('qtrans_getLanguage') && function_exists('qtrans_convertURL')) {
-    $current_lang = qtrans_getLanguage();
-    $languages = qtrans_getSortedLanguages();
-    foreach ($languages as $lang) {
-        $display_languages[$lang] = array(
-            'name' => $lang,
-            'url' => qtrans_convertURL($current_url, $lang, 0, 1)
-        );
-    }
-}
-
-// Obtaining from Qtranslate X
-if (function_exists('qtranxf_getSortedLanguages')) {
-    $current_lang = qtranxf_getLanguage();
-    $languages = qtranxf_getSortedLanguages();
-    foreach ($languages as $lang) {
-        $display_languages[$lang] = array(
-            'name' => $lang,
-            'url' => qtranxf_convertURL($current_url, $lang, 0, 1)
-        );
-    }
-}
-
-// Obtaining from Polylang
-if (function_exists('pll_current_language')) {
-    global $polylang;
-    $current_lang = pll_current_language();
-    $poly_langs = pll_the_languages(array(
-        'raw' => 1,
-        'echo' => 0
-    ));
-
-    foreach ($poly_langs as $lang) {
-        $display_languages[$lang['slug']] = array(
-            'name' => $lang['slug'],
-            'url' => $lang['url']
-        );
-    }
-}
+$display_languages = wputh_translated_url();
 
 if (!empty($display_languages) && count($display_languages) > 1) {
     echo '<div class="languages">';
     foreach ($display_languages as $lang) {
-        echo '<a hreflang="' . $lang['name'] . '" ' . ($lang['name'] == $current_lang ? 'class="current"' : '') . ' href="' . $lang['url'] . '"><span>' . $lang['name'] . '</span></a>';
+        echo '<a hreflang="' . $lang['name'] . '" ' . ($lang['current'] ? 'class="current"' : '') . ' href="' . $lang['url'] . '"><span>' . $lang['name'] . '</span></a>';
     }
     echo '</div>';
 }

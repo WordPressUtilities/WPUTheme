@@ -578,6 +578,61 @@ function wputh_get_current_url() {
 }
 
 /* ----------------------------------------------------------
+  Get translated URL
+---------------------------------------------------------- */
+
+function wputh_translated_url(){
+    $display_languages = array();
+    $current_lang = '';
+    $current_url = wputh_get_current_url();
+
+    // Obtaining from Qtranslate
+    if (function_exists('qtrans_getSortedLanguages') && function_exists('qtrans_getLanguage') && function_exists('qtrans_convertURL')) {
+        $current_lang = qtrans_getLanguage();
+        $languages = qtrans_getSortedLanguages();
+        foreach ($languages as $lang) {
+            $display_languages[$lang] = array(
+                'name' => $lang,
+                'current' => $lang == $current_lang,
+                'url' => qtrans_convertURL($current_url, $lang, 0, 1)
+            );
+        }
+    }
+
+    // Obtaining from Qtranslate X
+    if (function_exists('qtranxf_getSortedLanguages')) {
+        $current_lang = qtranxf_getLanguage();
+        $languages = qtranxf_getSortedLanguages();
+        foreach ($languages as $lang) {
+            $display_languages[$lang] = array(
+                'name' => $lang,
+                'current' => $lang == $current_lang,
+                'url' => qtranxf_convertURL($current_url, $lang, 0, 1)
+            );
+        }
+    }
+
+    // Obtaining from Polylang
+    if (function_exists('pll_current_language')) {
+        global $polylang;
+        $current_lang = pll_current_language();
+        $poly_langs = pll_the_languages(array(
+            'raw' => 1,
+            'echo' => 0
+        ));
+
+        foreach ($poly_langs as $lang) {
+            $display_languages[$lang['slug']] = array(
+                'name' => $lang['slug'],
+                'current' => $lang['slug'] == $current_lang,
+                'url' => $lang['url']
+            );
+        }
+    }
+    return $display_languages;
+}
+
+/* ----------------------------------------------------------
   Cached nav menu
 ---------------------------------------------------------- */
 
@@ -623,14 +678,6 @@ function wputh_cached_nav_menu__clear_cache() {
         wp_cache_delete($cached_url);
     }
     wp_cache_delete('wputh_cached_menu_urls');
-}
-
-add_action('save_post', 'wputh_cached_nav_menu__clear_cache_post');
-function wputh_cached_nav_menu__clear_cache_post($post_id) {
-    if (wp_is_post_revision($post_id)) {
-        return;
-    }
-    wputh_cached_nav_menu__clear_cache();
 }
 
 /* ----------------------------------------------------------
