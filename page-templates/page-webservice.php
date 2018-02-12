@@ -16,7 +16,9 @@ switch ($mode) {
     default:
         do_action('wputh_webservice', $_GET);
         if (!has_action('wputh_webservice')) {
-            header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
+            global $wp_query;
+            $wp_query->set_404();
+            status_header(404);
             include get_template_directory() . '/404.php';
         }
         die;
