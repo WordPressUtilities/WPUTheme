@@ -1,4 +1,5 @@
 <?php
+include dirname(__FILE__) . '/z-protect.php';
 
 echo '<div class="comments">';
 comment_form();
@@ -7,4 +8,3 @@ wp_list_comments();
 echo '</ul>';
 paginate_comments_links();
 echo '</div>';
-

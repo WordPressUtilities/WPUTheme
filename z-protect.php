@@ -25,6 +25,7 @@ if (isset($_SERVER['REQUEST_URI'])) {
     if (isset($url['path'])) {
         $current_filename = basename($url['path']);
         $invalid_files = array(
+            'comments.php',
             'functions.php',
             'header.php',
             'footer.php'
