@@ -46,7 +46,7 @@ class wputh_push extends WP_Widget {
         </select>
         </p>
         <div class="widget_push_uploader" id="<?php echo $this->get_field_id('widget_push_uploader'); ?>">
-            <input type="submit" class="button widget_push_uploader__button" value="<?php _e('Select an Image', 'image_widget'); ?>" />
+            <input type="submit" class="button widget_push_uploader__button" value="<?php _e('Select an Image', 'wputh'); ?>" />
             <div class="image_preview" id="<?php echo $this->get_field_id('preview'); ?>">
             <?php
         $image_attributes = wp_get_attachment_image_src($attachment_id);

@@ -2,10 +2,12 @@
 Theme Name: WP Utilities Base Theme
 Theme URI: https://github.com/Darklg/WPUtilities
 Description: A Framework WordPress Theme
-Version: 2.45.2
+Version: 2.45.3
 Author: Darklg
 Author URI: http://darklg.me/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: translation-ready, microformats, responsive-layout
+Tags: translation-ready, microformats
+Domain Path: /inc/lang
+Text Domain: wputh
 */
