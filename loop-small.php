@@ -11,6 +11,9 @@ $has_thumb = has_post_thumbnail();
         <div class="bm-cont">
             <?php include get_template_directory() . '/tpl/loops/header-loop-small.php'; ?>
             <?php the_excerpt(); ?>
+            <?php if(wputh_has_more()): ?>
+                <p><a href="<?php the_permalink(); ?>"><?php echo __( 'Read more' ); ?></a></p>
+            <?php endif; ?>
             <footer class="lpsm-metas">
                 <?php the_category( ', ' ); ?>
             </footer>

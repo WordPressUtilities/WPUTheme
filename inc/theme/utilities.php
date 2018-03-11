@@ -711,3 +711,17 @@ function wputh_get_all_users_values_for($meta_key = '') {
     }
     return $users;
 }
+
+/* ----------------------------------------------------------
+  Post have a "has more" tag
+---------------------------------------------------------- */
+
+function wputh_has_more($post = false) {
+    if (!$post) {
+        global $post;
+    }
+    if (!is_object($post)) {
+        return '';
+    }
+    return preg_match('/<!--more(.*?)?-->/', $post->post_content);
+}

@@ -1,6 +1,10 @@
 <?php
 include dirname(__FILE__) . '/z-protect.php';
 
+if (post_password_required()) {
+    return;
+}
+
 echo '<div class="comments">';
 comment_form();
 echo '<ul class="comments-list">';
