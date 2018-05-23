@@ -71,6 +71,7 @@ require_once get_template_directory() . '/inc/theme/utilities.php';
 require_once get_template_directory() . '/inc/theme/shortcodes.php';
 require_once get_template_directory() . '/inc/theme/activation.php';
 require_once get_template_directory() . '/inc/theme/customize.php';
+require_once get_template_directory() . '/inc/theme/breadcrumbs.php';
 require_once get_template_directory() . '/inc/theme/default-items.php';
 
 if (!isset($content_width)) {

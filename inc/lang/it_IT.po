@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2016-02-11 23:31+0100\n"
+"POT-Creation-Date: 2018-05-23 23:24+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -9,26 +9,57 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: __;_e;_x:1,2c;_n:1,2;esc_attr__\n"
 "X-Poedit-SearchPath-0: ../../.\n"
 "X-Poedit-SearchPath-1: ../../../../mu-plugins\n"
 
-#: ../../../../mu-plugins/wpu-test.php:101
-msgid "Work"
-msgstr "Lavori"
+#: ../../../../mu-plugins/wpu_acf_flexible.php:138
+msgid "No"
+msgstr "No"
 
-#: ../../../../mu-plugins/wpu-test.php:102
-msgid "Works"
-msgstr "Lavoro"
+#: ../../../../mu-plugins/wpu_acf_flexible.php:138
+msgid "Yes"
+msgstr "Sì"
 
-#: ../../../../mu-plugins/wpu_ux_tweaks.php:274
+#: ../../../../mu-plugins/wpu_relatedproductcategories.php:102
+msgid "Search for a product&hellip;"
+msgstr ""
+
+#: ../../../../mu-plugins/wpu_ux_tweaks.php:310
 msgid "Thumbnail"
 msgstr "Miniatura"
 
-#: ../.././404.php:7 ../.././tpl/header/breadcrumbs.php:92
+#: ../../../../mu-plugins/wpu_woo_account_endpoints.php:92
+#, php-format
+msgid "Default content for <strong>%s</strong>"
+msgstr ""
+
+#: ../../../../mu-plugins/wpu_woo_ask_invoice.php:40
+msgid "Ask Invoice"
+msgstr ""
+
+#: ../../../../mu-plugins/wpu_woo_ask_invoice.php:41
+msgid "You already asked for an invoice"
+msgstr ""
+
+#: ../../../../mu-plugins/wpu_woo_ask_invoice.php:42
+msgid "Invoice has been asked"
+msgstr ""
+
+#: ../../../../mu-plugins/wpu_woo_ask_invoice.php:43
+#, php-format
+msgid "Order #%s - Invoice"
+msgstr ""
+
+#: ../../../../mu-plugins/wpu_woo_ask_invoice.php:44
+#, php-format
+msgid "Please send the invoice for the order #%s"
+msgstr ""
+
+#: ../.././404.php:7 ../.././inc/theme/breadcrumbs.php:101
 msgid "404 Error"
 msgstr "Errore 404"
 
@@ -36,19 +67,19 @@ msgstr "Errore 404"
 msgid "Sorry, but this page doesn&rsquo;t exists."
 msgstr "Spiacenti, ma questa pagina non esiste."
 
-#: ../.././functions.php:55
+#: ../.././functions.php:26
 msgid "Main menu"
 msgstr "menu principale"
 
-#: ../.././functions.php:67
+#: ../.././functions.php:38
 msgid "Default Sidebar"
 msgstr "Sidebar Predefinita"
 
-#: ../.././functions.php:69
+#: ../.././functions.php:40
 msgid "Default theme sidebar"
 msgstr "Sidebar tema predefinito"
 
-#: ../.././header.php:7
+#: ../.././header.php:8
 msgid "Skip to main content"
 msgstr "Vai al contenuto principale"
 
@@ -67,6 +98,15 @@ msgstr "Pagine IDs"
 #: ../.././inc/plugins/wpu-options.php:33
 msgid "Email address"
 msgstr "Indirizzo e-mail"
+
+#: ../.././inc/theme/breadcrumbs.php:16
+msgid "Home"
+msgstr "Pagina iniziale"
+
+#: ../.././inc/theme/breadcrumbs.php:108
+#, php-format
+msgid "Search results for \"%s\""
+msgstr "Risultati della ricerca per \"%s\""
 
 #: ../.././inc/theme/customize.php:23
 msgid "Link Color"
@@ -88,35 +128,39 @@ msgstr "Allineamento del titolo"
 msgid "Title size"
 msgstr "Dimensione del titolo"
 
-#: ../.././inc/theme/default-items.php:221
+#: ../.././inc/theme/default-items.php:228
 msgid "Next page"
 msgstr "Pagina successiva"
 
-#: ../.././inc/theme/utilities.php:40
+#: ../.././inc/theme/utilities.php:39
 msgid "Sorry, no search results for this query."
 msgstr "Spiacenti, nessun risultato trovato."
 
-#: ../.././inc/theme/utilities.php:69
+#: ../.././inc/theme/utilities.php:68
 msgid "<strong>no</strong> comments"
 msgstr "<strong>nessun</strong> comment"
 
-#: ../.././inc/theme/utilities.php:72
+#: ../.././inc/theme/utilities.php:71
 msgid "<strong>1</strong> comment"
 msgstr "<strong>1</strong> commento"
 
-#: ../.././inc/theme/utilities.php:75
+#: ../.././inc/theme/utilities.php:74
 #, php-format
 msgid "<strong>%s</strong> comments"
 msgstr "<strong>%s</strong> commenti"
 
-#: ../.././inc/theme/utilities.php:78
+#: ../.././inc/theme/utilities.php:77
 msgid "Comments are closed"
 msgstr "I commenti sono chiusi"
 
-#: ../.././inc/theme/utilities.php:421
+#: ../.././inc/theme/utilities.php:432
 #, php-format
 msgid "%s: Follow %s (open in new window)"
 msgstr "%s : Seguire %s (apre in una nuova finestra)"
+
+#: ../.././loop-small.php:15
+msgid "Read more"
+msgstr "Leggi di più"
 
 #: ../.././loop.php:7 ../.././tpl/loops/header-loop-small.php:8
 msgid "F j, Y"
@@ -169,15 +213,6 @@ msgstr "%s per &ldquo;%s&rdquo;"
 msgid "A %s site using %s"
 msgstr "Un sito %s utilizzando %s"
 
-#: ../.././tpl/header/breadcrumbs.php:18
-msgid "Home"
-msgstr "Pagina iniziale"
-
-#: ../.././tpl/header/breadcrumbs.php:99
-#, php-format
-msgid "Search results for \"%s\""
-msgstr "Risultati della ricerca per \"%s\""
-
 #: ../.././tpl/header/searchform.php:7
 msgid "Search for:"
 msgstr "Ricerca :"
@@ -203,11 +238,11 @@ msgstr "Ricerca"
 msgid "Share this post"
 msgstr "Condividi questo post"
 
-#: ../.././tpl/paginate.php:22
+#: ../.././tpl/paginate.php:23
 msgid "« Previous"
 msgstr "« Precedente"
 
-#: ../.././tpl/paginate.php:25
+#: ../.././tpl/paginate.php:26
 msgid "Next »"
 msgstr "Prossimo »"
 
@@ -238,3 +273,9 @@ msgstr "Target:"
 #: ../.././tpl/widgets/widget_push.php:49
 msgid "Select an Image"
 msgstr "Seleziona un'Immagine"
+
+#~ msgid "Work"
+#~ msgstr "Lavori"
+
+#~ msgid "Works"
+#~ msgstr "Lavoro"
