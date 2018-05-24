@@ -10,14 +10,14 @@ the_post();
 get_template_part('loop');
 
 if (apply_filters('wputheme_display_single_share', true)):
-    include get_template_directory() . '/tpl/loops/share.php';
+    get_template_part('tpl/loops/share');
 endif;
 
 /* Comments */
 comments_template();
 
 if (apply_filters('wputheme_display_single_prevnext', true)):
-    include get_template_directory() . '/tpl/loops/prev-next.php';
+    get_template_part('tpl/loops/prev-next');
 endif;
 
 ?>

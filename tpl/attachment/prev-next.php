@@ -1,5 +1,5 @@
 <?php
-
+global $post;
 // Previous & next attachment
 $args = array(
     'post_type' => 'attachment',

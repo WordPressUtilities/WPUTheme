@@ -15,7 +15,7 @@ else {
 }
 do_action('wputheme_footer_elements');
 if (apply_filters('wputheme_display_footer', true)) {
-    include get_template_directory() . '/tpl/footer/copyright.php';
+    get_template_part('tpl/footer/copyright');
 }
 wp_footer();
 ?>

@@ -15,7 +15,7 @@ the_post();
 
     /* Displaying child pages */
     if (apply_filters('wputheme_display_page_child', true)):
-        include get_template_directory() . '/tpl/loops/child-pages.php';
+        get_template_part('tpl/loops/child-pages');
     endif;
 ?>
     </div>

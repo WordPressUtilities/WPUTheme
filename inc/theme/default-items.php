@@ -143,7 +143,7 @@ if (apply_filters('wputheme_display_searchform', true)):
 endif;
 if (!function_exists('wputh_display_searchform')) {
     function wputh_display_searchform() {
-        include get_template_directory() . '/tpl/header/searchform.php';
+        get_template_part('tpl/header/searchform');
     }
 }
 
@@ -185,7 +185,7 @@ if (apply_filters('wputheme_display_languages', true)):
 endif;
 if (!function_exists('wputh_maincontent_languages')) {
     function wputh_maincontent_languages() {
-        include get_template_directory() . '/tpl/header/languages.php';
+        get_template_part('tpl/header/languages');
     }
 }
 
@@ -194,7 +194,7 @@ if (apply_filters('wputheme_display_breadcrumbs', true)):
 endif;
 if (!function_exists('wputh_maincontent_breadcrumbs')) {
     function wputh_maincontent_breadcrumbs() {
-        include get_template_directory() . '/tpl/header/breadcrumbs.php';
+        get_template_part('tpl/header/breadcrumbs');
     }
 }
 
@@ -203,7 +203,7 @@ if (apply_filters('wputheme_display_jsvalues', true)):
 endif;
 if (!function_exists('wputh_maincontent_jsvalues')) {
     function wputh_maincontent_jsvalues() {
-        include get_template_directory() . '/tpl/header/jsvalues.php';
+        get_template_part('tpl/header/jsvalues');
     }
 }
 
@@ -214,7 +214,7 @@ if (!function_exists('wputh_maincontent_jsvalues')) {
 add_action('wputheme_home_content', 'wputheme_home_content__default');
 if (!function_exists('wputheme_home_content__default')) {
     function wputheme_home_content__default() {
-        include get_template_directory() . '/tpl/home/default.php';
+        get_template_part('tpl/home/default');
     }
 }
 

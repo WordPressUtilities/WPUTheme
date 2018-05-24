@@ -19,7 +19,7 @@ switch ($mode) {
             global $wp_query;
             $wp_query->set_404();
             status_header(404);
-            include get_template_directory() . '/404.php';
+            get_template_part('404');
         }
         die;
 }

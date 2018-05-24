@@ -1,4 +1,5 @@
 <?php
+global $post;
 $_methods = wputh_get_share_methods($post);
 ?>
 <div class="post-share">

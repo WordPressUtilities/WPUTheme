@@ -34,7 +34,7 @@ function get_the_loop($params = array()) {
             get_template_part($parameters['loop']);
         }
         echo '</div>';
-        include get_template_directory() . '/tpl/paginate.php';
+        echo wputh_paginate();
     } else {
         echo '<p>' . __('Sorry, no search results for this query.', 'wputh') . '</p>';
     }
@@ -258,15 +258,9 @@ function wputh_sendmail_set_html_content_type() {
 ---------------------------------------------------------- */
 
 if (!function_exists('wputh_paginate')) {
-    function wputh_paginate($prev_text = '', $next_text = '') {
-        $paginate_file = '/tpl/paginate.php';
-        $paginate_path = get_template_directory() . $paginate_file;
-        if (file_exists(get_stylesheet_directory() . $paginate_file)) {
-            $paginate_path = get_stylesheet_directory() . $paginate_file;
-        }
-
+    function wputh_paginate($prev_text = false, $next_text = false) {
         ob_start();
-        include $paginate_path;
+        locate_template(array('tpl/paginate.php'), 1);
         return ob_get_clean();
     }
 }
@@ -581,7 +575,7 @@ function wputh_get_current_url() {
   Get translated URL
 ---------------------------------------------------------- */
 
-function wputh_translated_url(){
+function wputh_translated_url() {
     $display_languages = array();
     $current_lang = '';
     $current_url = wputh_get_current_url();

@@ -9,7 +9,7 @@ $has_thumb = has_post_thumbnail();
         </div>
         <?php endif; ?>
         <div class="bm-cont">
-            <?php include get_template_directory() . '/tpl/loops/header-loop-small.php'; ?>
+            <?php get_template_part('tpl/loops/header-loop-small'); ?>
             <?php the_excerpt(); ?>
             <?php if(wputh_has_more()): ?>
                 <p><a href="<?php the_permalink(); ?>"><?php echo __( 'Read more' ); ?></a></p>
