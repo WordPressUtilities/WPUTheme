@@ -72,6 +72,14 @@
     margin: 0 0 1em 0;
 }
 
+.size-full {
+    float: none;
+    clear: both;
+    width: 100%;
+    height: auto;
+    margin: 0 0 1em 0;
+}
+
 /* Floats
 -------------------------- */
 
