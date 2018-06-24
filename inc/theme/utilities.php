@@ -719,3 +719,13 @@ function wputh_has_more($post = false) {
     }
     return preg_match('/<!--more(.*?)?-->/', $post->post_content);
 }
+
+/* ----------------------------------------------------------
+  Check if internal link
+---------------------------------------------------------- */
+
+function wpu_is_internal_link($external_url) {
+    $url_host = parse_url($external_url, PHP_URL_HOST);
+    $base_url_host = parse_url(get_site_url(), PHP_URL_HOST);
+    return ($url_host == $base_url_host || empty($url_host));
+}
