@@ -19,7 +19,7 @@ $att_image = wp_get_attachment_image_src(get_the_ID(), "large");
         <?php echo basename($post->guid); ?>
     </a>
     <?php endif;?>
-    <?php include get_stylesheet_directory() . '/tpl/attachment/prev-next.php';?>
+    <?php get_template_part('tpl/attachment/prev-next'); ?>
     </div>
 </article>
 </div>
