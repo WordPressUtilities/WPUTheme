@@ -729,3 +729,25 @@ function wpu_is_internal_link($external_url) {
     $base_url_host = parse_url(get_site_url(), PHP_URL_HOST);
     return ($url_host == $base_url_host || empty($url_host));
 }
+
+/* ----------------------------------------------------------
+  Gallery shortcode : add thickbox
+---------------------------------------------------------- */
+
+add_action('wp_head', 'wputh_gallery_filter_the_content', 10);
+function wputh_gallery_filter_the_content() {
+    if (!apply_filters('wputh_gallery_filter_the_content', false)) {
+        return;
+    }
+    add_thickbox();
+    echo <<<EOT
+<script>
+jQuery(document).ready(function() {
+    jQuery(".gallery-item a[href$='jpg'], .gallery-item a[href$='png'], .gallery-item a[href$='jpeg'], .gallery-item a[href$='gif']").each(function(){
+        jQuery(this).attr("rel","gallery");
+    });
+    tb_init(".gallery-item a[rel='gallery']");
+});
+</script>
+EOT;
+}
