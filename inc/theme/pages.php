@@ -48,14 +48,14 @@ function wputh_pages_site_setup() {
             continue;
         }
 
-        if (!isset($page['post_content']) || empty($page['post_content'])) {
-            $file_content = $default_folder . str_replace('__page_id', '', $id) . '.php';
-            if (file_exists($file_content)) {
-                ob_start();
-                include $file_content;
-                $page['post_content'] = ob_get_clean();
-            }
+        // Default content : try to load template
+        if (empty($page['post_content'])) {
+            $file_name = 'inc/theme/activation/' . str_replace('__page_id', '', $id) . '.php';
+            ob_start();
+            locate_template($file_name, 1);
+            $page['post_content'] = ob_get_clean();
         }
+
         // Create page
         $option_page = wp_insert_post($page);
         if (is_numeric($option_page)) {

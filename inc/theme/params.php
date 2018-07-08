@@ -12,7 +12,7 @@ if (function_exists('add_theme_support')) {
     function wputh_custom_theme_setup() {
 
         // WooCommerce
-        add_theme_support( 'woocommerce' );
+        add_theme_support('woocommerce');
 
         // Theme style
         add_theme_support('custom-background');
@@ -43,11 +43,15 @@ if (function_exists('add_theme_support')) {
 ---------------------------------------------------------- */
 
 add_filter('excerpt_length', 'wputh_excerpt_length', 999);
-function wputh_excerpt_length() {
-    return 15;
+if (!function_exists('wputh_excerpt_length')) {
+    function wputh_excerpt_length() {
+        return 15;
+    }
 }
 
 add_filter('excerpt_more', 'wputh_excerpt_more');
-function wputh_excerpt_more() {
-    return ' &hellip; ';
+if (!function_exists('wputh_excerpt_more')) {
+    function wputh_excerpt_more() {
+        return ' &hellip; ';
+    }
 }
