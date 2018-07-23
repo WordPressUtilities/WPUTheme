@@ -579,6 +579,11 @@ function wputh_translated_url() {
     $display_languages = array();
     $current_lang = '';
     $current_url = wputh_get_current_url();
+    $has_qtranslate_slug = false;
+    if (class_exists('QtranslateSlug')) {
+        global $qtranslate_slug;
+        $has_qtranslate_slug = true;
+    }
 
     // Obtaining from Qtranslate
     if (function_exists('qtrans_getSortedLanguages') && function_exists('qtrans_getLanguage') && function_exists('qtrans_convertURL')) {
@@ -595,15 +600,30 @@ function wputh_translated_url() {
 
     // Obtaining from Qtranslate X
     if (function_exists('qtranxf_getSortedLanguages')) {
+        global $q_config;
         $current_lang = qtranxf_getLanguage();
         $languages = qtranxf_getSortedLanguages();
+
         foreach ($languages as $lang) {
+            $is_current = ($lang == $current_lang);
+            if ($has_qtranslate_slug) {
+                /* Qtranslate slug needs a fix to force URL lang */
+                $url = $qtranslate_slug->get_current_url($lang);
+                $base_lang_url = get_site_url() . '/' . $lang . '/';
+                $url_root = substr($url, 0, strlen($base_lang_url));
+                if (strlen($url) > strlen($url_root) && $url_root != $base_lang_url) {
+                    $url = str_replace(get_site_url() . '/', $base_lang_url, $url);
+                }
+            } else {
+                $url = qtranxf_convertURL($current_url, $lang, 0, 1);
+            }
             $display_languages[$lang] = array(
                 'name' => $lang,
-                'current' => $lang == $current_lang,
-                'url' => qtranxf_convertURL($current_url, $lang, 0, 1)
+                'current' => $is_current,
+                'url' => $url
             );
         }
+
     }
 
     // Obtaining from Polylang
