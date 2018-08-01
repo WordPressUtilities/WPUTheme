@@ -572,6 +572,27 @@ function wputh_get_current_url() {
 }
 
 /* ----------------------------------------------------------
+  Remove AJAX parameter from URL
+---------------------------------------------------------- */
+
+function wputh_clean_ajax_parameter_from_url($url = '') {
+    $ajax_param = 'ajax=1';
+    /* First parameter of multiple parameters */
+    $url = str_replace('?' . $ajax_param . '&', '?', $url);
+    /* One parameter of multiple parameters */
+    $url = str_replace('&' . $ajax_param, '', $url);
+    /* Only parameter */
+    $url = str_replace('?' . $ajax_param, '', $url);
+    return $url;
+}
+
+/* Clean from pagenum */
+add_filter('get_pagenum_link','wputh_clean_get_pagenum_link',10,1);
+function wputh_clean_get_pagenum_link($url){
+    return wputh_clean_ajax_parameter_from_url($url);
+}
+
+/* ----------------------------------------------------------
   Get translated URL
 ---------------------------------------------------------- */
 
@@ -596,7 +617,7 @@ function wputh_qtranslate_slug_get_current_url($lang) {
     if (strlen($url) > strlen($url_root) && $url_root != $base_lang_url) {
         $url = str_replace(get_site_url() . '/', $base_lang_url, $url);
     }
-    return $url;
+    return wputh_clean_ajax_parameter_from_url($url);
 }
 
 function wputh_translated_url() {
