@@ -797,12 +797,21 @@ function wputh_gallery_filter_the_content() {
     add_thickbox();
     echo <<<EOT
 <script>
-jQuery(document).ready(function() {
-    jQuery(".gallery-item a[href$='jpg'], .gallery-item a[href$='png'], .gallery-item a[href$='jpeg'], .gallery-item a[href$='gif']").each(function(){
+function setup_wputh_gallery_filter() {
+    jQuery(".gallery-item").find("a[href$='jpg'], a[href$='png'], a[href$='jpeg'], a[href$='gif']").each(function(){
         jQuery(this).attr("rel","gallery");
     });
+}
+function wputh_gallery_filter() {
     tb_init(".gallery-item a[rel='gallery']");
+}
+jQuery(document).ready(function(){
+    setup_wputh_gallery_filter();
+    wputh_gallery_filter();
 });
+jQuery(window).on('vanilla-pjax-ready', function(e){
+    setup_wputh_gallery_filter();
+})
 </script>
 EOT;
 }
