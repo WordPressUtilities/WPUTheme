@@ -48,7 +48,7 @@ function wpu_add_css_file( $file, $dir, $url ) {
     // Adding a file to the WordPress stylesheet queue
     $css_file_url = str_replace( $dir, $url, $file );
     $css_file_slug = 'wputh'. ( ( WPU_CSS_DIR != $dir ) ? 'child' : '' ) . strtolower( str_replace( array( $dir, '.css' ), '', $file ) );
-    wp_register_style( $css_file_slug, $css_file_url, NULL, '2.0' );
+    wp_register_style( $css_file_slug, $css_file_url, NULL, apply_filters('wputh_style_version', '2.0') );
     wp_enqueue_style( $css_file_slug );
 }
 
