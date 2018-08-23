@@ -73,6 +73,7 @@ require_once get_template_directory() . '/inc/theme/activation.php';
 require_once get_template_directory() . '/inc/theme/customize.php';
 require_once get_template_directory() . '/inc/theme/breadcrumbs.php';
 require_once get_template_directory() . '/inc/theme/default-items.php';
+require_once get_template_directory() . '/inc/theme/templates.php';
 
 if (!isset($content_width)) {
     $content_width = 680;
