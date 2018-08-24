@@ -11,28 +11,13 @@ the_post();
 <?php
 the_content();
 
-$order = get_post_meta(get_the_ID(), 'wputh_gallery_order', 1);
-if (!$order) {
-    $order = 'DESC';
-}
-$orderby = get_post_meta(get_the_ID(), 'wputh_gallery_orderby', 1);
-if (!$orderby) {
-    $orderby = 'ideas';
-}
 $backgroundmethod = get_post_meta(get_the_ID(), 'wputh_gallery_backgroundmethod', 1);
 if (!$backgroundmethod) {
     $backgroundmethod = 'background';
 }
 
-$attachments = get_posts(array(
-    'post_type' => 'attachment',
-    'numberposts' => -1,
-    'orderby' => $orderby,
-    'order' => $order,
-    'post_status' => 'any',
-    'post_mime_type' => 'image',
-    'post_parent' => $post->ID)
-);
+
+$attachments = wputh_gallery_get_attachments(get_the_ID());
 if (!empty($attachments)) {
     echo '<ul class="gallery-list">';
     foreach ($attachments as $attachment) {

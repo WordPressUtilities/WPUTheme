@@ -1,14 +1,8 @@
 <?php
 global $post;
 // Previous & next attachment
-$args = array(
-    'post_type' => 'attachment',
-    'posts_per_page' => -1,
-    'post_status' => 'any',
-    'post_parent' => $post->post_parent
-);
 
-$attachments = get_posts($args);
+$attachments = wputh_gallery_get_attachments($post->post_parent);
 $current_attachment = -1;
 
 if (empty($attachments) || count($attachments) < 2) {
