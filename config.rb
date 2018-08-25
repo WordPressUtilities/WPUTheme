@@ -1,20 +1,17 @@
-# Require any additional compass plugins here.
-require File.join(File.dirname(__FILE__), '/scss/utilities/list-files.rb')
+# Monkey patch : Removes all comments completely
+class Sass::Tree::Visitors::Perform < Sass::Tree::Visitors::Base
+  def visit_comment(node)
+    return []
+  end
+end
 
-# Set this to the root of your project when deployed:
+# Compass config
 http_path = "/"
 css_dir = "css"
 sass_dir = "scss"
 images_dir = "images"
 javascripts_dir = "js"
-
-# You can select your preferred output style here (can be overridden via the command line):
-output_style = :compressed
-
-# To enable relative paths to assets via compass helper functions. Uncomment:
+output_style = :compact
 relative_assets = true
-
-# To disable debugging comments that display the original location of your selectors. Uncomment:
 line_comments = false
-
 preferred_syntax = :scss

@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+/* ----------------------------------------------------------
+  Form
+---------------------------------------------------------- */
+
+.comment-form {
+    label {
+        display: block;
+    }
+}
+
+/* ----------------------------------------------------------
+  List
+---------------------------------------------------------- */
+
+.comments-list > .comment + .comment {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: 1px solid #F0F0F0;
+}
+
+/* Item
+-------------------------- */
+
+footer.comment-meta {
+    & {
+        z-index: 1;
+        position: relative;
+        margin-bottom: 10px;
+        padding-left: 42px;
+        min-height: 32px;
+    }
+
+    .avatar {
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}

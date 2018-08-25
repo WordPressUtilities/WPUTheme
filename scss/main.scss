@@ -4,35 +4,95 @@
   Config
 ---------------------------------------------------------- */
 
-/* Colors & fonts */
+$content_width_wide: 1024px;
+$content_width: 0px;
 
-$color-main: #333333;
-$font-main: sans-serif;
+/* Fonts
+-------------------------- */
 
-/* Sprites */
+$font-main: Helvetica, Arial, sans-serif;
+$font-second: Times, serif;
+$font-size: 13px;
+$line-height: 1.3;
+$line-height-em: 1.3em;
+$letter-spacing-base: 0em;
+$letter-spacing-title: 0.05em;
 
-$sprites: sprite-map("css-sprite/*.png", $spacing: 10px);       /* :) */
-$sprites2x: sprite-map("css-sprite-2x/*.png", $spacing: 10px);  /* :) */
+/* Margins
+-------------------------- */
+
+$mobile-padding: 15px;
+$mobile-padding-neg: -15px;
+$tablet-padding: 30px;
+$tablet-padding-neg: -30px;
+$desktop-padding: 45px;
+$desktop-padding-neg: -45px;
+$border-radius: 3px;
+
+/* Basic colors
+-------------------------- */
+
+$color-main: #002C1C;
+$color-hl: #A69561;
+$color-hl-dark: #85774C;
+$color-border: #DADADA;
+$color-bg: #F8F8F6;
+
+/* Social colors */
+@import "csscommon/components/vars/colors";
+
+/* Breakpoints
+-------------------------- */
+
+$tablet-max: 1024px;
+
+@import "csscommon/components/vars/breakpoints";
+@import "csscommon/components/vars/mediaqueries";
+
+/* Custom breakpoints */
+$has_mobile_menu: $desktop_excluded;
+$has_desktop_menu: $desktop_only;
+
+/* Compass values
+-------------------------- */
+
+$critical-usage-threshold: 2;
+$graceful-usage-threshold: 2;
 
 /* ----------------------------------------------------------
-  Utilities
+  CSSCommon
 ---------------------------------------------------------- */
 
-@import "utilities/_mixins.scss";
-@import "utilities/_retina-sprites.scss";
-@import "utilities/_plugins.scss";
+@import "csscommon/components/default";
+@import "csscommon/components/common";
 
-/* ----------------------------------------------------------
-  CSS Common
----------------------------------------------------------- */
+/* Modules
+-------------------------- */
 
-@import "csscommon/_cssc-default.scss";
-@import "csscommon/_cssc-buttons.scss";
-@import "csscommon/_cssc-content.scss";
-@import "csscommon/_cssc-forms.scss";
-@import "csscommon/_cssc-common.scss";
-@import "csscommon/_cssc-layouts.scss";
-@import "csscommon/_cssc-grid.scss";
+/* Content */
+
+@import "csscommon/components/content/text";
+
+/* Buttons */
+
+@import "csscommon/components/buttons/core";
+@import "csscommon/components/buttons/theme";
+
+/* Forms */
+
+@import "csscommon/components/forms/core";
+@import "csscommon/components/forms/fake-check";
+@import "csscommon/components/forms/fake-check-ghost";
+
+/* Various */
+
+@import "csscommon/components/tables";
+@import "csscommon/components/grid";
+@import "csscommon/components/layouts/containers";
+@import "csscommon/components/layouts/responsive-visibility";
+@import "csscommon/components/common/navtoggle";
+@import "csscommon/components/print";
+@import "csscommon/components/mixins/common";
 
 /* ----------------------------------------------------------
   Project
@@ -42,3 +102,4 @@ $sprites2x: sprite-map("css-sprite-2x/*.png", $spacing: 10px);  /* :) */
 @import "project/_loops.scss";
 @import "project/_sidebar.scss";
 @import "project/_templates.scss";
+@import "project/_comments.scss";
