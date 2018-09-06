@@ -153,3 +153,32 @@
 .gallery-columns-9 > .gallery-item {
     width: 11.1%;
 }
+
+/* ----------------------------------------------------------
+  Admin bar
+---------------------------------------------------------- */
+
+html[lang] {
+    margin-top: 0!important;
+}
+
+@media(max-width:782px) {
+    html {
+        z-index: 1;
+        position: relative;
+    }
+}
+
+@media(min-width:783px) {
+    #wpadminbar {
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+
+    html:hover #wpadminbar {
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+    }
+}
