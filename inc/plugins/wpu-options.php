@@ -16,6 +16,7 @@ if (!function_exists('set_wpu_options_boxes')) {
             'name' => __('Social networks', 'wputh')
         );
         $boxes['pages_id'] = array(
+            'current_user_can' => 'manage_options',
             'name' => __('Pages IDs', 'wputh')
         );
         return $boxes;

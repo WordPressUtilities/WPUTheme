@@ -69,6 +69,7 @@
 .alignnone {
     display: block;
     float: none;
+    clear: both;
     margin: 0 0 1em 0;
 }
 
