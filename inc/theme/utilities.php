@@ -130,10 +130,46 @@ function wputh_get_thumbnail_url($format) {
     global $post;
     $returnUrl = get_template_directory_uri() . '/images/thumbnails/' . $format . '.jpg';
     $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), $format);
-    if (isset($image[0])) {
-        $returnUrl = $image[0];
+    return $image ? $image : $returnUrl;
+}
+
+/**
+ * Get an attachment URL and dynamically create intermediate sizes if needed
+ * @param  int $id        ID of the attachment
+ * @param  mixed $format  ID of an image format, or array of dimensions.
+ * @return mixed          URL if success, false if not found
+ */
+function wputh_get_attachment_image_src($id, $format = 'thumbnail', $crop = false) {
+    $image = wp_get_attachment_image_src($id, $format);
+
+    /* If format is an array of sizes : generate an intermediate size */
+    if (is_array($format) && isset($image[0])) {
+        $upload_dir = wp_get_upload_dir();
+        $base_image_path = wp_get_attachment_image_src($id, 'thumbnail');
+
+        /* Get thumbnail path */
+        $thumbnail_dimensions = $base_image_path[1] . 'x' . $base_image_path[2];
+        $new_dimensions = $format[0] . 'x' . $format[1];
+        $base_image_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $base_image_path[0]);
+        $base_image_path = str_replace($thumbnail_dimensions, $new_dimensions, $base_image_path);
+
+        /* If file exists : return URL */
+        if (file_exists($base_image_path)) {
+            return str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $base_image_path);
+        }
+
+        /* Resize image and return */
+        $new_img_path = image_resize(get_attached_file($id), $format[0], $format[1], $crop);
+        if (file_exists($new_img_path)) {
+            return str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $new_img_path);
+        }
+
     }
-    return $returnUrl;
+
+    if (isset($image[0])) {
+        return $image[0];
+    }
+    return false;
 }
 
 /**
@@ -587,8 +623,8 @@ function wputh_clean_ajax_parameter_from_url($url = '') {
 }
 
 /* Clean from pagenum */
-add_filter('get_pagenum_link','wputh_clean_get_pagenum_link',10,1);
-function wputh_clean_get_pagenum_link($url){
+add_filter('get_pagenum_link', 'wputh_clean_get_pagenum_link', 10, 1);
+function wputh_clean_get_pagenum_link($url) {
     return wputh_clean_ajax_parameter_from_url($url);
 }
 
