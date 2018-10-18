@@ -1,13 +1,19 @@
 <?php
 require_once dirname(__FILE__) . '/z-protect.php';
 
-define('WPUTHEME_VERSION','2.54.0');
+define('WPUTHEME_VERSION','2.55.0');
 
 if (apply_filters('wputheme_usesessions', true)) {
     @session_start();
 }
 
 do_action('wputh_functionsphp_start');
+
+/* Assets version
+-------------------------- */
+
+require_once get_template_directory() . '/inc/assets/version.php';
+define('WPUTHEME_ASSETS_VERSION', apply_filters('wputh_assets_version', WPUTHEME_VERSION));
 
 /* Globals
  -------------------------- */

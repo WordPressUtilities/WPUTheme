@@ -76,7 +76,7 @@ function wputh_add_javascripts() {
             $url = get_stylesheet_directory_uri() . $details['uri'];
         }
         $deps = isset($details['deps']) ? $details['deps'] : false;
-        $ver = isset($details['ver']) ? $details['ver'] : WPUTHEME_VERSION;
+        $ver = isset($details['ver']) ? $details['ver'] : WPUTHEME_ASSETS_VERSION;
         $in_footer = isset($details['footer']) && $details['footer'] == true;
         wp_register_script($id, $url, $deps, $ver, $in_footer);
         wp_enqueue_script($id);
