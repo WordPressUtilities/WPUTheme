@@ -48,6 +48,15 @@ function wputh_pages_site_setup() {
             continue;
         }
 
+        if (is_array($page['post_content']) && defined('QTX_VERSION')) {
+            $_content = '';
+            foreach ($page['post_content'] as $key => $var) {
+                $_content .= '[:' . $key . ']' . $var;
+            }
+            $_content .= '[:]';
+            $page['post_content'] = $_content;
+        }
+
         // Default content : try to load template
         if (empty($page['post_content'])) {
             $file_name = 'inc/theme/activation/' . str_replace('__page_id', '', $id) . '.php';
