@@ -656,7 +656,7 @@ function wputh_qtranslate_slug_get_current_url($lang) {
     return wputh_clean_ajax_parameter_from_url($url);
 }
 
-function wputh_translated_url() {
+function wputh_translated_url($use_full_lang_name = false) {
     $display_languages = array();
     $current_lang = '';
     $current_url = wputh_get_current_url();
@@ -688,8 +688,12 @@ function wputh_translated_url() {
             } else {
                 $url = qtranxf_convertURL($current_url, $lang, 0, 1);
             }
+            $full_name = $lang;
+            if ($use_full_lang_name && isset($q_config['language_name'][$lang])) {
+                $full_name = $q_config['language_name'][$lang];
+            }
             $display_languages[$lang] = array(
-                'name' => $lang,
+                'name' => $full_name,
                 'current' => $lang == $current_lang,
                 'url' => $url
             );
