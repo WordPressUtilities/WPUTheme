@@ -41,12 +41,23 @@ function wputh_pages_site_setup() {
     // Creating pages
     $pages_site = wputh_setup_pages_site(apply_filters('wputh_pages_site', array()));
     foreach ($pages_site as $id => $page) {
-        $option = get_option($id);
+        $option_page = get_option($id);
 
-        // If page doesn't exists
-        if (is_numeric($option) || isset($page['prevent_creation'])) {
+        // If page should not be created
+        if (isset($page['prevent_creation'])) {
             continue;
         }
+
+        // Check if page exists
+        if (is_numeric($option_page) && get_permalink($option_page)) {
+            continue;
+        }
+
+        // Avoid double launch
+        if (get_transient('creating_' . $id)) {
+            continue;
+        }
+        set_transient('creating_' . $id, 1, 60 * 10);
 
         if (is_array($page['post_content']) && defined('QTX_VERSION')) {
             $_content = '';
@@ -70,12 +81,17 @@ function wputh_pages_site_setup() {
         if (is_numeric($option_page)) {
             update_option($id, $option_page);
         }
+
+        delete_transient('creating_' . $id);
     }
 }
 
 add_action('init', 'wputh_setup_pages_init');
 function wputh_setup_pages_init() {
-    wputh_pages_site_setup();
+    if (!get_transient('wputh_pages_site_setup')) {
+        set_transient('wputh_pages_site_setup', 1, 60 * 10);
+        wputh_pages_site_setup();
+    }
 }
 
 /* ----------------------------------------------------------
