@@ -9,8 +9,12 @@ if (!is_admin()) {
 }
 
 // Base values
-define( 'WPU_CSS_DIR', get_template_directory() . '/css/' );
-define( 'WPU_CSS_URL', get_template_directory_uri() . '/css/' );
+if (!defined('WPU_CSS_DIR')) {
+    define('WPU_CSS_DIR', get_template_directory() . '/css/');
+}
+if (!defined('WPU_CSS_URL')) {
+    define('WPU_CSS_URL', get_template_directory_uri() . '/css/');
+}
 
 if(!function_exists('wputh_add_stylesheets')){
     function wputh_add_stylesheets() {

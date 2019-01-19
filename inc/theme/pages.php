@@ -167,3 +167,38 @@ function wputh_pages_hide_editor_css() {
     $css .= '</style>';
     echo $css;
 }
+
+/* ----------------------------------------------------------
+  Privacy policy
+---------------------------------------------------------- */
+
+function wputh_pages_set_privacy_policy() {
+
+    // Kill if already defined
+    $privacy_policy_page_id = get_option('wp_page_for_privacy_policy');
+    if (is_numeric($privacy_policy_page_id)) {
+        return;
+    }
+
+    // Load content class
+    if (!class_exists('WP_Privacy_Policy_Content')) {
+        require_once ABSPATH . 'wp-admin/includes/misc.php';
+    }
+
+    // Create page
+    $privacy_policy_page_content = WP_Privacy_Policy_Content::get_default_content();
+    $privacy_policy_page_id = wp_insert_post(
+        array(
+            'post_title' => __('Privacy Policy'),
+            'post_status' => 'publish',
+            'post_type' => 'page',
+            'post_content' => $privacy_policy_page_content
+        ),
+        true
+    );
+
+    // If success : set as the new page.
+    if (is_numeric($privacy_policy_page_id)) {
+        update_option('wp_page_for_privacy_policy', $privacy_policy_page_id);
+    }
+}

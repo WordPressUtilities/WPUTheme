@@ -14,6 +14,12 @@ function wputh_setup_theme() {
         'timezone_string' => 'Europe/Paris',
         'time_format' => 'H:i',
 
+        // Medias
+        'medium_size_w' => '640',
+        'medium_size_h' => '640',
+        'large_size_w' => '1280',
+        'large_size_h' => '1280',
+
         // Default values to avoid unnecessary queries
         'widget_calendar' => '',
         'widget_nav_menu' => '',
@@ -31,6 +37,8 @@ function wputh_setup_theme() {
     }
 
     wputh_pages_site_setup();
+
+    wputh_pages_set_privacy_policy();
 
     // Updating permalinks
     flush_rewrite_rules();
