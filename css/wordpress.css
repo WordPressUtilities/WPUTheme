@@ -171,15 +171,28 @@ html[lang] {
 }
 
 @media(min-width:783px) {
-    #wpadminbar {
-        -webkit-transition: all 0.3s ease;
-        transition: all 0.3s ease;
-        -webkit-transform: translateY(-100%);
-        transform: translateY(-100%);
+    #wpadminbar:after {
+        content: '';
+        z-index: 1;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        height: 15px;
+        margin: auto;
+        background-color: transparent;
     }
 
-    html:hover #wpadminbar {
-        -webkit-transform: translateY(0%);
-        transform: translateY(0%);
+    #wpadminbar {
+        -webkit-transition: -webkit-transform 0.3s ease;
+        transition: transform 0.3s ease;
+        -webkit-transform: translate3d(0,-100%,0);
+        transform: translate3d(0,-100%,0);
+    }
+
+    #wpadminbar:focus-within,
+    #wpadminbar:hover {
+        -webkit-transform: translate3d(0,0%,0);
+        transform: translate3d(0,0%,0);
     }
 }
