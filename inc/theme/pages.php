@@ -88,8 +88,12 @@ function wputh_pages_site_setup() {
 
 add_action('init', 'wputh_setup_pages_init');
 function wputh_setup_pages_init() {
-    if (!get_transient('wputh_pages_site_setup')) {
+    $opt_name = 'wputh_pages_site_setup_hash';
+    $pages_site = md5(json_encode(wputh_setup_pages_site(apply_filters('wputh_pages_site', array()))));
+
+    if (get_option($opt_name) != $pages_site || !get_transient('wputh_pages_site_setup')) {
         set_transient('wputh_pages_site_setup', 1, 60 * 10);
+        update_option('wputh_pages_site_setup_hash', $pages_site, true);
         wputh_pages_site_setup();
     }
 }
