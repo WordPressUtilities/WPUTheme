@@ -80,6 +80,12 @@ function wputh_pages_site_setup() {
         $option_page = wp_insert_post($page);
         if (is_numeric($option_page)) {
             update_option($id, $option_page);
+            /* Add optional post metas */
+            if (isset($page['wpu_post_metas']) && is_array($page['wpu_post_metas'])) {
+                foreach ($page['wpu_post_metas'] as $_key => $_var) {
+                    add_post_meta($option_page, $_key, $_var);
+                }
+            }
         }
 
         delete_transient('creating_' . $id);
