@@ -171,7 +171,7 @@ function wputh_pages_hide_editor() {
 
 function wputh_pages_hide_editor_css() {
     $css = '<style type="text/css">';
-    $css .= '#wp-content-editor-container, #post-status-info, .wp-switch-editor, .editor-block-list__layout { display: none; }';
+    $css .= '#wp-content-editor-container, #post-status-info, #post-body-content .wp-switch-editor, .editor-block-list__layout { display: none; }';
     $css .= '.wp-editor-expand + .qtranxs-lang-switch-wrap {display: none;}';
     $css .= '.wp-editor-expand #wp-content-editor-tools {border-bottom: 0;}';
     $css .= '</style>';
