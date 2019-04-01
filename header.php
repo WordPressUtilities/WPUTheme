@@ -5,6 +5,7 @@ if (!defined('IS_AJAX') || !IS_AJAX ) {
 ?>
 <head><?php echo wp_head(); ?></head>
 <body class="no-js <?php echo WPUTH_PAGE_BODYCLASS; ?>">
+<?php wp_body_open(); ?>
 <?php if (apply_filters('wputheme_display_skiplinks', true)): ?><a class="skiptomain" href="#maincontent"><?php echo __( 'Skip to main content', 'wputh' ); ?></a><?php endif; ?>
 <?php do_action('wputheme_header_items'); ?>
 <?php if (apply_filters('wputheme_display_header', true)): ?>
