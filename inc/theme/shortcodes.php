@@ -31,7 +31,7 @@ add_shortcode('columns', 'wputh_columns_shortcode');
 function wputh_googlemap_shortcode($atts, $content = null) {
     $width = isset($atts['width']) ? $atts['width'] : 640;
     $height = isset($atts['height']) ? $atts['height'] : 480;
-    return '<iframe width="' . $width . '" height="' . $height . '" src="http://maps.google.com/maps?q=' . urlencode($content) . '&output=embed"></iframe>';
+    return '<iframe width="' . $width . '" height="' . $height . '" src="//maps.google.com/maps?q=' . urlencode($content) . '&output=embed"></iframe>';
 }
 add_shortcode("googlemap", "wputh_googlemap_shortcode");
 
@@ -100,7 +100,7 @@ function wputh_youtube_shortcode($atts, $content = "") {
         return;
     }
 
-    return '<div class="wputh-video-container"><iframe src="http://www.youtube.com/embed/' . $arr['v'] . '" height="315" width="560" allowfullscreen="" frameborder="0"></iframe></div>';
+    return '<div class="wputh-video-container"><iframe src="//www.youtube.com/embed/' . $arr['v'] . '" height="315" width="560" allowfullscreen="" frameborder="0"></iframe></div>';
 }
 
 /* ----------------------------------------------------------
