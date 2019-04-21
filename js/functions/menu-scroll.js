@@ -1,7 +1,5 @@
 /* globals jQuery */
 
-'use strict';
-
 /* ----------------------------------------------------------
   Set Menu Scroll
 ---------------------------------------------------------- */
@@ -17,6 +15,7 @@ var wputhmenu = {
 };
 
 function set_wputh_menu_scroll() {
+    'use strict';
     wputhmenu.itemWindow = jQuery(window);
     wputhmenu.itemBody = jQuery('body');
     wputhmenu.scrollLimit = 100;
@@ -25,6 +24,7 @@ function set_wputh_menu_scroll() {
 }
 
 var wputh_scroll_event = function() {
+    'use strict';
     var scrollTop = wputhmenu.itemWindow.scrollTop(),
         scrollAmount = Math.abs(wputhmenu.prevScroll - scrollTop),
         scrollToTop = wputhmenu.prevScroll > scrollTop;
@@ -59,6 +59,4 @@ var wputh_scroll_event = function() {
     wputhmenu.prevScroll = scrollTop;
 };
 
-jQuery(document).ready(function() {
-    set_wputh_menu_scroll();
-});
+document.addEventListener("DOMContentLoaded", set_wputh_menu_scroll);

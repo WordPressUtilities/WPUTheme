@@ -12,4 +12,4 @@ var search_form_check = function() {
         });
     }
 };
-jQuery(document).ready(search_form_check);
+document.addEventListener("DOMContentLoaded", search_form_check);

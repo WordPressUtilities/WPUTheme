@@ -21,4 +21,4 @@ var wpu_set_faq_accordion = function() {
         faq_togglers.eq(0).trigger('click');
     }
 };
-jQuery(document).ready(wpu_set_faq_accordion);
+document.addEventListener("DOMContentLoaded", wpu_set_faq_accordion);
