@@ -162,18 +162,19 @@ function wputh_get_attachment_image_src($id, $format = 'thumbnail', $crop = fals
         $image = wp_get_image_editor(get_attached_file($id));
         $new_img_path = false;
         if (!is_wp_error($image)) {
+            $new_img_path = $base_image_path;
             $image->resize($format[0], $format[1], $crop);
             $image->save($new_img_path);
         }
         if (file_exists($new_img_path)) {
             return str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $new_img_path);
         }
-
     }
 
-    if (!is_wp_error($image) && isset($image[0])) {
+    if (!is_wp_error($image) && is_array($image) && isset($image[0])) {
         return $image[0];
     }
+
     return false;
 }
 
