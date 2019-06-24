@@ -717,8 +717,12 @@ function wputh_translated_url($use_full_lang_name = false) {
         ));
 
         foreach ($poly_langs as $lang) {
+            $full_name = $lang['slug'];
+            if ($use_full_lang_name && isset($lang['name'])) {
+                $full_name = $lang['name'];
+            }
             $display_languages[$lang['slug']] = array(
-                'name' => $lang['slug'],
+                'name' => $full_name,
                 'current' => $lang['slug'] == $current_lang,
                 'url' => $lang['url']
             );
