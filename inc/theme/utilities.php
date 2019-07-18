@@ -780,6 +780,22 @@ function wputh_cached_nav_menu__clear_cache() {
 }
 
 /* ----------------------------------------------------------
+  Cached posts
+---------------------------------------------------------- */
+
+function wputh_get_posts($args = array(), $expires = 60) {
+    $cache_id = 'get_posts_' . md5(json_encode($args));
+
+    $posts = wp_cache_get($cache_id);
+    if ($posts === false) {
+        $posts = get_posts($args);
+        wp_cache_set($cache_id, $posts, '', $expires);
+    }
+
+    return $posts;
+}
+
+/* ----------------------------------------------------------
   Update without revisions
 ---------------------------------------------------------- */
 
