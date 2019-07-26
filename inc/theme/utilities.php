@@ -139,7 +139,7 @@ function wputh_get_thumbnail_url($format) {
  * @param  mixed $format  ID of an image format, or array of dimensions.
  * @return mixed          URL if success, false if not found
  */
-function wputh_get_attachment_image_src($id, $format = 'thumbnail', $crop = false) {
+function wputh_get_attachment_image_src($id, $format = 'thumbnail', $crop = false, $image_quality = false) {
     $image = wp_get_attachment_image_src($id, $format);
 
     /* If format is an array of sizes : generate an intermediate size */
@@ -150,20 +150,25 @@ function wputh_get_attachment_image_src($id, $format = 'thumbnail', $crop = fals
         /* Get thumbnail path */
         $thumbnail_dimensions = $base_image_path[1] . 'x' . $base_image_path[2];
         $new_dimensions = $format[0] . 'x' . $format[1];
-        $base_image_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $base_image_path[0]);
-        $base_image_path = str_replace($thumbnail_dimensions, $new_dimensions, $base_image_path);
+        $source_image = $base_image_path[0];
+        $new_image = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $source_image);
+        $new_image = str_replace($thumbnail_dimensions, $new_dimensions, $new_image);
+        $new_image_source = str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $new_image);
 
         /* If file exists : return URL */
-        if (file_exists($base_image_path)) {
-            return str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $base_image_path);
+        if ($new_image_source != $source_image && file_exists($new_image)) {
+            return $new_image_source;
         }
 
         /* Resize image and return */
         $image = wp_get_image_editor(get_attached_file($id));
         $new_img_path = false;
         if (!is_wp_error($image)) {
-            $new_img_path = $base_image_path;
+            if (isset($image_quality)) {
+                $image->set_quality($image_quality);
+            }
             $image->resize($format[0], $format[1], $crop);
+            $new_img_path = $image->generate_filename();
             $image->save($new_img_path);
         }
         if (file_exists($new_img_path)) {
