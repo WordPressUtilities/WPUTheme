@@ -134,6 +134,31 @@ function wputh_get_thumbnail_url($format) {
 }
 
 /**
+ * Get Thumbnail URL with specific parameters
+ *
+ * @param  int $id                       Post ID
+ * @param  mixed (string|array) $format  Thumb format
+ * @param  boolean $crop                 Crop to format
+ * @return string                        Image URL
+ */
+function wputh_get_thumb_url($id = false, $format = 'thumbnail', $crop = false) {
+    if (!$id) {
+        $id = get_the_ID();
+    }
+    $format_txt = $format;
+    if (is_array($format)) {
+        $format_txt = implode('x', $format);
+    }
+    $returnUrl = get_template_directory_uri() . '/assets/images/thumbnails/' . $format_txt . '.jpg';
+    $thumb_id = get_post_thumbnail_id($id);
+    if (!$thumb_id) {
+        return $returnUrl;
+    }
+    $image = wputh_get_attachment_image_src($thumb_id, $format, $crop);
+    return $image ? $image : $returnUrl;
+}
+
+/**
  * Get an attachment URL and dynamically create intermediate sizes if needed
  * @param  int $id        ID of the attachment
  * @param  mixed $format  ID of an image format, or array of dimensions.
