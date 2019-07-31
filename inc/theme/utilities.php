@@ -149,7 +149,7 @@ function wputh_get_thumb_url($id = false, $format = 'thumbnail', $crop = false) 
     if (is_array($format)) {
         $format_txt = implode('x', $format);
     }
-    $returnUrl = get_template_directory_uri() . '/assets/images/thumbnails/' . $format_txt . '.jpg';
+    $returnUrl = get_stylesheet_directory_uri() . '/assets/images/thumbnails/' . $format_txt . '.jpg';
     $thumb_id = get_post_thumbnail_id($id);
     if (!$thumb_id) {
         return $returnUrl;
@@ -165,6 +165,17 @@ function wputh_get_thumb_url($id = false, $format = 'thumbnail', $crop = false) 
  * @return mixed          URL if success, false if not found
  */
 function wputh_get_attachment_image_src($id, $format = 'thumbnail', $crop = false, $image_quality = false) {
+    $cache_duration = 60*60;
+    $cache_id = 'wputhattimgsrc_' . $id;
+    $cache_id .= '_' . (is_array($format) ? md5(json_encode($format)) : $format);
+    $cache_id .= '_' . ($crop ? 1 : 0);
+    $cache_id .= '_' . ($image_quality ? $image_quality : 0);
+
+    // GET CACHED VALUE
+    $result = wp_cache_get($cache_id);
+    if ($result !== false) {
+        return $result;
+    }
     $image = wp_get_attachment_image_src($id, $format);
 
     /* If format is an array of sizes : generate an intermediate size */
@@ -182,6 +193,7 @@ function wputh_get_attachment_image_src($id, $format = 'thumbnail', $crop = fals
 
         /* If file exists : return URL */
         if ($new_image_source != $source_image && file_exists($new_image)) {
+            wp_cache_set($cache_id, $new_image_source, '', $cache_duration);
             return $new_image_source;
         }
 
@@ -197,13 +209,18 @@ function wputh_get_attachment_image_src($id, $format = 'thumbnail', $crop = fals
             $image->save($new_img_path);
         }
         if (file_exists($new_img_path)) {
-            return str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $new_img_path);
+            $image_src = str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $new_img_path);
+            wp_cache_set($cache_id, $image_src, '', $cache_duration);
+            return $image_src;
         }
     }
 
     if (!is_wp_error($image) && is_array($image) && isset($image[0])) {
+        wp_cache_set($cache_id, $image[0], '', $cache_duration);
         return $image[0];
     }
+
+    wp_cache_set($cache_id, '', '', $cache_duration);
 
     return false;
 }
