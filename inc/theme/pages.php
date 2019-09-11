@@ -150,8 +150,10 @@ function wputh_pages_hide_editor() {
     }
 
     $pages_site = wputh_setup_pages_site(apply_filters('wputh_pages_site', array()));
+    $page_template = get_post_meta($post_id, '_wp_page_template', 1);
     foreach ($pages_site as $id => $page) {
-        if (!empty($page['disable_items']) && $post_id == get_option($id)) {
+        $page_option_id = get_option($id);
+        if (!empty($page['disable_items']) && ($post_id == $page_option_id || (isset($page['page_template']) && $page_template == $page['page_template']))) {
             foreach ($page['disable_items'] as $item) {
                 switch ($item) {
                 case 'editor':
