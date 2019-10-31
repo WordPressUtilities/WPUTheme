@@ -22,19 +22,40 @@ body#tinymce.wp-editor img.wp-more-tag {
     min-width: 300px;
 }
 
-.wputh-content li,
+.wputh-content ul,
 .wputh-content p,
-body#tinymce.wp-editor li,
+body#tinymce.wp-editor ul,
 body#tinymce.wp-editor p {
     margin-bottom: 18px;
     font: inherit;
 }
 
-.wputh-content li:last-child,
+.wputh-content ul:last-child,
 .wputh-content p:last-child,
-body#tinymce.wp-editor li:last-child,
+body#tinymce.wp-editor ul:last-child,
 body#tinymce.wp-editor p:last-child {
     margin-bottom: 0;
+}
+
+.wputh-content ul:first-child,
+.wputh-content p:first-child,
+body#tinymce.wp-editor ul:first-child,
+body#tinymce.wp-editor p:first-child {
+    margin-top: 0;
+}
+
+.mce-content-body table {
+    width: 100%;
+}
+
+.mce-content-body th {
+    text-align: left;
+}
+
+.mce-content-body blockquote {
+    margin: 0;
+    padding: 1em;
+    background-color: #F0F0F0;
 }
 
 /* ----------------------------------------------------------
