@@ -44,6 +44,10 @@ function wputh_javascript_files__default($scripts = array()) {
         'url' => get_template_directory_uri() . '/js/functions/search-form-check.js',
         'footer' => 1
     );
+    $scripts['wputh-maps'] = array(
+        'url' => get_template_directory_uri() . '/js/functions/maps.js',
+        'footer' => 1
+    );
     $scripts['events'] = array(
         'url' => get_template_directory_uri() . '/js/events.js',
         'footer' => 1
