@@ -1,6 +1,7 @@
 var wputh_map = function($map, settings) {
     'use strict';
     var self = this,
+        _markers = [],
         _current_infowindow = false;
 
     self.init = function($map, settings) {
@@ -12,11 +13,11 @@ var wputh_map = function($map, settings) {
             zoom: settings.zoom,
             center: settings.center
         });
-        var _markers = [];
-        for (var i = 0, len = settings.markers.length; i < len; i++) {
-            _markers[i] = self.add_marker(map, settings.markers[i], settings.icon);
-        }
+        self.add_markers(map, settings);
     };
+
+    /* MARKERS
+    -------------------------- */
 
     self.add_marker = function(map, marker_info, marker_icon) {
         var marker = {},
@@ -49,6 +50,25 @@ var wputh_map = function($map, settings) {
 
         return marker;
     };
+
+    /* ADD */
+    self.add_markers = function(map, settings) {
+        _markers = [];
+        for (var i = 0, len = settings.markers.length; i < len; i++) {
+            _markers[i] = self.add_marker(map, settings.markers[i], settings.icon);
+        }
+    };
+
+    /* CLEAR */
+    self.clear_markers = function() {
+        for (var i = 0, len = _markers.length; i < len; i++) {
+            _markers[i].marker.setMap(null);
+        }
+        _markers = [];
+    };
+
+    /* INIT
+    -------------------------- */
 
     self.init($map, settings);
     return self;
