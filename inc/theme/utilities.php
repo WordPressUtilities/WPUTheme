@@ -834,7 +834,7 @@ function wputh_get_posts($args = array(), $expires = 60) {
     $cache_id = 'get_posts_' . md5(json_encode($args));
 
     $posts = wp_cache_get($cache_id);
-    if ($posts === false) {
+    if ($posts === false || $expires === false) {
         $posts = get_posts($args);
         wp_cache_set($cache_id, $posts, '', $expires);
     }
