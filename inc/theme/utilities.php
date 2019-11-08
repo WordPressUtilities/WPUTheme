@@ -165,7 +165,7 @@ function wputh_get_thumb_url($id = false, $format = 'thumbnail', $crop = false) 
  * @return mixed          URL if success, false if not found
  */
 function wputh_get_attachment_image_src($id, $format = 'thumbnail', $crop = false, $image_quality = false) {
-    $cache_duration = 60*60;
+    $cache_duration = 60 * 60;
     $cache_id = 'wputhattimgsrc_' . $id;
     $cache_id .= '_' . (is_array($format) ? md5(json_encode($format)) : $format);
     $cache_id .= '_' . ($crop ? 1 : 0);
@@ -831,10 +831,16 @@ function wputh_cached_nav_menu__clear_cache() {
 ---------------------------------------------------------- */
 
 function wputh_get_posts($args = array(), $expires = 60) {
+    $ignore_cache = false;
+    if (isset($args['wputh_ignore_cache'])) {
+        unset($args['wputh_ignore_cache']);
+        $ignore_cache = true;
+    }
+
     $cache_id = 'get_posts_' . md5(json_encode($args));
 
     $posts = wp_cache_get($cache_id);
-    if ($posts === false || $expires === false) {
+    if ($posts === false || $ignore_cache) {
         $posts = get_posts($args);
         wp_cache_set($cache_id, $posts, '', $expires);
     }
