@@ -2,6 +2,7 @@ var wputh_map = function($map, settings) {
     'use strict';
     var self = this,
         _markers = [],
+        _map = false,
         _current_infowindow = false;
 
     self.init = function($map, settings) {
@@ -9,8 +10,8 @@ var wputh_map = function($map, settings) {
     };
 
     self.create = function($map, settings) {
-        var map = new google.maps.Map($map, settings);
-        self.add_markers(map, settings);
+        _map = new google.maps.Map($map, settings);
+        self.add_markers(_map, settings);
     };
 
     /* MARKERS
@@ -40,6 +41,14 @@ var wputh_map = function($map, settings) {
                 if (_current_infowindow) {
                     _current_infowindow.close();
                 }
+
+                document.dispatchEvent(new CustomEvent('wputh_map_marker_click', {
+                    'detail': {
+                        'map': map,
+                        'marker': marker,
+                    }
+                }));
+
                 marker.infowindow.open(map, marker.marker);
                 _current_infowindow = marker.infowindow;
             });
@@ -50,8 +59,14 @@ var wputh_map = function($map, settings) {
 
     /* ADD */
     self.add_markers = function(map, settings) {
+        if (!map) {
+            map = _map;
+        }
         _markers = [];
         for (var i = 0, len = settings.markers.length; i < len; i++) {
+            if (!settings.markers[i]) {
+                continue;
+            }
             _markers[i] = self.add_marker(map, settings.markers[i], settings.icon);
         }
     };
