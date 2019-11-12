@@ -9,10 +9,7 @@ var wputh_map = function($map, settings) {
     };
 
     self.create = function($map, settings) {
-        var map = new google.maps.Map($map, {
-            zoom: settings.zoom,
-            center: settings.center
-        });
+        var map = new google.maps.Map($map, settings);
         self.add_markers(map, settings);
     };
 
