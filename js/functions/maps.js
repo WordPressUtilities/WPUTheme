@@ -11,7 +11,16 @@ var wputh_map = function($map, settings) {
 
     self.create = function($map, settings) {
         _map = new google.maps.Map($map, settings);
+
+        /* Add markers */
         self.add_markers(_map, settings);
+
+        /* Close Infowindow on map click */
+        google.maps.event.addListener(_map, "click", function() {
+            if (_current_infowindow) {
+                _current_infowindow.close();
+            }
+        });
     };
 
     /* MARKERS
@@ -77,6 +86,11 @@ var wputh_map = function($map, settings) {
             _markers[i].marker.setMap(null);
         }
         _markers = [];
+    };
+
+    /* Trigger marker open */
+    self.open_marker = function(i) {
+        new google.maps.event.trigger(_markers[i].marker, 'click');
     };
 
     /* INIT
