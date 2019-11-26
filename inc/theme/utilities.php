@@ -783,7 +783,7 @@ function wputh_translated_url($use_full_lang_name = false) {
 ---------------------------------------------------------- */
 
 function wputh_cached_nav_menu($args = array()) {
-    $cache_duration = 7 * 24 * 60 * 60;
+    $cache_duration = WEEK_IN_SECONDS;
     $cache_id = 'wputh_cached_menu_' . md5(wputh_get_current_url()) . md5(serialize($args));
     if (isset($args['cache_id'])) {
         $cache_id = $args['cache_id'];
@@ -809,6 +809,8 @@ function wputh_cached_nav_menu($args = array()) {
         $menu = wp_nav_menu($args);
         wp_cache_set($cache_id, $menu, '', $cache_duration);
     }
+
+    $menu = apply_filters('wputh_cached_nav_menu__menu', $menu, $args);
 
     return $menu;
 }
