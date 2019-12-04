@@ -23,6 +23,14 @@ var wputh_map = function($map, settings) {
         });
     };
 
+    self.getMap = function() {
+        return _map;
+    };
+
+    self.set = function(id, val) {
+        _map.set(id, val);
+    };
+
     /* MARKERS
     -------------------------- */
 
