@@ -64,8 +64,9 @@ function wputheme_get_javascripts() {
     return $scripts;
 }
 
-function wputh_add_javascripts() {
+function wputh_build_javascripts() {
     $scripts = wputheme_get_javascripts();
+    $_scripts = array();
     foreach ($scripts as $id => $details) {
         $url = '';
         if (!isset($details['uri']) && !isset($details['url'])) {
@@ -82,14 +83,99 @@ function wputh_add_javascripts() {
                 $url = get_stylesheet_directory_uri() . $url;
             }
         }
-        $deps = isset($details['deps']) ? $details['deps'] : false;
-        $ver = isset($details['ver']) ? $details['ver'] : WPUTHEME_ASSETS_VERSION;
-        $in_footer = isset($details['footer']) && $details['footer'] == true;
-        wp_register_script($id, $url, $deps, $ver, $in_footer);
+        $details['url'] = $url;
+        if (wputh_startsWith($details['url'], content_url())) {
+            $details['path'] = str_replace(content_url(), ABSPATH . 'wp-content', $details['url']);
+        }
+
+        $details['deps'] = isset($details['deps']) ? $details['deps'] : false;
+        $details['ver'] = isset($details['ver']) ? $details['ver'] : WPUTHEME_ASSETS_VERSION;
+        $details['footer'] = isset($details['footer']) && $details['footer'] == true;
+        $_scripts[$id] = $details;
+    }
+    return $_scripts;
+}
+
+function wputh_merge_javascripts($scripts) {
+
+    $scripts_hash = md5(json_encode($scripts));
+
+    /* Build cache folder */
+    $upload_dir = wp_get_upload_dir();
+    $cache_dir = $upload_dir['basedir'] . '/wputhmin';
+    $cache_url = $upload_dir['baseurl'] . '/wputhmin';
+    if (!is_dir($cache_dir)) {
+        mkdir($cache_dir);
+    }
+
+    /* Build files format */
+    $footer_js_path = $cache_dir . '/footer-' . $scripts_hash . '.js';
+    $footer_js_url = $cache_url . '/footer-' . $scripts_hash . '.js';
+    $header_js_path = $cache_dir . '/header-' . $scripts_hash . '.js';
+    $header_js_url = $cache_url . '/header-' . $scripts_hash . '.js';
+
+    /* Check if file already exists */
+    $has_footer = file_exists($footer_js_path);
+    $has_header = file_exists($header_js_path);
+
+    /* Build header & footer */
+    $header_content = '';
+    $footer_content = '';
+    foreach ($scripts as $id => $details) {
+        /* Ignore non local scripts */
+        if (!isset($details['path'])) {
+            continue;
+        }
+        if ($details['footer']) {
+            if (!$has_footer) {
+                $footer_content .= "\n;\n" . file_get_contents($details['path']);
+            }
+        } else {
+            if (!$has_header) {
+                $header_content .= "\n;\n" . file_get_contents($details['path']);
+            }
+        }
+
+        /* Remove from script list */
+        unset($scripts[$id]);
+    }
+
+    /* Build cached files */
+    if (!$has_header) {
+        file_put_contents($header_js_path, $header_content);
+    }
+    if (!$has_footer) {
+        file_put_contents($footer_js_path, $footer_content);
+    }
+
+    /* Add cached files */
+    $scripts['footer-' . $scripts_hash] = array(
+        'url' => $footer_js_url,
+        'deps' => array(),
+        'ver' => '',
+        'footer' => true
+    );
+    $scripts['header-' . $scripts_hash] = array(
+        'url' => $header_js_url,
+        'deps' => array(),
+        'ver' => '',
+        'footer' => false
+    );
+
+    return $scripts;
+}
+
+add_action('wp_enqueue_scripts', 'wputh_add_javascripts');
+function wputh_add_javascripts() {
+    $scripts = wputh_build_javascripts();
+    if (defined('WPUTH_MERGE_JAVASCRIPTS') && WPUTH_MERGE_JAVASCRIPTS) {
+        $scripts = wputh_merge_javascripts($scripts);
+    }
+    foreach ($scripts as $id => $details) {
+        wp_register_script($id, $details['url'], $details['deps'], $details['ver'], $details['footer']);
         wp_enqueue_script($id);
     }
 }
-add_action('wp_enqueue_scripts', 'wputh_add_javascripts');
 
 /* ----------------------------------------------------------
   Add attributes
