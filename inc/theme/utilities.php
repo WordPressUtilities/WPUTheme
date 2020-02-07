@@ -829,6 +829,43 @@ function wputh_cached_nav_menu__clear_cache() {
 }
 
 /* ----------------------------------------------------------
+  Default menu
+---------------------------------------------------------- */
+
+function wputh_default_menu($args = array()) {
+    $defaults = array(
+        'menu_id' => '',
+        'menu_class' => 'menu',
+        'container' => 'div',
+        'container_class' => '',
+        'echo' => true
+    );
+    $args = wp_parse_args($args, $defaults);
+
+    $pages_site = wputh_get_posts(array(
+        'post_type' => 'page',
+        'orderby' => 'ID',
+        'order' => 'ASC',
+        'posts_per_page' => 5
+    ));
+
+    $menu = '<' . $args['container'] . ' class="' . $args['container_class'] . '">';
+    $menu .= '<ul ' . ($args['menu_id'] ? 'id="' . $args['menu_id'] . '"' : '') . ' class="' . $args['menu_class'] . '">';
+    foreach ($pages_site as $page) {
+        $menu .= '<li class="menu-item"><a href="' . get_permalink($page) . '">' . get_the_title($page) . '</a></li>';
+    }
+    $menu .= '</ul>';
+    $menu .= '</' . $args['container'] . '>';
+
+    $menu = apply_filters('wputh_default_menu', $menu, $args);
+    if ($args['echo']) {
+        echo $menu;
+    } else {
+        return $menu;
+    }
+}
+
+/* ----------------------------------------------------------
   Cached posts
 ---------------------------------------------------------- */
 
