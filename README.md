@@ -96,3 +96,13 @@ add_filter('wputheme_display_searchform','__return_false');
 
 * **wputheme_loadmore_button** : Theme for loadmore button in paginate.php
 * **wputh_pagination_kind** : Kind of pagination used when loading paginate.php
+
+#### Scripts
+
+* **wputh_common_libraries__slickslider** : Load Slick Slider.
+* **wputh_common_libraries__simplebar** : Load SimpleBar.
+
+## Thanks
+
+* To @Grsmto and contributors for SimpleBar https://github.com/Grsmto/simplebar/ ( MIT )
+* To @kenwheeler and contributors for Slick Slicker : https://github.com/kenwheeler/slick/ ( MIT )
