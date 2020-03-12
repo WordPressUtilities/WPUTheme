@@ -42,7 +42,7 @@ function get_the_loop($params = array()) {
 
     /* Returns captured content */
     $content = ob_get_clean();
-    return $content;
+    return apply_filters('wputh__get_the_loop__content', $content);
 }
 
 /**
