@@ -868,6 +868,34 @@ function wputh_default_menu($args = array()) {
 }
 
 /* ----------------------------------------------------------
+  Get menu items
+---------------------------------------------------------- */
+
+function wputh_get_menu_items($menu_id, $args = array()) {
+    $theme_locations = get_nav_menu_locations();
+    if (!isset($theme_locations[$menu_id])) {
+        return array();
+    }
+    $menu_obj = get_term($theme_locations[$menu_id]);
+    if (!$menu_obj) {
+        return array();
+    }
+    if (!$args['depth']) {
+        $args['depth'] = 1;
+    }
+    $items = wp_get_nav_menu_items($menu_obj, $args);
+
+    $menu_items = array();
+    foreach ($items as $item) {
+        if ($item->menu_item_parent && $args['depth'] == 1) {
+            continue;
+        }
+        $menu_items[] = '<a target="' . $item->target . '" href="' . $item->url . '"><span>' . $item->title . '</span></a>';
+    }
+    return $menu_items;
+}
+
+/* ----------------------------------------------------------
   Cached posts
 ---------------------------------------------------------- */
 
