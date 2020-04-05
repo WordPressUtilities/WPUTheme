@@ -880,7 +880,7 @@ function wputh_get_menu_items($menu_id, $args = array()) {
     if (!$menu_obj) {
         return array();
     }
-    if (!$args['depth']) {
+    if (!isset($args['depth'])) {
         $args['depth'] = 1;
     }
     $items = wp_get_nav_menu_items($menu_obj, $args);
@@ -1019,4 +1019,21 @@ function wputh_endsWith($haystack, $needle) {
         return true;
     }
     return (substr($haystack, -$length) === $needle);
+}
+
+/* ----------------------------------------------------------
+  Time
+---------------------------------------------------------- */
+
+/**
+ * Get an HTML <time> tag for a post
+ * @param  string  $date_format   Native PHP date format.
+ * @param  boolean $post_id       (optional) Post ID
+ * @return string                 <time> tag for the
+ */
+function wputh_get_time_tag($date_format = 'd/m/Y', $post_id = false) {
+    if(!$post_id){
+        $post_id = get_the_ID();
+    }
+    return '<time datetime="' . get_the_time(DATE_W3C, $post_id) . '">' . get_the_time($date_format, $post_id) . '</time>';
 }
