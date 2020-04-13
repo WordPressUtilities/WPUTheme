@@ -16,6 +16,9 @@ function get_the_loop($params = array()) {
 
     /* Get params */
     $default_params = array(
+        'no_results_content' => '<p>' . __('Sorry, no search results for this query.', 'wputh') . '</p>',
+        'loop_item_modifiers' => array(),
+        'loop_container_classes' => 'list-loops',
         'loop' => 'loop-small'
     );
 
@@ -28,15 +31,17 @@ function get_the_loop($params = array()) {
     /* Start the loop */
     ob_start();
     if (have_posts()) {
-        echo '<div class="list-loops">';
+        echo '<div class="' . $parameters['loop_container_classes'] . '">';
         while (have_posts()) {
             the_post();
+            set_query_var('get_the_loop__parameters', $parameters);
             get_template_part($parameters['loop']);
+            /* Retrieve with : $parameters = get_query_var('get_the_loop__parameters'); */
         }
         echo '</div>';
         echo wputh_paginate();
     } else {
-        echo '<p>' . __('Sorry, no search results for this query.', 'wputh') . '</p>';
+        echo $parameters['no_results_content'];
     }
     wp_reset_query();
 
@@ -1032,7 +1037,7 @@ function wputh_endsWith($haystack, $needle) {
  * @return string                 <time> tag for the
  */
 function wputh_get_time_tag($date_format = 'd/m/Y', $post_id = false) {
-    if(!$post_id){
+    if (!$post_id) {
         $post_id = get_the_ID();
     }
     return '<time datetime="' . get_the_time(DATE_W3C, $post_id) . '">' . get_the_time($date_format, $post_id) . '</time>';
