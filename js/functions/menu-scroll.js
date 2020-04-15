@@ -18,7 +18,6 @@ function set_wputh_menu_scroll() {
     'use strict';
     wputhmenu.itemWindow = jQuery(window);
     wputhmenu.itemBody = jQuery('body');
-    wputhmenu.scrollLimit = 100;
     wputhmenu.itemWindow.on('scroll', wputh_scroll_event);
     wputh_scroll_event();
 }
