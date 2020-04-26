@@ -124,14 +124,15 @@ endif;
 add_action('wputheme_header_banner', 'wputh_display_title');
 if (!function_exists('wputh_display_title')) {
     function wputh_display_title() {
-        $main_tag = (is_home() || is_front_page()) ? 'h1' : 'div';
-        $main_tag_classname = 'h1 main-title';
-        $title_content = get_bloginfo('name');
+        $main_tag = apply_filters('wputh_display_title__main_tag', is_home() || is_front_page() ? 'h1' : 'div');
+        $main_tag_classname = apply_filters('wputh_display_title__main_tag_classname', 'h1 main-title');
+        $title_content = apply_filters('wputh_display_title__title_content', get_bloginfo('name'));
+        $title_url = apply_filters('wputh_display_title__title_url', home_url());
         if (has_header_image()) {
             $title_content = '<img src="' . get_header_image() . '" alt="' . esc_attr($title_content) . '" />';
             $main_tag_classname .= ' main-logo';
         }
-        echo '<' . $main_tag . ' class="' . $main_tag_classname . '"><a href="' . home_url() . '">' . $title_content . '</a></' . $main_tag . '>';
+        echo '<' . $main_tag . ' class="' . $main_tag_classname . '"><a href="' . $title_url . '">' . $title_content . '</a></' . $main_tag . '>';
     }
 }
 

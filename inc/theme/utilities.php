@@ -468,9 +468,9 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
                 'via' => $_via_user
             )
         ),
-        'viadeo' => array(
-            'name' => 'Viadeo',
-            'url' => 'https://www.viadeo.com/shareit/share/?url' . urlencode($_permalink) . '&title=' . urlencode($_title) . ''
+        'whatsapp' => array(
+            'name' => 'Whatsapp',
+            'url' => 'whatsapp://send?text=' . urlencode($_permalink)
         )
     );
 
