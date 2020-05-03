@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/z-protect.php';
 
-define('WPUTHEME_VERSION', '2.69.2');
+define('WPUTHEME_VERSION', '2.70.0');
 
 if (apply_filters('wputheme_usesessions', true)) {
     @session_start();
@@ -66,7 +66,9 @@ if (!empty($wputh_sidebars)) {
 
 // Default featured image size size
 if (function_exists('set_post_thumbnail_size')) {
-    set_post_thumbnail_size(1024, 1024);
+    $thumb_size_x = apply_filters('wputheme_thumbnail_size_x', 1024);
+    $thumb_size_y = apply_filters('wputheme_thumbnail_size_y', $thumb_size_x);
+    set_post_thumbnail_size($thumb_size_x, $thumb_size_x);
 }
 
 /* ----------------------------------------------------------
@@ -87,7 +89,7 @@ require_once get_template_directory() . '/inc/theme/default-items.php';
 require_once get_template_directory() . '/inc/theme/templates.php';
 
 if (!isset($content_width)) {
-    $content_width = 680;
+    $content_width = apply_filters('wputh_content_width', 680);
 }
 
 /* Plugins Configuration

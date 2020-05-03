@@ -154,7 +154,7 @@ function wputh_get_thumb_url($id = false, $format = 'thumbnail', $crop = false) 
     if (is_array($format)) {
         $format_txt = implode('x', $format);
     }
-    $returnUrl = get_stylesheet_directory_uri() . '/assets/images/thumbnails/' . $format_txt . '.jpg';
+    $returnUrl = get_theme_file_uri('/assets/images/thumbnails/' . $format_txt . '.jpg');
     $thumb_id = get_post_thumbnail_id($id);
     if (!$thumb_id) {
         return $returnUrl;
