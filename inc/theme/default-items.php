@@ -177,6 +177,18 @@ if (!function_exists('wputh_display_mainmenu')) {
     }
 }
 
+/* User
+ -------------------------- */
+
+if (apply_filters('wputheme_display_user_toolbar', true)):
+    add_action('wputheme_header_banner', 'wputh_display_user_toolbar');
+endif;
+if (!function_exists('wputh_display_user_toolbar')) {
+    function wputh_display_user_toolbar() {
+        get_template_part('tpl/header/user-toolbar');
+    }
+}
+
 /* ----------------------------------------------------------
   MAIN CONTENT
 ---------------------------------------------------------- */
