@@ -24,8 +24,10 @@ function wputh_disable_jqmigrate(&$scripts) {
 add_action('wp_enqueue_scripts', 'wputh_common_libraries');
 function wputh_common_libraries() {
     if (apply_filters('wputh_common_libraries__slickslider', false)) {
-        wp_enqueue_script('wputh-slickslider-js', get_template_directory_uri() . '/js/libs/slick-slider/slick/slick.min.js', array('jquery'), '1.8.1', true);
-        wp_enqueue_style('wputh-slickslider-css', get_template_directory_uri() . '/js/libs/slick-slider/slick/slick.css', array(), '1.8.1');
+        $slick_version = '1.8.1';
+        wp_enqueue_script('wputh-slickslider-js', get_template_directory_uri() . '/js/libs/slick-slider/slick/slick.min.js', array('jquery'), $slick_version, true);
+        wp_enqueue_script('wputh-slickslider-init-js', get_template_directory_uri() . '/js/libs/slick-slider-init.js', array('jquery'), $slick_version, true);
+        wp_enqueue_style('wputh-slickslider-css', get_template_directory_uri() . '/js/libs/slick-slider/slick/slick.css', array(), $slick_version);
     }
     if (apply_filters('wputh_common_libraries__simplebar', false)) {
         wp_enqueue_script('wputh-simplebar-js', get_template_directory_uri() . '/js/libs/simplebar/simplebar.min.js', array(), '5.1.0', true);
