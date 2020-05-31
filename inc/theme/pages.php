@@ -194,7 +194,7 @@ function wputh_pages_set_privacy_policy() {
 
     // Load content class
     if (!class_exists('WP_Privacy_Policy_Content')) {
-        require_once ABSPATH . 'wp-admin/includes/misc.php';
+        require_once ABSPATH . 'wp-admin/includes/class-wp-privacy-policy-content.php';
     }
 
     // Create page
