@@ -891,11 +891,13 @@ function wputh_get_menu_items($menu_id, $args = array()) {
     $items = wp_get_nav_menu_items($menu_obj, $args);
 
     $menu_items = array();
-    foreach ($items as $item) {
-        if ($item->menu_item_parent && $args['depth'] == 1) {
-            continue;
+    if (is_array($items)) {
+        foreach ($items as $item) {
+            if ($item->menu_item_parent && $args['depth'] == 1) {
+                continue;
+            }
+            $menu_items[] = '<a target="' . $item->target . '" href="' . $item->url . '"><span>' . $item->title . '</span></a>';
         }
-        $menu_items[] = '<a target="' . $item->target . '" href="' . $item->url . '"><span>' . $item->title . '</span></a>';
     }
     return $menu_items;
 }
