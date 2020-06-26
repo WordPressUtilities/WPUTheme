@@ -101,8 +101,12 @@ add_filter('wputheme_display_searchform','__return_false');
 
 * **wputh_common_libraries__slickslider** : Load Slick Slider.
 * **wputh_common_libraries__simplebar** : Load SimpleBar.
+* **wputh_common_libraries__juxtapose** : Load Juxtapose.
+* **wputh_common_libraries__photoswipe** : Load PhotoSwipe.
 
 ## Thanks
 
 * To @Grsmto and contributors for SimpleBar https://github.com/Grsmto/simplebar/ ( MIT )
 * To @kenwheeler and contributors for Slick Slicker : https://github.com/kenwheeler/slick/ ( MIT )
+* To @NUKnightLab and contributors for Juxtapose : https://github.com/NUKnightLab/juxtapose/ ( Mozilla Public License Version 2.0 )
+* To @dimsemenov and contributors for PhotoSwipe : https://github.com/dimsemenov/PhotoSwipe/ ( MIT )
