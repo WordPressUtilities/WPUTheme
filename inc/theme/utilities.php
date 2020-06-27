@@ -925,6 +925,62 @@ function wputh_get_posts($args = array(), $expires = 60) {
 }
 
 /* ----------------------------------------------------------
+  Complete post ids
+---------------------------------------------------------- */
+
+/**
+ * Complete furnished post ids with latest post ids, to get to a desired number
+ * @param  array  $settings  Settings for this function
+ * @return array             Args ready to be inserted in a query
+ */
+function wputh_complete_post_ids($settings = array()) {
+    if (!is_array($settings)) {
+        $settings = array();
+    }
+    if (!isset($settings['post_type'])) {
+        $settings['post_type'] = 'post';
+    }
+    if (!isset($settings['posts_per_page']) || !is_numeric($settings['posts_per_page'])) {
+        $settings['posts_per_page'] = 3;
+    }
+    if (!isset($settings['post_ids']) || !is_array($settings['post_ids'])) {
+        $settings['post_ids'] = array();
+    }
+
+    $posts = array();
+    if (!empty($settings['post_ids'])) {
+        $posts = wputh_get_posts(array(
+            'post_type' => $settings['post_type'],
+            'posts_per_page' => $settings['posts_per_page'],
+            'orderby' => 'post__in',
+            'fields' => 'ids',
+            'post__in' => $settings['post_ids']
+        ));
+    }
+
+    $nb_posts = count($posts);
+    if ($nb_posts < $settings['posts_per_page']) {
+        $extra_posts_nb = $settings['posts_per_page'] - $nb_posts;
+        $extra_posts = wputh_get_posts(array(
+            'post_type' => $settings['post_type'],
+            'posts_per_page' => $extra_posts_nb,
+            'orderby' => 'post__in',
+            'fields' => 'ids',
+            'post__not_in' => $posts
+        ));
+        $posts = array_merge($posts, $extra_posts);
+    }
+    return array(
+        'post_type' => $settings['post_type'],
+        'posts_per_page' => $settings['posts_per_page'],
+        'orderby' => 'post__in',
+        'fields' => 'ids',
+        'post__in' => $posts
+    );
+}
+
+
+/* ----------------------------------------------------------
   Update without revisions
 ---------------------------------------------------------- */
 
