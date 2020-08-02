@@ -17,6 +17,8 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
         'link' => home_url()
     );
 
+    $elements_ariane = apply_filters('wputh_get_breadcrumbs__after_home', $elements_ariane);
+
     if (is_singular()) {
         $main_category = get_the_category();
         if (isset($main_category[0])) {
@@ -73,6 +75,8 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
             );
         }
     }
+
+    $elements_ariane = apply_filters('wputh_get_breadcrumbs__before_singular', $elements_ariane);
 
     if (is_singular() || is_page()) {
         $page_id = get_the_ID();
