@@ -496,7 +496,7 @@ input[type="submit"], input[type="image"], button { cursor: pointer; }
 @media (max-width: 500px) { .hidden-on-phone, .visible-only-full, .visible-only-tablet { display: none; } }
 [data-inputmode="mouse"] .input-mouse-hidden, [data-inputmode="touch"] .input-touch-hidden, [data-inputmode="touch"] .input-mouse-visible, [data-inputmode="mouse"] .input-touch-visible { display: none; }
 
-.nav-toggle { display: inline-block; z-index: 1; position: relative; font-size: 5px; vertical-align: middle; }
+.nav-toggle { display: inline-block; z-index: 1; position: relative; font-size: 5px; vertical-align: middle; -webkit-user-select: none; -moz-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
 .nav-toggle span { right: 0; bottom: 0; margin: auto; }
 .nav-toggle span:before, .nav-toggle span:after { content: ''; -webkit-transform-origin: center center; -moz-transform-origin: center center; transform-origin: center center; }
 
