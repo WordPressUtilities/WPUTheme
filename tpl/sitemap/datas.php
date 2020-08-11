@@ -49,6 +49,8 @@ $default_args = array(
     'post__not_in' => array(get_the_ID())
 );
 
+$default_args = apply_filters('wputheme_sitemap_default_args', $default_args);
+
 /* Set posts
 -------------------------- */
 
