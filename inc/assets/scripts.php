@@ -84,6 +84,10 @@ function wputh_javascript_files__default($scripts = array()) {
         'url' => get_theme_file_uri('/js/functions/maps.js'),
         'footer' => 1
     );
+    $scripts['wputh-utilities'] = array(
+        'url' => get_theme_file_uri('/js/functions/utilities.js'),
+        'footer' => 1
+    );
     $scripts['events'] = array(
         'url' => get_theme_file_uri('/js/events.js'),
         'footer' => 1
