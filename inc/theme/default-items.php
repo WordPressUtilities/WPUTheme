@@ -113,6 +113,26 @@ if (!function_exists('wputh_head_add_iecompatibility')) {
 }
 
 /* ----------------------------------------------------------
+  BODY OPEN
+---------------------------------------------------------- */
+
+/* Skiplinks
+-------------------------- */
+
+add_action('wp_body_open', 'wputh_head_add_skip_links');
+function wputh_head_add_skip_links() {
+    if (!apply_filters('wputheme_display_skiplinks', true)) {
+        return;
+    }
+    $skiplinks = apply_filters('wputheme_skiplinks', array(
+        'maincontent' => __('Skip to main content', 'wputh')
+    ));
+    foreach ($skiplinks as $target => $label) {
+        echo '<a class="skiptomain" href="#' . $target . '">' . $label . '</a>';
+    }
+}
+
+/* ----------------------------------------------------------
   HEADER
 ---------------------------------------------------------- */
 
