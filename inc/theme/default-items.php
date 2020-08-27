@@ -15,13 +15,7 @@ if (!function_exists('wputh_get_doctype_html')) {
         $lang = ob_get_clean();
 
         echo '<!DOCTYPE HTML>';
-        if (WPUTH_IECOMPATIBILITY) {
-            echo '<!--[if IE 9 ]><html ' . $lang . ' class="is_ie9 lt_ie10"><![endif]-->';
-            echo '<!--[if gt IE 9]><html ' . $lang . ' class="is_ie10"><![endif]-->';
-            echo '<!--[if !IE]><!--> <html ' . $lang . '><!--<![endif]-->';
-        } else {
-            echo '<html ' . $lang . '>';
-        }
+        echo '<html class="no-js" ' . $lang . '>';
     }
 }
 
@@ -87,6 +81,16 @@ if (!function_exists('wputh_head_add_viewport')) {
     }
 }
 
+/* Detect JS
+ -------------------------- */
+
+add_action('wp_head', 'wputh_head_add_nojs', 50);
+if (!function_exists('wputh_head_add_nojs')) {
+    function wputh_head_add_nojs() {
+        echo '<script>document.documentElement.classList.remove("no-js");</script>';
+    }
+}
+
 /* Favicon
  -------------------------- */
 
@@ -96,19 +100,6 @@ if (!function_exists('wputh_head_add_favicon')) {
         if (!function_exists('has_site_icon') || !has_site_icon()) {
             echo '<link rel="shortcut icon" href="' . get_template_directory_uri() . '/images/favicon.ico" />';
         }
-    }
-}
-
-/* IE Compatibility
- -------------------------- */
-
-if (WPUTH_IECOMPATIBILITY):
-    add_action('wp_head', 'wputh_head_add_iecompatibility', 10);
-endif;
-if (!function_exists('wputh_head_add_iecompatibility')) {
-    function wputh_head_add_iecompatibility() {
-        $script_src = get_template_directory_uri() . '/js/ie/';
-        echo '<!--[if lt IE 9]><script type="text/javascript" src="' . $script_src . 'ie.js"></script><![endif]-->';
     }
 }
 
@@ -141,7 +132,6 @@ function wputh_head_add_skip_links() {
 if (apply_filters('wputheme_display_title', true)):
     add_action('wputheme_header_banner', 'wputh_display_title');
 endif;
-add_action('wputheme_header_banner', 'wputh_display_title');
 if (!function_exists('wputh_display_title')) {
     function wputh_display_title() {
         $main_tag = apply_filters('wputh_display_title__main_tag', is_home() || is_front_page() ? 'h1' : 'div');

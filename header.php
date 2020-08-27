@@ -4,7 +4,7 @@ define('WPUTH_PAGE_BODYCLASS', implode(' ', get_body_class('cssc-is-responsive')
 if (!defined('IS_AJAX') || !IS_AJAX ) {
 ?>
 <head><?php echo wp_head(); ?></head>
-<body class="no-js <?php echo WPUTH_PAGE_BODYCLASS; ?>">
+<body class="<?php echo WPUTH_PAGE_BODYCLASS; ?>">
 <?php wp_body_open(); ?>
 <?php do_action('wputheme_header_items'); ?>
 <?php if (apply_filters('wputheme_display_header', true)): ?>

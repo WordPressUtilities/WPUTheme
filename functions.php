@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/z-protect.php';
 
-define('WPUTHEME_VERSION', '2.77.0');
+define('WPUTHEME_VERSION', '2.78.0');
 
 if (apply_filters('wputheme_usesessions', true)) {
     @session_start();
@@ -49,7 +49,7 @@ $default_sidebars = array(
         'name' => __('Default Sidebar', 'wputh'),
         'id' => 'wputh-sidebar',
         'description' => __('Default theme sidebar', 'wputh'),
-        'before_title' => '<h3>',
+        'before_title' => '<h3 class="wputh-sidebar__title">',
         'after_title' => '</h3>'
     )
 );
