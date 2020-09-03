@@ -17,6 +17,9 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
         'link' => home_url()
     );
 
+    global $wp;
+    $current_view_url = add_query_arg($wp->query_vars, home_url($wp->request));
+
     $elements_ariane = apply_filters('wputh_get_breadcrumbs__after_home', $elements_ariane);
 
     if (is_singular()) {
@@ -71,6 +74,7 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
             // Adding category
             $elements_ariane['archive-page-name'] = array(
                 'name' => $shown_title,
+                'link' => $current_view_url,
                 'last' => 1
             );
         }
@@ -96,6 +100,7 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
 
         $elements_ariane['single-page'] = array(
             'name' => get_the_title(),
+            'link' => get_permalink(),
             'last' => 1
         );
     }
@@ -103,6 +108,7 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
     if (is_404()) {
         $elements_ariane['404-error'] = array(
             'name' => __('404 Error', 'wputh'),
+            'link' => home_url('404'),
             'last' => 1
         );
     }
@@ -110,9 +116,31 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
     if (is_search()) {
         $elements_ariane['search-results'] = array(
             'name' => sprintf(__('Search results for "%s"', 'wputh'), get_search_query()),
+            'link' => $current_view_url,
             'last' => 1
         );
     }
 
     return $elements_ariane;
+}
+
+function wputh_get_breadcrumbs_html($elements_ariane) {
+    $html = '';
+    $html .= '<ul class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">';
+    $i = 0;
+    foreach ($elements_ariane as $id => $element) {
+        $last = (isset($element['last']) && $element['last'] == 1);
+        $itemAttributes = 'itemprop="item" class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '') . '"';
+        $html .= '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
+        $element_name = '<span itemprop="name">' . $element['name'] . '</span>';
+        if (isset($element['link'])) {
+            $html .= '<a ' . $itemAttributes . ' href="' . $element['link'] . '">' . $element_name . '</a>';
+        } else {
+            $html .= '<strong  ' . $itemAttributes . '>' . $element_name . '</strong>';
+        }
+        $html .= '<meta itemprop="position" content="' . (++$i) . '" />';
+        $html .= '</li>';
+    }
+    $html .= '</ul>';
+    echo $html;
 }
