@@ -126,17 +126,17 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
 
 function wputh_get_breadcrumbs_html($elements_ariane) {
     $html = '';
-    $html .= '<ul class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">';
+    $html .= '<ul class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">';
     $i = 0;
     foreach ($elements_ariane as $id => $element) {
         $last = (isset($element['last']) && $element['last'] == 1);
         $itemAttributes = 'itemprop="item" class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '') . '"';
-        $html .= '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
+        $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
         $element_name = '<span itemprop="name">' . $element['name'] . '</span>';
         if (isset($element['link'])) {
             $html .= '<a ' . $itemAttributes . ' href="' . $element['link'] . '">' . $element_name . '</a>';
         } else {
-            $html .= '<strong  ' . $itemAttributes . '>' . $element_name . '</strong>';
+            $html .= '<strong>' . $element_name . '</strong>';
         }
         $html .= '<meta itemprop="position" content="' . (++$i) . '" />';
         $html .= '</li>';
