@@ -131,9 +131,30 @@ function wputh_build_javascripts() {
         $details['deps'] = isset($details['deps']) ? $details['deps'] : false;
         $details['ver'] = isset($details['ver']) ? $details['ver'] : WPUTHEME_ASSETS_VERSION;
         $details['footer'] = isset($details['footer']) && $details['footer'] == true;
+        if (isset($details['path'])) {
+            $details['filemtime'] = filemtime($details['path']);
+        }
+
         $_scripts[$id] = $details;
     }
     return $_scripts;
+}
+
+function wputh_merge_javascripts_compress($content) {
+    /* Comments */
+    $content = preg_replace('/\/\*([^\/]*)\*\//isU', '', $content);
+    $content = preg_replace("/\/\/(.*)\n/", '', $content);
+
+    /* Trim lines */
+    $content = implode("\n", array_map('trim', explode("\n", $content)));
+
+    /* Multiple spaces */
+    $content = preg_replace("/([ ]+)/", " ", $content);
+
+    /* Multiple line breaks */
+    $content = preg_replace("/[\r\n]+/", "\n", $content);
+
+    return $content;
 }
 
 function wputh_merge_javascripts($scripts) {
@@ -168,11 +189,11 @@ function wputh_merge_javascripts($scripts) {
         }
         if ($details['footer']) {
             if (!$has_footer) {
-                $footer_content .= "\n;\n" . file_get_contents($details['path']);
+                $footer_content .= "\n;\n" . trim(file_get_contents($details['path']));
             }
         } else {
             if (!$has_header) {
-                $header_content .= "\n;\n" . file_get_contents($details['path']);
+                $header_content .= "\n;\n" . trim(file_get_contents($details['path']));
             }
         }
 
@@ -182,10 +203,10 @@ function wputh_merge_javascripts($scripts) {
 
     /* Build cached files */
     if (!$has_header) {
-        file_put_contents($header_js_path, $header_content);
+        file_put_contents($header_js_path, wputh_merge_javascripts_compress($header_content));
     }
     if (!$has_footer) {
-        file_put_contents($footer_js_path, $footer_content);
+        file_put_contents($footer_js_path, wputh_merge_javascripts_compress($footer_content));
     }
 
     /* Add cached files */
