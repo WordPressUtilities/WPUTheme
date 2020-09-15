@@ -635,7 +635,9 @@ article .cssc-content { min-height: 1px; overflow: hidden; }
 
 .comment-form label { display: block; }
 
-.comments-list > .comment + .comment { margin-top: 1em; padding-top: 1em; border-top: 1px solid #F0F0F0; }
+.comments-list > .comment { margin: 1em 0; padding-top: 1em; }
+.comments-list > .comment + .comment { border-top: 1px solid #F0F0F0; }
+.comments-list .comment.bypostauthor { padding: 1em; background-color: #F0F0F0; }
 
 footer.comment-meta { z-index: 1; position: relative; margin-bottom: 10px; padding-left: 42px; min-height: 32px; }
 footer.comment-meta .avatar { z-index: 1; position: absolute; top: 0; left: 0; }

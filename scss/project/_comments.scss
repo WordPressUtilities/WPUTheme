@@ -14,10 +14,20 @@
   List
 ---------------------------------------------------------- */
 
-.comments-list > .comment + .comment {
-    margin-top: 1em;
-    padding-top: 1em;
-    border-top: 1px solid #F0F0F0;
+.comments-list {
+    & > .comment {
+        margin: 1em 0;
+        padding-top: 1em;
+    }
+
+    & > .comment + .comment {
+        border-top: 1px solid #F0F0F0;
+    }
+
+    .comment.bypostauthor {
+        padding: 1em;
+        background-color: #F0F0F0;
+    }
 }
 
 /* Item
