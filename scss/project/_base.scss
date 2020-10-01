@@ -27,15 +27,12 @@ body {
 }
 
 .header__social a,
-.header__social li,
-.main-menu a,
-.main-menu li {
+.header__social li {
     display: inline-block;
     line-height: 20px;
 }
 
-.header__social li,
-.main-menu li {
+.header__social li {
     margin-right: 10px;
 }
 
@@ -57,6 +54,65 @@ body {
         margin-left: 220px;
         min-width: 250px;
         text-align: right;
+    }
+}
+
+/* ----------------------------------------------------------
+  Menu
+---------------------------------------------------------- */
+
+.main-menu__wrapper {
+    @extend %cssc-desktop-menu__wrapper;
+    @extend %cssc-mobile-menu-down__wrapper;
+}
+
+.main-menu {
+    @extend %cssc-desktop-menu;
+    @extend %cssc-mobile-menu-down;
+}
+
+.main-menu > .menu-item {
+    @extend %cssc-desktop-menu__first_level;
+    @extend %cssc-mobile-menu-down__first_level;
+}
+
+.main-menu > .menu-item > .sub-menu {
+    @extend %cssc-desktop-menu__submenu;
+    @extend %cssc-mobile-menu-down__submenu;
+}
+
+@media($has_desktop_menu) {
+    .nav-toggle,
+    .main-menu .btn-toggle {
+        display: none;
+    }
+}
+
+@media($has_mobile_menu) {
+    .main-menu > .menu-item {
+        z-index: 1;
+        position: relative;
+    }
+
+    .main-menu > .menu-item .btn-toggle {
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 1.5em;
+        height: 1.5em;
+        background-color: #ccc;
+        -webkit-transition: -webkit-transform 0.3s ease;
+        transition: transform 0.3s ease;
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+    }
+
+    .main-menu > .menu-item.is-active .btn-toggle {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
     }
 }
 

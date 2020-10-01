@@ -168,6 +168,14 @@ html[lang] {
         z-index: 1;
         position: relative;
     }
+
+    #wpadminbar {
+        position: relative;
+    }
+
+    .has--opened-main-menu #wpadminbar {
+        display: none;
+    }
 }
 
 @media(min-width:783px) {

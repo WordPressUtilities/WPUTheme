@@ -8,7 +8,7 @@ var wpu_set_faq_accordion = function() {
         var faq_togglers = jQuery('.faq-element__title');
         var faq_elements = jQuery('.faq-element');
         faq_togglers.each(function(i, el) {
-            var el = jQuery(el);
+            el = jQuery(el);
             el.attr('data-i', i);
             el.on('click', function(e) {
                 faq_elements.addClass('is-hidden');

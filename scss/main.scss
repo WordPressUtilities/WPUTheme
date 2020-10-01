@@ -49,10 +49,6 @@ $tablet-max: 1024px;
 @import "csscommon/components/vars/breakpoints";
 @import "csscommon/components/vars/mediaqueries";
 
-/* Custom breakpoints */
-$has_mobile_menu: $desktop_excluded;
-$has_desktop_menu: $desktop_only;
-
 /* Compass values
 -------------------------- */
 
@@ -86,6 +82,7 @@ $graceful-usage-threshold: 2;
 
 /* Various */
 
+@import "csscommon/components/header/nav";
 @import "csscommon/components/tables";
 @import "csscommon/components/grid";
 @import "csscommon/components/layouts/containers";
