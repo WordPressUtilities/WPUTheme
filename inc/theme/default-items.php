@@ -13,9 +13,8 @@ if (!function_exists('wputh_get_doctype_html')) {
         ob_start();
         language_attributes();
         $lang = ob_get_clean();
-
         echo '<!DOCTYPE HTML>';
-        echo '<html class="no-js" ' . $lang . '>';
+        echo '<html class="' . apply_filters('wputh_html_class', 'no-js') . '" ' . $lang . '>';
     }
 }
 
