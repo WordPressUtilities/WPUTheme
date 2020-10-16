@@ -12,22 +12,20 @@ var wputhmenu = {
     scrollLimitB: 75,
     scrollLimit: 100,
     itemBody: false,
-    itemWindow: false,
     checkScrollToTop: true,
     prevScroll: 0
 };
 
 function set_wputh_menu_scroll() {
     'use strict';
-    wputhmenu.itemWindow = jQuery(window);
     wputhmenu.itemBody = jQuery('body');
-    wputhmenu.itemWindow.on('scroll', wputh_scroll_event);
+    window.addEventListener('scroll', wputh_scroll_event);
     wputh_scroll_event();
 }
 
 var wputh_scroll_event = function() {
     'use strict';
-    var scrollTop = wputhmenu.itemWindow.scrollTop(),
+    var scrollTop = window.scrollY,
         scrollAmount = Math.abs(wputhmenu.prevScroll - scrollTop),
         scrollToTop = wputhmenu.prevScroll > scrollTop;
 
