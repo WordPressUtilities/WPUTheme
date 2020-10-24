@@ -782,6 +782,28 @@ function wputh_translated_url($use_full_lang_name = false) {
             }
         }
     }
+
+    if(defined('ICL_LANGUAGE_CODE') && function_exists('icl_get_languages')){
+        $current_lang = ICL_LANGUAGE_CODE;
+        $wpml_langs = icl_get_languages(array(
+            'skip_missing' => 0
+        ));
+
+        if (is_array($wpml_langs)) {
+            foreach ($wpml_langs as $lang) {
+                $full_name = $lang['code'];
+                if ($use_full_lang_name && isset($lang['translated_name'])) {
+                    $full_name = $lang['translated_name'];
+                }
+                $display_languages[$lang['code']] = array(
+                    'name' => $full_name,
+                    'current' => $lang['code'] == $current_lang,
+                    'url' => $lang['url']
+                );
+            }
+        }
+    }
+
     return $display_languages;
 }
 
