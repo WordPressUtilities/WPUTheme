@@ -785,9 +785,7 @@ function wputh_translated_url($use_full_lang_name = false) {
 
     if(defined('ICL_LANGUAGE_CODE') && function_exists('icl_get_languages')){
         $current_lang = ICL_LANGUAGE_CODE;
-        $wpml_langs = icl_get_languages(array(
-            'skip_missing' => 0
-        ));
+        $wpml_langs = icl_get_languages();
 
         if (is_array($wpml_langs)) {
             foreach ($wpml_langs as $lang) {
