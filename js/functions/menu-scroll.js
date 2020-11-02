@@ -6,11 +6,14 @@
 
 var wputhmenu = {
     CSSClassName: 'has-floating-menu',
+    CSSClassNameM: 'has-floating-menu-mobile',
     CSSClassNameB: 'will-have-floating-menu',
     has_floating_menu: false,
     has_bfloating_menu: false,
-    scrollLimitB: 75,
+    has_mfloating_menu: false,
     scrollLimit: 100,
+    scrollLimitB: false,
+    scrollLimitMobile: false,
     itemBody: false,
     checkScrollToTop: true,
     prevScroll: 0
@@ -29,6 +32,10 @@ var wputh_scroll_event = function() {
         scrollAmount = Math.abs(wputhmenu.prevScroll - scrollTop),
         scrollToTop = wputhmenu.prevScroll > scrollTop;
 
+    /* ----------------------------------------------------------
+      Check menu scroll
+    ---------------------------------------------------------- */
+
     function disable_floating() {
         wputhmenu.has_floating_menu = false;
         wputhmenu.itemBody.removeClass(wputhmenu.CSSClassName);
@@ -38,25 +45,6 @@ var wputh_scroll_event = function() {
         wputhmenu.has_floating_menu = true;
         wputhmenu.itemBody.addClass(wputhmenu.CSSClassName);
     }
-
-    function disable_bfloating() {
-        wputhmenu.has_bfloating_menu = false;
-        wputhmenu.itemBody.removeClass(wputhmenu.CSSClassNameB);
-    }
-
-    function enable_bfloating() {
-        wputhmenu.has_bfloating_menu = true;
-        wputhmenu.itemBody.addClass(wputhmenu.CSSClassNameB);
-    }
-
-    /* Check before scroll limit */
-    if (scrollTop > wputhmenu.scrollLimitB && !wputhmenu.has_bfloating_menu) {
-        enable_bfloating();
-    }
-    if (scrollTop < wputhmenu.scrollLimitB && wputhmenu.has_bfloating_menu) {
-        disable_bfloating();
-    }
-
     if (wputhmenu.checkScrollToTop) {
         if (scrollToTop && scrollTop > wputhmenu.scrollLimit && !wputhmenu.has_floating_menu) {
             enable_floating();
@@ -71,6 +59,52 @@ var wputh_scroll_event = function() {
         }
         if (scrollTop < wputhmenu.scrollLimit && wputhmenu.has_floating_menu) {
             disable_floating();
+        }
+    }
+
+    /* ----------------------------------------------------------
+      Check before menu scroll
+    ---------------------------------------------------------- */
+
+    function disable_bfloating() {
+        wputhmenu.has_bfloating_menu = false;
+        wputhmenu.itemBody.removeClass(wputhmenu.CSSClassNameB);
+    }
+
+    function enable_bfloating() {
+        wputhmenu.has_bfloating_menu = true;
+        wputhmenu.itemBody.addClass(wputhmenu.CSSClassNameB);
+    }
+
+    if (wputhmenu.scrollLimitB) {
+        if (scrollTop > wputhmenu.scrollLimitB && !wputhmenu.has_bfloating_menu) {
+            enable_bfloating();
+        }
+        if (scrollTop < wputhmenu.scrollLimitB && wputhmenu.has_bfloating_menu) {
+            disable_bfloating();
+        }
+    }
+
+    /* ----------------------------------------------------------
+      Check mobile menu scroll
+    ---------------------------------------------------------- */
+
+    function disable_mfloating() {
+        wputhmenu.has_mfloating_menu = false;
+        wputhmenu.itemBody.removeClass(wputhmenu.CSSClassNameM);
+    }
+
+    function enable_mfloating() {
+        wputhmenu.has_mfloating_menu = true;
+        wputhmenu.itemBody.addClass(wputhmenu.CSSClassNameM);
+    }
+
+    if (wputhmenu.scrollLimitMobile) {
+        if (scrollTop > wputhmenu.scrollLimitMobile && !wputhmenu.has_mfloating_menu) {
+            enable_mfloating();
+        }
+        if (scrollTop < wputhmenu.scrollLimitMobile && wputhmenu.has_mfloating_menu) {
+            disable_mfloating();
         }
     }
 
