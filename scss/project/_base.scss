@@ -114,6 +114,18 @@ body {
         -webkit-transform: rotate(90deg);
         transform: rotate(90deg);
     }
+
+    .main-header .nav-toggle {
+        z-index: 1;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .has--opened-main-menu .main-header .nav-toggle {
+        z-index: 999;
+        position: fixed;
+    }
 }
 
 /* ----------------------------------------------------------

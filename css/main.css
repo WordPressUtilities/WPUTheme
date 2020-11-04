@@ -586,7 +586,9 @@ html, body { font: 13px/1.3 Helvetica, Arial, sans-serif; }
 @media (min-width: 1025px) { .nav-toggle, .main-menu .btn-toggle { display: none; } }
 @media (max-width: 1024px) { .main-menu > .menu-item { z-index: 1; position: relative; }
   .main-menu > .menu-item .btn-toggle { z-index: 1; position: absolute; top: 0; right: 0; width: 1.5em; height: 1.5em; background-color: #ccc; -webkit-transition: -webkit-transform 0.3s ease; transition: transform 0.3s ease; -webkit-transform: rotate(0); transform: rotate(0); -webkit-transform-origin: center center; transform-origin: center center; }
-  .main-menu > .menu-item.is-active .btn-toggle { -webkit-transform: rotate(90deg); transform: rotate(90deg); } }
+  .main-menu > .menu-item.is-active .btn-toggle { -webkit-transform: rotate(90deg); transform: rotate(90deg); }
+  .main-header .nav-toggle { z-index: 1; position: absolute; top: 20px; right: 20px; }
+  .has--opened-main-menu .main-header .nav-toggle { z-index: 999; position: fixed; } }
 .main-container { margin-bottom: 20px; overflow: auto; }
 
 .breadcrumbs { padding-bottom: 10px; font-size: 0; }
