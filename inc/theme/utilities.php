@@ -783,10 +783,10 @@ function wputh_translated_url($use_full_lang_name = false) {
         }
     }
 
-    if(defined('ICL_LANGUAGE_CODE') && function_exists('icl_get_languages')){
+    if(!function_exists('pll_current_language') && defined('ICL_LANGUAGE_CODE') && function_exists('icl_get_languages')){
         $current_lang = ICL_LANGUAGE_CODE;
         $wpml_langs = icl_get_languages();
-
+        echo '<pre>'; var_dump(ICL_LANGUAGE_CODE); echo '</pre>'; die;
         if (is_array($wpml_langs)) {
             foreach ($wpml_langs as $lang) {
                 $full_name = $lang['code'];
