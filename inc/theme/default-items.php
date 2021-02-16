@@ -5,16 +5,13 @@ include dirname(__FILE__) . '/../../z-protect.php';
   Main
 ---------------------------------------------------------- */
 
-if (!IS_AJAX) {
+if (!defined('IS_AJAX') || !IS_AJAX) {
     add_action('get_header', 'wputh_get_doctype_html', 1, 1);
 }
 if (!function_exists('wputh_get_doctype_html')) {
     function wputh_get_doctype_html() {
-        ob_start();
-        language_attributes();
-        $lang = ob_get_clean();
         echo '<!DOCTYPE HTML>';
-        echo '<html class="' . apply_filters('wputh_html_class', 'no-js') . '" ' . $lang . '>';
+        echo '<html class="' . apply_filters('wputh_html_class', 'no-js') . '" ' . get_language_attributes() . '>';
     }
 }
 
