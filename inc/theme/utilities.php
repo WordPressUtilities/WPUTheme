@@ -777,7 +777,7 @@ function wputh_translated_url($use_full_lang_name = false) {
                 $display_languages[$lang['slug']] = array(
                     'name' => $full_name,
                     'current' => $lang['slug'] == $current_lang,
-                    'url' => $lang['url']
+                    'url' => wputh_clean_ajax_parameter_from_url($lang['url'])
                 );
             }
         }
@@ -786,7 +786,6 @@ function wputh_translated_url($use_full_lang_name = false) {
     if(!function_exists('pll_current_language') && defined('ICL_LANGUAGE_CODE') && function_exists('icl_get_languages')){
         $current_lang = ICL_LANGUAGE_CODE;
         $wpml_langs = icl_get_languages();
-        echo '<pre>'; var_dump(ICL_LANGUAGE_CODE); echo '</pre>'; die;
         if (is_array($wpml_langs)) {
             foreach ($wpml_langs as $lang) {
                 $full_name = $lang['code'];
@@ -796,7 +795,7 @@ function wputh_translated_url($use_full_lang_name = false) {
                 $display_languages[$lang['code']] = array(
                     'name' => $full_name,
                     'current' => $lang['code'] == $current_lang,
-                    'url' => $lang['url']
+                    'url' => wputh_clean_ajax_parameter_from_url($lang['url'])
                 );
             }
         }
