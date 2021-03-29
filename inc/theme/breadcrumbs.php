@@ -142,5 +142,5 @@ function wputh_get_breadcrumbs_html($elements_ariane) {
         $html .= '</li>';
     }
     $html .= '</ul>';
-    echo $html;
+    return $html;
 }
