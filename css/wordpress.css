@@ -204,3 +204,9 @@ html[lang] {
         transform: translate3d(0,0%,0);
     }
 }
+
+@media(max-width:374px) {
+    #wpadminbar {
+        display: none;
+    }
+}

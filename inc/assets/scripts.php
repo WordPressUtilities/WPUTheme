@@ -2,18 +2,20 @@
 include dirname(__FILE__) . '/../../z-protect.php';
 
 /* ----------------------------------------------------------
-  Remove JQ Migrate
+  Replace jQuery Version
 ---------------------------------------------------------- */
 
-add_filter('wp_default_scripts', 'wputh_disable_jqmigrate');
-
-/* http://subinsb.com/remove-jquery-migrate-in-wp-blog */
-function wputh_disable_jqmigrate(&$scripts) {
-    if (!is_admin()) {
-        $scripts->remove('jquery');
-        $scripts->add('jquery', false, array(
-            'jquery-core'
-        ), '1.12.4');
+add_action('wp_enqueue_scripts', 'wputh_disable_jqmigrate');
+function wputh_disable_jqmigrate() {
+    if (is_admin()) {
+        return;
+    }
+    if (!is_object($GLOBALS['wp_scripts']) || !isset($GLOBALS['wp_scripts']->registered['jquery']->ver)) {
+        return;
+    }
+    if ($GLOBALS['wp_scripts']->registered['jquery']->ver == '3.5.1') {
+        wp_deregister_script('jquery');
+        wp_register_script('jquery', get_theme_file_uri('/js/libs/jquery-3.5.1.min.js'), array(), '3.5.1');
     }
 }
 
