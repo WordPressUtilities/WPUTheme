@@ -801,6 +801,8 @@ function wputh_translated_url($use_full_lang_name = false) {
         }
     }
 
+    $display_languages = apply_filters('wputh_translated_url', $display_languages, $current_url);
+
     return $display_languages;
 }
 
