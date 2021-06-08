@@ -55,6 +55,10 @@ function set_wputh_options_fields_default($options) {
                 'label' => $name . ' username',
                 'box' => 'social_networks'
             );
+            $options['social_' . $id . '_share_text'] = array(
+                'label' => $name . ' text',
+                'box' => 'social_networks'
+            );
         }
     }
 

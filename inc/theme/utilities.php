@@ -438,7 +438,11 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
 
     $_via_user = get_option('social_twitter_username');
     $_via = !empty($_via_user) ? ' via @' . $_via_user : '';
-    $_twitter_text = wputh_truncate($_title, 100 - strlen($_via));
+    $_twitter_text = get_option('social_twitter_share_text');
+    if (!$_twitter_text) {
+        $_twitter_text = $_title;
+    }
+    $_twitter_text = wputh_truncate($_twitter_text, 100 - strlen($_via));
 
     $_methods = array(
         'email' => array(
@@ -783,7 +787,7 @@ function wputh_translated_url($use_full_lang_name = false) {
         }
     }
 
-    if(!function_exists('pll_current_language') && defined('ICL_LANGUAGE_CODE') && function_exists('icl_get_languages')){
+    if (!function_exists('pll_current_language') && defined('ICL_LANGUAGE_CODE') && function_exists('icl_get_languages')) {
         $current_lang = ICL_LANGUAGE_CODE;
         $wpml_langs = icl_get_languages();
         if (is_array($wpml_langs)) {
@@ -999,7 +1003,6 @@ function wputh_complete_post_ids($settings = array()) {
         'post__in' => $posts
     );
 }
-
 
 /* ----------------------------------------------------------
   Update without revisions
