@@ -415,15 +415,22 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
         $post = get_post($post);
     }
 
+    /* Title */
     $_title = apply_filters('the_title', $post->post_title);
     if ($title !== false) {
         $_title = $title;
     }
+    $_title = apply_filters('wputh_get_share_methods__title', $_title);
     $_title = trim(strip_tags(html_entity_decode($_title)));
+
+    /* Permalink */
     $_permalink = get_permalink($post);
     if ($permalink !== false) {
         $_permalink = $permalink;
     }
+    $_permalink = apply_filters('wputh_get_share_methods__permalink', $_permalink);
+
+    /* Image */
     $_image = '';
     if (has_post_thumbnail($post->ID)) {
         if (function_exists('wputhumb_get_thumbnail_url')) {
@@ -435,7 +442,9 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
     if ($image !== false) {
         $_image = $image;
     }
+    $_image = apply_filters('wputh_get_share_methods__image', $_image);
 
+    /* Twitter */
     $_via_user = get_option('social_twitter_username');
     $_via = !empty($_via_user) ? ' via @' . $_via_user : '';
     $_twitter_text = get_option('social_twitter_share_text');
