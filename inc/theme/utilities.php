@@ -911,6 +911,19 @@ function wputh_default_menu($args = array()) {
 ---------------------------------------------------------- */
 
 function wputh_get_menu_items($menu_id, $args = array()) {
+
+    $cache_id = 'wputh_get_menu_items__' . $menu_id;
+    $cache_duration = 60;
+    if (isset($args['cache_duration'])) {
+        $cache_duration = $args['cache_duration'];
+        unset($args['cache_duration']);
+    }
+
+    $menu_items = wp_cache_get($cache_id);
+    if ($menu_items !== false) {
+        return $menu_items;
+    }
+
     $theme_locations = get_nav_menu_locations();
     if (!isset($theme_locations[$menu_id])) {
         return array();
@@ -933,6 +946,9 @@ function wputh_get_menu_items($menu_id, $args = array()) {
             $menu_items[] = '<a target="' . $item->target . '" href="' . $item->url . '"><span>' . $item->title . '</span></a>';
         }
     }
+
+    wp_cache_set($cache_id, $menu_items, '', $cache_duration);
+
     return $menu_items;
 }
 
