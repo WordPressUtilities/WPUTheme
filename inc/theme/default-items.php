@@ -188,6 +188,8 @@ if (!function_exists('wputh_display_mainmenu')) {
         $main_menu_settings = apply_filters('wputheme_mainmenu_settings', array(
             'depth' => 2,
             'theme_location' => 'main',
+            'link_before' => '<span>',
+            'link_after'  => '</span>',
             'fallback_cb' => 'wputh_default_menu',
             'container' => 'div',
             'container_class' => 'main-menu__wrapper',
