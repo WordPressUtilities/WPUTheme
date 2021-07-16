@@ -37,8 +37,15 @@ function wputh_common_libraries() {
     }
     if (apply_filters('wputh_common_libraries__juxtapose', false)) {
         wp_enqueue_script('wputh-juxtapose-js', get_theme_file_uri('/js/libs/juxtapose/js/juxtapose.min.js'), array(), '1.2.1', true);
-        wp_enqueue_script('wputh-juxtapose-init-js', get_theme_file_uri('/js/libs/juxtapose-init.js'), array('jquery', 'wputh-juxtapose-js'), $slick_version, true);
+        wp_enqueue_script('wputh-juxtapose-init-js', get_theme_file_uri('/js/libs/juxtapose-init.js'), array('jquery', 'wputh-juxtapose-js'), '1.2.1', true);
         wp_enqueue_style('wputh-juxtapose-css', get_theme_file_uri('/js/libs/juxtapose/css/juxtapose.css'), array(), '1.2.1');
+    }
+    if (apply_filters('wputh_common_libraries__clipboard', false)) {
+        wp_enqueue_script('wputh-clipboard-js', get_theme_file_uri('/js/libs/clipboard/clipboard.min.js'), array(), '2.0.8', true);
+        wp_enqueue_script('wputh-clipboard-init-js', get_theme_file_uri('/js/libs/clipboard-init.js'), array('jquery', 'wputh-clipboard-js'), '2.0.8', true);
+        wp_localize_script('wputh-clipboard-init-js', 'wputh_clipboard_init_js', array(
+            'txt_copied' => __('Copied !', 'wputh')
+        ));
     }
     if (apply_filters('wputh_common_libraries__photoswipe', false)) {
         wp_enqueue_style('wputh-photoswipe-css', get_theme_file_uri('/js/libs/photoswipe/dist/photoswipe.css'), array(), '4.1.3');
