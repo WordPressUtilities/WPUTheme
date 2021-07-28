@@ -564,7 +564,7 @@ function wputh_get_cached_metas($url) {
         return $cached_metas;
     }
 
-    if(!class_exists('DOMDocument')){
+    if (!class_exists('DOMDocument')) {
         return array();
     }
 
@@ -607,7 +607,7 @@ function wputh_cache_get_external_file($url, $ext = '') {
     }
 
     $upload_dir = wp_upload_dir();
-    $filename = md5($url) . '.' . $extension;
+    $filename = md5($url) . $extension;
     $tmp_dir = $upload_dir['basedir'] . '/wputheme/';
     $tmp_url = $upload_dir['baseurl'] . '/wputheme/';
     $file_path = $tmp_dir . $filename;
