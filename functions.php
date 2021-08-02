@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/z-protect.php';
 
-define('WPUTHEME_VERSION', '2.91.0');
+define('WPUTHEME_VERSION', '2.92.0');
 
 if (apply_filters('wputheme_usesessions', true)) {
     @session_start();

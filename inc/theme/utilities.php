@@ -487,9 +487,22 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
         )
     );
 
+    if (apply_filters('wputh_common_libraries__clipboard', false)) {
+        $_methods['clipboard'] = array(
+            'name' => __('Copy link', 'wputh'),
+            'url' => $_permalink,
+            'attributes' => array(
+                'data-clipboard-text' => $_permalink
+            )
+        );
+    }
+
     foreach ($_methods as $_id => $_method) {
         if (!isset($_methods[$_id]['datas'])) {
             $_methods[$_id]['datas'] = array();
+        }
+        if (!isset($_methods[$_id]['attributes'])) {
+            $_methods[$_id]['attributes'] = array();
         }
         $_methods[$_id]['datas']['permalink'] = $_permalink;
         $_methods[$_id]['datas']['title'] = $_title;

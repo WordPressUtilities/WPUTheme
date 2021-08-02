@@ -59,6 +59,9 @@ msgstr ""
 msgid "Please send the invoice for the order #%s"
 msgstr ""
 
+msgid "Copy link"
+msgstr "Copia link"
+
 #: ../.././404.php:7 ../.././inc/theme/breadcrumbs.php:101
 msgid "404 Error"
 msgstr "Errore 404"

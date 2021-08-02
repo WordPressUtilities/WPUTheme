@@ -140,6 +140,9 @@ msgstr "Désolé, il n'y a aucun résultat pour cette requête."
 msgid "<strong>no</strong> comments"
 msgstr "<strong>aucun</strong> commentaire"
 
+msgid "Copy link"
+msgstr "Copier le lien"
+
 #: ../.././inc/theme/utilities.php:71
 msgid "<strong>1</strong> comment"
 msgstr "<strong>1</strong> commentaire"
