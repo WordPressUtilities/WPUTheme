@@ -610,17 +610,28 @@ function wputh_get_cached_metas($url) {
 /* File
 -------------------------- */
 
-function wputh_cache_get_external_file($url, $ext = '') {
+function wputh_cache_get_external_file($url, $args = array()) {
     $extension = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION);
     if (!$extension) {
-        $extension = '.file';
+        $extension = 'file';
     }
-    if ($ext) {
-        $extension = '.' . $ext;
+    if (is_string($args) && strlen($args)) {
+        $extension = $args;
+    }
+
+    if (!is_array($args)) {
+        $args = array();
+    }
+    if (!isset($args['ext'])) {
+        $args['ext'] = $extension;
+    }
+
+    if (!isset($args['max_age'])) {
+        $args['max_age'] = 99 * YEAR_IN_SECONDS;
     }
 
     $upload_dir = wp_upload_dir();
-    $filename = md5($url) . $extension;
+    $filename = md5($url) . '.' . str_replace('.', '', $extension);
     $tmp_dir = $upload_dir['basedir'] . '/wputheme/';
     $tmp_url = $upload_dir['baseurl'] . '/wputheme/';
     $file_path = $tmp_dir . $filename;
@@ -631,7 +642,10 @@ function wputh_cache_get_external_file($url, $ext = '') {
     }
 
     if (file_exists($file_path)) {
-        return $file_url;
+        $file_age = time() - filemtime($file_path);
+        if ($file_age < $args['max_age']) {
+            return $file_url;
+        }
     }
 
     // If the function it's not available, require it.
