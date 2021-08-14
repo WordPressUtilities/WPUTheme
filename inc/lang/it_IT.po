@@ -62,6 +62,9 @@ msgstr ""
 msgid "Copy link"
 msgstr "Copia link"
 
+msgid "Share link"
+msgstr "Condividi il link"
+
 #: ../.././404.php:7 ../.././inc/theme/breadcrumbs.php:101
 msgid "404 Error"
 msgstr "Errore 404"

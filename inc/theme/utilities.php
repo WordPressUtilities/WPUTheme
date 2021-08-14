@@ -497,6 +497,15 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
         );
     }
 
+    $_methods['sharesheet'] = array(
+        'name' => __('Share link', 'wputh'),
+        'url' => $_permalink,
+        'attributes' => array(
+            'data-share-title' => $_title,
+            'data-share-url' => $_permalink
+        )
+    );
+
     foreach ($_methods as $_id => $_method) {
         if (!isset($_methods[$_id]['datas'])) {
             $_methods[$_id]['datas'] = array();

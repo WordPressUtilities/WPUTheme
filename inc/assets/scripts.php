@@ -89,6 +89,10 @@ function wputh_javascript_files__default($scripts = array()) {
         'url' => get_theme_file_uri('/js/functions/search-form-check.js'),
         'footer' => 1
     );
+    $scripts['wputh-sharesheet'] = array(
+        'url' => get_theme_file_uri('/js/functions/sharesheet.js'),
+        'footer' => 1
+    );
     $scripts['wputh-maps'] = array(
         'url' => get_theme_file_uri('/js/functions/maps.js'),
         'footer' => 1

@@ -143,6 +143,9 @@ msgstr "<strong>aucun</strong> commentaire"
 msgid "Copy link"
 msgstr "Copier le lien"
 
+msgid "Share link"
+msgstr "Partager le lien"
+
 #: ../.././inc/theme/utilities.php:71
 msgid "<strong>1</strong> comment"
 msgstr "<strong>1</strong> commentaire"
