@@ -130,13 +130,14 @@ function wputh_get_breadcrumbs_html($elements_ariane) {
     $i = 0;
     foreach ($elements_ariane as $id => $element) {
         $last = (isset($element['last']) && $element['last'] == 1);
+        $element = apply_filters('wputh_get_breadcrumbs_html__element', $element, $last);
         $itemAttributes = 'itemprop="item" class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '') . '"';
         $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
         $element_name = '<span itemprop="name">' . $element['name'] . '</span>';
         if (isset($element['link'])) {
             $html .= '<a ' . $itemAttributes . ' href="' . $element['link'] . '">' . $element_name . '</a>';
         } else {
-            $html .= '<strong>' . $element_name . '</strong>';
+            $html .= '<strong ' . $itemAttributes . '>' . $element_name . '</strong>';
         }
         $html .= '<meta itemprop="position" content="' . (++$i) . '" />';
         $html .= '</li>';
