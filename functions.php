@@ -1,7 +1,8 @@
 <?php
 require_once dirname(__FILE__) . '/z-protect.php';
 
-define('WPUTHEME_VERSION', '2.94.1');
+$WPUTheme_infos = wp_get_theme('WPUTheme');
+define('WPUTHEME_VERSION', $sty->Version);
 
 if (apply_filters('wputheme_usesessions', true)) {
     @session_start();

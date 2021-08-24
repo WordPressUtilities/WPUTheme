@@ -18,11 +18,6 @@ const stripCssComments = require('gulp-strip-css-comments');
 const removeEmptyLines = require('gulp-remove-empty-lines');
 const trimlines = require('gulp-trimlines');
 const gulpStylelint = require('gulp-stylelint');
-
-/* Icon font */
-const runTimestamp = function() {
-    return Math.round(Date.now() / 1000);
-};
 const replace = require('gulp-replace');
 
 /* ----------------------------------------------------------
@@ -36,7 +31,6 @@ const sass_folder = src_folder + 'scss';
 const sass_folder_proj = sass_folder + '/' + project_name;
 const css_folder = app_folder + 'css';
 const sass_files = [sass_folder + '/**.scss', sass_folder + '/**/**.scss'];
-
 
 /* ----------------------------------------------------------
   Compile styles
