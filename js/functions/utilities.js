@@ -70,3 +70,17 @@ function wputheme_debounce(func, wait, immediate) {
         if (callNow) func.apply(context, args);
     };
 }
+
+/* ----------------------------------------------------------
+  JS Loader
+---------------------------------------------------------- */
+
+function wputheme_loadscript_async(src, callback) {
+    var script = document.createElement('script');
+    if (callback) {
+        script.onload = callback;
+    }
+    script.async = true;
+    script.src = src;
+    document.head.append(script);
+}
