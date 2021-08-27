@@ -27,7 +27,7 @@ function get_pages_sitemap_child_of($post_type, $sitemap_pages = array(), $paren
 }
 
 /* ----------------------------------------------------------
-  Queries
+  Post Queries
 ---------------------------------------------------------- */
 
 /* Set post types
@@ -54,7 +54,6 @@ $default_args = apply_filters('wputheme_sitemap_default_args', $default_args);
 /* Set posts
 -------------------------- */
 
-$sitemap_posts = array();
 foreach ($post_types as $_post_type => $post_type_infos) {
     $args = array(
         'post_type' => $_post_type
@@ -72,6 +71,55 @@ foreach ($post_types as $_post_type => $post_type_infos) {
     $sitemap_posts[] = array(
         'title' => $post_type_infos['title'],
         'post_type' => $_post_type,
+        'posts' => $sitemap_pages
+    );
+}
+
+/* ----------------------------------------------------------
+  Tax queries
+---------------------------------------------------------- */
+
+/* Set taxonomies
+-------------------------- */
+
+$taxonomies = array(
+    'category' => array(
+        'title' => 'Categories'
+    )
+);
+$taxonomies = apply_filters('wputheme_sitemap_taxonomies', $taxonomies, get_the_ID());
+
+/* Default args
+-------------------------- */
+
+$default_args_tax = array(
+    'hide_empty' => true
+);
+
+$default_args_tax = apply_filters('wputheme_sitemap_default_args_tax', $default_args_tax);
+
+/* Set posts
+-------------------------- */
+
+foreach ($taxonomies as $_tax => $tax_infos) {
+
+    $args = array(
+        'taxonomy' => $_tax
+    );
+    $terms = get_terms(array_merge($args, $default_args_tax));
+    $sitemap_pages = array();
+    foreach ($terms as $taxitem) {
+        $sitemap_pages[$taxitem->term_id] = array(
+            'type' => 'tax',
+            'permalink' => get_term_link($taxitem),
+            'title' => $taxitem->name,
+            'parent' => $taxitem->parent
+        );
+    }
+
+    $sitemap_posts[] = array(
+        'title' => $tax_infos['title'],
+        'post_type' => $_tax,
         'posts' => $sitemap_pages
     );
 }
