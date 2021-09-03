@@ -533,10 +533,12 @@ function wputh_get_social_links_ids() {
     ));
 }
 
-function wputh_get_social_links() {
-    $wpu_social_links = wputh_get_social_links_ids();
+function wputh_get_social_links($wpu_social_links_ids = array()) {
+    if (!$wpu_social_links_ids || !is_array($wpu_social_links_ids)) {
+        $wpu_social_links_ids = wputh_get_social_links_ids();
+    }
     $links = array();
-    foreach ($wpu_social_links as $id => $name) {
+    foreach ($wpu_social_links_ids as $id => $name) {
         $social_link = trim(get_option('social_' . $id . '_url'));
         if (!empty($social_link)) {
             $links[$id] = array(
@@ -548,8 +550,10 @@ function wputh_get_social_links() {
     return $links;
 }
 
-function wputh_get_social_links_html($wrapper_classname = 'header__social', $display_type = false, $template = '') {
-    $wpu_social_links = wputh_get_social_links();
+function wputh_get_social_links_html($wrapper_classname = 'header__social', $display_type = false, $template = '', $wpu_social_links = array()) {
+    if (!$wpu_social_links || !is_array($wpu_social_links)) {
+        $wpu_social_links = wputh_get_social_links();
+    }
     $html = '<ul class="' . $wrapper_classname . '">';
     foreach ($wpu_social_links as $id => $link) {
         $html .= '<li><a rel="me" href="' . $link['url'] . '" class="' . $id . '" title="' . sprintf(__('%s: Follow %s (open in new window)', 'wputh'), $link['name'], get_bloginfo('name')) . '" target="_blank">';

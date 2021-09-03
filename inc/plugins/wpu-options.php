@@ -31,7 +31,7 @@ if (!function_exists('set_wputh_options_fields')) {
 
         // Virtual contacts
         $options['wpu_opt_email'] = array(
-            'label' => __('Email address', 'wputh') ,
+            'label' => __('Email address', 'wputh'),
             'box' => 'virtual_contacts',
             'type' => 'email',
             'test' => 'email'
@@ -48,6 +48,7 @@ function set_wputh_options_fields_default($options) {
     foreach ($wpu_social_links as $id => $name) {
         $options['social_' . $id . '_url'] = array(
             'label' => $name . ' URL',
+            'type' => 'url',
             'box' => 'social_networks'
         );
         if ($id == 'twitter') {
@@ -74,4 +75,3 @@ function set_wputh_options_fields_default($options) {
 
     return $options;
 }
-
