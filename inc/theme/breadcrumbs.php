@@ -90,7 +90,7 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
                 $parent_pages['parent-page--' . $page_id] = array(
                     'link' => get_permalink($page_id),
                     'name' => get_the_title($page_id),
-                    'last' => 1
+                    'last' => false
                 );
             }
 
