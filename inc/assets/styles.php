@@ -1,5 +1,9 @@
 <?php
-include dirname( __FILE__ ) . '/../../z-protect.php';
+include dirname(__FILE__) . '/../../z-protect.php';
+
+/* ----------------------------------------------------------
+  Insert all available CSS files
+---------------------------------------------------------- */
 
 if (!is_admin()) {
     add_action('wp_enqueue_scripts', 'wputh_add_stylesheets');
@@ -16,30 +20,29 @@ if (!defined('WPU_CSS_URL')) {
     define('WPU_CSS_URL', get_template_directory_uri() . '/css/');
 }
 
-if(!function_exists('wputh_add_stylesheets')){
+if (!function_exists('wputh_add_stylesheets')) {
     function wputh_add_stylesheets() {
-        $css_files = parse_path( WPU_CSS_DIR );
-        foreach ( $css_files as $file ) {
-            wpu_add_css_file( $file, WPU_CSS_DIR, WPU_CSS_URL );
+        $css_files = wputh_parse_path(WPU_CSS_DIR);
+        foreach ($css_files as $file) {
+            wpu_add_css_file($file, WPU_CSS_DIR, WPU_CSS_URL);
         }
     }
 }
 
-function parse_path( $dir ) {
+function wputh_parse_path($dir) {
     $css_files = array();
 
     // Retrieving files
-    $files = glob( $dir . '*', GLOB_MARK );
+    $files = glob($dir . '*', GLOB_MARK);
 
     // Ordering by name
-    asort( $files );
+    asort($files);
 
-    foreach ( $files as $file ) {
+    foreach ($files as $file) {
         // Searching for files inside a folder
-        if ( is_dir( $file ) ) {
-            $css_files = array_merge( parse_path( $file ), $css_files );
-        }
-        elseif ( substr( $file, -4, 4 ) == '.css' ) {
+        if (is_dir($file)) {
+            $css_files = array_merge(wputh_parse_path($file), $css_files);
+        } elseif (substr($file, -4, 4) == '.css') {
             $css_files[] = $file;
         }
     }
@@ -47,17 +50,17 @@ function parse_path( $dir ) {
     return $css_files;
 }
 
-
-function wpu_add_css_file( $file, $dir, $url ) {
+function wpu_add_css_file($file, $dir, $url) {
     // Adding a file to the WordPress stylesheet queue
-    $css_file_url = str_replace( $dir, $url, $file );
-    $css_file_slug = 'wputh'. ( ( WPU_CSS_DIR != $dir ) ? 'child' : '' ) . strtolower( str_replace( array( $dir, '.css' ), '', $file ) );
-    wp_register_style( $css_file_slug, $css_file_url, NULL, apply_filters('wputh_style_version', WPUTHEME_ASSETS_VERSION) );
-    wp_enqueue_style( $css_file_slug );
+    $css_file_url = str_replace($dir, $url, $file);
+    $css_file_slug = 'wputh' . ((WPU_CSS_DIR != $dir) ? 'child' : '') . strtolower(str_replace(array($dir, '.css'), '', $file));
+    wp_register_style($css_file_slug, $css_file_url, NULL, apply_filters('wputh_style_version', WPUTHEME_ASSETS_VERSION));
+    wp_enqueue_style($css_file_slug);
 }
 
-/* Editor Stylesheet
--------------------------- */
+/* ----------------------------------------------------------
+  Add editor stylesheet
+---------------------------------------------------------- */
 
 add_action('init', 'wputh_add_editor_styles');
 if (!function_exists('wputh_add_editor_styles')) {
@@ -65,3 +68,32 @@ if (!function_exists('wputh_add_editor_styles')) {
         add_editor_style(WPU_CSS_URL . 'editor.css');
     }
 }
+
+/* ----------------------------------------------------------
+  Helper : load a CSS file asynchronously
+---------------------------------------------------------- */
+
+/* Thanks to https://www.filamentgroup.com/lab/load-css-simpler/ */
+
+$wputheme_wp_styles_async_css = array();
+
+function wputheme_wp_styles_async_css($handle) {
+    global $wp_styles, $wputheme_wp_styles_async_css;
+    if (!is_object($wp_styles)) {
+        return false;
+    }
+    if (!isset($wp_styles->registered[$handle])) {
+        return false;
+    }
+    $wp_styles->registered[$handle]->args = 'print';
+    $wputheme_wp_styles_async_css[] = $handle;
+    return true;
+}
+
+add_filter('style_loader_tag', function ($html, $handle) {
+    global $wputheme_wp_styles_async_css;
+    if (in_array($handle, $wputheme_wp_styles_async_css)) {
+        $html = str_replace("media=", 'onload="this.media=\'all\'" media=', $html);
+    }
+    return $html;
+}, 10, 2);
