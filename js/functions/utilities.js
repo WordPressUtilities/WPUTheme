@@ -84,3 +84,17 @@ function wputheme_loadscript_async(src, callback) {
     script.src = src;
     document.head.append(script);
 }
+
+/* ----------------------------------------------------------
+  CSS Loader
+---------------------------------------------------------- */
+
+function wputheme_loadstyle_async(src, callback) {
+    var style = document.createElement("link");
+    if (callback) {
+        style.onload = callback;
+    }
+    style.rel = "stylesheet";
+    style.href = src;
+    document.head.append(style);
+}
