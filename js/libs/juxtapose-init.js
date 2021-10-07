@@ -12,9 +12,16 @@ jQuery(document).ready(function($) {
         var $e = jQuery(element);
 
         var juxtaposeRatio;
-
-        jQuery(window).on('load', function(event) {
+        function setRatio() {
             juxtaposeRatio = $e.outerHeight() / $e.outerWidth();
+            if (!juxtaposeRatio) {
+                juxtaposeRatio = 9/16;
+            }
+        }
+
+        setRatio();
+        jQuery(window).on('load', function(event) {
+            setRatio();
         });
 
         jQuery(window).on('resize', function(event) {
