@@ -11,6 +11,15 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
         return array();
     }
 
+    $home_ids = array();
+    $home_id = get_option('page_on_front');
+    if ($home_id) {
+        $home_ids[] = $home_id;
+        if (function_exists('pll_get_post_translations')) {
+            $home_ids = pll_get_post_translations($home_id);
+        }
+    }
+
     $elements_ariane = array();
     $elements_ariane['home'] = array(
         'name' => __('Home', 'wputh'),
@@ -87,6 +96,10 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
         if (wp_get_post_parent_id($page_id)) {
             $parent_pages = array();
             while ($page_id = wp_get_post_parent_id($page_id)) {
+                /* Dont use the parent page if it is an homepage */
+                if (in_array($page_id, $home_ids)) {
+                    break;
+                }
                 $parent_pages['parent-page--' . $page_id] = array(
                     'link' => get_permalink($page_id),
                     'name' => get_the_title($page_id),
