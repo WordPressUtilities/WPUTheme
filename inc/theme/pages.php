@@ -22,8 +22,11 @@ function wputh_setup_pages_site($pages) {
         if (!isset($page['post_type'])) {
             $pages[$id]['post_type'] = 'page';
         }
-        if (!isset($page['disable_items'])) {
+        if (!isset($page['disable_items']) || !is_array($page['disable_items'])) {
             $pages[$id]['disable_items'] = array();
+        }
+        if (!isset($page['wpu_post_metas']) || !is_array($page['wpu_post_metas'])) {
+            $pages[$id]['wpu_post_metas'] = array();
         }
     }
 
@@ -35,60 +38,59 @@ function wputh_setup_pages_site($pages) {
 ---------------------------------------------------------- */
 
 function wputh_pages_site_setup() {
+    /* Avoid double launch */
+    if (defined('WPUTH_PAGES_SITE_SETUP_LAUNCHED')) {
+        return;
+    }
+    define('WPUTH_PAGES_SITE_SETUP_LAUNCHED', '1');
 
-    $default_folder = dirname(__FILE__) . '/activation/';
+    /* Get admin users */
+    $admin_user = false;
+    $adminusers = get_users(array(
+        'fields' => 'ids',
+        'role__in' => array('administrator')
+    ));
+    if (isset($adminusers[0]) && is_numeric($adminusers[0])) {
+        $admin_user = intval($adminusers[0], 10);
+    }
 
     // Creating pages
     $pages_site = wputh_setup_pages_site(apply_filters('wputh_pages_site', array()));
     foreach ($pages_site as $id => $page) {
         $option_page = get_option($id);
 
-        // If page should not be created
+        /* If page should not be created */
         if (isset($page['prevent_creation'])) {
             continue;
         }
 
-        // Check if page exists
+        /* Set author */
+        if (!isset($page['post_author']) && $admin_user) {
+            $page['post_author'] = $admin_user;
+        }
+
+        /* Check if page exists */
         if (is_numeric($option_page) && get_permalink($option_page)) {
             continue;
         }
 
-        // Avoid double launch
-        if (get_transient('creating_' . $id)) {
-            continue;
-        }
-        set_transient('creating_' . $id, 1, 60 * 10);
-
-        if (is_array($page['post_content']) && defined('QTX_VERSION')) {
-            $_content = '';
-            foreach ($page['post_content'] as $key => $var) {
-                $_content .= '[:' . $key . ']' . $var;
-            }
-            $_content .= '[:]';
-            $page['post_content'] = $_content;
-        }
-
-        // Default content : try to load template
+        /* Default content : try to load template */
         if (empty($page['post_content'])) {
-            $file_name = 'inc/theme/activation/' . str_replace('__page_id', '', $id) . '.php';
+            $file_name = dirname(__FILE__) . '/activation/' . str_replace('__page_id', '', $id) . '.php';
             ob_start();
             locate_template($file_name, 1);
             $page['post_content'] = ob_get_clean();
         }
 
-        // Create page
+        /* Create page */
         $option_page = wp_insert_post($page);
         if (is_numeric($option_page)) {
             update_option($id, $option_page);
             /* Add optional post metas */
-            if (isset($page['wpu_post_metas']) && is_array($page['wpu_post_metas'])) {
-                foreach ($page['wpu_post_metas'] as $_key => $_var) {
-                    add_post_meta($option_page, $_key, $_var);
-                }
+            foreach ($page['wpu_post_metas'] as $_key => $_var) {
+                add_post_meta($option_page, $_key, $_var);
             }
         }
-
-        delete_transient('creating_' . $id);
     }
 }
 
