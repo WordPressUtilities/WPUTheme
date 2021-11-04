@@ -1067,7 +1067,7 @@ function wputh_get_menu_items($menu_id, $args = array()) {
             if ($item->menu_item_parent && $args['depth'] == 1) {
                 continue;
             }
-            $menu_items[] = '<a target="' . $item->target . '" href="' . $item->url . '"><span>' . $item->title . '</span></a>';
+            $menu_items[] = '<a rel="' . $item->xfn . '" target="' . $item->target . '" href="' . $item->url . '"><span>' . $item->title . '</span></a>';
         }
     }
 
