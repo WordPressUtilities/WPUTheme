@@ -1036,7 +1036,7 @@ function wputh_default_menu($args = array()) {
 
 function wputh_get_menu_items($menu_id, $args = array()) {
 
-    $cache_id = 'wputh_get_menu_items__' . $menu_id;
+    $cache_id = 'wputh_get_menu_items__' . $menu_id . '__' . get_locale();
     $cache_duration = 60;
     if (isset($args['cache_duration'])) {
         $cache_duration = $args['cache_duration'];
