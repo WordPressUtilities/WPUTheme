@@ -96,6 +96,11 @@ var wputh_map = function($map, settings) {
         _markers = [];
     };
 
+    /* GET */
+    self.get_markers = function() {
+        return _markers;
+    };
+
     /* Trigger marker open */
     self.open_marker = function(i) {
         new google.maps.event.trigger(_markers[i].marker, 'click');
