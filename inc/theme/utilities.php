@@ -556,7 +556,7 @@ function wputh_get_social_links_html($wrapper_classname = 'header__social', $dis
     }
     $html = '<ul class="' . $wrapper_classname . '">';
     foreach ($wpu_social_links as $id => $link) {
-        $html .= '<li><a rel="me" href="' . $link['url'] . '" class="' . $id . '" title="' . sprintf(__('%s: Follow %s (open in new window)', 'wputh'), $link['name'], get_bloginfo('name')) . '" target="_blank">';
+        $html .= '<li><a rel="me noreferrer noopener" href="' . $link['url'] . '" class="' . $id . '" title="' . sprintf(__('%s: Follow %s (open in new window)', 'wputh'), $link['name'], get_bloginfo('name')) . '" target="_blank">';
         switch ($display_type) {
         case 'custom':
             $html .= str_replace('%s', $id, $template);
