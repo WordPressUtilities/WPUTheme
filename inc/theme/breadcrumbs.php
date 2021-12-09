@@ -144,7 +144,7 @@ function wputh_get_breadcrumbs_html($elements_ariane) {
     foreach ($elements_ariane as $id => $element) {
         $last = (isset($element['last']) && $element['last'] == 1);
         $element = apply_filters('wputh_get_breadcrumbs_html__element', $element, $last);
-        $itemAttributes = 'itemprop="item" class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '') . '"';
+        $itemAttributes =  ($last ? '' : 'itemprop="item"') . ' class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '') . '"';
         $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
         $element_name = '<span itemprop="name">' . $element['name'] . '</span>';
         if (isset($element['link'])) {
