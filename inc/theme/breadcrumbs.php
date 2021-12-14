@@ -75,6 +75,13 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
                 'last' => 1
             );
         }
+    } else if (is_post_type_archive()) {
+        $obj = get_queried_object();
+        $elements_ariane['archive-post-type-' . $obj->name] = array(
+            'name' => $obj->label,
+            'link' => get_post_type_archive_link($obj->name),
+            'last' => 1
+        );
     } else {
         if (is_archive() && class_exists('WPUSEO')) {
             $wpu_seo = new WPUSEO();
@@ -144,7 +151,7 @@ function wputh_get_breadcrumbs_html($elements_ariane) {
     foreach ($elements_ariane as $id => $element) {
         $last = (isset($element['last']) && $element['last'] == 1);
         $element = apply_filters('wputh_get_breadcrumbs_html__element', $element, $last);
-        $itemAttributes =  ($last ? '' : 'itemprop="item"') . ' class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '') . '"';
+        $itemAttributes = ($last ? '' : 'itemprop="item"') . ' class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '') . '"';
         $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
         $element_name = '<span itemprop="name">' . $element['name'] . '</span>';
         if (isset($element['link'])) {
