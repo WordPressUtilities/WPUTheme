@@ -7,7 +7,7 @@ include dirname(__FILE__) . '/../../z-protect.php';
 
 add_action('after_setup_theme', 'wputh_custom_theme_setup');
 
-if (function_exists('add_theme_support')) {
+if (!function_exists('wputh_custom_theme_setup') && function_exists('add_theme_support')) {
 
     function wputh_custom_theme_setup() {
 
@@ -24,7 +24,9 @@ if (function_exists('add_theme_support')) {
             'comment-form',
             'search-form',
             'gallery',
-            'caption'
+            'caption',
+            'style',
+            'script'
         ));
 
         // Supporting thumbnails
