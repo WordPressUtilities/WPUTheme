@@ -106,6 +106,21 @@ function wputh_setup_pages_init() {
     }
 }
 
+add_action('wp_head', 'wputh_setup_pages_wp_head');
+function wputh_setup_pages_wp_head() {
+    $pages_site = wputh_setup_pages_site(apply_filters('wputh_pages_site', array()));
+    $displayed_values = array();
+    foreach ($pages_site as $id => $page) {
+        if (isset($page['load_url_js']) && $page['load_url_js']) {
+            $displayed_values[str_replace('__page_id', '', $id)] = get_page_link(get_option($id));
+        }
+    }
+    if (!$displayed_values) {
+        return;
+    }
+    echo '<script>var wputh_pages_list=' . json_encode($displayed_values) . '</script>';
+}
+
 /* ----------------------------------------------------------
   Pages IDs
 ---------------------------------------------------------- */
