@@ -406,17 +406,28 @@ function wputh_truncate($string, $length, $more = '...') {
   Share methods
 ---------------------------------------------------------- */
 
-function wputh_get_share_methods($post, $title = false, $permalink = false, $image = false) {
+function wputh_get_share_methods($item, $title = false, $permalink = false, $image = false) {
 
-    if (!is_object($post)) {
-        if (!is_numeric($post)) {
+    if (!is_object($item)) {
+        if (!is_numeric($item)) {
             return array();
         }
-        $post = get_post($post);
+        $item = get_post($item);
+    }
+
+    $_title = $title;
+    $_permalink = $permalink;
+    if (is_object($item) && isset($item->post_type)) {
+        $_title = get_the_title($item);
+        $_permalink = get_permalink($item);
+    }
+    if (is_object($item) && isset($item->term_id)) {
+        $_title = $item->name;
+        $_permalink = get_term_link($item);
     }
 
     /* Title */
-    $_title = apply_filters('the_title', $post->post_title);
+    $_title = apply_filters('the_title', $_title);
     if ($title !== false) {
         $_title = $title;
     }
@@ -424,7 +435,6 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
     $_title = trim(strip_tags(html_entity_decode($_title)));
 
     /* Permalink */
-    $_permalink = get_permalink($post);
     if ($permalink !== false) {
         $_permalink = $permalink;
     }
@@ -432,11 +442,11 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
 
     /* Image */
     $_image = '';
-    if (has_post_thumbnail($post->ID)) {
+    if (isset($item->ID) && has_post_thumbnail($item->ID)) {
         if (function_exists('wputhumb_get_thumbnail_url')) {
-            $_image = urlencode(wputhumb_get_thumbnail_url('thumbnail', $post->ID));
+            $_image = urlencode(wputhumb_get_thumbnail_url('thumbnail', $item->ID));
         } else {
-            $_image = wp_get_attachment_url(get_post_thumbnail_id($post->ID));
+            $_image = wp_get_attachment_url(get_post_thumbnail_id($item->ID));
         }
     }
     if ($image !== false) {
@@ -446,6 +456,7 @@ function wputh_get_share_methods($post, $title = false, $permalink = false, $ima
 
     /* Twitter */
     $_via_user = get_option('social_twitter_username');
+    $_via_user = trim(str_replace('@', '', $_via_user));
     $_via = !empty($_via_user) ? ' via @' . $_via_user : '';
     $_twitter_text = get_option('social_twitter_share_text');
     if (!$_twitter_text) {
