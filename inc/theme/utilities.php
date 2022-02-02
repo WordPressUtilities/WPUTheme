@@ -354,7 +354,10 @@ function wputh_sendmail_set_html_content_type() {
 if (!function_exists('wputh_paginate')) {
     function wputh_paginate($prev_text = false, $next_text = false) {
         ob_start();
-        locate_template(array('tpl/paginate.php'), 1);
+        $tpl = locate_template(array('tpl/paginate.php'), false);
+        if ($tpl && file_exists($tpl)) {
+            include $tpl;
+        }
         return ob_get_clean();
     }
 }
@@ -530,6 +533,40 @@ function wputh_get_share_methods($item, $title = false, $permalink = false, $ima
     }
 
     return apply_filters('wputheme_share_methods', $_methods, $_title, $_permalink, $_image, $_via_user);
+}
+
+/**
+ * Get a HTML list of shared methods
+ * @param  mixed   $post       post object or post ID
+ * @param  string  $list_type  text or icon
+ * @return string              HTML List
+ */
+function wputh_get_share_methods__list_html($post = false, $list_type = 'text') {
+    if (!$post) {
+        $post = get_the_ID();
+    }
+    $_methods = wputh_get_share_methods($post);
+    $html = '';
+    $html .= '<ul class="share-list">';
+    foreach ($_methods as $_id => $_method) {
+        $html .= '<li>';
+        $html .= '<a rel="noreferrer noopener" target="_blank"';
+        foreach ($_method['attributes'] as $key => $var) {
+            $html .= ' ' . $key . '="' . esc_attr($var) . '"';
+        }
+        $html .= ' href="' . $_method['url'] . '" class="' . $_id . '">';
+        switch ($list_type) {
+        case 'icon':
+            $html .= '<i class="icon icon_' . $_id . '"></i>';
+            break;
+        default:
+            $html .= $_method['name'];
+        }
+        $html .= '</a>';
+        $html .= '</li>';
+    }
+    $html .= '</ul>';
+    return $html;
 }
 
 /* ----------------------------------------------------------
