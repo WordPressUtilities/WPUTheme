@@ -11,7 +11,7 @@ if ($hasALink) {
     echo '<nav class="main-pagination"><p>';
     echo $previous_post_link;
     if ($hasTwoLinks) {
-        echo ' | ';
+        echo '<span class="sep"> | </span>';
     }
     echo $next_post_link;
     echo '</p></nav>';

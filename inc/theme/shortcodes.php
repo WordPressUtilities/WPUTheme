@@ -8,8 +8,8 @@ function wputh_grid_shortcode($atts, $content = null) {
     $content = strip_tags($content, '<br><img><b><i><strong><em><small>');
     $content_cols = explode('-column-separator-', $content);
     $content = '';
-    foreach($content_cols as $col){
-        $content .= '<div class="col">'.trim($col).'</div>';
+    foreach ($content_cols as $col) {
+        $content .= '<div class="col">' . trim($col) . '</div>';
     }
     return '<div class="post-content-grid">' . $content . '</div>';
 }
@@ -47,14 +47,14 @@ function wputh_widget_shortcode($atts) {
     // Configure defaults and extract the attributes into variables
     extract(shortcode_atts(array(
         'type' => '',
-        'title' => '',
-    ) , $atts));
+        'title' => ''
+    ), $atts));
 
     $args = array(
         'before_widget' => '<div class="box widget">',
         'after_widget' => '</div>',
         'before_title' => '<div class="widget-title">',
-        'after_title' => '</div>',
+        'after_title' => '</div>'
     );
 
     ob_start();
@@ -137,4 +137,35 @@ function wputh_vimeo_shortcode($atts, $content = "") {
     }
 
     return '<div class="wputh-video-container"><iframe src="//player.vimeo.com/video/' . $url_details[1] . '?title=0&amp;byline=0&amp;portrait=0" width="1200" height="674" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>';
+}
+
+/* ----------------------------------------------------------
+  Gallery shortcode : add thickbox
+---------------------------------------------------------- */
+
+add_action('wp_head', 'wputh_gallery_filter_the_content', 10);
+function wputh_gallery_filter_the_content() {
+    if (!apply_filters('wputh_gallery_filter_the_content', false)) {
+        return;
+    }
+    add_thickbox();
+    echo <<<EOT
+<script>
+function setup_wputh_gallery_filter() {
+    jQuery(".gallery-item").find("a[href$='jpg'], a[href$='png'], a[href$='jpeg'], a[href$='gif']").each(function(){
+        jQuery(this).attr("rel","gallery");
+    });
+}
+function wputh_gallery_filter() {
+    tb_init(".gallery-item a[rel='gallery']");
+}
+jQuery(document).ready(function(){
+    setup_wputh_gallery_filter();
+    wputh_gallery_filter();
+});
+jQuery(window).on('vanilla-pjax-ready', function(e){
+    setup_wputh_gallery_filter();
+})
+</script>
+EOT;
 }

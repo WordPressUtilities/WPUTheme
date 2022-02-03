@@ -17,6 +17,9 @@ if (is_object($wputh_query)) {
 if (isset($_custom_max_num_pages)) {
     $max_num_pages = $_custom_max_num_pages;
 }
+if (isset($wputh_paginate_query) && $wputh_paginate_query) {
+    $max_num_pages = $wputh_paginate_query->max_num_pages;
+}
 
 // Setting text
 if (!isset($prev_text) || empty($prev_text)) {
@@ -51,7 +54,7 @@ if ($pagedd < $max_num_pages) {
 
 if ($max_num_pages > 1) {?>
 <nav class="main-pagination">
-<p><?php
+<p class="main-pagination__list"><?php
 switch (PAGINATION_KIND) {
 case 'numbers':
     echo paginate_links(apply_filters('wputheme_paginate_args', $paginate_args));
