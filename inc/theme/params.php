@@ -67,3 +67,21 @@ if (!function_exists('wp_body_open')) {
         do_action('wp_body_open');
     }
 }
+
+/* ----------------------------------------------------------
+  Gutemberg
+---------------------------------------------------------- */
+
+if (apply_filters('wputheme_use_gutemberg', false)) {
+    add_action('wp_print_styles', function () {
+        wp_dequeue_style('wp-block-library');
+    }, 100);
+
+    add_action('after_setup_theme', function () {
+        remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+        remove_filter('render_block', 'wp_render_duotone_support');
+        remove_filter('render_block', 'wp_render_layout_support_flag');
+        remove_filter('render_block', 'wp_restore_group_inner_container');
+        remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
+    }, 100);
+}
