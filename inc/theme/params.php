@@ -72,7 +72,7 @@ if (!function_exists('wp_body_open')) {
   Gutemberg
 ---------------------------------------------------------- */
 
-if (apply_filters('wputheme_use_gutemberg', false)) {
+if (apply_filters('wputheme_disable_gutemberg', true)) {
     add_action('wp_print_styles', function () {
         wp_dequeue_style('wp-block-library');
     }, 100);
