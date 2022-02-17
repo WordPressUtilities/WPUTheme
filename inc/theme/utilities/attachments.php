@@ -164,3 +164,44 @@ function wputh_get_attachment($attachment_id) {
         'title' => $attachment->post_title
     );
 }
+
+/* ----------------------------------------------------------
+  SVG
+---------------------------------------------------------- */
+
+/**
+ * Get SVG attachment image
+ * @param  int    $image_id   Attachment ID
+ * @param  string $image_size Image size if it could be a simple image
+ * @return string             SVG Code or IMG Tag.
+ */
+function wputh_get_svg_attachment_image($image_id, $image_size = 'medium') {
+    $image_src = wputh_get_svg_src(get_attached_file($image_id));
+    if (!$image_src) {
+        $image_src = wp_get_attachment_image($image_id, $image_size);
+    }
+    return $image_src;
+}
+
+/**
+ * Get SVG code from a file
+ * @param  [type] $image_path [description]
+ * @return [type]             [description]
+ */
+function wputh_get_svg_src($image_path) {
+    if (!$image_path || !file_exists($image_path)) {
+        return '';
+    }
+    $image_src = '';
+    $path_parts = pathinfo($image_path);
+    if (isset($path_parts['extension']) && $path_parts['extension'] == 'svg') {
+        $image_src = file_get_contents($image_path);
+        /* Remove useless attributes */
+        $image_src = preg_replace('/version="([0-9\.]*)"/isU', '', $image_src);
+        $image_src = preg_replace('/xmlns\:([a-z]*)="([^"]*)"/isU', '', $image_src);
+        /* Remove comments */
+        $image_src = preg_replace('/<!--(.*)-->/isU', '', $image_src);
+        $image_src = preg_replace('/<\?xml(.*)\?>/isU', '', $image_src);
+    }
+    return $image_src;
+}
