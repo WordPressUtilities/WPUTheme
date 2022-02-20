@@ -92,6 +92,9 @@ function wputheme_wp_styles_async_css($handle) {
 
 add_filter('style_loader_tag', function ($html, $handle) {
     global $wputheme_wp_styles_async_css;
+    if (!is_array($wputheme_wp_styles_async_css)) {
+        $wputheme_wp_styles_async_css = array();
+    }
     if (in_array($handle, $wputheme_wp_styles_async_css)) {
         $html = str_replace("media=", 'onload="this.media=\'all\'" media=', $html);
     }
