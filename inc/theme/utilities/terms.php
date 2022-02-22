@@ -6,15 +6,24 @@
 
 /**
  * Search in terms
- * @param  string $search   String to search
- * @param  string $taxonomy Taxonomy name
- * @return array            Array of terms
+ * @param  string $search      String to search
+ * @param  string $taxonomy    Taxonomy name
+ * @param  array  $args        Extra args
+ * @return array               Array of terms
  */
-function wputh_search_terms($search, $taxonomy) {
+function wputh_search_terms($search, $taxonomy, $args = array()) {
+
+    if(!is_array($args)){
+        $args = array();
+    }
+    if(!isset($args['hide_empty'])){
+        $args['hide_empty'] = false;
+    }
+
     $terms_name = get_terms(array(
         'taxonomy' => $taxonomy,
         'name__like' => $search,
-        'hide_empty' => false
+        'hide_empty' => $args['hide_empty']
     ));
 
     if (!$terms_name) {
@@ -24,7 +33,7 @@ function wputh_search_terms($search, $taxonomy) {
     $terms_desc = get_terms(array(
         'taxonomy' => $taxonomy,
         'description__like' => $search,
-        'hide_empty' => false
+        'hide_empty' => $args['hide_empty']
     ));
 
     if (!$terms_desc) {
