@@ -252,6 +252,30 @@ function wputh_add_javascripts() {
 }
 
 /* ----------------------------------------------------------
+  JS Module version
+---------------------------------------------------------- */
+
+/**
+ * Get a package.json version
+ *
+ * @param  string $package_path  path of plugin or path of the package.json file
+ * @return string $version       version if available, package.json filemtime or current time
+ */
+function wputh_get_js_version($package_path) {
+    if (is_dir($package_path)) {
+        $package_path = $package_path . '/package.json';
+    }
+    if (!file_exists($package_path)) {
+        return time();
+    }
+    $json_content = json_decode(file_get_contents($package_path), true);
+    if (!is_array($json_content) || !isset($json_content['version'])) {
+        return filemtime($package_path);
+    }
+    return $json_content['version'];
+}
+
+/* ----------------------------------------------------------
   Add attributes
 ---------------------------------------------------------- */
 
