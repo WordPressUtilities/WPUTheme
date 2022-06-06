@@ -129,16 +129,22 @@ if (apply_filters('wputheme_display_title', true)):
     add_action('wputheme_header_banner', 'wputh_display_title');
 endif;
 if (!function_exists('wputh_display_title')) {
-    function wputh_display_title() {
-        $main_tag = apply_filters('wputh_display_title__main_tag', is_home() || is_front_page() ? 'h1' : 'div');
-        $main_tag_classname = apply_filters('wputh_display_title__main_tag_classname', 'h1 main-title');
+    function wputh_display_title($main_tag = '', $main_tag_classname = '') {
+        /* Main tag */
+        $main_tag = $main_tag ? $main_tag : (is_home() || is_front_page() ? 'h1' : 'div');
+        $main_tag = apply_filters('wputh_display_title__main_tag', $main_tag);
+        $main_tag_classname = $main_tag_classname ? $main_tag_classname : 'h1 main-title';
+        $main_tag_classname = apply_filters('wputh_display_title__main_tag_classname', $main_tag_classname);
+        /* Title */
         $title_content = apply_filters('wputh_display_title__title_content', get_bloginfo('name'));
         $title_url = apply_filters('wputh_display_title__title_url', home_url());
+        /* Image */
         if (has_header_image()) {
-            $title_content = '<img src="' . get_header_image() . '" alt="' . esc_attr($title_content) . '" />';
+            $title_content = '<img src="' . esc_url(get_header_image()) . '" alt="' . esc_attr($title_content) . '" />';
             $main_tag_classname .= ' main-logo';
         }
-        echo '<' . $main_tag . ' class="' . $main_tag_classname . '"><a href="' . $title_url . '">' . $title_content . '</a></' . $main_tag . '>';
+        /* Print HTML */
+        echo '<' . $main_tag . ' translate="no" class="' . $main_tag_classname . '"><a href="' . esc_url($title_url) . '">' . $title_content . '</a></' . $main_tag . '>';
     }
 }
 
@@ -173,7 +179,7 @@ if (apply_filters('wputheme_display_toggle', true)):
 endif;
 if (!function_exists('wputh_display_toggle')) {
     function wputh_display_toggle() {
-        echo '<a class="nav-toggle" href="#"><span></span></a>';
+        echo '<a class="nav-toggle" role="button" href="#"><span></span></a>';
     }
 }
 
@@ -189,7 +195,7 @@ if (!function_exists('wputh_display_mainmenu')) {
             'depth' => 2,
             'theme_location' => 'main',
             'link_before' => '<span>',
-            'link_after'  => '</span>',
+            'link_after' => '</span>',
             'fallback_cb' => 'wputh_default_menu',
             'container' => 'div',
             'container_class' => 'main-menu__wrapper',
