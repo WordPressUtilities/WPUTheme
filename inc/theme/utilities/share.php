@@ -152,7 +152,7 @@ function wputh_get_share_methods__list_html($post = false, $list_type = 'text') 
         $html .= ' href="' . $_method['url'] . '" class="' . $_id . '">';
         switch ($list_type) {
         case 'icon':
-            $html .= '<i class="icon icon_' . $_id . '"></i>';
+            $html .= '<i aria-hidden="true" class="icon icon_' . $_id . '"></i>';
             break;
         default:
             $html .= $_method['name'];
