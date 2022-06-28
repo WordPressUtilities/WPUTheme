@@ -77,7 +77,7 @@ function wputh_get_share_methods($item, $title = false, $permalink = false, $ima
         ),
         'linkedin' => array(
             'name' => 'LinkedIn',
-            'url' => 'https://www.linkedin.com/shareArticle?mini=true&url=' . urlencode($_permalink) . '&title=' . urlencode($_title) . '&summary=&source='
+            'url' => 'https://www.linkedin.com/sharing/share-offsite/?url=' . urlencode($_permalink)
         ),
         'pinterest' => array(
             'name' => 'Pinterest',
@@ -136,11 +136,14 @@ function wputh_get_share_methods($item, $title = false, $permalink = false, $ima
  * @param  string  $list_type  text or icon
  * @return string              HTML List
  */
-function wputh_get_share_methods__list_html($post = false, $list_type = 'text') {
+function wputh_get_share_methods__list_html($post = false, $list_type = 'text', $template = '') {
     if (!$post) {
         $post = get_the_ID();
     }
     $_methods = wputh_get_share_methods($post);
+    if (!$template) {
+        $template = '<i aria-hidden="true" class="icon icon_%s"></i>';
+    }
     $html = '';
     $html .= '<ul class="share-list">';
     foreach ($_methods as $_id => $_method) {
@@ -151,6 +154,9 @@ function wputh_get_share_methods__list_html($post = false, $list_type = 'text') 
         }
         $html .= ' href="' . $_method['url'] . '" class="' . $_id . '">';
         switch ($list_type) {
+        case 'custom':
+            $html .= str_replace('%s', $_id, $template);
+            break;
         case 'icon':
             $html .= '<i aria-hidden="true" class="icon icon_' . $_id . '"></i>';
             break;
