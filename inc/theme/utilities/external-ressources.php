@@ -29,15 +29,21 @@ function wputh_get_cached_metas($url) {
     /* Extract all metas */
     $cached_metas = array();
     $responseBody = wp_remote_retrieve_body($response);
-    $doc = new DOMDocument();
-    @$doc->loadHTML($responseBody);
-    $meta = $doc->getElementsByTagName('meta');
-    foreach ($meta as $element) {
-        $tag = array();
-        foreach ($element->attributes as $node) {
-            $tag[$node->name] = $node->value;
+
+    if ($responseBody) {
+        $doc = new DOMDocument();
+        $doc->loadHTML($responseBody);
+        $meta = $doc->getElementsByTagName('meta');
+        if (!is_array($meta)) {
+            $meta = array();
         }
-        $cached_metas[] = $tag;
+        foreach ($meta as $element) {
+            $tag = array();
+            foreach ($element->attributes as $node) {
+                $tag[$node->name] = $node->value;
+            }
+            $cached_metas[] = $tag;
+        }
     }
 
     /* Cache & return result */
@@ -87,13 +93,17 @@ function wputh_cache_get_external_file($url, $args = array()) {
         }
     }
 
-    // If the function it's not available, require it.
     if (!function_exists('download_url')) {
         require_once ABSPATH . 'wp-admin/includes/file.php';
     }
+
     $tmp_file = download_url($url);
-    copy($tmp_file, $file_path);
-    @unlink($tmp_file);
+    if (!is_wp_error($tmp_file)) {
+        copy($tmp_file, $file_path);
+        @unlink($tmp_file);
+    } else {
+        $file_url = $url;
+    }
 
     return $file_url;
 }
