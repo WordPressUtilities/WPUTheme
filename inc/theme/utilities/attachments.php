@@ -202,6 +202,11 @@ function wputh_get_svg_src($image_path) {
         /* Remove comments */
         $image_src = preg_replace('/<!--(.*)-->/isU', '', $image_src);
         $image_src = preg_replace('/<\?xml(.*)\?>/isU', '', $image_src);
+        /* Remove scripts */
+        $image_src = preg_replace('/<script(.*?)>(.*?)<\/script>/is', '', $image_src);
+        $image_src = str_replace('onload=', 'data-onload=', $image_src);
+        $image_src = str_replace('javascript:', 'data-javascript:', $image_src);
+
     }
     return $image_src;
 }
