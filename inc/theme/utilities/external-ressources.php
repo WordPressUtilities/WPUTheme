@@ -31,18 +31,22 @@ function wputh_get_cached_metas($url) {
     $responseBody = wp_remote_retrieve_body($response);
 
     if ($responseBody) {
+        $responseBody = preg_replace('/<body(.*?)<\/body>/isU', "<body></body>", $responseBody);
+        $responseBody = preg_replace('/<script(.*)>([^>]*)<\/script>/isU', '', $responseBody);
+        $responseBody = preg_replace('/<style(.*)>([^>]*)<\/style>/isU', '', $responseBody);
+        $responseBody = preg_replace('/<link([^>]*)\/>/isU', '', $responseBody);
         $doc = new DOMDocument();
         $doc->loadHTML($responseBody);
         $meta = $doc->getElementsByTagName('meta');
-        if (!is_array($meta)) {
-            $meta = array();
-        }
-        foreach ($meta as $element) {
-            $tag = array();
-            foreach ($element->attributes as $node) {
-                $tag[$node->name] = $node->value;
+
+        if (is_iterable($meta)) {
+            foreach ($meta as $element) {
+                $tag = array();
+                foreach ($element->attributes as $node) {
+                    $tag[$node->name] = $node->value;
+                }
+                $cached_metas[] = $tag;
             }
-            $cached_metas[] = $tag;
         }
     }
 
