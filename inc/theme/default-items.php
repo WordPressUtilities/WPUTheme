@@ -143,6 +143,7 @@ if (!function_exists('wputh_display_title')) {
             $title_content = '<img src="' . esc_url(get_header_image()) . '" alt="' . esc_attr($title_content) . '" />';
             $main_tag_classname .= ' main-logo';
         }
+        $title_content = apply_filters('wputh_display_title__title_content__before_display', $title_content);
         /* Print HTML */
         echo '<' . $main_tag . ' translate="no" class="' . $main_tag_classname . '"><a href="' . esc_url($title_url) . '">' . $title_content . '</a></' . $main_tag . '>';
     }
