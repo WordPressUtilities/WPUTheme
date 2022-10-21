@@ -147,7 +147,11 @@ function wputh_get_share_methods__list_html($post = false, $list_type = 'text', 
     $html = '';
     $html .= '<ul class="share-list">';
     foreach ($_methods as $_id => $_method) {
-        $html .= '<li>';
+        $attributes = '';
+        if ($_id == 'sharesheet') {
+            $attributes .= ' style="display:none;"';
+        }
+        $html .= '<li data-share-method="' . $_id . '" ' . $attributes . '>';
         $html .= '<a rel="noreferrer noopener" target="_blank"';
         foreach ($_method['attributes'] as $key => $var) {
             $html .= ' ' . $key . '="' . esc_attr($var) . '"';

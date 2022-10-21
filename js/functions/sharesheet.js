@@ -1,18 +1,12 @@
 function wputheme_setup_sharesheet() {
-    if (navigator.share) {
-        return;
-    }
-
     /* Native sharing is disabled : remove block */
-    jQuery('[data-share-title],[data-share-url]').each(function() {
-        var $item = jQuery(this),
-            $parent = $item.parent();
-        /* Remove parent node if this one is an only child */
-        if ($parent.children().length == 1) {
-            $parent.remove();
-            return;
+    jQuery('[data-share-method="sharesheet"]').each(function(i, $block) {
+        if (navigator.share) {
+            $block.style.display = '';
         }
-        $item.remove();
+        else {
+            $block.parentNode.removeChild($block);
+        }
     });
 }
 
