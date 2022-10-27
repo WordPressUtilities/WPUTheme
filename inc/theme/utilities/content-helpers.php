@@ -124,7 +124,10 @@ if (!function_exists('wputh_link')) {
  * @param  boolean $post_id       (optional) Post ID
  * @return string                 <time> tag for the
  */
-function wputh_get_time_tag($date_format = 'd/m/Y', $post_id = false) {
+function wputh_get_time_tag($date_format = '', $post_id = false) {
+    if (!$date_format) {
+        $date_format = get_option('date_format');
+    }
     if (!$post_id) {
         $post_id = get_the_ID();
     }

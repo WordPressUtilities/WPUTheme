@@ -8,7 +8,7 @@ if ($author_link) {
     echo '<span class="author">' . __('By', 'wputh') . ' ' . $author_link . '</span>';
     echo '<span class="sep">&bull;</span>';
 }
-echo wputh_get_time_tag(__('F j, Y', 'wputh'));
+echo wputh_get_time_tag();
 ?>
     </aside>
 </header>
