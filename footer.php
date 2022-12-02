@@ -2,6 +2,8 @@
 include dirname(__FILE__) . '/z-protect.php';
 do_action('wputheme_main_undercontent_inajax');
 if (defined('IS_AJAX') && IS_AJAX) {
+    $current_url = strtok($_SERVER["REQUEST_URI"], '?');
+    echo "<script>if(typeof jQuery !== 'function'){window.location='".$current_url."';}</script>";
     return;
 }
 do_action('wputheme_main_undercontent');
