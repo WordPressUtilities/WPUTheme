@@ -50,6 +50,42 @@ function get_the_loop($params = array()) {
 }
 
 /* ----------------------------------------------------------
+  Get loops
+---------------------------------------------------------- */
+
+function wputheme_get_loop_from_ids($wpq_posts = array(), $classname = 'loop-list', $loopfile = 'loop-post.php', $args = array()) {
+    if (!$wpq_posts) {
+        return '';
+    }
+    $html = '<ul class="' . $classname . '">';
+    foreach ($wpq_posts as $wpq_post) {
+        $html .= '<li>';
+        $html .= wputheme_get_loop_item_from_id($wpq_post, $loopfile, $args);
+        $html .= '</li>';
+    }
+    $html .= '</ul>';
+    return $html;
+}
+
+function wputheme_get_loop_item_from_id($post_obj, $loopfile = 'loop-post.php', $args = array()) {
+    global $post;
+    if (is_numeric($post_obj)) {
+        $post_obj = get_post($post_obj);
+    }
+    $loop_file = get_stylesheet_directory() . '/tpl/loops/' . $loopfile;
+    if (!file_exists($loop_file)) {
+        return '<div>Error : ' . $loopfile . ' does not exists</div>';
+    }
+    $old_post = $post;
+    $post = $post_obj;
+    ob_start();
+    include $loop_file;
+    $html = ob_get_clean();
+    $post = $old_post;
+    return $html;
+}
+
+/* ----------------------------------------------------------
   Complete post ids
 ---------------------------------------------------------- */
 
