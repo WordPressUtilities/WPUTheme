@@ -100,3 +100,52 @@ add_filter('style_loader_tag', function ($html, $handle) {
     }
     return $html;
 }, 10, 2);
+
+/* ----------------------------------------------------------
+  Preload fonts
+---------------------------------------------------------- */
+
+/* Helper to extract all available fonts
+-------------------------- */
+
+function wputheme_preload_font_find(){
+    $fonts = wputheme_rsearch(get_stylesheet_directory().'/assets/', '/.*\.woff2/');
+    return array_map(function($a){
+        return str_replace(get_stylesheet_directory(), '', $a);
+    }, $fonts);
+}
+
+// var_export(wputheme_preload_font_find());die;
+
+/* Helper to preload a font
+-------------------------- */
+
+function wputheme_preload_font($font_file, $version_file = false) {
+    $theme_path = str_replace(site_url(), '', get_stylesheet_directory_uri());
+    if (!is_readable(ABSPATH . $theme_path . $font_file)) {
+        return false;
+    }
+    if ($version_file && !is_readable(ABSPATH . $theme_path . $version_file)) {
+        $version_file = false;
+    }
+    $href = $theme_path . $font_file . ($version_file ? '?' . file_get_contents(ABSPATH . $theme_path . $version_file) : '');
+    return array(
+        'href' => $href,
+        'as' => 'font',
+        'crossorigin' => 'anonymous',
+        'type' => 'font/woff2'
+    );
+}
+
+/* Load all preloaded fonts
+-------------------------- */
+
+add_filter('wp_preload_resources', function ($preload_resources = array()) {
+    $fonts = apply_filters('wputheme_preload_fonts', array());
+    foreach ($fonts as $font) {
+        if ($font) {
+            $preload_resources[] = $font;
+        }
+    }
+    return $preload_resources;
+}, 10, 1);
