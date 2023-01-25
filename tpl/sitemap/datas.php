@@ -34,9 +34,7 @@ function get_pages_sitemap_child_of($post_type, $sitemap_pages = array(), $paren
 -------------------------- */
 
 $post_types = array(
-    'page' => array(
-        'title' => 'Pages'
-    )
+    'page' => array()
 );
 $post_types = apply_filters('wputheme_sitemap_post_types', $post_types, get_the_ID());
 
@@ -58,6 +56,19 @@ foreach ($post_types as $_post_type => $post_type_infos) {
     $args = array(
         'post_type' => $_post_type
     );
+
+    if (!is_array($post_type_infos)) {
+        $post_type_infos = array();
+    }
+
+    if (!isset($post_type_infos['title'])) {
+        $post_type_infos['title'] = $post_type;
+        $post_type_infos_raw = get_post_type_object($_post_type);
+        if (is_object($post_type_infos_raw) && !is_wp_error($post_type_infos_raw)) {
+            $post_type_infos['title'] = $post_type_infos_raw->label;
+        }
+    }
+
     $wpq_sitemap = get_posts(array_merge($args, $default_args));
     $sitemap_pages = array();
     foreach ($wpq_sitemap as $sitepost) {
