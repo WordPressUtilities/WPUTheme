@@ -108,9 +108,9 @@ add_filter('style_loader_tag', function ($html, $handle) {
 /* Helper to extract all available fonts
 -------------------------- */
 
-function wputheme_preload_font_find(){
-    $fonts = wputheme_rsearch(get_stylesheet_directory().'/assets/', '/.*\.woff2/');
-    return array_map(function($a){
+function wputheme_preload_font_find() {
+    $fonts = wputheme_rsearch(get_stylesheet_directory() . '/assets/', '/.*\.woff2/');
+    return array_map(function ($a) {
         return str_replace(get_stylesheet_directory(), '', $a);
     }, $fonts);
 }
@@ -146,6 +146,12 @@ add_filter('wp_preload_resources', function ($preload_resources = array()) {
         if ($font) {
             $preload_resources[] = $font;
         }
+    }
+    if (has_header_image()) {
+        $preload_resources[] = array(
+            'href' => get_header_image(),
+            'as' => 'image'
+        );
     }
     return $preload_resources;
 }, 10, 1);
