@@ -139,8 +139,12 @@ if (!function_exists('wputh_display_title')) {
         $title_content = apply_filters('wputh_display_title__title_content', get_bloginfo('name'));
         $title_url = apply_filters('wputh_display_title__title_url', home_url());
         /* Image */
-        if (has_header_image()) {
-            $title_content = '<img src="' . esc_url(get_header_image()) . '" fetchpriority="high" alt="' . esc_attr($title_content) . '" />';
+        $main_logo = apply_filters('wputh_display_title__title_image_url', '');
+        if (!$main_logo && has_header_image()) {
+            $main_logo = get_header_image();
+        }
+        if ($main_logo) {
+            $title_content = '<img src="' . esc_url($main_logo) . '" fetchpriority="high" alt="' . esc_attr($title_content) . '" />';
             $main_tag_classname .= ' main-logo';
         }
         $title_content = apply_filters('wputh_display_title__title_content__before_display', $title_content);
