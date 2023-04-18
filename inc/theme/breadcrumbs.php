@@ -31,6 +31,16 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
 
     $elements_ariane = apply_filters('wputh_get_breadcrumbs__after_home', $elements_ariane);
 
+    $display_post_type_archive = apply_filters('wputh_get_breadcrumbs__display_post_type_archive', false);
+    if($display_post_type_archive && is_single() && !is_singular('post')){
+        $obj = get_post_type_object(get_post_type());
+        $elements_ariane['archive-post-type-' . $obj->name] = array(
+            'name' => $obj->label,
+            'link' => get_post_type_archive_link($obj->name),
+            'last' => 1
+        );
+    }
+
     if (is_singular()) {
         $main_category = get_the_category();
         if (isset($main_category[0])) {
