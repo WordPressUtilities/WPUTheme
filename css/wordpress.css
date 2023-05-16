@@ -47,6 +47,18 @@
 .bypostauthor {
 }
 
+/* Video
+-------------------------- */
+
+.wp-video {
+    width: 100%!important;
+    max-width: 100%!important;
+}
+
+.wp-video > br {
+    display: none;
+}
+
 /* Content
 -------------------------- */
 
@@ -163,7 +175,7 @@ html[lang] {
     margin-top: 0!important;
 }
 
-@media(max-width:782px) {
+@media (max-width:782px) {
     html {
         z-index: 1;
         position: relative;
@@ -178,7 +190,7 @@ html[lang] {
     }
 }
 
-@media(min-width:783px) {
+@media (min-width:783px) {
     #wpadminbar:after {
         content: '';
         z-index: 1;
@@ -205,7 +217,7 @@ html[lang] {
     }
 }
 
-@media(max-width:374px) {
+@media (max-width:374px) {
     #wpadminbar {
         display: none;
     }
