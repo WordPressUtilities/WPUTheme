@@ -24,6 +24,6 @@ if (!defined('IS_AJAX') || !IS_AJAX ) {
 <?php endif; ?>
 <?php endif;
 do_action('wputheme_main_overcontent');
-if (apply_filters('wputheme_display_skiplinks', true)) { echo '<a id="maincontent"></a>'; }
+if (apply_filters('wputheme_display_skiplinks', true)) { echo '<div id="maincontent"></div>'; }
 }
 do_action('wputheme_main_overcontent_inajax');
