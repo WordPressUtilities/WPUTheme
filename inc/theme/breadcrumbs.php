@@ -32,7 +32,7 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
     $elements_ariane = apply_filters('wputh_get_breadcrumbs__after_home', $elements_ariane);
 
     $display_post_type_archive = apply_filters('wputh_get_breadcrumbs__display_post_type_archive', false);
-    if($display_post_type_archive && is_single() && !is_singular('post')){
+    if ($display_post_type_archive && is_single() && !is_singular('post')) {
         $obj = get_post_type_object(get_post_type());
         $elements_ariane['archive-post-type-' . $obj->name] = array(
             'name' => $obj->label,
@@ -109,6 +109,21 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
     $elements_ariane = apply_filters('wputh_get_breadcrumbs__before_singular', $elements_ariane);
 
     if (is_singular() || is_page()) {
+
+        /* Parent tax */
+        $parent_tax = apply_filters('wputh_get_breadcrumbs__before_singular__parent_tax', false, get_post_type());
+        if ($parent_tax) {
+            $parent_terms = wp_get_post_terms(get_the_ID(), $parent_tax);
+            if (is_array($parent_terms) && isset($parent_terms[0])) {
+                $elements_ariane['parent-term--' . $parent_terms[0]->term_id] = array(
+                    'name' => $parent_terms[0]->name,
+                    'link' => get_term_link($parent_terms[0]),
+                    'last' => false
+                );
+            }
+        }
+
+        /* Parent page */
         $page_id = get_the_ID();
         if (wp_get_post_parent_id($page_id)) {
             $parent_pages = array();
@@ -128,6 +143,7 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
             $elements_ariane += $parent_pages;
         }
 
+        /* Page */
         $elements_ariane['single-page'] = array(
             'name' => get_the_title(),
             'link' => get_permalink(),
