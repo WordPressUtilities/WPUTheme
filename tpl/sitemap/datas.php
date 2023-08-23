@@ -30,11 +30,6 @@ function get_pages_sitemap_child_of($post_type, $sitemap_pages = array(), $paren
   Post Queries
 ---------------------------------------------------------- */
 
-$sitemap_disabled_post_id = false;
-if (get_option('show_on_front') == 'page') {
-    $sitemap_disabled_post_id = get_option('page_on_front');
-}
-
 $sitemap_posts = array();
 
 /* Set post types
@@ -53,6 +48,9 @@ $default_args = array(
     'post_status' => 'publish',
     'post__not_in' => array(get_the_ID())
 );
+if (get_option('show_on_front') == 'page') {
+    $default_args['post__not_in'][] = get_option('page_on_front');
+}
 
 $default_args = apply_filters('wputheme_sitemap_default_args', $default_args);
 
@@ -79,9 +77,6 @@ foreach ($post_types as $_post_type => $post_type_infos) {
     $wpq_sitemap = get_posts(array_merge($args, $default_args));
     $sitemap_pages = array();
     foreach ($wpq_sitemap as $sitepost) {
-        if ($sitepost->ID == $sitemap_disabled_post_id) {
-            continue;
-        }
         $sitemap_pages[$sitepost->ID] = array(
             'permalink' => get_permalink($sitepost),
             'title' => get_the_title($sitepost),
