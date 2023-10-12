@@ -11,7 +11,7 @@ const {series} = gulp;
 /* Reload */
 
 /* Sass */
-const sass = require('gulp-sass')(require('node-sass'));
+const sass = require('gulp-sass')(require('sass'));
 const sassGlob = require('gulp-sass-glob');
 const autoprefixer = require('gulp-autoprefixer');
 const stripCssComments = require('gulp-strip-css-comments');
@@ -40,7 +40,6 @@ function style() {
     return gulp.src(sass_files)
         .pipe(sassGlob())
         .pipe(sass({
-            outputStyle: 'compact',
             indentType: 'space',
             indentWidth: 0
         }).on('error', sass.logError))

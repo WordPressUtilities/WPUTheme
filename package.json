@@ -1,6 +1,6 @@
 {
   "name": "wputheme",
-  "version": "3.8.3",
+  "version": "3.9.0",
   "description": "WPUTheme",
   "dependencies": {},
   "devDependencies": {
@@ -13,7 +13,7 @@
     "gulp-strip-css-comments": "^2.0.0",
     "gulp-stylelint": "^13.0.0",
     "gulp-trimlines": "^1.0.1",
-    "node-sass": "^6.0.1",
+    "sass": "^1.56.1",
     "stylelint": "^13.13.1"
   },
   "scripts": {},

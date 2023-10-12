@@ -7,13 +7,12 @@
 function get_pages_sitemap_child_of($post_type, $sitemap_pages = array(), $parent = 0) {
     $content = '';
 
-    if ($parent == 0 && $post_type == 'page') {
-        $content .= '<li><a href="' . home_url() . '">' . __('Home page', 'wputh') . '</a></li>';
-    }
-
     foreach ($sitemap_pages as $id => $sitemap_page) {
         if ($sitemap_page['parent'] == $parent) {
             $content .= '<li>';
+            if (!$sitemap_page['title']) {
+                $sitemap_page['title'] = $sitemap_page['permalink'];
+            }
             $content .= '<a href="' . $sitemap_page['permalink'] . '">' . $sitemap_page['title'] . '</a>';
             $content .= get_pages_sitemap_child_of($post_type, $sitemap_pages, $id);
             $content .= '</li>';
@@ -48,8 +47,9 @@ $default_args = array(
     'post_status' => 'publish',
     'post__not_in' => array(get_the_ID())
 );
+$wputheme_homepage_id = -1;
 if (get_option('show_on_front') == 'page') {
-    $default_args['post__not_in'][] = get_option('page_on_front');
+    $wputheme_homepage_id = get_option('page_on_front');
 }
 
 $default_args = apply_filters('wputheme_sitemap_default_args', $default_args);
@@ -82,6 +82,13 @@ foreach ($post_types as $_post_type => $post_type_infos) {
             'title' => get_the_title($sitepost),
             'parent' => $sitepost->post_parent
         );
+    }
+
+    /* Move homepage to first position */
+    if ($wputheme_homepage_id > 0 && isset($sitemap_pages[$wputheme_homepage_id])) {
+        $home_page_item = $sitemap_pages[$wputheme_homepage_id];
+        unset($sitemap_pages[$wputheme_homepage_id]);
+        $sitemap_pages = array($wputheme_homepage_id => $home_page_item) + $sitemap_pages;
     }
 
     $sitemap_posts[] = array(
