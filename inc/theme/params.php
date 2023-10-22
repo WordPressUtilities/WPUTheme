@@ -77,6 +77,7 @@ if (apply_filters('wputheme_disable_gutemberg', true)) {
         wp_dequeue_style('wp-block-library');
     }, 100);
 
+    remove_action( 'init', 'register_block_core_template_part' );
     add_action('after_setup_theme', function () {
         remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
         remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
