@@ -36,8 +36,7 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
         $obj = get_post_type_object(get_post_type());
         $elements_ariane['archive-post-type-' . $obj->name] = array(
             'name' => $obj->label,
-            'link' => get_post_type_archive_link($obj->name),
-            'last' => 1
+            'link' => get_post_type_archive_link($obj->name)
         );
     }
 
@@ -166,6 +165,8 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
             'last' => 1
         );
     }
+
+    $elements_ariane = apply_filters('wputh_get_breadcrumbs__after_all', $elements_ariane);
 
     return $elements_ariane;
 }
