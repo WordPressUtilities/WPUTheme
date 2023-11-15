@@ -110,6 +110,7 @@ function wputh_translated_url($use_full_lang_name = false) {
                     $full_name = $lang['name'];
                 }
                 $display_languages[$lang['slug']] = array(
+                    'flag' => $lang['flag'],
                     'name' => $full_name,
                     'current' => $lang['slug'] == $current_lang,
                     'url' => wputh_clean_ajax_parameter_from_url($lang['url'])
