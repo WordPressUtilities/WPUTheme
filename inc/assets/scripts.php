@@ -2,24 +2,6 @@
 include dirname(__FILE__) . '/../../z-protect.php';
 
 /* ----------------------------------------------------------
-  Replace jQuery Version
----------------------------------------------------------- */
-
-add_action('wp_enqueue_scripts', 'wputh_disable_jqmigrate');
-function wputh_disable_jqmigrate() {
-    if (is_admin()) {
-        return;
-    }
-    if (!is_object($GLOBALS['wp_scripts']) || !isset($GLOBALS['wp_scripts']->registered['jquery']->ver)) {
-        return;
-    }
-    if ($GLOBALS['wp_scripts']->registered['jquery']->ver == '3.5.1') {
-        wp_deregister_script('jquery');
-        wp_register_script('jquery', get_theme_file_uri('/js/libs/jquery-3.5.1.min.js'), array(), '3.5.1');
-    }
-}
-
-/* ----------------------------------------------------------
   Common libraries
 ---------------------------------------------------------- */
 
@@ -36,13 +18,15 @@ function wputh_common_libraries() {
         wp_enqueue_style('wputh-simplebar-css', get_theme_file_uri('/js/libs/simplebar/simplebar.css'), array(), '5.3.6');
     }
     if (apply_filters('wputh_common_libraries__juxtapose', false)) {
-        wp_enqueue_script('wputh-juxtapose-js', get_theme_file_uri('/js/libs/juxtapose/js/juxtapose.min.js'), array(), '1.2.1', true);
-        wp_enqueue_script('wputh-juxtapose-init-js', get_theme_file_uri('/js/libs/juxtapose-init.js'), array('jquery', 'wputh-juxtapose-js'), '1.2.1', true);
-        wp_enqueue_style('wputh-juxtapose-css', get_theme_file_uri('/js/libs/juxtapose/css/juxtapose.css'), array(), '1.2.1');
+        $juxtapose_version = '1.2.1';
+        wp_enqueue_script('wputh-juxtapose-js', get_theme_file_uri('/js/libs/juxtapose/js/juxtapose.min.js'), array(), $juxtapose_version, true);
+        wp_enqueue_script('wputh-juxtapose-init-js', get_theme_file_uri('/js/libs/juxtapose-init.js'), array('jquery', 'wputh-juxtapose-js'), $juxtapose_version, true);
+        wp_enqueue_style('wputh-juxtapose-css', get_theme_file_uri('/js/libs/juxtapose/css/juxtapose.css'), array(), $juxtapose_version);
     }
     if (apply_filters('wputh_common_libraries__clipboard', false)) {
-        wp_enqueue_script('wputh-clipboard-js', get_theme_file_uri('/js/libs/clipboard/clipboard.min.js'), array(), '2.0.8', true);
-        wp_enqueue_script('wputh-clipboard-init-js', get_theme_file_uri('/js/libs/clipboard-init.js'), array('jquery', 'wputh-clipboard-js'), '2.0.8', true);
+        $clipboard_version = '2.0.11';
+        wp_enqueue_script('wputh-clipboard-js', get_theme_file_uri('/js/libs/clipboard/clipboard.min.js'), array(), $clipboard_version, true);
+        wp_enqueue_script('wputh-clipboard-init-js', get_theme_file_uri('/js/libs/clipboard-init.js'), array('jquery', 'wputh-clipboard-js'), $clipboard_version, true);
         wp_localize_script('wputh-clipboard-init-js', 'wputh_clipboard_init_js', array(
             'txt_copied' => __('Copied !', 'wputh')
         ));

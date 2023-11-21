@@ -49,16 +49,19 @@ function set_wputh_options_fields_default($options) {
         $options['social_' . $id . '_url'] = array(
             'label' => $name . ' URL',
             'type' => 'url',
-            'box' => 'social_networks'
+            'box' => 'social_networks',
+            'lang' => 1
         );
         if ($id == 'twitter') {
             $options['social_' . $id . '_username'] = array(
                 'label' => $name . ' username',
-                'box' => 'social_networks'
+                'box' => 'social_networks',
+                'lang' => 1
             );
             $options['social_' . $id . '_share_text'] = array(
                 'label' => $name . ' text',
-                'box' => 'social_networks'
+                'box' => 'social_networks',
+                'lang' => 1
             );
         }
     }

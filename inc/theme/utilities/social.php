@@ -18,7 +18,9 @@ function wputh_get_social_links($wpu_social_links_ids = array()) {
     }
     $links = array();
     foreach ($wpu_social_links_ids as $id => $name) {
-        $social_link = trim(get_option('social_' . $id . '_url'));
+        $opt_id = 'social_' . $id . '_url';
+        $opt = function_exists('wputh_l18n_get_option') ? wputh_l18n_get_option($opt_id) : get_option($opt_id);
+        $social_link = trim($opt);
         if (!empty($social_link)) {
             $links[$id] = array(
                 'name' => $name,
