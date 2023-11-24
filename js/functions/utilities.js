@@ -98,3 +98,27 @@ function wputheme_loadstyle_async(src, callback) {
     style.href = src;
     document.head.append(style);
 }
+
+/* ----------------------------------------------------------
+  Get quadrant in page
+---------------------------------------------------------- */
+
+function wputheme_get_quadrant(x, y) {
+    var width = document.documentElement.clientWidth / 2;
+    var height = document.documentElement.clientHeight / 2;
+
+    var quadrant;
+    if (x < width && y < height) {
+        quadrant = "top-left";
+    }
+    else if (x >= width && y < height) {
+        quadrant = "top-right";
+    }
+    else if (x < width && y >= height) {
+        quadrant = "bottom-left";
+    }
+    else {
+        quadrant = "bottom-right";
+    }
+    return quadrant;
+}
