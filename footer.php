@@ -1,5 +1,7 @@
 <?php
 include dirname(__FILE__) . '/z-protect.php';
+do_action('qm/stop', 'wputheme_content');
+do_action('qm/start', 'wputheme_footer');
 do_action('wputheme_main_undercontent_inajax');
 if (defined('IS_AJAX') && IS_AJAX) {
     $current_url = strtok($_SERVER["REQUEST_URI"], '?');
@@ -20,6 +22,6 @@ if (apply_filters('wputheme_display_footer', true)) {
     get_template_part('tpl/footer/copyright');
 }
 wp_footer();
-?>
-</body>
-</html>
+echo '</body>';
+echo '</html>';
+do_action('qm/stop', 'wputheme_footer');

@@ -1,5 +1,6 @@
 <?php
 require_once dirname( __FILE__ ) . '/z-protect.php';
+do_action('qm/start', 'wputheme_header');
 if (!defined('IS_AJAX') || !IS_AJAX ) {
 ?>
 <head><?php echo wp_head(); ?></head>
@@ -27,3 +28,5 @@ do_action('wputheme_main_overcontent');
 if (apply_filters('wputheme_display_skiplinks', true)) { echo '<div id="maincontent"></div>'; }
 }
 do_action('wputheme_main_overcontent_inajax');
+do_action('qm/stop', 'wputheme_header');
+do_action('qm/start', 'wputheme_content');
