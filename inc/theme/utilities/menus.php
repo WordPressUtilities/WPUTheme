@@ -127,10 +127,17 @@ function wputh_get_menu_items($menu_id, $args = array()) {
 
             $attributes = '';
             if ($item->xfn) {
-                $attributes .= ' rel="' . $item->xfn . '"';
+                $attributes .= ' rel="' . esc_attr($item->xfn) . '"';
             }
             if ($item->target) {
-                $attributes .= ' target="' . $item->target . '"';
+                $attributes .= ' target="' . esc_attr($item->target) . '"';
+            }
+
+            if ($item->classes) {
+                $item_classname = trim(implode(' ', $item->classes));
+                if ($item_classname) {
+                    $attributes .= ' class="' . esc_attr($item_classname) . '"';
+                }
             }
             $menu_items[] = '<a ' . $attributes . ' href="' . $item->url . '"><span>' . $item->title . '</span></a>';
         }
