@@ -43,6 +43,8 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
     if (is_singular()) {
         $main_category = get_the_category();
         if (isset($main_category[0])) {
+            $elements_ariane = wputh_breadcrumbs_set_parent_categories($elements_ariane, $main_category[0]);
+
             $elements_ariane['category'] = array(
                 'name' => $main_category[0]->cat_name,
                 'link' => get_category_link($main_category[0]->term_id)
@@ -54,29 +56,8 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
         $term = get_queried_object();
         if (is_object($term)) {
 
-            // Checking for parent categories
-            $cat_tmp = $term->parent;
-            $parents_categories = array();
-            while ($cat_tmp != 0) {
-                $category_parent = get_categories(array(
-                    'include' => $cat_tmp
-                ));
-                if (isset($category_parent[0])) {
-                    $parents_categories['parent-category-' . $cat_tmp] = array(
-                        'name' => $category_parent[0]->name,
-                        'link' => get_category_link($category_parent[0]->term_id)
-                    );
-                    $cat_tmp = $category_parent[0]->parent;
-                } else {
-                    $cat_tmp = 0;
-                }
-            }
-
-            // Reordering & merging parents
-            if (!empty($parents_categories)) {
-                arsort($parents_categories);
-                $elements_ariane = array_merge($elements_ariane, $parents_categories);
-            }
+            // Adding parent
+            $elements_ariane = wputh_breadcrumbs_set_parent_categories($elements_ariane, $term);
 
             // Adding category
             $elements_ariane['category'] = array(
@@ -167,6 +148,35 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
     }
 
     $elements_ariane = apply_filters('wputh_get_breadcrumbs__after_all', $elements_ariane);
+
+    return $elements_ariane;
+}
+
+function wputh_breadcrumbs_set_parent_categories($elements_ariane, $term){
+
+    // Checking for parent categories
+    $cat_tmp = $term->parent;
+    $parents_categories = array();
+    while ($cat_tmp != 0) {
+        $category_parent = get_categories(array(
+            'include' => $cat_tmp
+        ));
+        if (isset($category_parent[0])) {
+            $parents_categories['parent-category-' . $cat_tmp] = array(
+                'name' => $category_parent[0]->name,
+                'link' => get_category_link($category_parent[0]->term_id)
+            );
+            $cat_tmp = $category_parent[0]->parent;
+        } else {
+            $cat_tmp = 0;
+        }
+    }
+
+    // Reordering & merging parents
+    if (!empty($parents_categories)) {
+        $parents_categories = array_reverse($parents_categories);
+        $elements_ariane = array_merge($elements_ariane, $parents_categories);
+    }
 
     return $elements_ariane;
 }
