@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__) . '/z-protect.php';
+require_once __DIR__ . '/z-protect.php';
 
 $WPUTheme_infos = wp_get_theme('WPUTheme');
 define('WPUTHEME_VERSION', $WPUTheme_infos->Version);
@@ -75,6 +75,12 @@ if (function_exists('set_post_thumbnail_size')) {
 /* ----------------------------------------------------------
   Includes
 ---------------------------------------------------------- */
+
+/* Utilities
+-------------------------- */
+
+require_once get_template_directory() . '/inc/WPUBaseFileCache/WPUBaseFileCache.php';
+$wputheme_wpubasefilecache = new \WPUTheme\WPUBaseFileCache('wputheme');
 
 /* Theme
  -------------------------- */

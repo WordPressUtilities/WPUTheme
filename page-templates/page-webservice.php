@@ -1,7 +1,7 @@
 <?php
 /* Template Name: Webservice */
 
-include dirname(__FILE__) . '/../z-protect.php';
+include __DIR__ . '/../z-protect.php';
 
 $mode = '';
 if (isset($_GET['mode'])) {

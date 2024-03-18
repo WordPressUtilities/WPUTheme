@@ -8,10 +8,12 @@
 -------------------------- */
 
 function wputh_get_cached_metas($url) {
+    global $wputheme_wpubasefilecache;
+
     $cache_id = 'wputh_get_cached_metas_' . md5($url);
 
     /* Valid metas */
-    $cached_metas = get_transient($cache_id);
+    $cached_metas = $wputheme_wpubasefilecache->get_cache($cache_id, 0);
     if (is_array($cached_metas)) {
         return $cached_metas;
     }
@@ -51,7 +53,7 @@ function wputh_get_cached_metas($url) {
     }
 
     /* Cache & return result */
-    set_transient($cache_id, $cached_metas, 0);
+    $wputheme_wpubasefilecache->set_cache($cache_id, $cached_metas);
 
     return $cached_metas;
 }

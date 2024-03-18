@@ -1,6 +1,6 @@
 <?php
 $_min_count = apply_filters('wputh_searchform_datalist_mincount', 3);
-include dirname(__FILE__) . '/../../z-protect.php';
+include __DIR__ . '/../../z-protect.php';
 ?>
 <div class="search search--header header-search">
   <form role="search" method="get" id="header-search" class="search__form" action="<?php echo home_url(); ?>">

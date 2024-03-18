@@ -2,7 +2,7 @@
 
 /* Template Name: Woocommerce */
 
-include dirname(__FILE__) . '/../z-protect.php';
+include __DIR__ . '/../z-protect.php';
 
 the_post();
 get_header();

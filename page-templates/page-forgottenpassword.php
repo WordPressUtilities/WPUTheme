@@ -1,6 +1,6 @@
 <?php
 /* Template Name: Forgotten Password */
-include dirname(__FILE__) . '/../z-protect.php';
+include __DIR__ . '/../z-protect.php';
 
 if (is_user_logged_in()) {
     wp_redirect(apply_filters('wputh_forgottenpassword_url_logged_in', site_url()));

@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__) . '/../WPUTheme/z-protect.php';
+require_once __DIR__ . '/../WPUTheme/z-protect.php';
 
 /* ----------------------------------------------------------
   Hide these blocks on parent theme

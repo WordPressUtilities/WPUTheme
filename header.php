@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__) . '/z-protect.php';
+require_once __DIR__ . '/z-protect.php';
 if (!defined('IS_AJAX') || !IS_AJAX) {
 
     /* ----------------------------------------------------------

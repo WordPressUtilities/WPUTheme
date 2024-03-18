@@ -1,6 +1,6 @@
 <?php
 /* Template Name: FAQ */
-include dirname( __FILE__ ) . '/../z-protect.php';
+include __DIR__ . '/../z-protect.php';
 the_post();
 $content_faq = '';
 ob_start();

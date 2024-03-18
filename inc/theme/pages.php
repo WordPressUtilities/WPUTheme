@@ -76,7 +76,7 @@ function wputh_pages_site_setup() {
 
         /* Default content : try to load template */
         if (empty($page['post_content'])) {
-            $file_name = dirname(__FILE__) . '/activation/' . str_replace('__page_id', '', $id) . '.php';
+            $file_name = __DIR__ . '/activation/' . str_replace('__page_id', '', $id) . '.php';
             ob_start();
             locate_template($file_name, 1);
             $page['post_content'] = ob_get_clean();

@@ -1,6 +1,6 @@
 <?php
 /* Template Name: Big Pictures */
-include dirname( __FILE__ ) . '/../z-protect.php';
+include __DIR__ . '/../z-protect.php';
 
 get_header();
 the_post();

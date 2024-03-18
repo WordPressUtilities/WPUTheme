@@ -1,5 +1,5 @@
 <?php
-include dirname(__FILE__) . '/../../z-protect.php';
+include __DIR__ . '/../../z-protect.php';
 
 /* ----------------------------------------------------------
    Options for the plugin "WPU Options"

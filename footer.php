@@ -1,5 +1,5 @@
 <?php
-include dirname(__FILE__) . '/z-protect.php';
+include __DIR__ . '/z-protect.php';
 do_action('qm/stop', 'wputheme_content');
 do_action('qm/start', 'wputheme_footer');
 

@@ -1,6 +1,6 @@
 <?php
 /* Template Name: Sitemap */
-include dirname(__FILE__) . '/../z-protect.php';
+include __DIR__ . '/../z-protect.php';
 include get_template_directory() . '/tpl/sitemap/datas.php';
 
 /* ----------------------------------------------------------

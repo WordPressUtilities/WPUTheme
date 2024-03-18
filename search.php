@@ -1,5 +1,5 @@
 <?php
-include dirname( __FILE__ ) . '/z-protect.php';
+include __DIR__ . '/z-protect.php';
 
 $number_results = (int) $wp_query->found_posts;
 $search_results = __( '<strong>no</strong> search results', 'wputh' );
