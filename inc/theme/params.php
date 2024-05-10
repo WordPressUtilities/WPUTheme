@@ -17,6 +17,7 @@ if (!function_exists('wputh_custom_theme_setup') && function_exists('add_theme_s
         // Theme style
         add_theme_support('custom-background');
         add_theme_support('custom-header');
+        add_theme_support('custom-logo');
 
         // Supporting HTML5
         add_theme_support('html5', array(

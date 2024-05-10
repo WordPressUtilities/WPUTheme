@@ -140,6 +140,12 @@ if (!function_exists('wputh_display_title')) {
         $title_url = apply_filters('wputh_display_title__title_url', home_url());
         /* Image */
         $main_logo = apply_filters('wputh_display_title__title_image_url', '');
+        if (!$main_logo && has_custom_logo()) {
+            $main_logo_img = get_theme_mod('custom_logo');
+            if (is_numeric($main_logo_img)) {
+                $main_logo = wp_get_attachment_image_url($main_logo_img, 'full');
+            }
+        }
         if (!$main_logo && has_header_image()) {
             $main_logo = get_header_image();
         }
