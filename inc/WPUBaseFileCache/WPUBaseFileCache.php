@@ -4,7 +4,7 @@ namespace WPUTheme;
 /*
 Class Name: WPU Base File Cache
 Description: A class to handle basic file cache
-Version: 0.1.2
+Version: 0.2.0
 Author: Darklg
 Author URI: https://darklg.me/
 License: MIT License
@@ -28,8 +28,9 @@ class WPUBaseFileCache {
         $cache_dir = $root_cache_dir . '/' . $this->cache_dir . '/';
         if (!is_dir($cache_dir)) {
             mkdir($cache_dir);
-            file_put_contents($cache_dir . 'index.html', '');
-            file_put_contents($cache_dir . '.htaccess', 'deny from all');
+            chmod($cache_dir, 0775);
+            $this->file_put_contents($cache_dir . 'index.html', '');
+            $this->file_put_contents($cache_dir . '.htaccess', 'deny from all');
         }
         return $cache_dir;
     }
@@ -60,9 +61,17 @@ class WPUBaseFileCache {
 
     public function set_cache($cache_id, $content = '') {
         $cached_file = $this->get_cache_dir() . '/' . $cache_id;
-        file_put_contents($cached_file, serialize($content));
+        $this->file_put_contents($cached_file, serialize($content));
 
         return true;
+    }
+
+    /**
+     * Writes content to a file and sets the file permissions.
+     */
+    public function file_put_contents($file, $content) {
+        file_put_contents($file, $content);
+        chmod($file, 0664);
     }
 
 }

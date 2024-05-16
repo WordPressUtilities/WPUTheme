@@ -8,7 +8,7 @@ A class to handle basic file cache.
 
 ```php
 /* Cache */
-include __DIR__ . '/inc/WPUBaseFileCache/WPUBaseFileCache.php';
+include dirname( __FILE__ ) . '/inc/WPUBaseFileCache/WPUBaseFileCache.php';
 $this->wpubasefilecache = new \mypluginid\WPUBaseFileCache('mypluginid');
 
 ```
