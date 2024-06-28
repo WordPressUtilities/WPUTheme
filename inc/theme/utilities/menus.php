@@ -5,6 +5,7 @@
 ---------------------------------------------------------- */
 
 function wputh_cached_nav_menu($args = array()) {
+    global $wputheme_wpubasefilecache;
     $cache_duration = WEEK_IN_SECONDS;
     $cache_id = 'wputh_cached_menu_' . md5(wputh_get_current_url()) . md5(serialize($args));
     if (isset($args['cache_id'])) {
@@ -12,24 +13,14 @@ function wputh_cached_nav_menu($args = array()) {
         unset($args['cache_id']);
     }
 
-    /* Keep URL keys */
-    $cached_urls = wp_cache_get('wputh_cached_menu_urls');
-    if (!is_array($cached_urls)) {
-        $cached_urls = array();
-    }
-    if (!in_array($cache_id, $cached_urls)) {
-        $cached_urls[] = $cache_id;
-        wp_cache_set('wputh_cached_menu_urls', $cached_urls, '', $cache_duration);
-    }
-
     /* Force return */
     $args['echo'] = false;
 
     /* Cache menu if not cached */
-    $menu = wp_cache_get($cache_id);
+    $menu = $wputheme_wpubasefilecache->get_cache($cache_id, $cache_duration);
     if ($menu === false) {
         $menu = wp_nav_menu($args);
-        wp_cache_set($cache_id, $menu, '', $cache_duration);
+        $wputheme_wpubasefilecache->set_cache($cache_id, $menu);
     }
 
     $menu = apply_filters('wputh_cached_nav_menu__menu', $menu, $args);
@@ -40,14 +31,15 @@ function wputh_cached_nav_menu($args = array()) {
 add_action('wp_update_nav_menu_item', 'wputh_cached_nav_menu__clear_cache');
 add_action('wp_update_nav_menu', 'wputh_cached_nav_menu__clear_cache');
 function wputh_cached_nav_menu__clear_cache() {
-    $cached_urls = wp_cache_get('wputh_cached_menu_urls');
-    if (!is_array($cached_urls)) {
-        return;
+
+    global $wputheme_wpubasefilecache;
+
+    $cache_dir = $wputheme_wpubasefilecache->get_cache_dir();
+    $cached_menu_files = glob($cache_dir . 'wputh_cached_menu_*');
+
+    foreach ($cached_menu_files as $cached_menu_file) {
+        unlink($cached_menu_file);
     }
-    foreach ($cached_urls as $cached_url) {
-        wp_cache_delete($cached_url);
-    }
-    wp_cache_delete('wputh_cached_menu_urls');
 }
 
 /* ----------------------------------------------------------
@@ -92,6 +84,7 @@ function wputh_default_menu($args = array()) {
 ---------------------------------------------------------- */
 
 function wputh_get_menu_items($menu_id, $args = array()) {
+    global $wputheme_wpubasefilecache;
 
     $cache_id = 'wputh_get_menu_items__' . $menu_id . '__' . get_locale();
     $cache_duration = 60;
@@ -100,8 +93,8 @@ function wputh_get_menu_items($menu_id, $args = array()) {
         unset($args['cache_duration']);
     }
 
-    $menu_items = wp_cache_get($cache_id);
-    if ($menu_items !== false) {
+    $menu_items = $wputheme_wpubasefilecache->get_cache($cache_id, $cache_duration);
+    if (is_array($menu_items)) {
         return $menu_items;
     }
 
@@ -143,7 +136,7 @@ function wputh_get_menu_items($menu_id, $args = array()) {
         }
     }
 
-    wp_cache_set($cache_id, $menu_items, '', $cache_duration);
+    $wputheme_wpubasefilecache->set_cache($cache_id, $menu_items);
 
     return $menu_items;
 }
@@ -153,18 +146,21 @@ function wputh_get_menu_items($menu_id, $args = array()) {
 ---------------------------------------------------------- */
 
 function wputh_get_posts($args = array(), $expires = 60) {
+
+    global $wputheme_wpubasefilecache;
+
     $ignore_cache = false;
     if (isset($args['wputh_ignore_cache'])) {
         unset($args['wputh_ignore_cache']);
         $ignore_cache = true;
     }
 
-    $cache_id = 'get_posts_' . md5(json_encode($args));
+    $cache_id = 'wputh_get_posts_' . md5(json_encode($args));
 
-    $posts = wp_cache_get($cache_id);
+    $posts = $wputheme_wpubasefilecache->get_cache($cache_id, $expires);
     if ($posts === false || $ignore_cache) {
         $posts = get_posts($args);
-        wp_cache_set($cache_id, $posts, '', $expires);
+        $wputheme_wpubasefilecache->set_cache($cache_id, $posts);
     }
 
     return $posts;
