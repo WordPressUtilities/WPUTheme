@@ -5,7 +5,7 @@
 ---------------------------------------------------------- */
 
 function wputh_cached_nav_menu($args = array()) {
-    global $wputheme_wpubasefilecache;
+    $wputheme_wpubasefilecache = wputheme_get_wpubasefilecache();
     $cache_duration = WEEK_IN_SECONDS;
     $cache_id = 'wputh_cached_menu_' . md5(wputh_get_current_url()) . md5(serialize($args));
     if (isset($args['cache_id'])) {
@@ -32,7 +32,7 @@ add_action('wp_update_nav_menu_item', 'wputh_cached_nav_menu__clear_cache');
 add_action('wp_update_nav_menu', 'wputh_cached_nav_menu__clear_cache');
 function wputh_cached_nav_menu__clear_cache() {
 
-    global $wputheme_wpubasefilecache;
+    $wputheme_wpubasefilecache = wputheme_get_wpubasefilecache();
 
     $cache_dir = $wputheme_wpubasefilecache->get_cache_dir();
     $cached_menu_files = glob($cache_dir . 'wputh_cached_menu_*');
@@ -84,7 +84,7 @@ function wputh_default_menu($args = array()) {
 ---------------------------------------------------------- */
 
 function wputh_get_menu_items($menu_id, $args = array()) {
-    global $wputheme_wpubasefilecache;
+    $wputheme_wpubasefilecache = wputheme_get_wpubasefilecache();
 
     $cache_id = 'wputh_get_menu_items__' . $menu_id . '__' . get_locale();
     $cache_duration = 60;
@@ -147,7 +147,7 @@ function wputh_get_menu_items($menu_id, $args = array()) {
 
 function wputh_get_posts($args = array(), $expires = 60) {
 
-    global $wputheme_wpubasefilecache;
+    $wputheme_wpubasefilecache = wputheme_get_wpubasefilecache();
 
     $ignore_cache = false;
     if (isset($args['wputh_ignore_cache'])) {

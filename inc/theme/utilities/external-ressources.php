@@ -8,7 +8,7 @@
 -------------------------- */
 
 function wputh_get_cached_metas($url) {
-    global $wputheme_wpubasefilecache;
+    $wputheme_wpubasefilecache = wputheme_get_wpubasefilecache();
 
     $cache_id = 'wputh_get_cached_metas_' . md5($url);
 
