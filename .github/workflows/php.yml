@@ -2,9 +2,9 @@ name: PHP Lint
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   phplint:
@@ -13,8 +13,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: PHP Lint
       uses: michaelw90/PHP-Lint@2.1.0
-

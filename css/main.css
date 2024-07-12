@@ -3,7 +3,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,
 a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,
 small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,
 form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,
-audio,canvas,datalist,details,dialog,figure,footer,header,
+audio,canvas,datalist,details,figure,footer,header,
 menu,nav,section,video,abbr,mark,meter,time,progress,output{
 margin:0;
 padding:0;
@@ -36,7 +36,6 @@ aside,
 audio,
 canvas,
 details,
-dialog,
 figure,
 figcaption,
 footer,
@@ -342,6 +341,20 @@ height:1px !important;
 overflow:hidden !important;
 white-space:nowrap !important;
 opacity:0.001 !important;
+}
+dialog{
+padding:1em;
+border:1px solid;
+font:inherit;
+vertical-align:baseline;
+outline:0;
+color:#000;
+background:transparent no-repeat top left;
+background-color:#FFF;
+}
+dialog::backdrop{
+opacity:0.75;
+background-color:#000;
 }
 .cssc-oneline{
 max-width:100%;

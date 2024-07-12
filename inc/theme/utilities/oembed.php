@@ -17,8 +17,12 @@ function wputh_get_oembed_infos($url) {
         return false;
     }
 
-    $transient_id = 'wputh_oembed_cache_' . md5($url);
-    if (false === ($infos = get_transient($transient_id))) {
+    $wputheme_wpubasefilecache = wputheme_get_wpubasefilecache();
+    $cache_duration = WEEK_IN_SECONDS;
+    $cache_id = 'wputh_oembed_cache_' . md5($url);
+
+    $infos = $wputheme_wpubasefilecache->get_cache($cache_id, $cache_duration);
+    if ($infos === false) {
         require_once ABSPATH . WPINC . '/class-wp-oembed.php';
         $oembed = new WP_oEmbed();
         $url = esc_url_raw($url);
@@ -28,7 +32,7 @@ function wputh_get_oembed_infos($url) {
         /* Load biggest available thumbnail */
         $infos = wputh_get_oembed_infos__big_thumbnail($infos);
 
-        set_transient($transient_id, $infos, MONTH_IN_SECONDS);
+        $wputheme_wpubasefilecache->set_cache($cache_id, $infos);
     }
 
     return $infos;

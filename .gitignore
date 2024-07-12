@@ -1,2 +1,4 @@
 .sass-cache
 *.mo.php
+/package-lock.json
+/yarn.lock
