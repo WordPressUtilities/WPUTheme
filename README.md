@@ -99,14 +99,18 @@ add_filter('wputheme_display_searchform','__return_false');
 
 #### Scripts
 
-* **wputh_common_libraries__slickslider** : Load Slick Slider.
 * **wputh_common_libraries__simplebar** : Load SimpleBar.
+* **wputh_common_libraries__slickslider** : Load Slick Slider.
 * **wputh_common_libraries__juxtapose** : Load Juxtapose.
+* **wputh_common_libraries__clipboard** : Load Clipboard.js.
 * **wputh_common_libraries__photoswipe** : Load PhotoSwipe.
+* **wputh_common_libraries__swiper** : Load swiper.
 
 ## Thanks
 
 * To @Grsmto and contributors for SimpleBar https://github.com/Grsmto/simplebar/ ( MIT )
 * To @kenwheeler and contributors for Slick Slicker : https://github.com/kenwheeler/slick/ ( MIT )
 * To @NUKnightLab and contributors for Juxtapose : https://github.com/NUKnightLab/juxtapose/ ( Mozilla Public License Version 2.0 )
+* To @zenorocha and contributors for Clipboard.js : https://github.com/zenorocha/clipboard.js/ ( MIT )
 * To @dimsemenov and contributors for PhotoSwipe : https://github.com/dimsemenov/PhotoSwipe/ ( MIT )
+* To @nolimits4web and contributors for SwiperJS : https://github.com/nolimits4web/swiper/ ( MIT )
