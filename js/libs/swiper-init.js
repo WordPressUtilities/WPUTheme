@@ -32,6 +32,9 @@ function wputheme_swiper_init($element, _settings) {
 
     /* Add element class */
     $element.classList.add('swiper-wrapper');
+    Array.prototype.forEach.call($element.classList, function(_class) {
+        $swiper.classList.add('wrapper__' + _class);
+    });
 
     /* Add slides classes */
     Array.prototype.forEach.call($element.children, function($slide) {
@@ -56,5 +59,6 @@ function wputheme_swiper_init($element, _settings) {
     $swiper.appendChild($utils);
 
     /* Init swiper */
-    new Swiper($swiper, _settings);
+    var _swiper = new Swiper($swiper, _settings);
+    return _swiper;
 }
