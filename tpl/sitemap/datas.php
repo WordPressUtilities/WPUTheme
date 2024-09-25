@@ -45,7 +45,19 @@ $post_types = apply_filters('wputheme_sitemap_post_types', $post_types, get_the_
 $default_args = array(
     'posts_per_page' => 500,
     'post_status' => 'publish',
-    'post__not_in' => array(get_the_ID())
+    'post__not_in' => array(get_the_ID()),
+    'meta_query' => array(
+        'relation' => 'OR',
+        array(
+            'key' => 'wpuseo_hide_search',
+            'compare' => 'NOT EXISTS'
+        ),
+        array(
+            'key' => 'wpuseo_hide_search',
+            'value' => '0',
+            'compare' => '='
+        )
+    )
 );
 $wputheme_homepage_id = -1;
 if (get_option('show_on_front') == 'page') {
