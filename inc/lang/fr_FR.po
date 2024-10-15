@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2018-05-23 23:24+0300\n"
+"POT-Creation-Date: 2024-10-15 15:50+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -9,57 +9,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: __;_e;_x:1,2c;_n:1,2;esc_attr__\n"
 "X-Poedit-SearchPath-0: ../../.\n"
-"X-Poedit-SearchPath-1: ../../../../mu-plugins\n"
 
-#: ../../../../mu-plugins/wpu_acf_flexible.php:138
-msgid "No"
-msgstr "Non"
-
-#: ../../../../mu-plugins/wpu_acf_flexible.php:138
-msgid "Yes"
-msgstr "Oui"
-
-#: ../../../../mu-plugins/wpu_relatedproductcategories.php:102
-msgid "Search for a product&hellip;"
-msgstr ""
-
-#: ../../../../mu-plugins/wpu_ux_tweaks.php:310
-msgid "Thumbnail"
-msgstr "Miniature"
-
-#: ../../../../mu-plugins/wpu_woo_account_endpoints.php:92
-#, php-format
-msgid "Default content for <strong>%s</strong>"
-msgstr ""
-
-#: ../../../../mu-plugins/wpu_woo_ask_invoice.php:40
-msgid "Ask Invoice"
-msgstr ""
-
-#: ../../../../mu-plugins/wpu_woo_ask_invoice.php:41
-msgid "You already asked for an invoice"
-msgstr ""
-
-#: ../../../../mu-plugins/wpu_woo_ask_invoice.php:42
-msgid "Invoice has been asked"
-msgstr ""
-
-#: ../../../../mu-plugins/wpu_woo_ask_invoice.php:43
-#, php-format
-msgid "Order #%s - Invoice"
-msgstr ""
-
-#: ../../../../mu-plugins/wpu_woo_ask_invoice.php:44
-#, php-format
-msgid "Please send the invoice for the order #%s"
-msgstr ""
-
-#: ../.././404.php:7 ../.././inc/theme/breadcrumbs.php:101
+#: ../.././404.php:7 ../.././inc/theme/breadcrumbs.php:136
 msgid "404 Error"
 msgstr "Erreur 404"
 
@@ -67,21 +23,25 @@ msgstr "Erreur 404"
 msgid "Sorry, but this page doesn&rsquo;t exists."
 msgstr "Désolé, mais cette page n'existe pas."
 
-#: ../.././functions.php:26
+#: ../.././404.php:9
+msgid "Back to the homepage"
+msgstr "Retour à la page d’accueil"
+
+#: ../.././functions.php:38
 msgid "Main menu"
 msgstr "Menu principal"
 
-#: ../.././functions.php:38
+#: ../.././functions.php:50
 msgid "Default Sidebar"
 msgstr "Sidebar par défaut"
 
-#: ../.././functions.php:40
+#: ../.././functions.php:52
 msgid "Default theme sidebar"
 msgstr "Sidebar du thème par défaut"
 
-#: ../.././header.php:8
-msgid "Skip to main content"
-msgstr "Aller au contenu principal"
+#: ../.././inc/assets/scripts.php:37
+msgid "Copied !"
+msgstr "Copié !"
 
 #: ../.././inc/plugins/wpu-options.php:13
 msgid "Contacts"
@@ -91,19 +51,19 @@ msgstr "Contacts"
 msgid "Social networks"
 msgstr "Réseaux sociaux"
 
-#: ../.././inc/plugins/wpu-options.php:19
+#: ../.././inc/plugins/wpu-options.php:20
 msgid "Pages IDs"
 msgstr "IDs des pages"
 
-#: ../.././inc/plugins/wpu-options.php:33
+#: ../.././inc/plugins/wpu-options.php:34
 msgid "Email address"
 msgstr "Adresse email"
 
-#: ../.././inc/theme/breadcrumbs.php:16
+#: ../.././inc/theme/breadcrumbs.php:25
 msgid "Home"
 msgstr "Accueil"
 
-#: ../.././inc/theme/breadcrumbs.php:108
+#: ../.././inc/theme/breadcrumbs.php:144
 #, php-format
 msgid "Search results for \"%s\""
 msgstr "Résultats de recherche pour \"%s\""
@@ -128,38 +88,85 @@ msgstr "Alignement du titre"
 msgid "Title size"
 msgstr "Taille du titre"
 
-#: ../.././inc/theme/default-items.php:228
+#: ../.././inc/theme/default-items.php:115
+msgid "Skip to main content"
+msgstr "Aller au contenu principal"
+
+#: ../.././inc/theme/default-items.php:280
 msgid "Next page"
 msgstr "Page suivante"
 
-#: ../.././inc/theme/utilities.php:39
-msgid "Sorry, no search results for this query."
-msgstr "Désolé, il n'y a aucun résultat pour cette requête."
+#: ../.././inc/theme/pages.php:221
+msgid "Privacy Policy"
+msgstr "Politique de confidentialité"
 
-#: ../.././inc/theme/utilities.php:68
+#: ../.././inc/theme/templates.php:10
+msgid "Gallery"
+msgstr "Galerie"
+
+#: ../.././inc/theme/templates.php:24
+msgid "Order by"
+msgstr "Trier par"
+
+#: ../.././inc/theme/templates.php:34
+msgid "Order"
+msgstr "Ordre"
+
+#: ../.././inc/theme/templates.php:43
+msgid "Background"
+msgstr "Arrière-plan"
+
+#: ../.././inc/theme/utilities/comments.php:23
 msgid "<strong>no</strong> comments"
 msgstr "<strong>aucun</strong> commentaire"
 
-msgid "Copy link"
-msgstr "Copier le lien"
-
-msgid "Share link"
-msgstr "Partager le lien"
-
-#: ../.././inc/theme/utilities.php:71
+#: ../.././inc/theme/utilities/comments.php:26
 msgid "<strong>1</strong> comment"
 msgstr "<strong>1</strong> commentaire"
 
-#: ../.././inc/theme/utilities.php:74
+#: ../.././inc/theme/utilities/comments.php:29
 #, php-format
 msgid "<strong>%s</strong> comments"
 msgstr "<strong>%s</strong> commentaires"
 
-#: ../.././inc/theme/utilities.php:77
+#: ../.././inc/theme/utilities/comments.php:32
 msgid "Comments are closed"
 msgstr "Les commentaires sont fermés"
 
-#: ../.././inc/theme/utilities.php:432
+#: ../.././inc/theme/utilities/content-helpers.php:162
+#: ../.././inc/theme/utilities/content-helpers.php:168
+#: ../.././inc/theme/utilities/content-helpers.php:174
+#: ../.././inc/theme/utilities/content-helpers.php:176
+#: ../.././inc/theme/utilities/content-helpers.php:177
+msgid "d F Y"
+msgstr "d F Y"
+
+#: ../.././inc/theme/utilities/content-helpers.php:167
+msgid "d"
+msgstr "d"
+
+#: ../.././inc/theme/utilities/content-helpers.php:173
+msgid "d F"
+msgstr "d F"
+
+#: ../.././inc/theme/utilities/content-helpers.php:181
+#, php-format
+msgid "From %s to %s"
+msgstr "Du %s au %s"
+
+#: ../.././inc/theme/utilities/posts.php:18
+msgid "Sorry, no search results for this query."
+msgstr "Désolé, il n'y a aucun résultat pour cette requête."
+
+#: ../.././inc/theme/utilities/share.php:101
+msgid "Copy link"
+msgstr "Copier le lien"
+
+#: ../.././inc/theme/utilities/share.php:110
+msgid "Share link"
+msgstr "Partager le lien"
+
+#: ../.././inc/theme/utilities/social.php:43
 #, php-format
 msgid "%s: Follow %s (open in new window)"
 msgstr "%s : Suivre %s (s'ouvre dans une nouvelle fenêtre)"
@@ -168,11 +175,11 @@ msgstr "%s : Suivre %s (s'ouvre dans une nouvelle fenêtre)"
 msgid "Read more"
 msgstr "En savoir plus"
 
-#: ../.././loop.php:7 ../.././tpl/loops/header-loop-small.php:8
+#: ../.././loop.php:7
 msgid "F j, Y"
 msgstr "j F Y"
 
-#: ../.././loop.php:9 ../.././tpl/loops/header-loop-small.php:4
+#: ../.././loop.php:9 ../.././tpl/loops/header-loop-small.php:8
 msgid "By"
 msgstr "Par"
 
@@ -184,17 +191,13 @@ msgstr "Tags :"
 msgid "Size:"
 msgstr "Poids :"
 
-#: ../.././page-templates/page-sitemap.php:13
-msgid "Home page"
-msgstr "Accueil"
+#: ../.././page-templates/page-forgottenpassword.php:14
+msgid "Check your email for the confirmation link."
+msgstr "Vérifiez vos courriels pour y trouver le lien de confirmation."
 
-#: ../.././page-templates/page-sitemap.php:74
-msgid "Pages"
-msgstr "Pages"
-
-#: ../.././page-templates/page-sitemap.php:79
-msgid "Posts"
-msgstr "Articles"
+#: ../.././page-templates/page-forgottenpassword.php:29
+msgid "Username or Email Address"
+msgstr "Identifiant ou adresse email"
 
 #: ../.././search.php:5
 msgid "<strong>no</strong> search results"
@@ -219,36 +222,44 @@ msgstr "%s pour &ldquo;%s&rdquo;"
 msgid "A %s site using %s"
 msgstr "Un site %s utilisant %s"
 
-#: ../.././tpl/header/searchform.php:7
+#: ../.././tpl/header/searchform.php:8
 msgid "Search for:"
 msgstr "Rechercher :"
 
-#: ../.././tpl/header/searchform.php:8
+#: ../.././tpl/header/searchform.php:9
 msgid "Enter your keywords..."
 msgstr "Entrez vos mots-clefs..."
 
-#: ../.././tpl/header/searchform.php:8
+#: ../.././tpl/header/searchform.php:9
 msgid "Search by keywords"
 msgstr "Rechercher par mots-clefs"
 
-#: ../.././tpl/header/searchform.php:9
+#: ../.././tpl/header/searchform.php:10
 #, php-format
 msgid "Search on %s"
 msgstr "Rechercher sur %s"
 
-#: ../.././tpl/header/searchform.php:9
+#: ../.././tpl/header/searchform.php:10
 msgid "Search"
 msgstr "Rechercher"
 
-#: ../.././tpl/loops/share.php:5
+#: ../.././tpl/header/user-toolbar.php:4
+msgid "Logout"
+msgstr "Se déconnecter"
+
+#: ../.././tpl/header/user-toolbar.php:7
+msgid "Log in"
+msgstr "Se connecter"
+
+#: ../.././tpl/loops/share.php:2
 msgid "Share this post"
 msgstr "Partager cet article"
 
-#: ../.././tpl/paginate.php:23
+#: ../.././tpl/paginate.php:26
 msgid "« Previous"
 msgstr "« Précédent"
 
-#: ../.././tpl/paginate.php:26
+#: ../.././tpl/paginate.php:29
 msgid "Next »"
 msgstr "Suivant »"
 
@@ -280,8 +291,20 @@ msgstr "Cible :"
 msgid "Select an Image"
 msgstr "Sélectionner une image"
 
-msgid "Back to the homepage"
-msgstr "Retour à la page d’accueil"
+#~ msgid "No"
+#~ msgstr "Non"
 
-msgid "Copied !"
-msgstr "Copié !"
+#~ msgid "Yes"
+#~ msgstr "Oui"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Miniature"
+
+#~ msgid "Home page"
+#~ msgstr "Accueil"
+
+#~ msgid "Pages"
+#~ msgstr "Pages"
+
+#~ msgid "Posts"
+#~ msgstr "Articles"
