@@ -65,7 +65,7 @@ function wputh_get_share_methods($item, $title = false, $permalink = false, $ima
     $_methods = array(
         'email' => array(
             'name' => 'Email',
-            'url' => str_replace('+', '%20', 'mailto:?subject=' . urlencode($_title) . '&body=' . urlencode($_title) . '+' . urlencode($_permalink))
+            'url' => str_replace('+', '%20', 'mailto:?subject=' . urlencode($_title) . '&body=' . urlencode($_title . ' ' . $_permalink))
         ),
         'facebook' => array(
             'name' => 'Facebook',
@@ -85,14 +85,14 @@ function wputh_get_share_methods($item, $title = false, $permalink = false, $ima
         ),
         'twitter' => array(
             'name' => 'Twitter',
-            'url' => 'https://twitter.com/intent/tweet?text=' . urlencode($_twitter_text) . '+' . urlencode($_permalink) . urlencode($_via),
+            'url' => 'https://twitter.com/intent/tweet?text=' . urlencode($_twitter_text . ' ' . $_permalink . $_via),
             'datas' => array(
                 'via' => $_via_user
             )
         ),
         'whatsapp' => array(
             'name' => 'Whatsapp',
-            'url' => 'whatsapp://send?text=' . urlencode($_permalink)
+            'url' => 'whatsapp://send?text=' . urlencode($_title . ' ' . $_permalink)
         )
     );
 
@@ -105,6 +105,13 @@ function wputh_get_share_methods($item, $title = false, $permalink = false, $ima
             )
         );
     }
+    $_methods['print'] = array(
+        'name' => __('Print', 'wputh'),
+        'url' => '#',
+        'attributes' => array(
+            'onclick' => 'window.print();return false;'
+        )
+    );
 
     $_methods['sharesheet'] = array(
         'name' => __('Share link', 'wputh'),
