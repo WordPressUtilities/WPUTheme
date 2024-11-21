@@ -63,6 +63,10 @@ function wputh_get_share_methods($item, $title = false, $permalink = false, $ima
     $_twitter_text = wputh_truncate($_twitter_text, 100 - strlen($_via));
 
     $_methods = array(
+        'bluesky' => array(
+            'name' => 'BlueSky',
+            'url' => 'https://bsky.app/intent/compose?text=' . urlencode($_title . ' ' . $_permalink)
+        ),
         'email' => array(
             'name' => 'Email',
             'url' => str_replace('+', '%20', 'mailto:?subject=' . urlencode($_title) . '&body=' . urlencode($_title . ' ' . $_permalink))
@@ -83,9 +87,13 @@ function wputh_get_share_methods($item, $title = false, $permalink = false, $ima
             'name' => 'Pinterest',
             'url' => 'https://pinterest.com/pin/create/button/?url=' . urlencode($_permalink) . (!empty($_image) ? '&media=' . $_image : '') . '&description=' . urlencode($_title)
         ),
+        'threads' => array(
+            'name' => 'Threads',
+            'url' => 'https://www.threads.net/intent/post?url=' . urlencode($_permalink) . '&text=' . urlencode($_title)
+        ),
         'twitter' => array(
-            'name' => 'Twitter',
-            'url' => 'https://twitter.com/intent/tweet?text=' . urlencode($_twitter_text . ' ' . $_permalink . $_via),
+            'name' => 'X',
+            'url' => 'https://x.com/intent/post?text=' . urlencode($_twitter_text . ' ' . $_permalink . $_via),
             'datas' => array(
                 'via' => $_via_user
             )
