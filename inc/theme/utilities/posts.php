@@ -171,3 +171,39 @@ function wputh_update_without_revision($args = array()) {
     add_action('pre_post_update', 'wp_save_post_revision');
     return $update_action;
 }
+
+/* ----------------------------------------------------------
+  Navigation for custom post types
+---------------------------------------------------------- */
+
+function wputh_get_adjacents_posts($post_type, $post_id = false) {
+
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+
+    $all_posts = get_posts(array(
+        'post_type' => $post_type,
+        'posts_per_page' => -1,
+        'orderby' => 'date',
+        'order' => 'ASC',
+        'fields' => 'ids'
+    ));
+
+    $current_post_key = array_search($post_id, $all_posts);
+
+    $previous_post = false;
+    if ($current_post_key > 0) {
+        $previous_post = $all_posts[$current_post_key - 1];
+    }
+
+    $next_post = false;
+    if ($current_post_key < count($all_posts) - 1) {
+        $next_post = $all_posts[$current_post_key + 1];
+    }
+
+    return array(
+        'prev' => $previous_post,
+        'next' => $next_post
+    );
+}
