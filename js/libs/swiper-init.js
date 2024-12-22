@@ -1,26 +1,32 @@
 document.addEventListener("DOMContentLoaded", function() {
     'use strict';
-    var $swipes = document.querySelectorAll('.wputheme-swiper');
-    Array.prototype.forEach.call($swipes, function($swipe) {
-        wputheme_swiper_init($swipe, {
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination'
-            },
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
-            keyboard: {
-                enabled: true,
-            },
-            watchSlidesProgress: true,
-            loop: true
-        });
-    });
+    Array.prototype.forEach.call(document.querySelectorAll('.wputheme-swiper'), wputheme_call_default_swiper);
 });
+
+function wputheme_call_default_swiper($swipe) {
+    var _autoplay = $swipe.getAttribute('data-slider-autoplay'),
+        _autoplay_speed = $swipe.getAttribute('data-slider-autoplay-speed');
+    wputheme_swiper_init($swipe, {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination'
+        },
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+        keyboard: {
+            enabled: true,
+        },
+        watchSlidesProgress: true,
+        loop: true,
+        autoplay: _autoplay == '1' ? {
+            delay: _autoplay_speed
+        } : false
+    });
+}
 
 function wputheme_swiper_init($element, _settings) {
     'use strict';
