@@ -50,12 +50,16 @@ function wputheme_swiper_init($element, _settings) {
     /* Add utilities */
     var _utilsHTML = '';
     if (_settings.pagination) {
+        _settings.pagination.clickable = true;
         _utilsHTML += '<div class="swiper-pagination"></div>';
     }
     if (_settings.navigation) {
-        _settings.pagination.clickable = true;
-        _utilsHTML += '<div class="swiper-button-prev"></div>';
-        _utilsHTML += '<div class="swiper-button-next"></div>';
+        if (_settings.navigation.nextEl && typeof _settings.navigation.nextEl != 'object') {
+            _utilsHTML += '<div class="swiper-button-prev"></div>';
+        }
+        if(_settings.navigation.prevEl && typeof _settings.navigation.prevEl != 'object') {
+            _utilsHTML += '<div class="swiper-button-next"></div>';
+        }
     }
     if (_settings.scrollbar) {
         _utilsHTML += '<div class="swiper-scrollbar"></div>';
