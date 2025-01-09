@@ -1,6 +1,6 @@
 {
   "name": "wputheme",
-  "version": "3.21.2",
+  "version": "3.21.3",
   "description": "WPUTheme",
   "devDependencies": {
     "gulp": "^4.0.2",

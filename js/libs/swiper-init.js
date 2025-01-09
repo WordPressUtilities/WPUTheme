@@ -54,10 +54,10 @@ function wputheme_swiper_init($element, _settings) {
         _utilsHTML += '<div class="swiper-pagination"></div>';
     }
     if (_settings.navigation) {
-        if (_settings.navigation.nextEl && typeof _settings.navigation.nextEl != 'object') {
+        if (!_settings.navigation.nextEl || (_settings.navigation.nextEl && typeof _settings.navigation.nextEl != 'object')) {
             _utilsHTML += '<div class="swiper-button-prev"></div>';
         }
-        if(_settings.navigation.prevEl && typeof _settings.navigation.prevEl != 'object') {
+        if (!_settings.navigation.prevEl || (_settings.navigation.prevEl && typeof _settings.navigation.prevEl != 'object')) {
             _utilsHTML += '<div class="swiper-button-next"></div>';
         }
     }
