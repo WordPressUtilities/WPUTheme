@@ -1,59 +1,6 @@
 @charset "UTF-8";
 
-/* ----------------------------------------------------------
-  Config
----------------------------------------------------------- */
-
-$content_width_wide: 1024px;
-$content_width: 0px;
-
-/* Fonts
--------------------------- */
-
-$font-main: Helvetica, Arial, sans-serif;
-$font-second: Times, serif;
-$font-size: 13px;
-$line-height: 1.3;
-$line-height-em: 1.3em;
-$letter-spacing-base: 0em;
-$letter-spacing-title: 0.05em;
-
-/* Margins
--------------------------- */
-
-$mobile-padding: 15px;
-$mobile-padding-neg: -15px;
-$tablet-padding: 30px;
-$tablet-padding-neg: -30px;
-$desktop-padding: 45px;
-$desktop-padding-neg: -45px;
-$border-radius: 3px;
-
-/* Basic colors
--------------------------- */
-
-$color-main: #002C1C;
-$color-hl: #A69561;
-$color-hl-dark: #85774C;
-$color-border: #DADADA;
-$color-bg: #F8F8F6;
-
-/* Social colors */
-@import "csscommon/components/vars/colors";
-
-/* Breakpoints
--------------------------- */
-
-$tablet-max: 1024px;
-
-@import "csscommon/components/vars/breakpoints";
-@import "csscommon/components/vars/mediaqueries";
-
-/* Compass values
--------------------------- */
-
-$critical-usage-threshold: 2;
-$graceful-usage-threshold: 2;
+@import "vars";
 
 /* ----------------------------------------------------------
   CSSCommon

@@ -1,3 +1,6 @@
 [submodule "scss/csscommon"]
 	path = scss/csscommon
 	url = https://github.com/Darklg/SassCSSCommon.git
+[submodule "inc/intestarter_gulpfile"]
+	path = inc/intestarter_gulpfile
+	url = https://github.com/Darklg/intestarter_gulpfile.git

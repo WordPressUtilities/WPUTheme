@@ -50,6 +50,11 @@ function wputheme_swiper_init($element, _settings) {
     /* Add utilities */
     var _utilsHTML = '';
     if (_settings.pagination) {
+        if (typeof _settings.pagination != 'object' || !_settings.pagination.el) {
+            _settings.pagination = {
+                el: '.swiper-pagination'
+            }
+        }
         _settings.pagination.clickable = true;
         _utilsHTML += '<div class="swiper-pagination"></div>';
     }

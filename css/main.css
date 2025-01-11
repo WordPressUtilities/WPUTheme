@@ -567,6 +567,18 @@ font-size:1.15em;
 display:block;
 width:100%;
 }
+@media (max-width:767px){
+.cssc-button--wide-mobile{
+display:block;
+width:100%;
+}
+}
+@media (max-width:500px){
+.cssc-button--wide-tiny{
+display:block;
+width:100%;
+}
+}
 .cssc-button--default{
 height:25px;
 padding:0 8px;
@@ -943,7 +955,7 @@ width:100%;
 opacity:0;
 background-color:#fff;
 }
-.main-menu>.menu-item.is-active>.sub-menu,
+.main-menu>.is-active.menu-item>.sub-menu,
 .main-menu>.menu-item:hover>.sub-menu{
 display:block;
 visibility:visible;
@@ -980,7 +992,7 @@ position:relative;
 .main-menu>.menu-item>.sub-menu{
 display:none;
 }
-.main-menu>.menu-item.is-active>.sub-menu{
+.main-menu>.is-active.menu-item>.sub-menu{
 display:block;
 }
 }
