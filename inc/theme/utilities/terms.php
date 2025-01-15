@@ -56,25 +56,32 @@ function wputh_search_terms($search, $taxonomy, $args = array()) {
  * @return array $terms  Results
  */
 function wputh_search_terms__like($args) {
-    if (!isset($args['name__like'])) {
+
+    $arg_id = 'name__like';
+    if(isset($args['description__like'])){
+        $arg_id = 'description__like';
+    }
+
+
+    if (!isset($args[$arg_id])) {
         return array();
     }
 
     /* Ensuring the search string is correct */
-    if (!is_array($args['name__like'])) {
+    if (!is_array($args[$arg_id])) {
         /* Removing invalid chars */
-        $args['name__like'] = str_replace(array('-', ':', ';', ','), ' ', $args['name__like']);
+        $args[$arg_id] = str_replace(array('-', ':', ';', ','), ' ', $args[$arg_id]);
         /* Converting to an array */
-        $args['name__like'] = explode(' ', $args['name__like']);
+        $args[$arg_id] = explode(' ', $args[$arg_id]);
         /* Removing empty values */
-        $args['name__like'] = array_filter(array_map('trim', $args['name__like']));
+        $args[$arg_id] = array_filter(array_map('trim', $args[$arg_id]));
     }
 
     /* Extracting results for each word */
     $terms_results = array();
-    foreach ($args['name__like'] as $name) {
+    foreach ($args[$arg_id] as $name) {
         $new_args = $args;
-        $new_args['name__like'] = $name;
+        $new_args[$arg_id] = $name;
         $t = get_terms($new_args);
         if (!empty($t) && $t) {
             $terms_results[] = $t;
