@@ -48,6 +48,7 @@ function wputheme_swiper_init($element, _settings) {
     });
 
     /* Add utilities */
+    var $utils = false;
     var _utilsHTML = '';
     if (_settings.pagination) {
         if (typeof _settings.pagination != 'object' || !_settings.pagination.el) {
@@ -59,21 +60,59 @@ function wputheme_swiper_init($element, _settings) {
         _utilsHTML += '<div class="swiper-pagination"></div>';
     }
     if (_settings.navigation) {
+        if (typeof _settings.navigation != 'object') {
+            _settings.navigation = {};
+        }
         if (!_settings.navigation.nextEl || (_settings.navigation.nextEl && typeof _settings.navigation.nextEl != 'object')) {
-            _utilsHTML += '<div class="swiper-button-prev"></div>';
+            _settings.navigation.nextEl = '.swiper-button-next';
+            _utilsHTML += '<div class="swiper-button-next"></div>';
         }
         if (!_settings.navigation.prevEl || (_settings.navigation.prevEl && typeof _settings.navigation.prevEl != 'object')) {
-            _utilsHTML += '<div class="swiper-button-next"></div>';
+            _settings.navigation.prevEl = '.swiper-button-prev';
+            _utilsHTML += '<div class="swiper-button-prev"></div>';
         }
     }
     if (_settings.scrollbar) {
         _utilsHTML += '<div class="swiper-scrollbar"></div>';
     }
-    var $utils = document.createElement('div');
-    $utils.innerHTML = _utilsHTML;
-    $swiper.appendChild($utils);
+
+    if (_utilsHTML) {
+        $utils = document.createElement('div');
+        $utils.classList.add('swiper-utils');
+        $utils.innerHTML = _utilsHTML;
+        $swiper.appendChild($utils);
+    }
 
     /* Init swiper */
     var _swiper = new Swiper($swiper, _settings);
+
+    /* Add resize events */
+    window.addEventListener('resize', wputheme_debounce(function() {
+        wputheme_swiper_set_utils_attributes(_swiper, $utils);
+    }, 250));
+    wputheme_swiper_set_utils_attributes(_swiper, $utils);
     return _swiper;
+}
+
+/*
+ * Add attributes to utils
+ */
+function wputheme_swiper_set_utils_attributes(_swiper, $utils) {
+    var _next_enabled = false,
+        _prev_enabled = false,
+        _pagination_enabled = false;
+    if (_swiper.navigation) {
+        if (_swiper.navigation.nextEl) {
+            _next_enabled = !_swiper.navigation.nextEl.classList.contains('swiper-button-disabled');
+        }
+        if (_swiper.navigation.prevEl) {
+            _prev_enabled = !_swiper.navigation.prevEl.classList.contains('swiper-button-disabled');
+        }
+    }
+    if (_swiper.pagination && _swiper.pagination.el) {
+        _pagination_enabled = _swiper.pagination.el.children.length > 1;
+    }
+    $utils.setAttribute('data-next-enabled', _next_enabled ? '1' : '0');
+    $utils.setAttribute('data-prev-enabled', _prev_enabled ? '1' : '0');
+    $utils.setAttribute('data-pagination-enabled', _pagination_enabled ? '1' : '0');
 }
