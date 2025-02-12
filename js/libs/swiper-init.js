@@ -87,10 +87,12 @@ function wputheme_swiper_init($element, _settings) {
     var _swiper = new Swiper($swiper, _settings);
 
     /* Add resize events */
-    window.addEventListener('resize', wputheme_debounce(function() {
+    if ($utils){
+        window.addEventListener('resize', wputheme_debounce(function() {
+            wputheme_swiper_set_utils_attributes(_swiper, $utils);
+        }, 250));
         wputheme_swiper_set_utils_attributes(_swiper, $utils);
-    }, 250));
-    wputheme_swiper_set_utils_attributes(_swiper, $utils);
+    }
     return _swiper;
 }
 
