@@ -72,7 +72,8 @@ function wputheme_get_loop_item_from_id($post_obj, $loopfile = 'loop-post.php', 
     if (is_numeric($post_obj)) {
         $post_obj = get_post($post_obj);
     }
-    $loop_file = get_stylesheet_directory() . '/tpl/loops/' . $loopfile;
+    $loop_folder = apply_filters('wputheme_get_loop_item___folder', get_stylesheet_directory() . '/tpl/loops/');
+    $loop_file = $loop_folder . $loopfile;
     if (!file_exists($loop_file)) {
         return '<div>Error : ' . $loopfile . ' does not exists</div>';
     }
