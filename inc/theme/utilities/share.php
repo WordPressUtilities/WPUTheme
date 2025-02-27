@@ -177,7 +177,8 @@ function wputh_get_share_methods__list_html($post = false, $list_type = 'text', 
             $html .= str_replace('%s', $_id, $template);
             break;
         case 'icon':
-            $html .= '<i aria-hidden="true" class="icon icon_' . $_id . '"></i>';
+            $_icon_id = isset($_method['icon']) && $_method['icon'] ? $_method['icon'] : $_id;
+            $html .= '<i aria-hidden="true" class="icon icon_' . esc_attr($_icon_id) . '"></i>';
             break;
         default:
             $html .= $_method['name'];
