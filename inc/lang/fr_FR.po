@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2024-10-15 15:50+0200\n"
+"POT-Creation-Date: 2025-02-28 21:42+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -100,6 +100,10 @@ msgstr "Page suivante"
 msgid "Privacy Policy"
 msgstr "Politique de confidentialité"
 
+#: ../.././inc/theme/pages.php:273
+msgid "All pages"
+msgstr "Toutes les pages"
+
 #: ../.././inc/theme/templates.php:10
 msgid "Gallery"
 msgstr "Galerie"
@@ -158,11 +162,15 @@ msgstr "Du %s au %s"
 msgid "Sorry, no search results for this query."
 msgstr "Désolé, il n'y a aucun résultat pour cette requête."
 
-#: ../.././inc/theme/utilities/share.php:101
+#: ../.././inc/theme/utilities/share.php:109
 msgid "Copy link"
 msgstr "Copier le lien"
 
-#: ../.././inc/theme/utilities/share.php:110
+#: ../.././inc/theme/utilities/share.php:117
+msgid "Print"
+msgstr "Imprimer"
+
+#: ../.././inc/theme/utilities/share.php:125
 msgid "Share link"
 msgstr "Partager le lien"
 

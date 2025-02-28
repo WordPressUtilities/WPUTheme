@@ -231,3 +231,64 @@ function wputh_pages_set_privacy_policy() {
         update_option('wp_page_for_privacy_policy', $privacy_policy_page_id);
     }
 }
+
+/* ----------------------------------------------------------
+  Select pages in admin
+---------------------------------------------------------- */
+
+add_action('pre_get_posts', function ($query) {
+    if (!is_admin() || !$query->is_main_query() || $query->get('post_type') !== 'page') {
+        return;
+    }
+
+    if (!isset($_GET['wputh_filter_pages']) || !$_GET['wputh_filter_pages']) {
+        return;
+    }
+
+    $pages_sites = wputh_pages_site__get_list();
+    foreach ($pages_sites as $key => $page) {
+        if ($_GET['wputh_filter_pages'] != $key) {
+            continue;
+        }
+        $page_id = get_option($key);
+        $pages = array($page_id);
+        if ($pages && function_exists('pll_get_post_translations')) {
+            $pages = array_merge($pages, pll_get_post_translations($page_id));
+        }
+        if (!$pages) {
+            continue;
+        }
+        $query->set('post__in', $pages);
+        break;
+    }
+});
+
+add_action('restrict_manage_posts', function () {
+    global $typenow;
+    if ($typenow != 'page') {
+        return;
+    }
+    $pages_site = wputh_pages_site__get_list();
+    echo '<select name="wputh_filter_pages">';
+    echo '<option value="">' . __('All pages', 'wputh') . '</option>';
+    foreach ($pages_site as $key => $title) {
+        $page_id = get_option($key);
+        if (!$page_id) {
+            continue;
+        }
+        echo '<option value="' . esc_attr($key) . '" ' . (isset($_GET['wputh_filter_pages']) && $_GET['wputh_filter_pages'] == $key ? 'selected="selected"' : '') . '>' . esc_html($title) . '</option>';
+    }
+    echo '</select>';
+
+});
+
+function wputh_pages_site__get_list() {
+    $pages_site = array();
+    $pages_sites_raw = apply_filters('wputh_pages_site', array());
+    foreach ($pages_sites_raw as $key => $page) {
+        $pages_site[$key] = isset($page['post_title']) ? $page['post_title'] : $key;
+    }
+
+    return $pages_site;
+
+}
