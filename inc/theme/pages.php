@@ -288,7 +288,48 @@ function wputh_pages_site__get_list() {
     foreach ($pages_sites_raw as $key => $page) {
         $pages_site[$key] = isset($page['post_title']) ? $page['post_title'] : $key;
     }
-
     return $pages_site;
+}
 
+/* ----------------------------------------------------------
+  Filter pages by template
+---------------------------------------------------------- */
+
+add_action('restrict_manage_posts', function () {
+    global $typenow;
+    if ($typenow != 'page') {
+        return;
+    }
+
+    $pages_site_templates = wputh_pages_site__get_templates();
+    if (!$pages_site_templates) {
+        return;
+    }
+    echo '<select name="wputh_filter_pages_template">';
+    echo '<option value="">' . __('All templates', 'wputh') . '</option>';
+    foreach ($pages_site_templates as $template => $name) {
+        echo '<option value="' . esc_attr($template) . '" ' . (isset($_GET['wputh_filter_pages_template']) && $_GET['wputh_filter_pages_template'] == $template ? 'selected="selected"' : '') . '>' . esc_html($name) . '</option>';
+    }
+    echo '</select>';
+});
+
+add_action('pre_get_posts', function ($query) {
+    if (!is_admin() || !$query->is_main_query() || $query->get('post_type') !== 'page' || !isset($_GET['wputh_filter_pages_template']) || !$_GET['wputh_filter_pages_template']) {
+        return;
+    }
+
+    $pages_site_templates = wputh_pages_site__get_templates();
+    if (array_key_exists($_GET['wputh_filter_pages_template'], $pages_site_templates)) {
+        $query->set('meta_key', '_wp_page_template');
+        $query->set('meta_value', $_GET['wputh_filter_pages_template']);
+    }
+});
+
+/**
+ * Get all available pages templates
+ * @return array
+ */
+function wputh_pages_site__get_templates() {
+    $theme = wp_get_theme();
+    return $theme ? $theme->get_page_templates() : array();
 }

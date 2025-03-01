@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2025-02-28 21:42+0100\n"
+"POT-Creation-Date: 2025-03-01 21:34+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -103,6 +103,10 @@ msgstr "Privacy Policy"
 #: ../.././inc/theme/pages.php:273
 msgid "All pages"
 msgstr "Tutte le pagine"
+
+#: ../.././inc/theme/pages.php:309
+msgid "All templates"
+msgstr "Tutti i modelli"
 
 #: ../.././inc/theme/templates.php:10
 msgid "Gallery"
