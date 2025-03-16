@@ -104,9 +104,9 @@ function wputh_url_to_link($url, $options = array()) {
 
 }
 
-/**
- * Page link
- */
+/* ----------------------------------------------------------
+  Time
+---------------------------------------------------------- */
 if (!function_exists('wputh_link')) {
     function wputh_link($page_id) {
         $wputh_link_classname = apply_filters('wputh_link_classname', (is_page($page_id) ? 'current' : ''));
@@ -115,7 +115,7 @@ if (!function_exists('wputh_link')) {
 }
 
 /* ----------------------------------------------------------
-  Time
+  Display a time period
 ---------------------------------------------------------- */
 
 /**
@@ -134,9 +134,7 @@ function wputh_get_time_tag($date_format = '', $post_id = false) {
     return '<time datetime="' . get_the_time(DATE_W3C, $post_id) . '">' . get_the_time($date_format, $post_id) . '</time>';
 }
 
-/* ----------------------------------------------------------
-  Display a time period
----------------------------------------------------------- */
+/* Same day */
 
 /**
  * Display a time period
@@ -157,18 +155,20 @@ function wputh_get_time_period_string($start_date, $end_date) {
     $from_str = '';
     $to_str = '';
 
-    /* Same day */
+    /* Same month year */
     if ($start_date == $end_date || !$end_date) {
         return '<div class="wputh-time-period">' . date_i18n(__('d F Y', 'wputh'), $from) . '</div>';
     }
 
-    /* Same month year */
+    /* Same year */
     else if (date('Ym', $from) == date('Ym', $to)) {
         $from_str = date_i18n(__('d', 'wputh'), $from);
         $to_str = date_i18n(__('d F Y', 'wputh'), $to);
     }
 
-    /* Same year */
+    /* ----------------------------------------------------------
+  Tools
+---------------------------------------------------------- */
     else if (date('Y', $from) == date('Y', $to)) {
         $from_str = date_i18n(__('d F', 'wputh'), $from);
         $to_str = date_i18n(__('d F Y', 'wputh'), $to);
@@ -184,9 +184,7 @@ function wputh_get_time_period_string($start_date, $end_date) {
     ) . '</div>';
 }
 
-/* ----------------------------------------------------------
-  Tools
----------------------------------------------------------- */
+/* Add word to word */
 
 /**
  * Truncate
@@ -195,29 +193,44 @@ function wputh_get_time_period_string($start_date, $end_date) {
  * @param  string $more   [description]
  * @return [type]         [description]
  */
-function wputh_truncate($string, $length = 150, $more = '...') {
+function wputh_truncate($string, $length = 150, $more = '...', $args = array()) {
+
+    if (!is_array($args)) {
+        $args = array();
+    }
+    $args = array_merge(array(
+        'strip_tags' => true
+    ), $args);
     $_new_string = '';
-    $string = strip_tags($string);
+    if ($args['strip_tags']) {
+        $string = strip_tags($string);
+    }
     $_maxlen = $length - strlen($more);
     $_words = explode(' ', $string);
 
-    /* Add word to word */
+    /* Separate by spaces */
     foreach ($_words as $_word) {
         if (strlen($_word) + strlen($_new_string) >= $_maxlen) {
             break;
         }
 
-        /* Separate by spaces */
+        /* If new string is shorter than original */
         if (!empty($_new_string)) {
             $_new_string .= ' ';
         }
         $_new_string .= $_word;
     }
 
-    /* If new string is shorter than original */
+    if (!$args['strip_tags']) {
+        $_new_string = force_balance_tags($_new_string);
+    }
+
+    /* Add the after text */
     if (strlen($_new_string) < strlen($string)) {
 
-        /* Add the after text */
+        /* ----------------------------------------------------------
+  Pagination
+---------------------------------------------------------- */
         $_new_string .= $more;
     }
 
@@ -248,10 +261,6 @@ function wputh_endsWith($haystack = '', $needle = '') {
     }
     return (substr($haystack, -$length) === $needle);
 }
-
-/* ----------------------------------------------------------
-  Pagination
----------------------------------------------------------- */
 
 if (!function_exists('wputh_paginate')) {
     function wputh_paginate($prev_text = false, $next_text = false, $wputh_paginate_query = false) {
