@@ -93,7 +93,7 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
         /* Parent tax */
         $parent_tax = apply_filters('wputh_get_breadcrumbs__before_singular__parent_tax', false, get_post_type());
         if ($parent_tax) {
-            $parent_terms = wp_get_post_terms(get_the_ID(), $parent_tax);
+            $parent_terms = get_the_terms(get_the_ID(), $parent_tax);
             if (is_array($parent_terms) && isset($parent_terms[0])) {
                 $elements_ariane['parent-term--' . $parent_terms[0]->term_id] = array(
                     'name' => $parent_terms[0]->name,
