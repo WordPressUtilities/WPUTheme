@@ -64,12 +64,20 @@ function wputheme_swiper_init($element, _settings) {
             _settings.navigation = {};
         }
         if (!_settings.navigation.nextEl || (_settings.navigation.nextEl && typeof _settings.navigation.nextEl != 'object')) {
-            _settings.navigation.nextEl = '.swiper-button-next';
-            _utilsHTML += '<div class="swiper-button-next"></div>';
+            var _next_el_classname = '.swiper-button-next';
+            if(typeof _settings.navigation.nextEl == 'string') {
+                _next_el_classname = _settings.navigation.nextEl;
+            }
+            _settings.navigation.nextEl = _next_el_classname;
+            _utilsHTML += '<div class="' + (_next_el_classname.replace(/\./g, ' ')) + '"></div>';
         }
         if (!_settings.navigation.prevEl || (_settings.navigation.prevEl && typeof _settings.navigation.prevEl != 'object')) {
-            _settings.navigation.prevEl = '.swiper-button-prev';
-            _utilsHTML += '<div class="swiper-button-prev"></div>';
+            var _prev_el_classname = '.swiper-button-prev';
+            if(typeof _settings.navigation.prevEl == 'string') {
+                _prev_el_classname = _settings.navigation.prevEl;
+            }
+            _settings.navigation.prevEl = _prev_el_classname;
+            _utilsHTML += '<div class="' + (_prev_el_classname.replace(/\./g, ' ')) + '"></div>';
         }
     }
     if (_settings.scrollbar) {
