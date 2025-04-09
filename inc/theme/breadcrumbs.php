@@ -31,13 +31,16 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
 
     $elements_ariane = apply_filters('wputh_get_breadcrumbs__after_home', $elements_ariane);
 
-    $display_post_type_archive = apply_filters('wputh_get_breadcrumbs__display_post_type_archive', false);
-    if ($display_post_type_archive && is_single() && !is_singular('post')) {
-        $obj = get_post_type_object(get_post_type());
-        $elements_ariane['archive-post-type-' . $obj->name] = array(
-            'name' => $obj->label,
-            'link' => get_post_type_archive_link($obj->name)
-        );
+    if (is_single() && !is_singular('post')) {
+        $display_post_type_archive = apply_filters('wputh_get_breadcrumbs__display_post_type_archive', false);
+        $display_post_type_archive = apply_filters('wputh_get_breadcrumbs__display_post_type_archive__' . get_post_type(), $display_post_type_archive);
+        if ($display_post_type_archive) {
+            $obj = get_post_type_object(get_post_type());
+            $elements_ariane['archive-post-type-' . $obj->name] = array(
+                'name' => $obj->label,
+                'link' => get_post_type_archive_link($obj->name)
+            );
+        }
     }
 
     if (is_singular()) {
@@ -152,7 +155,7 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
     return $elements_ariane;
 }
 
-function wputh_breadcrumbs_set_parent_categories($elements_ariane, $term){
+function wputh_breadcrumbs_set_parent_categories($elements_ariane, $term) {
 
     // Checking for parent categories
     $cat_tmp = $term->parent;
