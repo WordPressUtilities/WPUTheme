@@ -57,9 +57,17 @@ function wputheme_get_loop_from_ids($wpq_posts = array(), $classname = 'loop-lis
     if (!$wpq_posts) {
         return '';
     }
+
+    if (!is_array($args)) {
+        $args = array();
+    }
+    $args = array_merge(array(
+        'li_classname' => ''
+    ), $args);
+
     $html = '<ul class="' . $classname . '">';
     foreach ($wpq_posts as $wpq_post) {
-        $html .= '<li>';
+        $html .= '<li' . ($args['li_classname'] ? ' class="' . esc_attr($args['li_classname']) . '"' : '') . '>';
         $html .= wputheme_get_loop_item_from_id($wpq_post, $loopfile, $args);
         $html .= '</li>';
     }
