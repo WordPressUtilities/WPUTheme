@@ -26,7 +26,7 @@ const sass_files = [sass_folder + '/**.scss', sass_folder + '/**/**.scss'];
   Compile styles
 ---------------------------------------------------------- */
 
-style = require("./intestarter_gulpfile/tasks/style")(sass_files, css_folder, bs, p);
+style = require("./inc/intestarter_gulpfile/tasks/style")(sass_files, css_folder, bs, p);
 exports.style = style;
 
 /* ----------------------------------------------------------

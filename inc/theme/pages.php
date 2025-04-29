@@ -268,6 +268,9 @@ add_action('restrict_manage_posts', function () {
     if ($typenow != 'page') {
         return;
     }
+    if (isset($_GET['wputh_filter_pages_template']) && $_GET['wputh_filter_pages_template']) {
+        return;
+    }
     $pages_site = wputh_pages_site__get_list();
     echo '<select name="wputh_filter_pages">';
     echo '<option value="">' . __('All pages', 'wputh') . '</option>';
@@ -298,6 +301,9 @@ function wputh_pages_site__get_list() {
 add_action('restrict_manage_posts', function () {
     global $typenow;
     if ($typenow != 'page') {
+        return;
+    }
+    if (isset($_GET['wputh_filter_pages']) && $_GET['wputh_filter_pages']) {
         return;
     }
 

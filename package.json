@@ -1,6 +1,6 @@
 {
   "name": "wputheme",
-  "version": "3.27.0",
+  "version": "3.27.1",
   "description": "WPUTheme",
   "devDependencies": {
     "browser-sync": "^3.0.3",
@@ -8,12 +8,12 @@
     "gulp-autoprefixer": "^8.0.0",
     "gulp-remove-empty-lines": "^0.1.0",
     "gulp-replace": "^1.1.4",
-    "gulp-sass": "^5.1.0",
+    "gulp-sass": "^6.0.1",
     "gulp-sass-glob": "^1.1.0",
     "gulp-strip-css-comments": "^2.0.0",
     "gulp-stylelint": "13.0.0",
     "gulp-trimlines": "^1.0.1",
-    "sass": "^1.83.1",
+    "sass": "^1.86.0",
     "stylelint": "13.13.1"
   },
   "intestarter_gulpfile_style_silenceDeprecations": [
