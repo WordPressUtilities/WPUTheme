@@ -34,33 +34,38 @@ define('PAGINATION_KIND', apply_filters('wputh_pagination_kind', 'numbers'));
 /* Menus
  -------------------------- */
 
-$default_menus = array(
-    'main' => __('Main menu', 'wputh')
-);
-$wputh_menus = apply_filters('wputh_default_menus', $default_menus);
-if (!empty($wputh_menus)) {
-    register_nav_menus($wputh_menus);
-}
+add_action('after_setup_theme', function () {
+    $default_menus = array(
+        'main' => __('Main menu', 'wputh')
+    );
+    $wputh_menus = apply_filters('wputh_default_menus', $default_menus);
+    if (!empty($wputh_menus)) {
+        register_nav_menus($wputh_menus);
+    }
+});
 
 /* Sidebars
  -------------------------- */
 
-$default_sidebars = array(
-    array(
-        'name' => __('Default Sidebar', 'wputh'),
-        'id' => 'wputh-sidebar',
-        'description' => __('Default theme sidebar', 'wputh'),
-        'before_title' => '<h3 class="wputh-sidebar__title">',
-        'after_title' => '</h3>'
-    )
-);
+add_action('widgets_init', function () {
+    $default_sidebars = array(
+        array(
+            'name' => __('Default Sidebar', 'wputh'),
+            'id' => 'wputh-sidebar',
+            'description' => __('Default theme sidebar', 'wputh'),
+            'before_title' => '<h3 class="wputh-sidebar__title">',
+            'after_title' => '</h3>'
+        )
+    );
 
-$wputh_sidebars = apply_filters('wputh_default_sidebars', $default_sidebars);
-if (!empty($wputh_sidebars)) {
+    $wputh_sidebars = apply_filters('wputh_default_sidebars', $default_sidebars);
+    if (empty($wputh_sidebars)) {
+        return;
+    }
     foreach ($wputh_sidebars as $wputh_sidebar) {
         register_sidebar($wputh_sidebar);
     }
-}
+});
 
 /* Thumbnails
  -------------------------- */
