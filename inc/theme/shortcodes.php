@@ -169,3 +169,12 @@ jQuery(window).on('vanilla-pjax-ready', function(e){
 </script>
 EOT;
 }
+
+/* ----------------------------------------------------------
+  Icon
+---------------------------------------------------------- */
+
+add_shortcode('wputh_icon', 'wputh_icon_shortcode');
+function wputh_icon_shortcode($atts) {
+    return '<i class="icon icon_' . esc_attr($atts['name']) . '" aria-hidden="true"></i>';
+}

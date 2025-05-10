@@ -134,7 +134,7 @@ function wputh_build_javascripts() {
         $details['deps'] = isset($details['deps']) ? $details['deps'] : false;
         $details['ver'] = isset($details['ver']) ? $details['ver'] : WPUTHEME_ASSETS_VERSION;
         $details['footer'] = isset($details['footer']) && $details['footer'] == true;
-        if (isset($details['path'])) {
+        if (isset($details['path']) && file_exists($details['path'])) {
             $details['filemtime'] = filemtime($details['path']);
         }
 
