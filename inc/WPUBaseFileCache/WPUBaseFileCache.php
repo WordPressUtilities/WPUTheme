@@ -4,7 +4,7 @@ namespace WPUTheme;
 /*
 Class Name: WPU Base File Cache
 Description: A class to handle basic file cache
-Version: 0.2.1
+Version: 0.3.0
 Author: Darklg
 Author URI: https://darklg.me/
 License: MIT License
@@ -16,7 +16,7 @@ defined('ABSPATH') || die;
 class WPUBaseFileCache {
     private $cache_dir;
     public function __construct($cache_dir = '') {
-        if(!$cache_dir){
+        if (!$cache_dir) {
             $cache_dir = __NAMESPACE__;
         }
         $this->cache_dir = $cache_dir;
@@ -27,6 +27,12 @@ class WPUBaseFileCache {
         $root_cache_dir = WP_CONTENT_DIR . '/cache';
         if (!is_dir($root_cache_dir) && !mkdir($root_cache_dir)) {
             return false;
+        }
+        if (is_multisite()) {
+            $root_cache_dir .= '/site_' . get_current_blog_id();
+            if (!is_dir($root_cache_dir) && !mkdir($root_cache_dir)) {
+                return false;
+            }
         }
         $cache_dir = $root_cache_dir . '/' . $this->cache_dir . '/';
         if (!is_dir($cache_dir)) {
