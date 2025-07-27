@@ -140,14 +140,23 @@ function wputh_get_time_tag($date_format = '', $post_id = false) {
  * Display a time period
  * @param  string $start_date
  * @param  string $end_date
+ * @param  array  $args
  * @return string
  */
 
-function wputh_get_time_period_string($start_date, $end_date) {
+function wputh_get_time_period_string($start_date, $end_date, $args = array()) {
 
     if (!$start_date) {
         return '';
     }
+
+    if(!is_array($args)) {
+        $args = array();
+    }
+    $args = array_merge(array(
+        'ymd_format' => __('d F Y', 'wputh'),
+        'md_format' => __('d F', 'wputh'),
+    ), $args);
 
     $from = strtotime($start_date);
     $to = strtotime($end_date);
@@ -157,24 +166,24 @@ function wputh_get_time_period_string($start_date, $end_date) {
 
     /* Same month year */
     if ($start_date == $end_date || !$end_date) {
-        return '<div class="wputh-time-period">' . date_i18n(__('d F Y', 'wputh'), $from) . '</div>';
+        return '<div class="wputh-time-period">' . date_i18n($args['ymd_format'], $from) . '</div>';
     }
 
     /* Same year */
     else if (date('Ym', $from) == date('Ym', $to)) {
         $from_str = date_i18n(__('d', 'wputh'), $from);
-        $to_str = date_i18n(__('d F Y', 'wputh'), $to);
+        $to_str = date_i18n($args['ymd_format'], $to);
     }
 
     /* ----------------------------------------------------------
   Tools
 ---------------------------------------------------------- */
     else if (date('Y', $from) == date('Y', $to)) {
-        $from_str = date_i18n(__('d F', 'wputh'), $from);
-        $to_str = date_i18n(__('d F Y', 'wputh'), $to);
+        $from_str = date_i18n($args['md_format'], $from);
+        $to_str = date_i18n($args['ymd_format'], $to);
     } else {
-        $from_str = date_i18n(__('d F Y', 'wputh'), $from);
-        $to_str = date_i18n(__('d F Y', 'wputh'), $to);
+        $from_str = date_i18n($args['ymd_format'], $from);
+        $to_str = date_i18n($args['ymd_format'], $to);
     }
 
     return '<div class="wputh-time-period">' . sprintf(
