@@ -67,6 +67,28 @@ function array_to_html_list($array = array()) {
     return '<ul>' . implode('</li><li>', $array) . '</ul>';
 }
 
+/**
+ * Convert an array to an HTML list using a callback function
+ * @param  array    $items     Array of items to be converted
+ * @param  callable $callback  Callback function to process each item
+ * @param  array    $args      Additional arguments to pass to the callback
+ * @return string              HTML List
+ */
+function array_to_callback_list($items, $callback, $args = array()) {
+    if (!$items || !is_array($items) || !is_callable($callback)) {
+        return '';
+    }
+    if (!is_array($args)) {
+        $args = array();
+    }
+    $output = '<ul>';
+    foreach ($items as $item) {
+        $output .= '<li>' . call_user_func($callback, $item, $args) . '</li>';
+    }
+    $output .= '</ul>';
+    return $output;
+}
+
 /* ----------------------------------------------------------
   Links
 ---------------------------------------------------------- */
@@ -150,12 +172,12 @@ function wputh_get_time_period_string($start_date, $end_date, $args = array()) {
         return '';
     }
 
-    if(!is_array($args)) {
+    if (!is_array($args)) {
         $args = array();
     }
     $args = array_merge(array(
         'ymd_format' => __('d F Y', 'wputh'),
-        'md_format' => __('d F', 'wputh'),
+        'md_format' => __('d F', 'wputh')
     ), $args);
 
     $from = strtotime($start_date);
