@@ -239,6 +239,10 @@ function wputh_truncate($string, $length = 150, $more = '...', $args = array()) 
     $_maxlen = $length - strlen($more);
     $_words = explode(' ', $string);
 
+    if (isset($_words[0]) && strlen($_words[0]) > 0) {
+        $_new_string = substr($_words[0], 0, $_maxlen);
+    }
+
     /* Separate by spaces */
     foreach ($_words as $_word) {
         if (strlen($_word) + strlen($_new_string) >= $_maxlen) {
@@ -258,10 +262,6 @@ function wputh_truncate($string, $length = 150, $more = '...', $args = array()) 
 
     /* Add the after text */
     if (strlen($_new_string) < strlen($string)) {
-
-        /* ----------------------------------------------------------
-  Pagination
----------------------------------------------------------- */
         $_new_string .= $more;
     }
 
@@ -292,6 +292,10 @@ function wputh_endsWith($haystack = '', $needle = '') {
     }
     return (substr($haystack, -$length) === $needle);
 }
+
+/* ----------------------------------------------------------
+  Pagination
+---------------------------------------------------------- */
 
 if (!function_exists('wputh_paginate')) {
     function wputh_paginate($prev_text = false, $next_text = false, $wputh_paginate_query = false) {
