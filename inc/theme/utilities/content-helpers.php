@@ -239,7 +239,7 @@ function wputh_truncate($string, $length = 150, $more = '...', $args = array()) 
     $_maxlen = $length - strlen($more);
     $_words = explode(' ', $string);
 
-    if (isset($_words[0]) && strlen($_words[0]) > 0) {
+    if (isset($_words[0]) && strlen($_words[0]) > $_maxlen) {
         $_new_string = substr($_words[0], 0, $_maxlen);
     }
 
