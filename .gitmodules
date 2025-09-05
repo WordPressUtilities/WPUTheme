@@ -4,3 +4,6 @@
 [submodule "inc/intestarter_gulpfile"]
 	path = inc/intestarter_gulpfile
 	url = https://github.com/Darklg/intestarter_gulpfile.git
+[submodule "intestarter_gulpfile"]
+	path = intestarter_gulpfile
+	url = https://github.com/Darklg/intestarter_gulpfile.git

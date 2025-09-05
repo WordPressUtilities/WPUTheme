@@ -81,9 +81,17 @@ function array_to_callback_list($items, $callback, $args = array()) {
     if (!is_array($args)) {
         $args = array();
     }
-    $output = '<ul>';
+    $args = array_merge(array(
+        'ul_classname' => '',
+        'li_classname' => ''
+    ), $args);
+
+    $ul_classname = $args['ul_classname'] ? ' class="' . esc_attr($args['ul_classname']) . '"' : '';
+    $li_classname = $args['li_classname'] ? ' class="' . esc_attr($args['li_classname']) . '"' : '';
+
+    $output = '<ul' . $ul_classname . '>';
     foreach ($items as $item) {
-        $output .= '<li>' . call_user_func($callback, $item, $args) . '</li>';
+        $output .= '<li' . $li_classname . '>' . call_user_func($callback, $item, $args) . '</li>';
     }
     $output .= '</ul>';
     return $output;
@@ -129,6 +137,7 @@ function wputh_url_to_link($url, $options = array()) {
 /* ----------------------------------------------------------
   Time
 ---------------------------------------------------------- */
+
 if (!function_exists('wputh_link')) {
     function wputh_link($page_id) {
         $wputh_link_classname = apply_filters('wputh_link_classname', (is_page($page_id) ? 'current' : ''));
@@ -195,12 +204,7 @@ function wputh_get_time_period_string($start_date, $end_date, $args = array()) {
     else if (date('Ym', $from) == date('Ym', $to)) {
         $from_str = date_i18n(__('d', 'wputh'), $from);
         $to_str = date_i18n($args['ymd_format'], $to);
-    }
-
-    /* ----------------------------------------------------------
-  Tools
----------------------------------------------------------- */
-    else if (date('Y', $from) == date('Y', $to)) {
+    } else if (date('Y', $from) == date('Y', $to)) {
         $from_str = date_i18n($args['md_format'], $from);
         $to_str = date_i18n($args['ymd_format'], $to);
     } else {
@@ -215,7 +219,9 @@ function wputh_get_time_period_string($start_date, $end_date, $args = array()) {
     ) . '</div>';
 }
 
-/* Add word to word */
+/* ----------------------------------------------------------
+  Tools
+---------------------------------------------------------- */
 
 /**
  * Truncate
