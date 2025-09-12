@@ -165,3 +165,56 @@ function wputh_get_posts($args = array(), $expires = 60) {
 
     return $posts;
 }
+
+/* ----------------------------------------------------------
+  UX fix : reduce opacity of menu items that exceed the max depth
+---------------------------------------------------------- */
+
+add_action('admin_head-nav-menus.php', function () {
+
+    $max_possible_depth = apply_filters('wputh_menus_max_depth', 5);
+
+    /* Get rules */
+    $rules = apply_filters('wputh_default_menus_depth', array());
+    if (empty($rules) || !is_array($rules)) {
+        return;
+    }
+
+    /* Get locations */
+    $locations = get_nav_menu_locations();
+    if (empty($locations)) {
+        return;
+    }
+
+    /* Retrieve current menu ID */
+    $current_menu_id = isset($_GET['menu']) ? (int) $_GET['menu'] : 0;
+    if (!$current_menu_id) {
+        $current_menu_id = absint(get_user_option('nav_menu_recently_edited'));
+        if (!$current_menu_id) {
+            return;
+        }
+    }
+
+    /* Check if current menu ID matches any rule */
+    $matched_depth = null;
+    foreach ($rules as $loc => $max_depth) {
+        if (isset($locations[$loc]) && (int) $locations[$loc] === $current_menu_id) {
+            $matched_depth = (int) $max_depth;
+            break;
+        }
+    }
+    if ($matched_depth === null || $matched_depth < 0 || $matched_depth > $max_possible_depth) {
+        return;
+    }
+
+    /* Generate CSS selectors */
+    $selectors = [];
+    for ($i = $matched_depth + 1; $i <= $max_possible_depth; $i++) {
+        $selectors[] = "#menu-to-edit .menu-item-depth-$i";
+    }
+
+    if (!empty($selectors)) {
+        echo '<style>' . implode(',', $selectors) . '{opacity: 0.3;}' . '</style>';
+    }
+
+});
