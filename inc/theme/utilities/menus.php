@@ -1,6 +1,19 @@
 <?php
 
 /* ----------------------------------------------------------
+  Helpers
+---------------------------------------------------------- */
+
+/* Retrieve current menu ID */
+function wputh_menus_get_current_menu_id() {
+    $current_menu_id = isset($_GET['menu']) ? (int) $_GET['menu'] : 0;
+    if (!$current_menu_id) {
+        $current_menu_id = absint(get_user_option('nav_menu_recently_edited'));
+    }
+    return $current_menu_id ? $current_menu_id : 0;
+}
+
+/* ----------------------------------------------------------
   Cached nav menu
 ---------------------------------------------------------- */
 
@@ -187,13 +200,7 @@ add_action('admin_head-nav-menus.php', function () {
     }
 
     /* Retrieve current menu ID */
-    $current_menu_id = isset($_GET['menu']) ? (int) $_GET['menu'] : 0;
-    if (!$current_menu_id) {
-        $current_menu_id = absint(get_user_option('nav_menu_recently_edited'));
-        if (!$current_menu_id) {
-            return;
-        }
-    }
+    $current_menu_id = wputh_menus_get_current_menu_id();
 
     /* Check if current menu ID matches any rule */
     $matched_depth = null;
@@ -216,5 +223,59 @@ add_action('admin_head-nav-menus.php', function () {
     if (!empty($selectors)) {
         echo '<style>' . implode(',', $selectors) . '{opacity: 0.3;}' . '</style>';
     }
+
+});
+
+/* ----------------------------------------------------------
+  UX fix : limit number of items in menu
+---------------------------------------------------------- */
+
+add_action('admin_head-nav-menus.php', function () {
+
+    $max_possible_length = apply_filters('wputh_menus_max_length', 99);
+
+    /* Get rules */
+    $rules = apply_filters('wputh_default_menus_length', array());
+    if (empty($rules) || !is_array($rules)) {
+        return;
+    }
+
+    /* Get locations */
+    $locations = get_nav_menu_locations();
+    if (empty($locations)) {
+        return;
+    }
+
+    /* Retrieve current menu ID */
+    $current_menu_id = wputh_menus_get_current_menu_id();
+
+    /* Check if current menu ID matches any rule */
+    $matched_length = null;
+    foreach ($rules as $loc => $max_length) {
+        if (isset($locations[$loc]) && (int) $locations[$loc] === $current_menu_id) {
+            $matched_length = (int) $max_length;
+            break;
+        }
+    }
+    if ($matched_length === null || $matched_length < 0 || $matched_length > $max_possible_length) {
+        return;
+    }
+
+    /* Generate CSS selectors */
+
+    echo '<style>#menu-to-edit .menu-item-depth-0[data-wputh-over-max-length="1"] {opacity: 0.5;}</style>';
+
+    echo '<script>';
+    /* Update menu when max length is exceeded */
+    echo 'function wputh_update_menu_style_max_length(){
+Array.prototype.forEach.call(document.querySelectorAll("#menu-to-edit .menu-item-depth-0"), function(el, i){
+    el.setAttribute("data-wputh-over-max-length", i >= ' . $matched_length . ' ? "1" : "0");
+})}';
+
+    $_events = ['DOMContentLoaded', 'mouseup', 'mousedown'];
+    foreach ($_events as $_event) {
+        echo 'document.addEventListener("' . $_event . '", wputh_update_menu_style_max_length);';
+    }
+    echo '</script>';
 
 });
