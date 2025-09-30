@@ -96,7 +96,6 @@ function wputh_translated_url($use_full_lang_name = false) {
 
     // Obtaining from Polylang
     if (function_exists('pll_current_language')) {
-        global $polylang;
         $current_lang = pll_current_language();
         $poly_langs = pll_the_languages(array(
             'raw' => 1,
@@ -104,6 +103,9 @@ function wputh_translated_url($use_full_lang_name = false) {
         ));
 
         if (is_array($poly_langs)) {
+            usort($poly_langs, function ($a, $b) {
+                return $a['order'] - $b['order'];
+            });
             foreach ($poly_langs as $lang) {
                 $full_name = $lang['slug'];
                 if ($use_full_lang_name && isset($lang['name'])) {

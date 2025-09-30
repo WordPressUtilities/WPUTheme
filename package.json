@@ -1,6 +1,6 @@
 {
   "name": "wputheme",
-  "version": "3.29.1",
+  "version": "3.29.2",
   "description": "WPUTheme",
   "devDependencies": {
     "browser-sync": "^3.0.3",
