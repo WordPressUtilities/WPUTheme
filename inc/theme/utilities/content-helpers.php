@@ -149,6 +149,21 @@ if (!function_exists('wputh_link')) {
   Display a time period
 ---------------------------------------------------------- */
 
+function wputh_get_time_tag_html($raw_date, $date_format = '') {
+    if (!$raw_date) {
+        return '';
+    }
+
+    if (!$date_format) {
+        $date_format = get_option('date_format');
+    }
+    $date = strtotime($raw_date);
+    if (!$date) {
+        return '';
+    }
+    return '<time datetime="' . date(DATE_W3C, $date) . '">' . date_i18n($date_format, $date) . '</time>';
+}
+
 /**
  * Get an HTML <time> tag for a post
  * @param  string  $date_format   Native PHP date format.
@@ -156,13 +171,11 @@ if (!function_exists('wputh_link')) {
  * @return string                 <time> tag for the
  */
 function wputh_get_time_tag($date_format = '', $post_id = false) {
-    if (!$date_format) {
-        $date_format = get_option('date_format');
-    }
     if (!$post_id) {
         $post_id = get_the_ID();
     }
-    return '<time datetime="' . get_the_time(DATE_W3C, $post_id) . '">' . get_the_time($date_format, $post_id) . '</time>';
+
+    return wputh_get_time_tag_html(get_the_date('c', $post_id), $date_format);
 }
 
 /* Same day */

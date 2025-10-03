@@ -103,3 +103,47 @@ function wputh_search_terms__like($args) {
 function wputh_search_terms__compare_term_id($val1, $val2) {
     return strcmp($val1->term_id, $val2->term_id);
 }
+
+/* ----------------------------------------------------------
+  Get main term
+---------------------------------------------------------- */
+
+/**
+ * Get the main term of a post
+ * @param  int|WP_Post $post  Post ID or WP_Post object
+ * @return WP_Term|false      Main term or false if not found
+ */
+function wputh_get_main_term($post, $taxonomy = 'category') {
+    if (is_numeric($post)) {
+        $post = get_post($post);
+    }
+    if (!$post instanceof WP_Post) {
+        return false;
+    }
+
+    $terms = get_the_terms($post->ID, $taxonomy);
+    if (empty($terms) || is_wp_error($terms)) {
+        return false;
+    }
+
+    $main_term = apply_filters('wputh_get_main_term', false, $post, $terms, $taxonomy);
+    if ($main_term) {
+        return $main_term;
+    }
+
+    /* Yoast SEO */
+    if (class_exists('WPSEO_Primary_Term')) {
+        $wpseo_primary_term = new WPSEO_Primary_Term($taxonomy, $post->ID);
+        $primary_term_id = $wpseo_primary_term->get_primary_term();
+        if (!is_wp_error($primary_term_id) && $primary_term_id) {
+            foreach ($terms as $term) {
+                if ($term->term_id == $primary_term_id) {
+                    return $term;
+                }
+            }
+        }
+    }
+
+    /* Default to the first term */
+    return $terms[0];
+}

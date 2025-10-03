@@ -5,7 +5,7 @@ if (function_exists('wputh_get_breadcrumbs')) {
 }
 
 function wputh_get_breadcrumbs($elements_ariane = array()) {
-    global $post;
+
     // Hide breadcrumbs if called on homepage
     if (is_home() || is_front_page()) {
         return array();
@@ -44,13 +44,12 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
     }
 
     if (is_singular()) {
-        $main_category = get_the_category();
-        if (isset($main_category[0])) {
-            $elements_ariane = wputh_breadcrumbs_set_parent_categories($elements_ariane, $main_category[0]);
-
+        $main_category = wputh_get_main_term(get_the_ID(), 'category');
+        if ($main_category) {
+            $elements_ariane = wputh_breadcrumbs_set_parent_categories($elements_ariane, $main_category);
             $elements_ariane['category'] = array(
-                'name' => $main_category[0]->cat_name,
-                'link' => get_category_link($main_category[0]->term_id)
+                'name' => $main_category->name,
+                'link' => get_category_link($main_category->term_id)
             );
         }
     }
