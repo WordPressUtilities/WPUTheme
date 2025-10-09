@@ -62,3 +62,22 @@ function wputh_rebuild_parsed_url($url_parts) {
         (isset($url_parts['query']) ? '?' . $url_parts['query'] : '') .
         (isset($url_parts['fragment']) ? '#' . $url_parts['fragment'] : '');
 }
+
+/* ----------------------------------------------------------
+  Reading time
+---------------------------------------------------------- */
+
+function wputh_get_reading_time($post_id = null) {
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+    $_post = get_post($post_id);
+    $content = wp_strip_all_tags($_post->post_content);
+    $word_count = str_word_count(strip_tags($content));
+    $reading_time = ceil($word_count / apply_filters('wputh_get_reading_time__words_per_minute', 180));
+
+    if (!$reading_time) {
+        $reading_time = 1;
+    }
+    return $reading_time;
+}
