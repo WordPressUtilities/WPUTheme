@@ -110,15 +110,20 @@ function wputheme_get_quadrant(x, y) {
     var quadrant;
     if (x < width && y < height) {
         quadrant = "top-left";
-    }
-    else if (x >= width && y < height) {
+    } else if (x >= width && y < height) {
         quadrant = "top-right";
-    }
-    else if (x < width && y >= height) {
+    } else if (x < width && y >= height) {
         quadrant = "bottom-left";
-    }
-    else {
+    } else {
         quadrant = "bottom-right";
     }
     return quadrant;
+}
+
+/* ----------------------------------------------------------
+  Check if an element is visible
+---------------------------------------------------------- */
+
+function wputheme_is_element_visible($el) {
+    return ($el.offsetWidth || $el.offsetHeight || $el.getClientRects().length);
 }
