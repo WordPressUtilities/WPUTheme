@@ -10,10 +10,14 @@ var wpu_set_smooth_scroll = function() {
             return;
         }
         var $href = jQuery(href);
+        var _offset = 0;
+        if(window.wputheme_smooth_scroll_offset !== undefined){
+            _offset = parseInt(window.wputheme_smooth_scroll_offset, 10);
+        }
         if ($href.length > 0) {
             e.preventDefault();
             jQuery('html,body').animate({
-                scrollTop: $href.offset().top
+                scrollTop: $href.offset().top - _offset
             }, 500);
         }
     });
