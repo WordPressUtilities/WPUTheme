@@ -28,6 +28,10 @@ function wputheme_build_summary_item($item, i, $links_list) {
         return false;
     }
 
+    if (!$item.textContent) {
+        return false;
+    }
+
     /* Add an ID to this block */
     var unique_id;
     if ($item.id) {
