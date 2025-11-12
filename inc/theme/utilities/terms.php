@@ -58,10 +58,9 @@ function wputh_search_terms($search, $taxonomy, $args = array()) {
 function wputh_search_terms__like($args) {
 
     $arg_id = 'name__like';
-    if(isset($args['description__like'])){
+    if (isset($args['description__like'])) {
         $arg_id = 'description__like';
     }
-
 
     if (!isset($args[$arg_id])) {
         return array();
@@ -131,15 +130,23 @@ function wputh_get_main_term($post, $taxonomy = 'category') {
         return $main_term;
     }
 
+    $primary_term_id = false;
+
     /* Yoast SEO */
     if (class_exists('WPSEO_Primary_Term')) {
         $wpseo_primary_term = new WPSEO_Primary_Term($taxonomy, $post->ID);
         $primary_term_id = $wpseo_primary_term->get_primary_term();
-        if (!is_wp_error($primary_term_id) && $primary_term_id) {
-            foreach ($terms as $term) {
-                if ($term->term_id == $primary_term_id) {
-                    return $term;
-                }
+    }
+
+    /* WPU Main Category */
+    if (!$primary_term_id && $taxonomy == 'category') {
+        $primary_term_id = get_post_meta($post->ID, 'primary_category', true);
+    }
+
+    if ($primary_term_id && !is_wp_error($primary_term_id)) {
+        foreach ($terms as $term) {
+            if ($term->term_id == $primary_term_id) {
+                return $term;
             }
         }
     }
