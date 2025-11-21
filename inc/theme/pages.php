@@ -28,6 +28,9 @@ function wputh_setup_pages_site($pages) {
         if (!isset($page['wpu_post_metas']) || !is_array($page['wpu_post_metas'])) {
             $pages[$id]['wpu_post_metas'] = array();
         }
+        if (!isset($page['disable_deletion'])) {
+            $pages[$id]['disable_deletion'] = false;
+        }
     }
 
     return $pages;
@@ -339,3 +342,60 @@ function wputh_pages_site__get_templates() {
     $theme = wp_get_theme();
     return $theme ? $theme->get_page_templates() : array();
 }
+
+/* ----------------------------------------------------------
+  Prevent trashing or deleting some pages
+---------------------------------------------------------- */
+
+function wputh_pages_get_protected_pages_ids() {
+    $protected_pages_ids = array();
+    $pages_site = wputh_setup_pages_site(apply_filters('wputh_pages_site', array()));
+    foreach ($pages_site as $id => $page) {
+        if (!isset($page['disable_deletion']) || !$page['disable_deletion']) {
+            continue;
+        }
+        $post_id = get_option($id);
+        if (!$post_id) {
+            continue;
+        }
+        $page_ids = array((int) $post_id);
+        if (function_exists('pll_get_post_translations')) {
+            $page_ids = pll_get_post_translations($post_id);
+        }
+        foreach ($page_ids as $page_id) {
+            $protected_pages_ids[] = $page_id;
+        }
+
+    }
+    return $protected_pages_ids;
+}
+
+// Prevent moving a specific page to trash and prevent deletion
+add_filter('pre_trash_post', 'wputh_pre_trash_delete_callback', 10, 2);
+add_filter('pre_delete_post', 'wputh_pre_trash_delete_callback', 10, 2);
+function wputh_pre_trash_delete_callback($act, $post) {
+    $protected_pages_ids = wputh_pages_get_protected_pages_ids();
+    if (in_array((int) $post->ID, $protected_pages_ids)) {
+        wp_die(__('This page is protected and cannot be moved to trash or deleted.', 'wputh'));
+    }
+    return $act;
+}
+
+add_filter('page_row_actions', function ($actions, $post) {
+    $protected_pages_ids = wputh_pages_get_protected_pages_ids();
+    if (in_array((int) $post->ID, $protected_pages_ids)) {
+        unset($actions['trash']);
+        unset($actions['delete']);
+    }
+    return $actions;
+}, 10, 2);
+
+add_action('admin_head', function () {
+    if (!isset($_GET['post'])) {
+        return;
+    }
+    $protected_pages_ids = wputh_pages_get_protected_pages_ids();
+    if (in_array((int) $_GET['post'], $protected_pages_ids)) {
+        echo '<style>#delete-action { display:none; }</style>';
+    }
+});
