@@ -360,7 +360,10 @@ function wputh_pages_get_protected_pages_ids() {
         }
         $page_ids = array((int) $post_id);
         if (function_exists('pll_get_post_translations')) {
-            $page_ids = pll_get_post_translations($post_id);
+            $pll_page_ids = pll_get_post_translations($post_id);
+            if (!empty($pll_page_ids) && is_array($pll_page_ids)) {
+                $page_ids = $pll_page_ids;
+            }
         }
         foreach ($page_ids as $page_id) {
             $protected_pages_ids[] = $page_id;
