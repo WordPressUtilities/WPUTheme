@@ -178,3 +178,52 @@ add_shortcode('wputh_icon', 'wputh_icon_shortcode');
 function wputh_icon_shortcode($atts) {
     return '<i class="icon icon_' . esc_attr($atts['name']) . '" aria-hidden="true"></i>';
 }
+
+/* ----------------------------------------------------------
+  Shortcode view more
+---------------------------------------------------------- */
+
+add_shortcode('view_more', function ($atts, $content = null) {
+    $atts = shortcode_atts(array(
+        'more' => __('View more', 'wputh'),
+        'less' => __('View less', 'wputh')
+    ), $atts, 'view_more');
+
+    if (!defined('WPUTHEME_HAS_SHORTCODE_VIEW_MORE')) {
+        define('WPUTHEME_HAS_SHORTCODE_VIEW_MORE', true);
+    }
+    $html = '<a data-nosnippet class="view-more-link" href="#" data-text-more="' . esc_attr($atts['more']) . '" data-text-less="' . esc_attr($atts['less']) . '">' . esc_html($atts['more']) . '</a>';
+    return ' ' . $html . ' ';
+});
+
+add_action('wp_footer', function () {
+    if (!defined('WPUTHEME_HAS_SHORTCODE_VIEW_MORE')) {
+        return;
+    }
+    /* JS action */
+    echo '<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".view-more-link").forEach(function(link) {
+            var _parent = link.closest("p, div, ul");
+            _parent.setAttribute("data-view-more-is-expanded", "0");
+            link.addEventListener("click", function(e) {
+                e.preventDefault();
+                var _wasExpanded = _parent.getAttribute("data-view-more-is-expanded") === "1";
+                _parent.setAttribute("data-view-more-is-expanded", _wasExpanded ? "0" : "1");
+                link.textContent = link.getAttribute(_wasExpanded ? "data-text-more" : "data-text-less");
+            });
+        });
+    });
+    </script>';
+
+    echo '<style>
+    [data-view-more-is-expanded="0"] ~ * {
+        position: absolute!important;
+        left: -999vw!important;
+        width: 0!important;
+        height: 0!important;
+        overflow: hidden!important;
+    }
+    </style>';
+
+});
