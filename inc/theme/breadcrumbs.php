@@ -184,6 +184,9 @@ function wputh_breadcrumbs_set_parent_categories($elements_ariane, $term) {
 }
 
 function wputh_get_breadcrumbs_html($elements_ariane) {
+    if(!is_array($elements_ariane) || empty($elements_ariane)) {
+        return '';
+    }
     $html = '';
     $html .= '<ul class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">';
     $i = 0;
