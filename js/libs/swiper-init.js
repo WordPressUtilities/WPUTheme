@@ -108,10 +108,14 @@ function wputheme_swiper_init($element, _settings) {
  * Add attributes to utils
  */
 function wputheme_swiper_set_utils_attributes(_swiper, $utils) {
-    var _next_enabled = false,
+    var
+        _nav_enabled = false,
+        _next_enabled = false,
         _prev_enabled = false,
+        _scrollbar_enabled = false,
         _pagination_enabled = false;
     if (_swiper.navigation) {
+        _nav_enabled = true;
         if (_swiper.navigation.nextEl) {
             _next_enabled = !_swiper.navigation.nextEl.classList.contains('swiper-button-disabled');
         }
@@ -122,7 +126,12 @@ function wputheme_swiper_set_utils_attributes(_swiper, $utils) {
     if (_swiper.pagination && _swiper.pagination.el) {
         _pagination_enabled = _swiper.pagination.el.children.length > 1;
     }
+    if(_swiper.scrollbar && _swiper.scrollbar.el) {
+        _scrollbar_enabled = true;
+    }
+    $utils.setAttribute('data-nav-enabled', _nav_enabled ? '1' : '0');
     $utils.setAttribute('data-next-enabled', _next_enabled ? '1' : '0');
     $utils.setAttribute('data-prev-enabled', _prev_enabled ? '1' : '0');
+    $utils.setAttribute('data-scrollbar-enabled', _scrollbar_enabled ? '1' : '0');
     $utils.setAttribute('data-pagination-enabled', _pagination_enabled ? '1' : '0');
 }
