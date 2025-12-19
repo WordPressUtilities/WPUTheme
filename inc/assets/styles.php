@@ -147,7 +147,7 @@ add_filter('wp_preload_resources', function ($preload_resources = array()) {
             $preload_resources[] = $font;
         }
     }
-    if (has_header_image()) {
+    if (has_header_image() && apply_filters('wputheme_preload_header_image', true)) {
         $preload_resources[] = array(
             'href' => get_header_image(),
             'as' => 'image'
