@@ -54,7 +54,7 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
         }
     }
 
-    if (is_category()) {
+    if (is_category() || is_tag() || is_tax()) {
         $term = get_queried_object();
         if (is_object($term)) {
 
@@ -62,7 +62,7 @@ function wputh_get_breadcrumbs($elements_ariane = array()) {
             $elements_ariane = wputh_breadcrumbs_set_parent_categories($elements_ariane, $term);
 
             // Adding category
-            $elements_ariane['category'] = array(
+            $elements_ariane[$term->taxonomy] = array(
                 'name' => $term->name,
                 'last' => 1
             );
@@ -160,13 +160,14 @@ function wputh_breadcrumbs_set_parent_categories($elements_ariane, $term) {
     $cat_tmp = $term->parent;
     $parents_categories = array();
     while ($cat_tmp != 0) {
-        $category_parent = get_categories(array(
-            'include' => $cat_tmp
+        $category_parent = get_terms(array(
+            'include' => $cat_tmp,
+            'taxonomy' => $term->taxonomy,
         ));
         if (isset($category_parent[0])) {
             $parents_categories['parent-category-' . $cat_tmp] = array(
                 'name' => $category_parent[0]->name,
-                'link' => get_category_link($category_parent[0]->term_id)
+                'link' => get_term_link($category_parent[0])
             );
             $cat_tmp = $category_parent[0]->parent;
         } else {
