@@ -70,6 +70,10 @@ $default_args = apply_filters('wputheme_sitemap_default_args', $default_args);
 -------------------------- */
 
 foreach ($post_types as $_post_type => $post_type_infos) {
+    if (!get_post_type_object($_post_type)) {
+        continue;
+    }
+
     $args = array(
         'post_type' => $_post_type
     );
@@ -88,6 +92,19 @@ foreach ($post_types as $_post_type => $post_type_infos) {
 
     $wpq_sitemap = get_posts(array_merge($args, $default_args));
     $sitemap_pages = array();
+
+    if ($_post_type != 'post') {
+        $post_type_object = get_post_type_object($_post_type);
+        if ($post_type_object && !empty($post_type_object->has_archive) && !empty($post_type_object->public)) {
+            $sitemap_pages['main'] = array(
+                'permalink' => get_post_type_archive_link($_post_type),
+                'title' => $post_type_infos['title'],
+                'parent' => 0
+            );
+        }
+
+    }
+
     foreach ($wpq_sitemap as $sitepost) {
         $sitemap_pages[$sitepost->ID] = array(
             'permalink' => get_permalink($sitepost),
@@ -137,7 +154,13 @@ $default_args_tax = apply_filters('wputheme_sitemap_default_args_tax', $default_
 -------------------------- */
 
 foreach ($taxonomies as $_tax => $tax_infos) {
-
+    if (!taxonomy_exists($_tax)) {
+        continue;
+    }
+    $taxonomy_object = get_taxonomy($_tax);
+    if (!$taxonomy_object || empty($taxonomy_object->rewrite)) {
+        continue;
+    }
     $args = array(
         'taxonomy' => $_tax
     );
