@@ -175,6 +175,10 @@ foreach ($taxonomies as $_tax => $tax_infos) {
         );
     }
 
+    if(!isset($tax_infos['title'])) {
+        $tax_infos['title'] = $taxonomy_object->label;
+    }
+
     $sitemap_posts[] = array(
         'title' => $tax_infos['title'],
         'post_type' => $_tax,
