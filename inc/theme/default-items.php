@@ -190,7 +190,7 @@ if (apply_filters('wputheme_display_toggle', true)):
 endif;
 if (!function_exists('wputh_display_toggle')) {
     function wputh_display_toggle() {
-        echo '<a class="nav-toggle" role="button" href="#"><span></span></a>';
+        echo '<a class="nav-toggle" title="' . __('Toggle navigation', 'wputh') . '" role="button" href="#"><span></span></a>';
     }
 }
 

@@ -47,7 +47,7 @@ function wputh_get_social_links_html($wrapper_classname = 'header__social', $dis
             break;
             break;
         case 'icon':
-            $html .= '<i aria-hidden="true" class="icon icon_' . $id . '"></i>';
+            $html .= '<i aria-hidden="true" class="icon icon_' . $id . '"><span class="screen-reader-text">' . $link['name'] . '</span></i>';
             break;
         default:
             $html .= $link['name'];

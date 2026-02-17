@@ -162,7 +162,7 @@ function wputh_breadcrumbs_set_parent_categories($elements_ariane, $term) {
     while ($cat_tmp != 0) {
         $category_parent = get_terms(array(
             'include' => $cat_tmp,
-            'taxonomy' => $term->taxonomy,
+            'taxonomy' => $term->taxonomy
         ));
         if (isset($category_parent[0])) {
             $parents_categories['parent-category-' . $cat_tmp] = array(
@@ -184,18 +184,30 @@ function wputh_breadcrumbs_set_parent_categories($elements_ariane, $term) {
     return $elements_ariane;
 }
 
-function wputh_get_breadcrumbs_html($elements_ariane) {
-    if(!is_array($elements_ariane) || empty($elements_ariane)) {
+function wputh_get_breadcrumbs_html($elements_ariane, $args = array()) {
+    if (!is_array($elements_ariane) || empty($elements_ariane)) {
         return '';
     }
+
+    if (!is_array($args)) {
+        $args = array();
+    }
+    $args = apply_filters('wputh_get_breadcrumbs_html__default_args', $args);
+    $args = array_merge(array(
+        'tagname_list' => 'ul',
+        'tagname_item' => 'li',
+        'tagname_wrapper' => 'nav',
+        'wrapper' => false
+    ), $args);
+
     $html = '';
-    $html .= '<ul class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">';
+    $html .= '<' . esc_html($args['tagname_list']) . ' class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">';
     $i = 0;
     foreach ($elements_ariane as $id => $element) {
         $last = (isset($element['last']) && $element['last'] == 1);
         $element = apply_filters('wputh_get_breadcrumbs_html__element', $element, $last);
         $itemAttributes = ($last ? '' : 'itemprop="item"') . ' class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '') . '"';
-        $html .= '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+        $html .= '<' . esc_html($args['tagname_item']) . ' itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
         $element_name = '<span itemprop="name">' . $element['name'] . '</span>';
         if (isset($element['link'])) {
             $html .= '<a ' . $itemAttributes . ' href="' . $element['link'] . '">' . $element_name . '</a>';
@@ -203,8 +215,13 @@ function wputh_get_breadcrumbs_html($elements_ariane) {
             $html .= '<strong ' . $itemAttributes . '>' . $element_name . '</strong>';
         }
         $html .= '<meta itemprop="position" content="' . (++$i) . '" />';
-        $html .= '</li>';
+        $html .= '</' . esc_html($args['tagname_item']) . '>';
     }
-    $html .= '</ul>';
+    $html .= '</' . esc_html($args['tagname_list']) . '>';
+
+    if ($args['wrapper']) {
+        $html = '<' . esc_html($args['tagname_wrapper']) . ' class="breadcrumbs-wrapper">' . $html . '</' . esc_html($args['tagname_wrapper']) . '>';
+    }
+
     return $html;
 }

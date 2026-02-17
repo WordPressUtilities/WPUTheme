@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2025-12-04 21:23+0100\n"
+"POT-Creation-Date: 2026-02-17 11:17+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -92,6 +92,10 @@ msgstr "Dimensione del titolo"
 msgid "Skip to main content"
 msgstr "Vai al contenuto principale"
 
+#: ../.././inc/theme/default-items.php:193
+msgid "Toggle navigation"
+msgstr "Attiva / disattiva la navigazione"
+
 #: ../.././inc/theme/default-items.php:280
 msgid "Next page"
 msgstr "Pagina successiva"
@@ -110,13 +114,15 @@ msgstr "Tutti i modelli"
 
 #: ../.././inc/theme/pages.php:382
 msgid "This page is protected and cannot be moved to trash or deleted."
-msgstr "Questa pagina è protetta e non può essere spostata nella spazzatura o cancellata."
+msgstr ""
+"Questa pagina è protetta e non può essere spostata nella spazzatura o "
+"cancellata."
 
-#: ../.././inc/theme/shortcodes.php:189
+#: ../.././inc/theme/shortcodes.php:188
 msgid "View more"
 msgstr "Vedi di più"
 
-#: ../.././inc/theme/shortcodes.php:190
+#: ../.././inc/theme/shortcodes.php:189
 msgid "View less"
 msgstr "Vedi meno"
 
