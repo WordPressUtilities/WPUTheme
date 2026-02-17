@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2026-02-17 11:17+0100\n"
+"POT-Creation-Date: 2026-02-17 11:59+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -39,7 +39,27 @@ msgstr "Sidebar Predefinita"
 msgid "Default theme sidebar"
 msgstr "Sidebar tema predefinito"
 
-#: ../.././inc/assets/scripts.php:37
+#: ../.././inc/assets/scripts.php:21
+msgid "Go to slide {{index}}"
+msgstr "Vai alla diapositiva {{index}}"
+
+#: ../.././inc/assets/scripts.php:22
+msgid "This is the first slide"
+msgstr "Questa è la prima diapositiva"
+
+#: ../.././inc/assets/scripts.php:23
+msgid "This is the last slide"
+msgstr "Questa è l’ultima diapositiva"
+
+#: ../.././inc/assets/scripts.php:24
+msgid "Previous slide"
+msgstr "Diapositiva precedente"
+
+#: ../.././inc/assets/scripts.php:25
+msgid "Next slide"
+msgstr "Diapositiva successiva"
+
+#: ../.././inc/assets/scripts.php:45
 msgid "Copied !"
 msgstr "Copiato !"
 

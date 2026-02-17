@@ -84,6 +84,14 @@ function wputheme_swiper_init($element, _settings) {
         _utilsHTML += '<div class="swiper-scrollbar"></div>';
     }
 
+    _settings.a11y = {
+        paginationBulletMessage: wputh_swiper_init_js.paginationBulletMessage,
+        firstSlideMessage: wputh_swiper_init_js.firstSlideMessage,
+        lastSlideMessage: wputh_swiper_init_js.lastSlideMessage,
+        prevSlideMessage: wputh_swiper_init_js.prevSlideMessage,
+        nextSlideMessage: wputh_swiper_init_js.nextSlideMessage,
+    };
+
     if (_utilsHTML) {
         $utils = document.createElement('div');
         $utils.classList.add('swiper-utils');
