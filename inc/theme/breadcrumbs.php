@@ -197,7 +197,8 @@ function wputh_get_breadcrumbs_html($elements_ariane, $args = array()) {
         'tagname_list' => 'ul',
         'tagname_item' => 'li',
         'tagname_wrapper' => 'nav',
-        'wrapper' => false
+        'wrapper' => false,
+        'link_on_last_item' => true
     ), $args);
 
     $html = '';
@@ -206,10 +207,11 @@ function wputh_get_breadcrumbs_html($elements_ariane, $args = array()) {
     foreach ($elements_ariane as $id => $element) {
         $last = (isset($element['last']) && $element['last'] == 1);
         $element = apply_filters('wputh_get_breadcrumbs_html__element', $element, $last);
-        $itemAttributes = ($last ? '' : 'itemprop="item"') . ' class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '') . '"';
-        $html .= '<' . esc_html($args['tagname_item']) . ' itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+        $has_link = isset($element['link']) && !empty($element['link']) && (!$last || $args['link_on_last_item']);
+        $itemAttributes = ($last ? '' : 'itemprop="item" ') . ' class="element-ariane element-ariane--' . $id . ' ' . ($last ? 'is-last' : '') . '"';
+        $html .= '<' . esc_html($args['tagname_item']) . ' ' . ($last && !$has_link ? 'aria-current="page" ' : '') . ' itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
         $element_name = '<span itemprop="name">' . $element['name'] . '</span>';
-        if (isset($element['link'])) {
+        if ($has_link) {
             $html .= '<a ' . $itemAttributes . ' href="' . $element['link'] . '">' . $element_name . '</a>';
         } else {
             $html .= '<strong ' . $itemAttributes . '>' . $element_name . '</strong>';
