@@ -29,6 +29,7 @@ var wpu_set_smooth_scroll = function() {
         var _offset = (window.innerWidth <= mobile_offset_breakpoint) ? mobile_offset : desktop_offset;
         if ($href.length > 0) {
             e.preventDefault();
+            $href.focus();
             jQuery('html,body').animate({
                 scrollTop: $href.offset().top - _offset
             }, 500);

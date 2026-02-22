@@ -115,7 +115,7 @@ function wputh_head_add_skip_links() {
         'maincontent' => __('Skip to main content', 'wputh')
     ));
     foreach ($skiplinks as $target => $label) {
-        echo '<a class="skiptomain" href="#' . $target . '">' . $label . '</a>';
+        echo '<a data-nosnippet class="skiptomain" href="#' . $target . '">' . $label . '</a>';
     }
 }
 
