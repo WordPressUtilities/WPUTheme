@@ -279,3 +279,27 @@ Array.prototype.forEach.call(document.querySelectorAll("#menu-to-edit .menu-item
     echo '</script>';
 
 });
+
+/* ----------------------------------------------------------
+  Limit number of items in menu (front)
+---------------------------------------------------------- */
+
+add_filter('wp_nav_menu_objects', function ($menu_objects, $args) {
+
+    if (!isset($args->wputh_max_length)) {
+        return $menu_objects;
+    }
+
+    $current_parent_item = 0;
+    foreach($menu_objects as $index => $menu_item) {
+        if($menu_item->menu_item_parent != 0){
+            continue;
+        }
+        $current_parent_item++;
+        if ($current_parent_item > $args->wputh_max_length) {
+            unset($menu_objects[$index]);
+        }
+    }
+
+    return $menu_objects;
+}, 10, 2);
