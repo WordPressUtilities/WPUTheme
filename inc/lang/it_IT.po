@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPUtilities\n"
-"POT-Creation-Date: 2026-02-17 11:59+0100\n"
+"POT-Creation-Date: 2026-03-06 16:01+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Darklg <darklg.blog@gmail.com>\n"
 "Language-Team: \n"
@@ -59,7 +59,7 @@ msgstr "Diapositiva precedente"
 msgid "Next slide"
 msgstr "Diapositiva successiva"
 
-#: ../.././inc/assets/scripts.php:45
+#: ../.././inc/assets/scripts.php:44
 msgid "Copied !"
 msgstr "Copiato !"
 
@@ -195,6 +195,10 @@ msgstr "d"
 #, php-format
 msgid "From %s to %s"
 msgstr "Dal %s al %s"
+
+#: ../.././inc/theme/utilities/content-helpers.php:343
+msgid "View all"
+msgstr "Vedi tutti"
 
 #: ../.././inc/theme/utilities/posts.php:18
 msgid "Sorry, no search results for this query."

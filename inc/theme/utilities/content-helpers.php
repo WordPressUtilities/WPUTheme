@@ -326,3 +326,73 @@ if (!function_exists('wputh_paginate')) {
         return ob_get_clean();
     }
 }
+
+/* ----------------------------------------------------------
+  Term switcher
+---------------------------------------------------------- */
+
+function wputh_get_term_switcher($args = array()) {
+    $filter_html = '';
+
+    if (!is_array($args)) {
+        $args = array();
+    }
+    $args = wp_parse_args($args, array(
+        'taxonomy' => 'category',
+        'view_all_always' => true,
+        'view_all_text' => __('View all', 'wputh'),
+        'view_all_url' => site_url(),
+        'classname_current' => 'current',
+        'classname_wrapper' => 'term-switcher__wrapper',
+        'classname_list' => 'term-switcher',
+        'classname_item' => 'term-switcher__item'
+    ));
+    $args = apply_filters('wputh_term_switcher_args', $args);
+    $terms = get_terms(apply_filters('wputh_term_switcher_terms_query', array(
+        'taxonomy' => $args['taxonomy'],
+        'hide_empty' => true
+    ), $args));
+    if (is_wp_error($terms) || empty($terms)) {
+        return '';
+    }
+
+    $can_show_view_all = is_tax($args['taxonomy']) || (is_category() && $args['taxonomy'] == 'category') || (is_tag() && $args['taxonomy'] == 'post_tag');
+
+    /* View all */
+    if ($can_show_view_all || $args['view_all_always']) {
+        $filter_html .= '<li class="' . esc_attr($args['classname_item']) . '">';
+        $filter_html .= '<a href="' . esc_url($args['view_all_url']) . '" class="' . (!$can_show_view_all ? esc_attr($args['classname_current']) : '') . '">' . esc_html($args['view_all_text']) . '</a>';
+        $filter_html .= '</li>';
+    }
+
+    foreach ($terms as $term) {
+        /* Exclude terms hidden from search */
+        if (get_term_meta($term->term_id, 'wpuseo_hide_search', true)) {
+            continue;
+        }
+        if (apply_filters('wputh_term_switcher_exclude_term', false, $term, $args)) {
+            continue;
+        }
+
+        $is_active = is_tax($args['taxonomy'], $term->term_id);
+        if ($args['taxonomy'] == 'category' && is_category($term->term_id)) {
+            $is_active = true;
+        }
+        if ($args['taxonomy'] == 'post_tag' && is_tag($term->term_id)) {
+            $is_active = true;
+        }
+
+        $filter_html .= '<li class="' . esc_attr($args['classname_item']) . '">';
+        $filter_html .= '<a href="' . get_term_link($term) . '" ' . ($is_active ? 'class="' . esc_attr($args['classname_current']) . '"' : '') . '><span>' . esc_html($term->name) . '</span></a>';
+        $filter_html .= '</li>';
+    }
+
+    $return_string = '';
+    if (!empty($filter_html)) {
+        $return_string = '<div class="' . esc_attr($args['classname_wrapper']) . '">';
+        $return_string .= '<ul class="' . esc_attr($args['classname_list']) . '">' . $filter_html . '</ul>';
+        $return_string .= '</div>';
+    }
+
+    return $return_string;
+}
