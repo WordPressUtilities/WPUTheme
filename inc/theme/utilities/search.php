@@ -143,7 +143,7 @@ function wputheme_search_get_post_type_content($post_type_key, $pt_settings, $ar
     ));
     $html = '';
     if ($wpq_search->have_posts()) {
-        $html .= '<ul class="' . esc_attr($pt_settings['classname']) . '" data-max="' . esc_attr($max) . '" data-found="' . esc_attr($wpq_search->found_posts) . '">';
+        $html .= '<ul class="' . esc_attr($pt_settings['classname']) . '" data-perpage="' . esc_attr($args['per_page']) . '" data-max="' . esc_attr($max) . '" data-found="' . esc_attr($wpq_search->found_posts) . '">';
         while ($wpq_search->have_posts()) {
             $wpq_search->the_post();
             $html .= '<li class="' . esc_attr($pt_settings['item_classname']) . '">';
