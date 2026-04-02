@@ -345,7 +345,8 @@ function wputh_get_term_switcher($args = array()) {
         'classname_current' => 'current',
         'classname_wrapper' => 'term-switcher__wrapper',
         'classname_list' => 'term-switcher',
-        'classname_item' => 'term-switcher__item'
+        'classname_item' => 'term-switcher__item',
+        'classname_link' => 'term-switcher__link'
     ));
     $args = apply_filters('wputh_term_switcher_args', $args);
     $terms = get_terms(apply_filters('wputh_term_switcher_terms_query', array(
@@ -361,7 +362,7 @@ function wputh_get_term_switcher($args = array()) {
     /* View all */
     if ($can_show_view_all || $args['view_all_always']) {
         $filter_html .= '<li class="' . esc_attr($args['classname_item']) . '">';
-        $filter_html .= '<a href="' . esc_url($args['view_all_url']) . '" class="' . (!$can_show_view_all ? esc_attr($args['classname_current']) : '') . '">' . esc_html($args['view_all_text']) . '</a>';
+        $filter_html .= '<a class="' . esc_attr($args['classname_link']) . ' ' . (!$can_show_view_all ? esc_attr($args['classname_current']) : '') . '" href="' . esc_url($args['view_all_url']) . '">' . esc_html($args['view_all_text']) . '</a>';
         $filter_html .= '</li>';
     }
 
@@ -383,7 +384,7 @@ function wputh_get_term_switcher($args = array()) {
         }
 
         $filter_html .= '<li class="' . esc_attr($args['classname_item']) . '">';
-        $filter_html .= '<a href="' . get_term_link($term) . '" ' . ($is_active ? 'class="' . esc_attr($args['classname_current']) . '"' : '') . '><span>' . esc_html($term->name) . '</span></a>';
+        $filter_html .= '<a class="' . esc_attr($args['classname_link']) . ' ' . ($is_active ? esc_attr($args['classname_current']) : '') . '" href="' . get_term_link($term) . '"><span>' . esc_html($term->name) . '</span></a>';
         $filter_html .= '</li>';
     }
 
