@@ -31,6 +31,9 @@ function wputh_setup_pages_site($pages) {
         if (!isset($page['disable_deletion'])) {
             $pages[$id]['disable_deletion'] = false;
         }
+        if (!isset($page['disable_pll_lang_selector'])) {
+            $pages[$id]['disable_pll_lang_selector'] = false;
+        }
     }
 
     return $pages;
@@ -347,11 +350,11 @@ function wputh_pages_site__get_templates() {
   Prevent trashing or deleting some pages
 ---------------------------------------------------------- */
 
-function wputh_pages_get_protected_pages_ids() {
+function wputh_pages_get_protected_pages_ids($protection_type = 'disable_deletion') {
     $protected_pages_ids = array();
     $pages_site = wputh_setup_pages_site(apply_filters('wputh_pages_site', array()));
     foreach ($pages_site as $id => $page) {
-        if (!isset($page['disable_deletion']) || !$page['disable_deletion']) {
+        if (!isset($page[$protection_type]) || !$page[$protection_type]) {
             continue;
         }
         $post_id = get_option($id);
@@ -397,8 +400,13 @@ add_action('admin_head', function () {
     if (!isset($_GET['post'])) {
         return;
     }
+    $post_id = (int) $_GET['post'];
     $protected_pages_ids = wputh_pages_get_protected_pages_ids();
-    if (in_array((int) $_GET['post'], $protected_pages_ids)) {
+    if (in_array($post_id, $protected_pages_ids)) {
         echo '<style>#delete-action { display:none; }</style>';
+    }
+    $protected_pages_ids = wputh_pages_get_protected_pages_ids('disable_pll_lang_selector');
+    if (in_array($post_id, $protected_pages_ids)) {
+        echo '<style>#select-post-language select{ display:none!important; }</style>';
     }
 });
