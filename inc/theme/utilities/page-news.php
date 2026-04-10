@@ -59,7 +59,7 @@ function wputh_get_term_switcher($args = array()) {
         }
 
         $filter_html .= '<li class="' . esc_attr($args['classname_item']) . ' ' . ($is_active ? esc_attr($args['classname_item_current']) : '') . '">';
-        $filter_html .= '<a class="' . esc_attr($args['classname_link']) . '" href="' . get_term_link($term) . '"><span>' . esc_html($term->name) . '</span></a>';
+        $filter_html .= '<a class="' . esc_attr($args['classname_link']) . ' ' . ($is_active ? esc_attr($args['classname_current']) : '') . '" href="' . get_term_link($term) . '"><span>' . esc_html($term->name) . '</span></a>';
         $filter_html .= '</li>';
     }
 
