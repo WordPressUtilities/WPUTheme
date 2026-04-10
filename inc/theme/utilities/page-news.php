@@ -79,10 +79,10 @@ function wputh_get_term_switcher($args = array()) {
  * @param string $tax Taxonomy to filter by if on a taxonomy archive
  * @return array Query args
  */
-function wputh_pagenews_get_query($post_type = 'post', $tax = 'category') {
+function wputh_pagenews_get_query($post_type = 'post', $tax = 'category', $args = array()) {
     $q = array(
         'post_type' => $post_type,
-        'ignore_sticky_posts' => 1,
+        'ignore_sticky_posts' => false,
         'paged' => get_query_var('paged'),
         'meta_query' => array(
             'relation' => 'OR',
@@ -106,6 +106,7 @@ function wputh_pagenews_get_query($post_type = 'post', $tax = 'category') {
             )
         );
     }
+    $q = array_merge($q, $args);
 
     $q = apply_filters('wputh_pagenews_query_args', $q, $post_type, $tax);
 
