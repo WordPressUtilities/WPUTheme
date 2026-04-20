@@ -97,6 +97,9 @@ function wputh_pagenews_get_query($post_type = 'post', $tax = 'category', $args 
             )
         )
     );
+    if (function_exists('pll_current_language')) {
+        $q['lang'] = pll_current_language();
+    }
     if (($tax == 'category' && is_category()) || ($tax == 'post_tag' && is_tag()) || is_tax($tax)) {
         $q['tax_query'] = array(
             array(
