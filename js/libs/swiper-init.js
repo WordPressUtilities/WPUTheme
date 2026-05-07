@@ -65,7 +65,7 @@ function wputheme_swiper_init($element, _settings) {
         }
         if (!_settings.navigation.nextEl || (_settings.navigation.nextEl && typeof _settings.navigation.nextEl != 'object')) {
             var _next_el_classname = '.swiper-button-next';
-            if(typeof _settings.navigation.nextEl == 'string') {
+            if (typeof _settings.navigation.nextEl == 'string') {
                 _next_el_classname = _settings.navigation.nextEl;
             }
             _settings.navigation.nextEl = _next_el_classname;
@@ -73,7 +73,7 @@ function wputheme_swiper_init($element, _settings) {
         }
         if (!_settings.navigation.prevEl || (_settings.navigation.prevEl && typeof _settings.navigation.prevEl != 'object')) {
             var _prev_el_classname = '.swiper-button-prev';
-            if(typeof _settings.navigation.prevEl == 'string') {
+            if (typeof _settings.navigation.prevEl == 'string') {
                 _prev_el_classname = _settings.navigation.prevEl;
             }
             _settings.navigation.prevEl = _prev_el_classname;
@@ -103,13 +103,30 @@ function wputheme_swiper_init($element, _settings) {
     var _swiper = new Swiper($swiper, _settings);
 
     /* Add resize events */
-    if ($utils){
+    if ($utils) {
         window.addEventListener('resize', wputheme_debounce(function() {
             wputheme_swiper_set_utils_attributes(_swiper, $utils);
         }, 250));
         wputheme_swiper_set_utils_attributes(_swiper, $utils);
     }
+    window.addEventListener('resize', wputheme_debounce(function() {
+        wputheme_swiper_set_swiper_attributes(_swiper, $swiper);
+    }, 250));
+    wputheme_swiper_set_swiper_attributes(_swiper, $swiper);
+
     return _swiper;
+}
+
+/*
+ * Info classnames
+ */
+
+function wputheme_swiper_set_swiper_attributes(_swiper, $swiper) {
+    var _nbSlides = $swiper.querySelectorAll('.swiper-slide').length;
+    var _nbSlidesPerView = _swiper.params.slidesPerView;
+    $swiper.setAttribute('data-slides', _nbSlides);
+    $swiper.setAttribute('data-slides-per-view', _nbSlidesPerView);
+    $swiper.setAttribute('data-all-slides-visible', _nbSlidesPerView >= _nbSlides ? '1' : '0');
 }
 
 /*
@@ -134,7 +151,7 @@ function wputheme_swiper_set_utils_attributes(_swiper, $utils) {
     if (_swiper.pagination && _swiper.pagination.el) {
         _pagination_enabled = _swiper.pagination.el.children.length > 1;
     }
-    if(_swiper.scrollbar && _swiper.scrollbar.el) {
+    if (_swiper.scrollbar && _swiper.scrollbar.el) {
         _scrollbar_enabled = true;
     }
     $utils.setAttribute('data-nav-enabled', _nav_enabled ? '1' : '0');
