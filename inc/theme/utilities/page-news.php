@@ -115,3 +115,26 @@ function wputh_pagenews_get_query($post_type = 'post', $tax = 'category', $args 
 
     return $q;
 }
+
+/* ----------------------------------------------------------
+  Get page news
+---------------------------------------------------------- */
+
+function wputheme_pagenews_get_id() {
+    $news_page_id = get_option('news__page_id');
+    if (function_exists('pll_get_post')) {
+        $news_page_id = pll_get_post($news_page_id);
+    }
+    if(!$news_page_id) {
+        $news_page_id = get_option('page_for_posts');
+    }
+    return $news_page_id;
+}
+
+function wputheme_pagenews_get_url() {
+    $news_page_id = wputheme_pagenews_get_id();
+    if (!$news_page_id) {
+        return home_url();
+    }
+    return get_permalink($news_page_id);
+}

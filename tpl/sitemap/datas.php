@@ -13,7 +13,7 @@ function get_pages_sitemap_child_of($post_type, $sitemap_pages = array(), $paren
             if (!$sitemap_page['title']) {
                 $sitemap_page['title'] = $sitemap_page['permalink'];
             }
-            $content .= '<a href="' . $sitemap_page['permalink'] . '">' . $sitemap_page['title'] . '</a>';
+            $content .= '<a href="' . esc_url($sitemap_page['permalink']) . '">' . esc_html($sitemap_page['title']) . '</a>';
             $content .= get_pages_sitemap_child_of($post_type, $sitemap_pages, $id);
             $content .= '</li>';
         }
@@ -74,15 +74,23 @@ foreach ($post_types as $_post_type => $post_type_infos) {
         continue;
     }
 
-    $args = array(
-        'post_type' => $_post_type
-    );
-
     if (!is_array($post_type_infos)) {
         $post_type_infos = array();
     }
+    $post_type_infos = array_merge(array(
+        'title' => '',
+        'has_archive' => true,
+        'orderby' => 'date',
+        'order' => 'DESC'
+    ), $post_type_infos);
 
-    if (!isset($post_type_infos['title'])) {
+    $args = array(
+        'post_type' => $_post_type,
+        'orderby' => $post_type_infos['orderby'],
+        'order' => $post_type_infos['order']
+    );
+
+    if (!isset($post_type_infos['title']) || empty($post_type_infos['title'])) {
         $post_type_infos['title'] = $post_type;
         $post_type_infos_raw = get_post_type_object($_post_type);
         if (is_object($post_type_infos_raw) && !is_wp_error($post_type_infos_raw)) {
@@ -93,12 +101,27 @@ foreach ($post_types as $_post_type => $post_type_infos) {
     $wpq_sitemap = get_posts(array_merge($args, $default_args));
     $sitemap_pages = array();
 
-    if ($_post_type != 'post') {
+    if ($_post_type != 'post' && $post_type_infos['has_archive']) {
         $post_type_object = get_post_type_object($_post_type);
         if ($post_type_object && !empty($post_type_object->has_archive) && !empty($post_type_object->public)) {
+            $archive_title = $post_type_infos['title'];
+            if (!empty($post_type_object->labels->all_items)) {
+                $archive_title = $post_type_object->labels->all_items;
+            }
             $sitemap_pages['main'] = array(
                 'permalink' => get_post_type_archive_link($_post_type),
-                'title' => $post_type_infos['title'],
+                'title' => $archive_title,
+                'parent' => 0
+            );
+        }
+    }
+
+    if ($_post_type == 'post') {
+        $news_page_id = wputheme_pagenews_get_id();
+        if ($news_page_id) {
+            $sitemap_pages['news_page'] = array(
+                'permalink' => get_permalink($news_page_id),
+                'title' => get_the_title($news_page_id),
                 'parent' => 0
             );
         }
@@ -106,6 +129,9 @@ foreach ($post_types as $_post_type => $post_type_infos) {
     }
 
     foreach ($wpq_sitemap as $sitepost) {
+        if($_post_type == 'page' && $sitepost->ID == wputheme_pagenews_get_id()) {
+            continue;
+        }
         $sitemap_pages[$sitepost->ID] = array(
             'permalink' => get_permalink($sitepost),
             'title' => get_the_title($sitepost),
@@ -114,7 +140,7 @@ foreach ($post_types as $_post_type => $post_type_infos) {
     }
 
     /* Move homepage to first position */
-    if ($wputheme_homepage_id > 0 && isset($sitemap_pages[$wputheme_homepage_id])) {
+    if ($_post_type == 'page' && $wputheme_homepage_id > 0 && isset($sitemap_pages[$wputheme_homepage_id])) {
         $home_page_item = $sitemap_pages[$wputheme_homepage_id];
         unset($sitemap_pages[$wputheme_homepage_id]);
         $sitemap_pages = array($wputheme_homepage_id => $home_page_item) + $sitemap_pages;
@@ -175,7 +201,7 @@ foreach ($taxonomies as $_tax => $tax_infos) {
         );
     }
 
-    if(!isset($tax_infos['title'])) {
+    if (!isset($tax_infos['title'])) {
         $tax_infos['title'] = $taxonomy_object->label;
     }
 
