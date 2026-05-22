@@ -127,3 +127,35 @@ function wputheme_get_quadrant(x, y) {
 function wputheme_is_element_visible($el) {
     return ($el.offsetWidth || $el.offsetHeight || $el.getClientRects().length);
 }
+
+/* ----------------------------------------------------------
+  Build an item
+---------------------------------------------------------- */
+
+function wputheme_build_item(tag, attributes, _extra) {
+    var $el = document.createElement(tag);
+    for (var key in attributes) {
+        if (attributes.hasOwnProperty(key)) {
+            $el.setAttribute(key, attributes[key]);
+        }
+    }
+
+    /* Content */
+    if (_extra && _extra.content) {
+        if (typeof _extra.content === 'string') {
+            $el.innerHTML = _extra.content;
+        }
+        if (_extra.content instanceof Node) {
+            $el.appendChild(_extra.content);
+        }
+    }
+
+    /* Parent */
+    if (_extra && _extra.parent) {
+        if (_extra.parent instanceof Node) {
+            _extra.parent.appendChild($el);
+        }
+    }
+
+    return $el;
+}
