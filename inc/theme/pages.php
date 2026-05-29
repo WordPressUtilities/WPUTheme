@@ -294,9 +294,17 @@ add_action('restrict_manage_posts', function () {
 function wputh_pages_site__get_list() {
     $pages_site = array();
     $pages_sites_raw = apply_filters('wputh_pages_site', array());
+    $has_privacy_policy = false;
     foreach ($pages_sites_raw as $key => $page) {
+        if (strpos($key, 'privacy') !== false) {
+            $has_privacy_policy = true;
+        }
         $pages_site[$key] = isset($page['post_title']) ? $page['post_title'] : $key;
     }
+    if (!$has_privacy_policy) {
+        $pages_site['wp_page_for_privacy_policy'] = __('Privacy Policy');
+    }
+    asort($pages_site);
     return $pages_site;
 }
 
