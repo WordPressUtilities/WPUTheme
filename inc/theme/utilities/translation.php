@@ -102,11 +102,23 @@ function wputh_translated_url($use_full_lang_name = false) {
             'echo' => 0
         ));
 
+        $active_slugs = array();
+        if (function_exists('PLL')) {
+            foreach (PLL()->model->get_languages_list() as $language) {
+                if (!empty($language->active)) {
+                    $active_slugs[$language->slug] = true;
+                }
+            }
+        }
+
         if (is_array($poly_langs)) {
             usort($poly_langs, function ($a, $b) {
                 return $a['order'] - $b['order'];
             });
             foreach ($poly_langs as $lang) {
+                if ($active_slugs && !isset($active_slugs[$lang['slug']])) {
+                    continue;
+                }
                 $full_name = $lang['slug'];
                 if ($use_full_lang_name && isset($lang['name'])) {
                     $full_name = $lang['name'];
