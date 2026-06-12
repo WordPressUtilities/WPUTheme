@@ -87,7 +87,7 @@ if (function_exists('set_post_thumbnail_size')) {
 function wputheme_get_wpubasefilecache() {
     global $wputheme_wpubasefilecache;
     if (!$wputheme_wpubasefilecache) {
-        require_once get_template_directory() . '/inc/WPUBaseFileCache/WPUBaseFileCache.php';
+        require_once __DIR__ . '/inc/WPUBaseFileCache/WPUBaseFileCache.php';
         $wputheme_wpubasefilecache = new \WPUTheme\WPUBaseFileCache('wputheme');
     }
     return $wputheme_wpubasefilecache;
