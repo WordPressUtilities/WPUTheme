@@ -20,11 +20,13 @@ function wputh_menus_get_current_menu_id() {
 function wputh_cached_nav_menu($args = array()) {
     $wputheme_wpubasefilecache = wputheme_get_wpubasefilecache();
     $cache_duration = WEEK_IN_SECONDS;
-    $cache_id = 'wputh_cached_menu_' . md5(wputh_get_current_url()) . md5(serialize($args));
+    $cache_id = md5(wputh_get_current_url()) . md5(serialize($args));
     if (isset($args['cache_id'])) {
         $cache_id = $args['cache_id'];
         unset($args['cache_id']);
     }
+
+    $cache_id = 'wputh_cached_menu_' . $cache_id;
 
     /* Force return */
     $args['echo'] = false;

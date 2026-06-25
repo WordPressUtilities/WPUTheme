@@ -63,6 +63,7 @@ function wputheme_swiper_init($element, _settings) {
         if (typeof _settings.navigation != 'object') {
             _settings.navigation = {};
         }
+        _settings.navigation.addIcons = false;
         if (!_settings.navigation.nextEl || (_settings.navigation.nextEl && typeof _settings.navigation.nextEl != 'object')) {
             var _next_el_classname = '.swiper-button-next';
             if (typeof _settings.navigation.nextEl == 'string') {
