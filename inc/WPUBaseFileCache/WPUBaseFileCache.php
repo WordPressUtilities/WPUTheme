@@ -4,7 +4,7 @@ namespace WPUTheme;
 /*
 Class Name: WPU Base File Cache
 Description: A class to handle basic file cache
-Version: 0.3.0
+Version: 0.4.0
 Author: Darklg
 Author URI: https://darklg.me/
 License: MIT License
@@ -14,13 +14,45 @@ License URI: https://opensource.org/licenses/MIT
 defined('ABSPATH') || die;
 
 class WPUBaseFileCache {
-    private $cache_dir;
-    public function __construct($cache_dir = '') {
+    private $cache_dir = '';
+    private $settings = array();
+    private $default_args = array(
+        'autopurge_delay' => 0
+    );
+    private $excluded_files = array('.', '..', '.htaccess', 'index.html');
+    public function __construct($cache_dir = '', $args = array()) {
         if (!$cache_dir) {
             $cache_dir = __NAMESPACE__;
         }
         $this->cache_dir = $cache_dir;
+        $this->settings = array_merge($this->default_args, is_array($args) ? $args : array());
         $this->get_cache_dir();
+        $this->maybe_autopurge();
+    }
+
+    public function maybe_autopurge() {
+        $transient_key = 'wpu_filecache_purge_' . sanitize_key($this->cache_dir);
+        if (get_transient($transient_key)) {
+            return;
+        }
+        set_transient($transient_key, 1, HOUR_IN_SECONDS);
+        $this->autopurge();
+    }
+
+    public function autopurge() {
+        $cache_dir = $this->get_cache_dir();
+        $threshold = time() - $this->settings['autopurge_delay'];
+        if ($handle = opendir($cache_dir)) {
+            while (false !== ($file = readdir($handle))) {
+                if (in_array($file, $this->excluded_files) || is_dir($cache_dir . DIRECTORY_SEPARATOR . $file)) {
+                    continue;
+                }
+                if (filemtime($cache_dir . DIRECTORY_SEPARATOR . $file) < $threshold) {
+                    unlink($cache_dir . DIRECTORY_SEPARATOR . $file);
+                }
+            }
+            closedir($handle);
+        }
     }
 
     public function get_cache_dir() {
@@ -48,7 +80,7 @@ class WPUBaseFileCache {
         $upload_dir = $this->get_cache_dir();
         if ($handle = opendir($upload_dir)) {
             while (false !== ($file = readdir($handle))) {
-                if ($file != "." && $file != ".." && $file != ".htaccess" && !is_dir($upload_dir . DIRECTORY_SEPARATOR . $file)) {
+                if (!in_array($file, $this->excluded_files) && !is_dir($upload_dir . DIRECTORY_SEPARATOR . $file)) {
                     unlink($upload_dir . DIRECTORY_SEPARATOR . $file);
                 }
             }
@@ -78,7 +110,7 @@ class WPUBaseFileCache {
     /**
      * Writes content to a file and sets the file permissions.
      */
-    public function file_put_contents($file, $content) {
+    public function file_put_contents($file, $content = '') {
         file_put_contents($file, $content);
         chmod($file, 0664);
     }

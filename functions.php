@@ -74,7 +74,7 @@ add_action('widgets_init', function () {
 if (function_exists('set_post_thumbnail_size')) {
     $thumb_size_x = apply_filters('wputheme_thumbnail_size_x', 1024);
     $thumb_size_y = apply_filters('wputheme_thumbnail_size_y', $thumb_size_x);
-    set_post_thumbnail_size($thumb_size_x, $thumb_size_x);
+    set_post_thumbnail_size($thumb_size_x, $thumb_size_y);
 }
 
 /* ----------------------------------------------------------
@@ -88,7 +88,9 @@ function wputheme_get_wpubasefilecache() {
     global $wputheme_wpubasefilecache;
     if (!$wputheme_wpubasefilecache) {
         require_once __DIR__ . '/inc/WPUBaseFileCache/WPUBaseFileCache.php';
-        $wputheme_wpubasefilecache = new \WPUTheme\WPUBaseFileCache('wputheme');
+        $wputheme_wpubasefilecache = new \WPUTheme\WPUBaseFileCache('wputheme', array(
+            'autopurge_delay' => apply_filters('wputheme_wpubasefilecache_autopurge_delay', WEEK_IN_SECONDS)
+        ));
     }
     return $wputheme_wpubasefilecache;
 }
