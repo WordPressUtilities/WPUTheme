@@ -334,18 +334,18 @@ if (!function_exists('wputh_paginate')) {
 /*
 * Filter the content to allow only specific style properties in the style attribute.
 * @param string $content The content to filter
-* @param array $allowed_styles An array of allowed style properties (e.g., ['font-size', 'color'])
+* @param array $allowed_properties An array of allowed style properties (e.g., ['font-size', 'color'])
 * @return string The filtered content with only allowed style properties
 */
-function wputh_allow_attributes_style_values($content = '', $allowed_styles = array('font-size')) {
+function wputh_allow_attributes_style_values($content = '', $allowed_properties = array('font-size')) {
 
     /* Check if allowed styles is an array and not empty */
-    if (!is_array($allowed_styles) || empty($allowed_styles)) {
+    if (!is_array($allowed_properties) || empty($allowed_properties)) {
         return $content;
     }
 
     /* Find all style attributes in the content */
-    preg_match_all('/ style="([^"]+)"/', $content, $matches);
+    preg_match_all('/\s+style\s*=\s*(?|"([^"]*)"|\'([^\']*)\')/i', $content, $matches);
     if (empty($matches[0])) {
         return $content;
     }
@@ -356,23 +356,11 @@ function wputh_allow_attributes_style_values($content = '', $allowed_styles = ar
 
         /* Split the attribute into properties and values */
         $styles_parts = explode(';', $matches[1][$i]);
-        foreach ($styles_parts as $style_part) {
-
-            /* Check style validity */
-            $style_part = trim($style_part);
-            if (empty($style_part)) {
-                continue;
+        foreach ($styles_parts as $declaration) {
+            $checked_declaration = wputh_allow_attributes_style_values__get_declaration($declaration, $allowed_properties);
+            if ($checked_declaration) {
+                $valid_style[] = $declaration;
             }
-            $style_part = explode(':', $style_part);
-            if (count($style_part) != 2) {
-                continue;
-            }
-            $style_name = trim($style_part[0]);
-            $style_value = trim($style_part[1]);
-            if (empty($style_name) || empty($style_value) || !in_array($style_name, $allowed_styles)) {
-                continue;
-            }
-            $valid_style[] = $style_name . ':' . $style_value;
         }
 
         $new_value = '';
@@ -384,4 +372,28 @@ function wputh_allow_attributes_style_values($content = '', $allowed_styles = ar
     }
 
     return $content;
+}
+
+/*
+* Check if a style declaration is valid based on allowed properties
+* @param string $declaration The style declaration (e.g., "font-size: 16px")
+* @param array $allowed_properties An array of allowed style properties (e.g., ['font-size', 'color'])
+* @return string|false The valid declaration or false if not valid
+*/
+function wputh_allow_attributes_style_values__get_declaration($declaration = '', $allowed_properties = array()) {
+    $declaration = trim($declaration);
+    if (empty($declaration)) {
+        return false;
+    }
+    $declaration = explode(':', $declaration);
+    if (count($declaration) != 2) {
+        return false;
+    }
+    $prop_name = trim($declaration[0]);
+    $prop_value = trim($declaration[1]);
+    if (empty($prop_name) || empty($prop_value) || !in_array($prop_name, $allowed_properties)) {
+        return false;
+    }
+    return $prop_name . ':' . $prop_value;
+
 }
