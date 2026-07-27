@@ -159,3 +159,42 @@ function wputheme_build_item(tag, attributes, _extra) {
 
     return $el;
 }
+
+/* ----------------------------------------------------------
+  Nav toggle
+---------------------------------------------------------- */
+
+function wputheme_set_nav_toggle(args) {
+    var args = args || {};
+
+    if (!args.callback) {
+        args.callback = function() {};
+    }
+
+    var $jQbody = jQuery('body');
+
+    /* Open */
+    $jQbody.on('click', '.nav-toggle', function(e) {
+        e.preventDefault();
+        var $toggle = jQuery(this),
+            is_expanded = $toggle.attr('aria-expanded') === 'true';
+        $jQbody.toggleClass('has--opened-main-menu', !is_expanded);
+        $toggle.attr('aria-expanded', !is_expanded);
+        args.callback();
+    });
+
+    /* Extra */
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape") {
+            wputheme_close_nav_toggle();
+        }
+    });
+}
+
+function wputheme_close_nav_toggle() {
+    var $toggle = jQuery('.nav-toggle');
+    if ($toggle.length) {
+        $toggle.attr('aria-expanded', 'false');
+    }
+    jQuery('body').removeClass('has--opened-main-menu');
+}

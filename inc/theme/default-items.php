@@ -189,8 +189,28 @@ if (apply_filters('wputheme_display_toggle', true)):
     add_action('wputheme_header_banner', 'wputh_display_toggle');
 endif;
 if (!function_exists('wputh_display_toggle')) {
-    function wputh_display_toggle() {
-        echo '<a class="nav-toggle" title="' . __('Toggle navigation', 'wputh') . '" role="button" href="#"><span></span></a>';
+    function wputh_display_toggle($args = array()) {
+        if (!is_array($args)) {
+            $args = array();
+        }
+        $args = array_merge(array(
+            'target' => '',
+            'tag' => 'a'
+        ), $args);
+
+        echo '<' . $args['tag'];
+        echo ' class="nav-toggle"';
+        if ($args['tag'] === 'a') {
+            echo ' href="#' . ($args['target'] ? esc_attr($args['target']) : '') . '"';
+            echo ' role="button"';
+        }
+        echo ' aria-expanded="false"';
+        if ($args['target']) {
+            echo ' aria-controls="' . esc_attr($args['target']) . '"';
+        }
+        echo ' aria-label="' . esc_attr(__('Toggle navigation', 'wputh')) . '"';
+        echo '>';
+        echo '<span aria-hidden="true"></span></' . $args['tag'] . '>';
     }
 }
 
